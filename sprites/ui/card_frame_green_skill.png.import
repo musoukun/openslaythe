@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5frlk2x7muo0"
-path="res://.godot/imported/card_frame_attack.png-c4faba8cd984ad8bc21be15104c7b7d0.ctex"
+uid="uid://can4y8pgufdyy"
+path="res://.godot/imported/card_frame_green_skill.png-f46d3472c4649a7f1e0b6a3f8d9b8446.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/card_frame_attack.png"
-dest_files=["res://.godot/imported/card_frame_attack.png-c4faba8cd984ad8bc21be15104c7b7d0.ctex"]
+source_file="res://sprites/ui/card_frame_green_skill.png"
+dest_files=["res://.godot/imported/card_frame_green_skill.png-f46d3472c4649a7f1e0b6a3f8d9b8446.ctex"]
 
 [params]
 

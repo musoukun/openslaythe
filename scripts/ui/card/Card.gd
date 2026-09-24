@@ -91,7 +91,7 @@ func update_card_display(selected_enemy: Enemy = null) -> void:
 	
 	# update visuals
 	card_texture.texture = FileLoader.load_texture(card_data.card_texture_path)
-	card_frame.texture = CardFrames.get_frame(card_data.card_type)
+	card_frame.texture = CardFrames.get_frame(card_data.card_type, card_data.card_color_id)
 	# フレーム画像がある場合は元の単色背景を隠す
 	card_color.visible = card_frame.texture == null
 	card_background.visible = card_frame.texture == null

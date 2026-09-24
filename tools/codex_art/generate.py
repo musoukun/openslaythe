@@ -65,14 +65,60 @@ def generate_raw(codex: str, style: str, asset: dict) -> bool:
     return ok
 
 
+def chroma_key(im: Image.Image, hex_color: str, tolerance: int = 90) -> Image.Image:
+    """指定色に近いピクセルを透明にする (距離に応じてなめらかに)."""
+    kr, kg, kb = (int(hex_color.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4))
+    px = im.load()
+    for y in range(im.height):
+        for x in range(im.width):
+            r, g, b, a = px[x, y]
+            d = abs(r - kr) + abs(g - kg) + abs(b - kb)
+            if d < tolerance:
+                px[x, y] = (r, g, b, 0)
+            elif d < tolerance * 2:
+                px[x, y] = (r, g, b, min(a, int(255 * (d - tolerance) / tolerance)))
+    return im
+
+
+def clear_window(im: Image.Image, seed_pct: list) -> Image.Image:
+    """seed (割合座標) から暗い不透明な縁に当たるまでを透明にする (カード枠の絵の窓を抜く)."""
+    px = im.load()
+    sx, sy = int(im.width * seed_pct[0]), int(im.height * seed_pct[1])
+    def is_wall(p):
+        r, g, b, a = p
+        return a > 200 and (r * 0.3 + g * 0.59 + b * 0.11) < 95
+    stack, seen = [(sx, sy)], set()
+    while stack:
+        x, y = stack.pop()
+        if (x, y) in seen or not (0 <= x < im.width and 0 <= y < im.height):
+            continue
+        seen.add((x, y))
+        if is_wall(px[x, y]):
+            continue
+        r, g, b, _ = px[x, y]
+        px[x, y] = (r, g, b, 0)
+        stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
+    return im
+
+
 def post_process(asset: dict) -> None:
     raw_path = RAW_DIR / f"{asset['id']}.png"
     out_path = REPO / asset["out"]
     out_path.parent.mkdir(parents=True, exist_ok=True)
     w, h = asset["size"]
     im = Image.open(raw_path).convert("RGBA")
+    if asset.get("chroma_key"):
+        im = chroma_key(im, asset["chroma_key"])
 
-    if asset.get("transparent"):
+    if asset.get("fit") == "stretch":
+        # 透明部分をトリムして、枠いっぱいに引き伸ばす (カード枠などレイアウト位置が重要なもの)
+        bbox = im.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
+        if bbox:
+            im = im.crop(bbox)
+        im = im.resize((w, h), Image.LANCZOS)
+        if asset.get("clear_window"):
+            im = clear_window(im, asset["clear_window"])
+    elif asset.get("transparent"):
         # 透明部分をトリムして、枠内に収まるよう縮小 → 中央(下揃え可)に配置
         bbox = im.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
         if bbox:

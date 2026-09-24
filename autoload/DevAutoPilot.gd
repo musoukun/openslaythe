@@ -19,6 +19,10 @@ func _ready() -> void:
 			var map := get_tree().root.find_child("Map", true, false)
 			if map:
 				map.show_map()
+		"deck":
+			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
+			if deck_button:
+				deck_button.button_up.emit()
 		"combat", "vfx":
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:

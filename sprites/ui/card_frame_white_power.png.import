@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6iqr7geuaads"
-path="res://.godot/imported/card_frame_power.png-e8301672ce43db856bb379ee6d91d6ca.ctex"
+uid="uid://0ti72li3ual0"
+path="res://.godot/imported/card_frame_white_power.png-9ed8dfc97919391266023fe6414a4105.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/card_frame_power.png"
-dest_files=["res://.godot/imported/card_frame_power.png-e8301672ce43db856bb379ee6d91d6ca.ctex"]
+source_file="res://sprites/ui/card_frame_white_power.png"
+dest_files=["res://.godot/imported/card_frame_white_power.png-9ed8dfc97919391266023fe6414a4105.ctex"]
 
 [params]
 

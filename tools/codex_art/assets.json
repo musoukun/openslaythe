@@ -2,42 +2,6 @@
  "style": "Create original playful reactor-greenhouse game art with chunky hand-inked dark teal contours, flat gouache-like color masses and restrained dry-brush texture. Combine botanical shapes with improvised copper machinery and cream ceramics, using mint, lime, peach, coral and cyan accents over deep teal. Use bold readable silhouettes, two-step cel shading and selective warm ivory highlights; reserve soft emission for active energy and VFX. Keep the humor earnest and slightly ridiculous, with no imitation of existing game designs. Include no text, letters, numerals, labels, logos, watermarks or typographic symbols, and respect each asset's stated background and framing requirements.",
  "assets": [
   {
-   "id": "frame_attack",
-   "out": "sprites/ui/card_frame_attack.png",
-   "size": [
-    288,
-    368
-   ],
-   "transparent": true,
-   "brief": "Card frame for ATTACK cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
-   "category": "card_frame",
-   "prompt": "Portrait card frame with coral copper jaws, angular clipped shoulders and a small trowel notch. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
-  },
-  {
-   "id": "frame_skill",
-   "out": "sprites/ui/card_frame_skill.png",
-   "size": [
-    288,
-    368
-   ],
-   "transparent": true,
-   "brief": "Card frame for SKILL cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
-   "category": "card_frame",
-   "prompt": "Portrait card frame with cyan mint ceramic edging, smooth rounded shoulders and one leaf rib. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
-  },
-  {
-   "id": "frame_power",
-   "out": "sprites/ui/card_frame_power.png",
-   "size": [
-    288,
-    368
-   ],
-   "transparent": true,
-   "brief": "Card frame for POWER cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
-   "category": "card_frame",
-   "prompt": "Portrait card frame with amber copper concentric coils, stepped shoulders and a small seed crown. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
-  },
-  {
    "id": "frame_status",
    "out": "sprites/ui/card_frame_status.png",
    "size": [
@@ -45,9 +9,123 @@
     368
    ],
    "transparent": true,
-   "brief": "Card frame for STATUS cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+   "fit": "stretch",
+   "chroma_key": "#FF00FF",
    "category": "card_frame",
-   "prompt": "Portrait card frame with plum dented ceramic edging, asymmetrical chipped shoulders and sealed sludge seams. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
+   "brief": "Simple readable card frame (status skill)",
+   "prompt": "A clean, simple, flat trading-card frame template in the style of classic deckbuilder cards. Card body color: muted plum (#6B4A63) with a darker inner border (#48304A); ribbon in dark plum (#2F1F31) with a thin cream edge. ART WINDOW SHAPE: plain rectangle with small rounded corners. STRICT LAYOUT on a portrait card (width W, height H), flat front view, no perspective: the card body fills the whole canvas edge to edge with small rounded corners and a thin dark ink outline (#142C30). NAME RIBBON: a horizontal banner across the top from x=6% to x=94%, y=3% to y=14%, flat and empty in the middle (text is added later). COST SOCKET: an empty round socket centered at x=11%, y=8%, diameter 18% of W, overlapping the left end of the ribbon. ART WINDOW: x=12% to 88%, y=16% to 55%; fill the window interior with PURE FLAT MAGENTA #FF00FF (it will be cut out), with a clean frame border around it. TYPE TAG: a small flat dark plate centered at x=36%-64%, y=55%-61%, empty. TEXT PLATE: x=9% to 91%, y=63% to 95%, a FLAT LIGHT CREAM (#F3E8CF) panel with rounded corners and a thin border, completely plain and empty for dark text. Keep decoration minimal and flat: no vines, no leaves over the plates, no gadgets, no texture noise, no text. Background outside the card must be transparent.",
+   "clear_window": [
+    0.5,
+    0.35
+   ]
+  },
+  {
+   "id": "frame_white_power",
+   "out": "sprites/ui/card_frame_white_power.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "fit": "stretch",
+   "chroma_key": "#FF00FF",
+   "category": "card_frame",
+   "brief": "Simple readable card frame (white power)",
+   "prompt": "A clean, simple, flat trading-card frame template in the style of classic deckbuilder cards. Card body color: light warm gray (#B9B3A6) with a slightly darker inner border (#7E786C); ribbon in charcoal gray (#4A4A48) with a thin cream edge. ART WINDOW SHAPE: rounded arch - straight sides, fully semicircular top, flat bottom. STRICT LAYOUT on a portrait card (width W, height H), flat front view, no perspective: the card body fills the whole canvas edge to edge with small rounded corners and a thin dark ink outline (#142C30). NAME RIBBON: a horizontal banner across the top from x=6% to x=94%, y=3% to y=14%, flat and empty in the middle (text is added later). COST SOCKET: an empty round socket centered at x=11%, y=8%, diameter 18% of W, overlapping the left end of the ribbon. ART WINDOW: x=12% to 88%, y=16% to 55%; fill the window interior with PURE FLAT MAGENTA #FF00FF (it will be cut out), with a clean frame border around it. TYPE TAG: a small flat dark plate centered at x=36%-64%, y=55%-61%, empty. TEXT PLATE: x=9% to 91%, y=63% to 95%, a FLAT LIGHT CREAM (#F3E8CF) panel with rounded corners and a thin border, completely plain and empty for dark text. Keep decoration minimal and flat: no vines, no leaves over the plates, no gadgets, no texture noise, no text. Background outside the card must be transparent.",
+   "clear_window": [
+    0.5,
+    0.35
+   ]
+  },
+  {
+   "id": "frame_white_attack",
+   "out": "sprites/ui/card_frame_white_attack.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "fit": "stretch",
+   "chroma_key": "#FF00FF",
+   "category": "card_frame",
+   "brief": "Simple readable card frame (white attack)",
+   "prompt": "A clean, simple, flat trading-card frame template in the style of classic deckbuilder cards. Card body color: light warm gray (#B9B3A6) with a slightly darker inner border (#7E786C); ribbon in charcoal gray (#4A4A48) with a thin cream edge. ART WINDOW SHAPE: rectangle whose bottom edge comes to a shallow downward point (a wide V) in the center, like a shield bottom. STRICT LAYOUT on a portrait card (width W, height H), flat front view, no perspective: the card body fills the whole canvas edge to edge with small rounded corners and a thin dark ink outline (#142C30). NAME RIBBON: a horizontal banner across the top from x=6% to x=94%, y=3% to y=14%, flat and empty in the middle (text is added later). COST SOCKET: an empty round socket centered at x=11%, y=8%, diameter 18% of W, overlapping the left end of the ribbon. ART WINDOW: x=12% to 88%, y=16% to 55%; fill the window interior with PURE FLAT MAGENTA #FF00FF (it will be cut out), with a clean frame border around it. TYPE TAG: a small flat dark plate centered at x=36%-64%, y=55%-61%, empty. TEXT PLATE: x=9% to 91%, y=63% to 95%, a FLAT LIGHT CREAM (#F3E8CF) panel with rounded corners and a thin border, completely plain and empty for dark text. Keep decoration minimal and flat: no vines, no leaves over the plates, no gadgets, no texture noise, no text. Background outside the card must be transparent.",
+   "clear_window": [
+    0.5,
+    0.35
+   ]
+  },
+  {
+   "id": "frame_white_skill",
+   "out": "sprites/ui/card_frame_white_skill.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "fit": "stretch",
+   "chroma_key": "#FF00FF",
+   "category": "card_frame",
+   "brief": "Simple readable card frame (white skill)",
+   "prompt": "A clean, simple, flat trading-card frame template in the style of classic deckbuilder cards. Card body color: light warm gray (#B9B3A6) with a slightly darker inner border (#7E786C); ribbon in charcoal gray (#4A4A48) with a thin cream edge. ART WINDOW SHAPE: plain rectangle with small rounded corners. STRICT LAYOUT on a portrait card (width W, height H), flat front view, no perspective: the card body fills the whole canvas edge to edge with small rounded corners and a thin dark ink outline (#142C30). NAME RIBBON: a horizontal banner across the top from x=6% to x=94%, y=3% to y=14%, flat and empty in the middle (text is added later). COST SOCKET: an empty round socket centered at x=11%, y=8%, diameter 18% of W, overlapping the left end of the ribbon. ART WINDOW: x=12% to 88%, y=16% to 55%; fill the window interior with PURE FLAT MAGENTA #FF00FF (it will be cut out), with a clean frame border around it. TYPE TAG: a small flat dark plate centered at x=36%-64%, y=55%-61%, empty. TEXT PLATE: x=9% to 91%, y=63% to 95%, a FLAT LIGHT CREAM (#F3E8CF) panel with rounded corners and a thin border, completely plain and empty for dark text. Keep decoration minimal and flat: no vines, no leaves over the plates, no gadgets, no texture noise, no text. Background outside the card must be transparent.",
+   "clear_window": [
+    0.5,
+    0.35
+   ]
+  },
+  {
+   "id": "frame_green_power",
+   "out": "sprites/ui/card_frame_green_power.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "fit": "stretch",
+   "chroma_key": "#FF00FF",
+   "category": "card_frame",
+   "brief": "Simple readable card frame (green power)",
+   "prompt": "A clean, simple, flat trading-card frame template in the style of classic deckbuilder cards. Card body color: saturated fresh leaf green (#4E9F3D) with a slightly darker green inner border (#2F6B2A); ribbon in deep green (#23502A) with a thin cream edge. ART WINDOW SHAPE: rounded arch - straight sides, fully semicircular top, flat bottom. STRICT LAYOUT on a portrait card (width W, height H), flat front view, no perspective: the card body fills the whole canvas edge to edge with small rounded corners and a thin dark ink outline (#142C30). NAME RIBBON: a horizontal banner across the top from x=6% to x=94%, y=3% to y=14%, flat and empty in the middle (text is added later). COST SOCKET: an empty round socket centered at x=11%, y=8%, diameter 18% of W, overlapping the left end of the ribbon. ART WINDOW: x=12% to 88%, y=16% to 55%; fill the window interior with PURE FLAT MAGENTA #FF00FF (it will be cut out), with a clean frame border around it. TYPE TAG: a small flat dark plate centered at x=36%-64%, y=55%-61%, empty. TEXT PLATE: x=9% to 91%, y=63% to 95%, a FLAT LIGHT CREAM (#F3E8CF) panel with rounded corners and a thin border, completely plain and empty for dark text. Keep decoration minimal and flat: no vines, no leaves over the plates, no gadgets, no texture noise, no text. Background outside the card must be transparent.",
+   "clear_window": [
+    0.5,
+    0.35
+   ]
+  },
+  {
+   "id": "frame_green_skill",
+   "out": "sprites/ui/card_frame_green_skill.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "fit": "stretch",
+   "chroma_key": "#FF00FF",
+   "category": "card_frame",
+   "brief": "Simple readable card frame (green skill)",
+   "prompt": "A clean, simple, flat trading-card frame template in the style of classic deckbuilder cards. Card body color: saturated fresh leaf green (#4E9F3D) with a slightly darker green inner border (#2F6B2A); ribbon in deep green (#23502A) with a thin cream edge. ART WINDOW SHAPE: plain rectangle with small rounded corners. STRICT LAYOUT on a portrait card (width W, height H), flat front view, no perspective: the card body fills the whole canvas edge to edge with small rounded corners and a thin dark ink outline (#142C30). NAME RIBBON: a horizontal banner across the top from x=6% to x=94%, y=3% to y=14%, flat and empty in the middle (text is added later). COST SOCKET: an empty round socket centered at x=11%, y=8%, diameter 18% of W, overlapping the left end of the ribbon. ART WINDOW: x=12% to 88%, y=16% to 55%; fill the window interior with PURE FLAT MAGENTA #FF00FF (it will be cut out), with a clean frame border around it. TYPE TAG: a small flat dark plate centered at x=36%-64%, y=55%-61%, empty. TEXT PLATE: x=9% to 91%, y=63% to 95%, a FLAT LIGHT CREAM (#F3E8CF) panel with rounded corners and a thin border, completely plain and empty for dark text. Keep decoration minimal and flat: no vines, no leaves over the plates, no gadgets, no texture noise, no text. Background outside the card must be transparent.",
+   "clear_window": [
+    0.5,
+    0.35
+   ]
+  },
+  {
+   "id": "frame_green_attack",
+   "out": "sprites/ui/card_frame_green_attack.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "fit": "stretch",
+   "chroma_key": "#FF00FF",
+   "category": "card_frame",
+   "brief": "Simple readable card frame (green attack)",
+   "prompt": "A clean, simple, flat trading-card frame template in the style of classic deckbuilder cards. Card body color: saturated fresh leaf green (#4E9F3D) with a slightly darker green inner border (#2F6B2A); ribbon in deep green (#23502A) with a thin cream edge. ART WINDOW SHAPE: rectangle whose bottom edge comes to a shallow downward point (a wide V) in the center, like a shield bottom. STRICT LAYOUT on a portrait card (width W, height H), flat front view, no perspective: the card body fills the whole canvas edge to edge with small rounded corners and a thin dark ink outline (#142C30). NAME RIBBON: a horizontal banner across the top from x=6% to x=94%, y=3% to y=14%, flat and empty in the middle (text is added later). COST SOCKET: an empty round socket centered at x=11%, y=8%, diameter 18% of W, overlapping the left end of the ribbon. ART WINDOW: x=12% to 88%, y=16% to 55%; fill the window interior with PURE FLAT MAGENTA #FF00FF (it will be cut out), with a clean frame border around it. TYPE TAG: a small flat dark plate centered at x=36%-64%, y=55%-61%, empty. TEXT PLATE: x=9% to 91%, y=63% to 95%, a FLAT LIGHT CREAM (#F3E8CF) panel with rounded corners and a thin border, completely plain and empty for dark text. Keep decoration minimal and flat: no vines, no leaves over the plates, no gadgets, no texture noise, no text. Background outside the card must be transparent.",
+   "clear_window": [
+    0.5,
+    0.35
+   ]
   },
   {
    "id": "energy_green",
