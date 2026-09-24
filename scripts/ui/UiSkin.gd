@@ -13,6 +13,7 @@ const BUTTON_ICONS := {
 	"RunScreen/Combat/Shop": "res://sprites/ui/shop.png",
 }
 const TITLE_BACKGROUND := "res://sprites/ui/title_background.png"
+const TOP_BAR_COLOR := Color(0.03, 0.09, 0.09, 0.78)
 
 
 static func apply(root: Node) -> void:
@@ -21,6 +22,13 @@ static func apply(root: Node) -> void:
 		var tex := load_if_exists(BUTTON_ICONS[node_path])
 		if button and tex:
 			button.texture_normal = tex
+	# 戦闘背景画像の上に上部バーを半透明で重ねて HUD を読みやすくする
+	var top_bar := root.get_node_or_null("RunScreen/Combat/Background2") as ColorRect
+	var bg_button := root.get_node_or_null("RunScreen/Combat/BackgroundButton")
+	if top_bar and bg_button:
+		top_bar.get_parent().move_child(top_bar, bg_button.get_index())
+		top_bar.color = TOP_BAR_COLOR
+		top_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var title := root.get_node_or_null("TitleScreen")
 	if title:
 		add_background(title, TITLE_BACKGROUND, ["Background"])

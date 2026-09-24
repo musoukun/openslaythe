@@ -41,7 +41,7 @@ func init(_enemy_data: EnemyData):
 	var sprite_height: float = fit_sprite_to_feet()
 	if sprite_height > 0.0:
 		# インテントを頭上へ
-		enemy_intent.position.y = animated_sprite_2d.position.y + SPRITE_FEET_Y - sprite_height - enemy_intent.size.y
+		enemy_intent.position.y = get_head_y(sprite_height) - enemy_intent.size.y
 	
 	# apply initial effects
 	for status_effect_object_id in enemy_data.enemy_initial_status_effects.keys():

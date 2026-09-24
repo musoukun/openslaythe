@@ -4,8 +4,8 @@ class_name MapPaths
 
 const DASH_LENGTH := 8.0
 const LINE_WIDTH := 3.0
-const LINE_COLOR := Color(0.12, 0.1, 0.08, 0.7)
-const VISITED_COLOR := Color(0.95, 0.75, 0.3, 0.95)
+const LINE_COLOR := Color(0.95, 0.9, 0.75, 0.55)
+const VISITED_COLOR := Color(1.0, 0.72, 0.35, 1.0)
 const ICON_MARGIN := 30.0	# アイコンに線が重ならないよう端を詰める
 
 ## [from: Vector2, to: Vector2, visited: bool]

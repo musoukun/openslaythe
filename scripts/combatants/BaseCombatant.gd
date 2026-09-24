@@ -24,6 +24,8 @@ var status_id_to_status_effects: Dictionary = {}	# maps status id to the array o
 var custom_ui_object_id_to_custom_ui: Dictionary = {} # maps a custom ui id to the ui component it matches. Duplicate registrations will be ignored
 
 const BLOCK_ICON_PATH := "res://sprites/ui/icon_block.png"
+const DAMAGE_TEXT_COLOR := Color(1.0, 0.86, 0.55)
+const BLOCK_TEXT_COLOR := Color(0.55, 0.95, 1.0)
 var BLOCK_TEXTURE: Texture = UiSkin.load_if_exists(BLOCK_ICON_PATH) if ResourceLoader.exists(BLOCK_ICON_PATH) else load("res://icon.svg")
 
 func _ready():
@@ -66,8 +68,14 @@ func fit_sprite_to_feet() -> float:
 	selection_button.offset_right = hit_w / 2.0
 	selection_button.offset_top = SPRITE_FEET_Y - size.y * 0.9
 	selection_button.offset_bottom = SPRITE_FEET_Y
+	# ダメージ数字は頭上に出す
+	fade_container.position.y = get_head_y(size.y) + 24.0
 	_start_breathing()
 	return size.y
+
+## Visible 座標系でのスプライト頭頂の y
+func get_head_y(sprite_height: float) -> float:
+	return animated_sprite_2d.position.y + SPRITE_FEET_Y - sprite_height
 
 func _start_breathing() -> void:
 	if _breath_tween and _breath_tween.is_valid():
@@ -212,12 +220,15 @@ func queue_speech_message(message_bbcode: String) -> void:
 func create_block_text() -> void:
 	var text_fade: TextFade = Scenes.TEXT_FADE.instantiate()
 	fade_container.add_child(text_fade)
-	text_fade.init("Blocked")
+	text_fade.init("Blocked", BLOCK_TEXT_COLOR)
+	text_fade.pop(1.3)
 
 func create_damage_text(damage_amount: int) -> void:
 	var text_fade: TextFade = Scenes.TEXT_FADE.instantiate()
 	fade_container.add_child(text_fade)
-	text_fade.init(str(damage_amount))
+	text_fade.init(str(damage_amount), DAMAGE_TEXT_COLOR)
+	# ダメージが大きいほど大きく弾ける (20 ダメージで最大)
+	text_fade.pop(1.6 + clampf(damage_amount / 20.0, 0.0, 1.0))
 
 func create_block_fade() -> void:
 	create_image_fade(BLOCK_TEXTURE)

@@ -26,10 +26,8 @@ func reset_player() -> void:
 	animated_sprite_2d.play(AnimationData.ANIMATION_IDLE)
 	var sprite_height: float = fit_sprite_to_feet()
 	if sprite_height > 0.0:
-		# 被ダメ予告とダメージ数字を頭上へ
-		var head_y: float = animated_sprite_2d.position.y + SPRITE_FEET_Y - sprite_height
-		incoming_damage.position.y = head_y - 8.0
-		fade_container.position.y = head_y + 24.0
+		# 被ダメ予告を頭上へ
+		incoming_damage.position.y = get_head_y(sprite_height) - 8.0
 	
 	reset_block()
 	clear_all_status_effects()
