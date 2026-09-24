@@ -22,7 +22,7 @@ func init(character_id: String) -> void:
 	var character_data: CharacterData = Global.get_character_data(character_id)
 	
 	character_icon.texture = FileLoader.load_texture(character_data.character_icon_texture_path)
-	character_name_label.text = character_data.character_name
+	character_name_label.text = tr(character_data.character_name)
 
 	# wins/losses
 	var character_wins: int = profile_data.profile_character_id_to_wins.get(character_id, 0)

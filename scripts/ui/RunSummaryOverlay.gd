@@ -2,7 +2,7 @@ extends Control
 
 @onready var victory_label: Label = %VictoryLabel
 @onready var defeat_label: Label = %DefeatLabel
-## Displays either VICTORY_MESSAGE or EventData.event_death_message_bbcode
+## Displays either VICTORY_MESSAGE or tr(EventData.event_death_message_bbcode)
 @onready var end_run_message_label: RichTextLabel = %EndRunMessageLabel
 ## Displays formatted stats
 @onready var stats_summary_autosize_label: RichLabelAutoSizer = %StatsSummaryAutosizeLabel
@@ -97,7 +97,7 @@ func _on_player_death_animation_finished(_player: Player):
 	
 	var event_data: EventData = Global.get_player_event_data()
 	if event_data != null:
-		end_run_message_label.parse_bbcode(event_data.event_death_message_bbcode)
+		end_run_message_label.parse_bbcode(tr(event_data.event_death_message_bbcode))
 	
 	generate_run_summary_text()
 	visible = true

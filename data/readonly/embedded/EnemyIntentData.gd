@@ -169,7 +169,7 @@ func get_intent_codex_bbcode() -> String:
 					for enemy_id: String in random_enemy_object_ids:
 						# add names and icons for each enemy
 						var enemy_data: EnemyData = Global.get_enemy_data(enemy_id)
-						var summoning_text: String = "{0} [img width={1}]{2}[/img]".format([enemy_data.enemy_name, BBCODE_EMBEDDED_IMAGE_WIDTH, enemy_data.enemy_texture_path])
+						var summoning_text: String = "{0} [img width={1}]{2}[/img]".format([tr(enemy_data.enemy_name), BBCODE_EMBEDDED_IMAGE_WIDTH, enemy_data.enemy_texture_path])
 						summoning_texts.append(summoning_text)
 					
 					returned_bbcode += ", ".join(summoning_texts)

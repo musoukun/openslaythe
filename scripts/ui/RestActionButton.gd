@@ -12,7 +12,7 @@ func _ready():
 func init(_rest_action_object_id: String) -> void:
 	rest_action_object_id = _rest_action_object_id
 	var rest_action_data: RestActionData = Global.get_rest_action_data(rest_action_object_id)
-	text = rest_action_data.rest_action_name
+	text = tr(rest_action_data.rest_action_name)
 
 func _on_button_up():
 	rest_action_button_up.emit(self)

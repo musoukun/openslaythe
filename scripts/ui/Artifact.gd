@@ -45,7 +45,7 @@ func _on_right_button_up() -> void:
 
 
 func _on_mouse_entered() -> void:
-	if artifact_data.artifact_description != "":
+	if tr(artifact_data.artifact_description) != "":
 		HandManager.tooltip.display_artifact_tooltip(artifact_script)
 func _on_mouse_exited() -> void:
 	HandManager.tooltip.hide_tooltip()

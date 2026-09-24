@@ -170,6 +170,7 @@ func _ready():
 	### Load Profile and User Settings
 	FileLoader.load_profile()
 	FileLoader.load_user_settings()
+	Localization.apply_saved()
 	
 	### Production data generation
 	GlobalProdDataGenerator.generate_production_data()

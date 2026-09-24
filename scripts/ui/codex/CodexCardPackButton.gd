@@ -18,7 +18,7 @@ func init(_card_pack_data: CardPackData) -> void:
 		var color_data: ColorData = Global.get_color_data(card_pack_data.card_pack_color_id)
 		self_modulate = color_data.color
 		
-		text = color_data.color_name
+		text = tr(color_data.color_name)
 
 func _on_button_presssed():
 	codex_card_card_pack_button_pressed.emit(card_pack_data)

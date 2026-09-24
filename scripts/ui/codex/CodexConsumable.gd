@@ -14,7 +14,7 @@ func init(_consumable_data: ConsumableData):
 	texture_normal = FileLoader.load_texture(consumable_data.consumable_texture_path)
 
 func _on_mouse_entered() -> void:
-	if consumable_data.consumable_description != "":
+	if tr(consumable_data.consumable_description) != "":
 		HandManager.tooltip.display_codex_consumable_tooltip(consumable_data)
 func _on_mouse_exited() -> void:
 	HandManager.tooltip.hide_tooltip()

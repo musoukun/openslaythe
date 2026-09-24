@@ -37,7 +37,7 @@ func _codex_artifact_custom_sort(artifact_args_1: Array, artifact_args_2: Array)
 	var artifact_data_2: ArtifactData = artifact_args_2[0]
 	if sort_by_artifact_rarity:
 		if artifact_data_1.artifact_rarity == artifact_data_2.artifact_rarity:
-			return (artifact_data_1.artifact_name < artifact_data_2.artifact_name) == subsort_by_artifact_name_ascending
+			return (tr(artifact_data_1.artifact_name) < tr(artifact_data_2.artifact_name)) == subsort_by_artifact_name_ascending
 		return artifact_data_1.artifact_rarity < artifact_data_2.artifact_rarity
 	else:
-		return (artifact_data_1.artifact_name < artifact_data_2.artifact_name) == subsort_by_artifact_name_ascending
+		return (tr(artifact_data_1.artifact_name) < tr(artifact_data_2.artifact_name)) == subsort_by_artifact_name_ascending

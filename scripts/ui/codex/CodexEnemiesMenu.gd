@@ -75,7 +75,7 @@ func _populate_codex_enemies() -> void:
 
 ## Populates info for a given enemy, and a list of intents
 func populate_codex_enemy(enemy_data: EnemyData) -> void:
-	codex_enemy_name_label.text = enemy_data.enemy_name
+	codex_enemy_name_label.text = tr(enemy_data.enemy_name)
 	codex_enemy_texture.texture = FileLoader.load_texture(enemy_data.enemy_texture_path)
 	codex_enemy_health_label.text = "HP: {0}-{1}".format([enemy_data.enemy_health_max_random_lower, enemy_data.enemy_health_max_random_upper])
 	populate_codex_enemy_intents(enemy_data)
@@ -106,7 +106,7 @@ func _on_enemy_intent_toggle(toggle: bool) -> void:
 
 func _codex_act_sort(act_data_1: ActData, act_data_2: ActData) -> bool:
 	if act_data_1.act_codex_number == act_data_2.act_codex_number:
-		return act_data_1.act_name < act_data_2.act_name
+		return tr(act_data_1.act_name) < tr(act_data_2.act_name)
 	else:
 		return act_data_1.act_codex_number < act_data_2.act_codex_number
 
@@ -115,6 +115,6 @@ func _codex_enemy_sort(enemy_id_1: String, enemy_id_2: String) -> bool:
 	var enemy_data_1: EnemyData = Global.get_enemy_data(enemy_id_1)
 	var enemy_data_2: EnemyData = Global.get_enemy_data(enemy_id_2)
 	if enemy_data_1.enemy_type == enemy_data_2.enemy_type:
-		return enemy_data_1.enemy_name < enemy_data_2.enemy_name
+		return tr(enemy_data_1.enemy_name) < tr(enemy_data_2.enemy_name)
 	else:
 		return enemy_data_1.enemy_type < enemy_data_2.enemy_type

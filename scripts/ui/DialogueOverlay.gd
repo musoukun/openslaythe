@@ -54,9 +54,9 @@ func populate_dialogue_options() -> void:
 	clear_dialogue_options()
 	
 	# set name
-	dialogue_name_label.parse_bbcode(current_dialogue_data.dialogue_name_bbcode)
+	dialogue_name_label.parse_bbcode(tr(current_dialogue_data.dialogue_name_bbcode))
 	# set prompt
-	dialogue_prompt_label.parse_bbcode(current_dialogue_state.dialogue_state_prompt_bbcode)
+	dialogue_prompt_label.parse_bbcode(tr(current_dialogue_state.dialogue_state_prompt_bbcode))
 	
 	# set prompt image
 	if current_dialogue_state.dialogue_state_dialogue_texture_path != "":
@@ -74,8 +74,8 @@ func populate_dialogue_options() -> void:
 			dialogue_option_container.add_child(dialogue_option_button)
 			dialogue_option_button.init(
 				dialogue_option_data.object_id,
-				dialogue_option_data.dialogue_option_bbcode,
-				dialogue_option_data.dialogue_option_failed_validator_bbcode,
+				tr(dialogue_option_data.dialogue_option_bbcode),
+				tr(dialogue_option_data.dialogue_option_failed_validator_bbcode),
 				dialogue_option_data.dialogue_option_actions,
 				dialogue_option_data.dialogue_option_validators,
 				)

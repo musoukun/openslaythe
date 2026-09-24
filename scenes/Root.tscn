@@ -732,6 +732,22 @@ max_value = 1.0
 step = 0.1
 rounded = false
 
+[node name="LanguageLabel" type="Label" parent="TitleScreen/SettingsMenu"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 432.0
+offset_right = 328.0
+offset_bottom = 504.0
+text = "Language"
+
+[node name="LanguageOptionButton" type="OptionButton" parent="TitleScreen/SettingsMenu"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 344.0
+offset_top = 444.0
+offset_right = 696.0
+offset_bottom = 492.0
+
 [node name="CodexMenu" type="Control" parent="TitleScreen" unique_id=184224315 node_paths=PackedStringArray("navigation_button_to_menu", "navigation_button_to_sub_menu", "default_sub_menu")]
 visible = false
 layout_mode = 1

@@ -83,18 +83,18 @@ func clear_character_buttons() -> void:
 func populate_character_info(character_object_id: String) -> void:
 	var character_data: CharacterData = Global.get_character_data(character_object_id)
 	if character_data != null:
-		character_name_label.text = character_data.character_name
+		character_name_label.text = tr(character_data.character_name)
 		character_health_label.text = "HP: {0}".format([character_data.character_starting_health])
 		character_money_label.text = "Money: {0}".format([character_data.character_starting_money])
-		character_description_label.text = character_data.character_description
+		character_description_label.text = tr(character_data.character_description)
 		
 		# TODO potentially update ui to support multiple starter artifacts displayed
 		if len(character_data.character_starting_artifact_ids) > 0:
 			var artifact_data: ArtifactData = Global.get_artifact_data(character_data.character_starting_artifact_ids[0])
 			if artifact_data != null:
 				character_artifact_texture_rect.texture = FileLoader.load_texture(artifact_data.artifact_texture_path)
-				character_artifact_name_label.text = artifact_data.artifact_name
-				character_artifact_description_label.text = artifact_data.artifact_description
+				character_artifact_name_label.text = tr(artifact_data.artifact_name)
+				character_artifact_description_label.text = tr(artifact_data.artifact_description)
 		
 		# play character selection audio if it exists
 		if character_data.character_selection_audio_path != "":
@@ -133,7 +133,7 @@ func set_selected_difficulty_level(value: int) -> void:
 	var run_modifier_data: RunModifierData = Global.get_run_modifier_data(run_modifier_id)
 	
 	if run_modifier_data != null:
-		difficulty_label.text = run_modifier_data.run_modifier_name
+		difficulty_label.text = tr(run_modifier_data.run_modifier_name)
 
 func _on_decrease_difficulty_button_pressed():
 	selected_difficulty_level = max(0, selected_difficulty_level - 1)

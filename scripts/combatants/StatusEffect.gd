@@ -24,7 +24,7 @@ func update_status_charge_display() -> void:
 		status_secondary_charge_label.text = str(status_effect_script.status_secondary_charges)
 	
 	
-	tooltip_text = status_effect_script.status_effect_data.status_effect_name
+	tooltip_text = tr(status_effect_script.status_effect_data.status_effect_name)
 	
 	# texture
 	var status_effect_texture_path: String = status_effect_data.get_status_effect_texture_path(status_effect_script.status_charges)

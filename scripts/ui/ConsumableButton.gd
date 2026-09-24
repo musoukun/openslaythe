@@ -16,9 +16,9 @@ func init(_consumable_slot_index: int):
 	var consumable_data: ConsumableData = Global.get_player_consumable_in_slot_index(consumable_slot_index)
 	if consumable_data != null:
 		# set tooltip
-		tooltip_text = consumable_data.consumable_name
-		if consumable_data.consumable_description != "":
-			tooltip_text += "\n" + consumable_data.consumable_description
+		tooltip_text = tr(consumable_data.consumable_name)
+		if tr(consumable_data.consumable_description) != "":
+			tooltip_text += "\n" + tr(consumable_data.consumable_description)
 		# texture
 		texture_normal = FileLoader.load_texture(consumable_data.consumable_texture_path)
 	else:

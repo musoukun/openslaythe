@@ -6,5 +6,5 @@ func init(_run_modifier_object_id: String) -> void:
 	run_modifier_object_id = _run_modifier_object_id
 	var run_modifier_data: RunModifierData = Global.get_run_modifier_data(run_modifier_object_id)
 	if run_modifier_data != null:
-		text = run_modifier_data.run_modifier_name
-		tooltip_text = run_modifier_data.run_modifier_description
+		text = tr(run_modifier_data.run_modifier_name)
+		tooltip_text = tr(run_modifier_data.run_modifier_description)

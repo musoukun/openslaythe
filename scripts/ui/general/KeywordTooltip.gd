@@ -15,7 +15,7 @@ func init(keyword_object_id: String) -> void:
 		var keyword_bbcode: String = ""
 		
 		# keyword name
-		keyword_bbcode = keyword_data.keyword_name
+		keyword_bbcode = tr(keyword_data.keyword_name)
 		
 		# prepend status image if it exists
 		var keyword_status_effect_id: String = keyword_data.keyword_status_effect_id
@@ -28,7 +28,7 @@ func init(keyword_object_id: String) -> void:
 				keyword_bbcode = "[img width={0}]{1}[/img] {2}".format([EMBEDDED_IMAGE_SIZE, status_effect_data.status_effect_texture_path, keyword_bbcode])
 		
 		# append keyword text
-		keyword_bbcode = "{0}\n{1}".format([keyword_bbcode, keyword_data.keyword_text_bb_code])
+		keyword_bbcode = "{0}\n{1}".format([keyword_bbcode, tr(keyword_data.keyword_text_bb_code)])
 		
 		# force the font to a certain size
 		keyword_bbcode = "[font_size={0}]{1}[/font_size]".format([FONT_SIZE, keyword_bbcode])

@@ -72,7 +72,7 @@ func _populate_run_history(run_index: int = -1) -> void:
 		run_history_character_name_label.text = "Invalid Character"
 		run_history_character_icon.texture = FileLoader.MISSING_TEXTURE
 	else:
-		run_history_character_name_label.text = character_data.character_name
+		run_history_character_name_label.text = tr(character_data.character_name)
 		run_history_character_icon.texture = FileLoader.load_texture(character_data.character_icon_texture_path)
 	
 	run_history_difficulty_label.text = str(run_stats_data.run_difficulty_level)
@@ -90,7 +90,7 @@ func _populate_run_history(run_index: int = -1) -> void:
 		if defeat_event_data == null:
 			run_history_message_label.parse_bbcode(MISSING_EVENT_BBCODE)
 		else:
-			run_history_message_label.parse_bbcode(defeat_event_data.event_death_message_bbcode)
+			run_history_message_label.parse_bbcode(tr(defeat_event_data.event_death_message_bbcode))
 	
 	var completion_date_str: String = Time.get_date_string_from_unix_time(run_stats_data.run_completion_timestamp)
 	run_history_completion_date_label.text = "Completed {0}".format([completion_date_str])

@@ -9,10 +9,15 @@ extends BaseMenu
 @onready var music_volume_slider: HSlider = %MusicVolumeSlider
 
 @onready var mute_background_check_button: CheckButton = %MuteBackgroundCheckButton
+@onready var language_option_button: OptionButton = %LanguageOptionButton
 
 func _ready():
 	super()
 	mute_background_check_button.toggled.connect(_on_mute_background_button_toggled)
+	
+	for language in Localization.LANGUAGES:
+		language_option_button.add_item(language[1])
+	language_option_button.item_selected.connect(_on_language_selected)
 	
 	master_volume_slider.value_changed.connect(_on_volume_slider_changed)
 	effects_volume_slider.value_changed.connect(_on_volume_slider_changed)
@@ -41,6 +46,8 @@ func populate_menu() -> void:
 	music_volume_slider.value = Global.user_settings_data.settings_audio_music_volume
 	# mute in background
 	mute_background_check_button.set_pressed_no_signal(Global.user_settings_data.settings_audio_mute_on_window_lose_focus)
+	# language
+	language_option_button.select(Localization.get_language_index())
 
 ## Save settings before going to the next menu
 func _navigate_to_next_menu(next_menu: BaseMenu) -> void:
@@ -51,6 +58,9 @@ func clear_menu() -> void:
 	super()
 
 #region Settings Signals
+func _on_language_selected(index: int) -> void:
+	Localization.set_language(Localization.LANGUAGES[index][0])
+
 ## Called whenever any slider changes. Recomputes volumes
 func _on_volume_slider_changed(_val: float):
 	var master_volume: float = master_volume_slider.value

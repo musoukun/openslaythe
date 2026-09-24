@@ -56,7 +56,7 @@ func populate_run_start_options() -> void:
 		var downside_actions: Array[Dictionary] = downside_run_start_option_data.run_start_option_actions.duplicate()
 
 		# concatenate partial text and actions
-		var option_bbcode: String = upside_run_start_option_data.run_start_option_bb_code + ", " + downside_run_start_option_data.run_start_option_bb_code
+		var option_bbcode: String = tr(upside_run_start_option_data.run_start_option_bb_code) + ", " + tr(downside_run_start_option_data.run_start_option_bb_code)
 		var option_actions: Array[Dictionary] = downside_run_start_option_data.run_start_option_actions + upside_run_start_option_data.run_start_option_actions
 		
 		# create a dialogue button for the option
@@ -73,7 +73,7 @@ func populate_run_start_options() -> void:
 		var complete_run_start_option_data: RunStartOptionData = Global.get_run_start_option_data(complete_option_id)
 		
 		# get actions and bbcode
-		var option_bbcode: String = complete_run_start_option_data.run_start_option_bb_code
+		var option_bbcode: String = tr(complete_run_start_option_data.run_start_option_bb_code)
 		var option_actions: Array[Dictionary] = complete_run_start_option_data.run_start_option_actions
 		
 		# create a dialogue button for the option

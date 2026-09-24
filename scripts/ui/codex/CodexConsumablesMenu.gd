@@ -36,7 +36,7 @@ func _codex_consumable_custom_sort(consumable_args_1: Array, consumable_args_2: 
 	var consumable_data_2: ConsumableData = consumable_args_2[0]
 	if sort_by_consumable_rarity:
 		if consumable_data_1.consumable_rarity == consumable_data_2.consumable_rarity:
-			return (consumable_data_1.consumable_name < consumable_data_2.consumable_name) == subsort_by_consumable_name_ascending
+			return (tr(consumable_data_1.consumable_name) < tr(consumable_data_2.consumable_name)) == subsort_by_consumable_name_ascending
 		return consumable_data_1.consumable_rarity < consumable_data_2.consumable_rarity
 	else:
-		return (consumable_data_1.consumable_name < consumable_data_2.consumable_name) == subsort_by_consumable_name_ascending
+		return (tr(consumable_data_1.consumable_name) < tr(consumable_data_2.consumable_name)) == subsort_by_consumable_name_ascending

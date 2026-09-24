@@ -15,7 +15,7 @@ func init(_enemy_data: EnemyData, _base_enemy_intent_data: EnemyIntentData) -> v
 	enemy_data = _enemy_data
 	base_enemy_intent_data = _base_enemy_intent_data
 	
-	intent_name_label.text = base_enemy_intent_data.enemy_intent_name
+	intent_name_label.text = tr(base_enemy_intent_data.enemy_intent_name)
 	
 	# generate the intent text
 	var intent_bbcode: String = _base_enemy_intent_data.get_intent_codex_bbcode()
@@ -36,7 +36,7 @@ func init(_enemy_data: EnemyData, _base_enemy_intent_data: EnemyIntentData) -> v
 			DebugLogger.log_error("CodexEnemyIntent: Invalid next intent {0} intent {1}".format([next_intent_id, base_enemy_intent_data.object_id]))
 			breakpoint
 			continue
-		var next_intent_name: String = next_intent_data.enemy_intent_name
+		var next_intent_name: String = tr(next_intent_data.enemy_intent_name)
 		next_intent_names.append(next_intent_name)
 	
 	next_intent_text = "Next: " + ", ".join(next_intent_names)

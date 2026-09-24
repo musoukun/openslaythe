@@ -397,7 +397,7 @@ func add_card_decorator(card_decorator_id: String, decorator_script_values: Dict
 		update_card_values(card_decorator_data.card_decorator_value_changes)
 		
 		# mutate card description
-		card_description = card_decorator_data.card_decorator_pre_description + card_description +  card_decorator_data.card_decorator_post_description
+		card_description = tr(card_decorator_data.card_decorator_pre_description) + card_description +  tr(card_decorator_data.card_decorator_post_description)
 		
 		# mutate card actions, wrapping them before and after
 		card_play_actions = card_decorator_data.card_decorator_post_play_actions + card_play_actions + card_decorator_data.card_decorator_pre_play_actions

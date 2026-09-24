@@ -37,7 +37,7 @@ func right_click_artifact() -> void:
 ## Typically used to provide additonal information for an artifact in addition to the standard
 ## description, for use in Tooltips.
 func get_artifact_description() -> String:
-	return artifact_data.artifact_description # + "other text"
+	return tr(artifact_data.artifact_description) # + "other text"
 
 func _on_combat_ended() -> void:
 	# reset counter

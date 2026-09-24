@@ -11,7 +11,7 @@ func _ready():
 
 func init(_enemy_data: EnemyData):
 	enemy_data = _enemy_data
-	text = enemy_data.enemy_name
+	text = tr(enemy_data.enemy_name)
 
 func _on_button_up() -> void:
 	codex_enemy_button_up.emit(enemy_data)
