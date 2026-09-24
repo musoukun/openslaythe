@@ -33,7 +33,7 @@ func _ready() -> void:
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:
 				deck_button.button_up.emit()
-		"combat", "vfx":
+		"combat", "vfx", "profile":
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
@@ -41,6 +41,35 @@ func _ready() -> void:
 			if mode == "vfx":
 				await get_tree().create_timer(1.0).timeout
 				_preview_vfx()
+			if mode == "profile":
+				await get_tree().create_timer(1.0).timeout
+				_profile()
+
+
+## 性能計測: 何もしない時 / デッキ一覧を開いた直後 のフレーム時間
+func _profile() -> void:
+	for phase in ["idle", "mouse_sweep", "open_deck"]:
+		var worst := 0.0
+		var total := 0.0
+		for i in 60:
+			var t := Time.get_ticks_usec()
+			if phase == "mouse_sweep":
+				# 手札 (y=620) と敵 (y=380) の上を往復させる
+				var pos := Vector2(200 + (i % 30) * 30, 620 if i < 30 else 380)
+				var motion := InputEventMouseMotion.new()
+				motion.position = pos
+				motion.global_position = pos
+				get_viewport().warp_mouse(pos)
+				Input.parse_input_event(motion)
+			if phase == "open_deck" and i == 0:
+				var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
+				deck_button.button_up.emit()
+			await get_tree().process_frame
+			var ms := (Time.get_ticks_usec() - t) / 1000.0
+			worst = max(worst, ms)
+			total += ms
+		print("PROFILE %s: avg %.1f ms, worst %.1f ms, cards %d" % [phase, total / 60.0, worst, get_tree().get_nodes_in_group("cards").size()])
+	get_tree().quit()
 
 
 ## 全トリガーを順番に再生する (VFX 確認用)

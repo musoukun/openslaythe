@@ -82,6 +82,8 @@ func init(_card_data: CardData, angular_offset: float, connect_combat_signals: b
 	
 
 func update_card_display(selected_enemy: Enemy = null) -> void:
+	if card_data == null:
+		return
 	if _card_is_rerendering:
 		return
 	if CARDS_RERENDER_LAZILY:
