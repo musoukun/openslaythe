@@ -33,7 +33,7 @@ func _ready() -> void:
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:
 				deck_button.button_up.emit()
-		"combat", "vfx", "profile":
+		"combat", "vfx", "profile", "hitstop":
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
@@ -41,6 +41,21 @@ func _ready() -> void:
 			if mode == "vfx":
 				await get_tree().create_timer(1.0).timeout
 				_preview_vfx()
+			if mode == "hitstop":
+				await get_tree().create_timer(1.0).timeout
+				var enemy := get_tree().get_first_node_in_group("enemies") as BaseCombatant
+				await get_tree().create_timer(2.0).timeout
+				print("HITSTOP hand ", HandManager.player_hand.map(func(c): return c.object_id))
+				# 手札のアタックカードを本当にプレイする
+				for card_data: CardData in HandManager.player_hand:
+					if card_data.card_type == CardData.CARD_TYPES.ATTACK:
+						print("HITSTOP play ", card_data.object_id)
+						HandManager.add_card_to_play_queue(HandManager.create_card_play_request(card_data, enemy))
+						break
+				for i in 20:
+					await get_tree().create_timer(0.1, true, false, true).timeout
+					print("HITSTOP t=%.1f time_scale=%.2f" % [i * 0.1 + 0.1, Engine.time_scale])
+				get_tree().quit()
 			if mode == "profile":
 				await get_tree().create_timer(1.0).timeout
 				_profile()

@@ -25,6 +25,8 @@ var _pending_enemy_hits: Array = []	# [combatant, damage] 同フレームの被�
 var _last_player_health: int = -1
 var _shake_tween: Tween
 var _hit_stop_until: float = 0.0
+var _hit_stop_token: int = 0
+const HIT_STOP_TIME_SCALE := 0.05
 
 
 func _ready() -> void:
@@ -41,6 +43,8 @@ func _ready() -> void:
 	Signals.energy_changed.connect(func(): play_trigger("energy_gain", _get_player()))
 	Signals.player_health_changed.connect(_on_player_health_changed)
 	Signals.combat_started.connect(func(_id): _last_player_health = _player_health())
+	# 保険: 戦闘終了時は必ず通常速度に戻す
+	Signals.combat_ended.connect(func(): Engine.time_scale = 1.0)
 
 
 func _load_config() -> void:
@@ -217,12 +221,16 @@ func shake(strength: float, duration: float = 0.25) -> void:
 func hit_stop(duration: float) -> void:
 	var now := Time.get_ticks_msec() / 1000.0
 	if now + duration <= _hit_stop_until:
-		return
+		return	# 既に同じかそれより長い停止中
 	_hit_stop_until = now + duration
-	Engine.time_scale = 0.05
+	# 最後に呼ばれた停止だけが解除する (タイマーは時計より早く発火しうるので時刻比較はしない)
+	_hit_stop_token += 1
+	var token := _hit_stop_token
+	Engine.time_scale = HIT_STOP_TIME_SCALE
 	await get_tree().create_timer(duration, true, false, true).timeout
-	if Time.get_ticks_msec() / 1000.0 >= _hit_stop_until - 0.001:
+	if token == _hit_stop_token:
 		Engine.time_scale = 1.0
+		_hit_stop_until = 0.0
 
 #endregion
 
