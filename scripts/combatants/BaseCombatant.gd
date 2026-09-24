@@ -220,7 +220,10 @@ func add_status_effect_charges(status_effect_object_id: String, charge_amount: i
 		# status effect of given id does not exist
 		DebugLogger.log_error("Status effect {0} does not exist".format([status_effect_object_id]))
 		return
-	
+
+	if status_effect_data.status_effect_is_visible:
+		Vfx.on_status_applied(self, status_effect_data, charge_amount)
+
 	#  get status effect ui elements corresponding to the status
 	var status_effects: Array[StatusEffect] = []
 	if status_id_to_status_effects.has(status_effect_object_id):

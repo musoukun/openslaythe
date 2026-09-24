@@ -33,6 +33,7 @@ var tooltip_left_side: bool = false # if tooltip should display to the left of t
 @onready var card_energy_sprite: TextureRect = %EnergySprite
 @onready var card_energy_cost_label: Label = %EnergyCost
 @onready var card_color: ColorRect = %ColorBackground
+@onready var card_frame: TextureRect = %CardFrame
 @onready var card_decorator_container: VBoxContainer = %CardDecoratorContainer
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -89,7 +90,8 @@ func update_card_display(selected_enemy: Enemy = null) -> void:
 	
 	# update visuals
 	card_texture.texture = FileLoader.load_texture(card_data.card_texture_path)
-	
+	card_frame.texture = CardFrames.get_frame(card_data.card_type)
+
 	# updates the card's display
 	card_name.set_bbcode("[center]" + card_data.get_card_name() + "[/center]")
 	card_description.set_bbcode(get_card_description(selected_enemy))

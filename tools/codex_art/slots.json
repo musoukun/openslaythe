@@ -1,0 +1,1486 @@
+[
+ {
+  "id": "card_basic_attack_green",
+  "out": "external/sprites/cards/green/card_basic_attack_green.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Basic Attack' (ATTACK): Deal 7 damage.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_basic_block_green",
+  "out": "external/sprites/cards/green/card_basic_block_green.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Basic Block' (SKILL): Gain 5 block.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_energy_next_turn",
+  "out": "external/sprites/cards/white/card_energy_next_turn.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Energy Next Turn' (SKILL): Gain [status_charge_amount] energy next turn.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_blossom",
+  "out": "external/sprites/cards/green/card_blossom.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Blossom' (SKILL): Gain [health_amount] HP",
+  "category": "card_art"
+ },
+ {
+  "id": "card_bud",
+  "out": "external/sprites/cards/green/card_bud.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Bud' (SKILL): Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy. Exhaust.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_cell_wall",
+  "out": "external/sprites/cards/green/card_cell_wall.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Cell Wall' (SKILL): Convert Block into Overshield",
+  "category": "card_art"
+ },
+ {
+  "id": "card_chloroplast",
+  "out": "external/sprites/cards/green/card_chloroplast.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Chloroplast' (ATTACK): Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_clippers",
+  "out": "external/sprites/cards/green/card_clippers.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Clippers' (ATTACK): Attack for [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Strength. On pickup, Gain [health_amount] HP.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_differentiation",
+  "out": "external/sprites/cards/green/card_differentiation.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Differentiation' (ATTACK): Do [attack_damage]. Lose [self_damage] HP.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_fertilize",
+  "out": "external/sprites/cards/green/card_fertilize.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Fertilize' (SKILL): Gain {0}{0}. Lose [self_damage] HP.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_fruit",
+  "out": "external/sprites/cards/green/card_fruit.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Fruit' (SKILL): Randomly gain [small_max_health_amount] Max HP, [big_max_health_amount] Max HP, or {0}",
+  "category": "card_art"
+ },
+ {
+  "id": "card_growth",
+  "out": "external/sprites/cards/green/card_growth.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Growth' (SKILL): Gain [status_charge_amount] Overshield and draw 1 card.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_lotus",
+  "out": "external/sprites/cards/green/card_lotus.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Lotus' (SKILL): Double Overshield charges.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_moss",
+  "out": "external/sprites/cards/green/card_moss.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Moss' (ATTACK): Gain [status_charge_amount]. Deal damage equal to Overshield.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_pollen",
+  "out": "external/sprites/cards/green/card_pollen.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Pollen' (POWER): Take [status_charge_amount] damage at the start of your turn and draw [status_secondary_charge_amount] cards",
+  "category": "card_art"
+ },
+ {
+  "id": "card_petals",
+  "out": "external/sprites/cards/green/card_petals.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Petals' (SKILL): Gain [block] block. Keep block for [status_charge_amount] turns. Exhaust. On pickup, gain [health_amount] HP.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_reap",
+  "out": "external/sprites/cards/green/card_reap.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Reap' (ATTACK): Attack for [damage] damage and gain Overshield for unblocked damage\\nExhaust",
+  "category": "card_art"
+ },
+ {
+  "id": "card_wildflower",
+  "out": "external/sprites/cards/green/card_wildflower.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Wildflower' (ATTACK): Attack for [damage] damage. Costs 0 if damage was taken this turn.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_symbiosis",
+  "out": "external/sprites/cards/green/card_symbiosis.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Symbiosis' (POWER): Overshield no longer decays",
+  "category": "card_art"
+ },
+ {
+  "id": "card_thorns",
+  "out": "external/sprites/cards/green/card_thorns.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Thorns' (SKILL): Gain [block] Block and [status_charge_amount] Pointy",
+  "category": "card_art"
+ },
+ {
+  "id": "card_verdant",
+  "out": "external/sprites/cards/green/card_verdant.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Verdant' (SKILL): When drawn, cap incoming damage to [status_secondary_charge_amount] for [status_charge_amount] and Exhaust.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_vines",
+  "out": "external/sprites/cards/green/card_vines.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Vines' (ATTACK): Do [damage] to all enemies [number_of_attacks] times. Not affected by Pointy",
+  "category": "card_art"
+ },
+ {
+  "id": "card_conclusion",
+  "out": "external/sprites/cards/green/card_conclusion.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Conclusion' (ATTACK): Retain. Do [damage]. Gain 4 damage for each unused energy at turn end. Exhaust",
+  "category": "card_art"
+ },
+ {
+  "id": "card_datum",
+  "out": "external/sprites/cards/green/card_datum.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Datum' (SKILL): Gain [block] Block. Duplicates on draw. Exhaust.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_photoelectric_synthesis",
+  "out": "external/sprites/cards/green/card_photoelectric_synthesis.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Photoelectric Synthesis' (POWER): Gain 10 strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_big_boom",
+  "out": "external/sprites/cards/green/card_big_boom.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Big Boom' (ATTACK): Do [damage] damage to all enemies. Gain [status_charge_amount] Overheat.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_containment",
+  "out": "external/sprites/cards/green/card_containment.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Containment' (SKILL): Gain [block] Block. Add [number_of_cards] Wastes to hand",
+  "category": "card_art"
+ },
+ {
+  "id": "card_critical",
+  "out": "external/sprites/cards/green/card_critical.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Critical' (POWER): Gain [status_charge_amount] Overheat each turn.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_feedback_loop",
+  "out": "external/sprites/cards/green/card_feedback_loop.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Feedback Loop' (POWER): Gain {0} whenever you Overheat.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_fusion_cannon",
+  "out": "external/sprites/cards/green/card_fusion_cannon.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Special Discard' (ATTACK): Do [damage] damage for each Waste card in your exhaust pile. Add 1 Waste to your hand.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_meltdown",
+  "out": "external/sprites/cards/green/card_meltdown.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Meltdown' (ATTACK): Do [damage] damage. Gain [status_charge_amount] Overheat.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_particle_accelerator",
+  "out": "external/sprites/cards/green/card_particle_accelerator.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Particle Accelerator' (SKILL): Gain [energy_amount] Energy. Add [number_of_cards] Wastes to discard pile.",
+  "category": "card_art"
+ },
+ {
+  "id": "card_unstable",
+  "out": "external/sprites/cards/green/card_unstable.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Unstable' (SKILL): Draw [draw_count] cards. Gain [status_charge_amount] Overheat",
+  "category": "card_art"
+ },
+ {
+  "id": "card_waste",
+  "out": "external/sprites/cards/green/card_waste.png",
+  "size": [
+   192,
+   192
+  ],
+  "transparent": false,
+  "brief": "Card illustration for card 'Waste' (STATUS): At end of turn gain [status_charge_amount] Overheat and do [damage] damage to a random enemy. Exhaust",
+  "category": "card_art"
+ },
+ {
+  "id": "frame_attack",
+  "out": "sprites/ui/card_frame_attack.png",
+  "size": [
+   288,
+   368
+  ],
+  "transparent": true,
+  "brief": "Card frame for ATTACK cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+  "category": "card_frame"
+ },
+ {
+  "id": "frame_skill",
+  "out": "sprites/ui/card_frame_skill.png",
+  "size": [
+   288,
+   368
+  ],
+  "transparent": true,
+  "brief": "Card frame for SKILL cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+  "category": "card_frame"
+ },
+ {
+  "id": "frame_power",
+  "out": "sprites/ui/card_frame_power.png",
+  "size": [
+   288,
+   368
+  ],
+  "transparent": true,
+  "brief": "Card frame for POWER cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+  "category": "card_frame"
+ },
+ {
+  "id": "frame_status",
+  "out": "sprites/ui/card_frame_status.png",
+  "size": [
+   288,
+   368
+  ],
+  "transparent": true,
+  "brief": "Card frame for STATUS cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+  "category": "card_frame"
+ },
+ {
+  "id": "energy_green",
+  "out": "external/sprites/colors/green_energy_icon.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Energy (mana) orb icon for the green card color, shown in the card cost corner",
+  "category": "icon"
+ },
+ {
+  "id": "energy_white",
+  "out": "external/sprites/colors/white_energy_icon.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Energy (mana) orb icon for the white card color, shown in the card cost corner",
+  "category": "icon"
+ },
+ {
+  "id": "map_background",
+  "out": "sprites/ui/map_background.png",
+  "size": [
+   1200,
+   700
+  ],
+  "transparent": false,
+  "brief": "Map screen background: top-down overworld map the player travels through. Center area should be calm/low contrast so node icons stay readable.",
+  "category": "map"
+ },
+ {
+  "id": "map_combat",
+  "out": "sprites/map/location_combat.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Map node icon for location type COMBAT",
+  "category": "map_icon"
+ },
+ {
+  "id": "map_miniboss",
+  "out": "sprites/map/location_miniboss.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Map node icon for location type MINIBOSS",
+  "category": "map_icon"
+ },
+ {
+  "id": "map_boss",
+  "out": "sprites/map/location_boss.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Map node icon for location type BOSS",
+  "category": "map_icon"
+ },
+ {
+  "id": "map_event",
+  "out": "sprites/map/location_event.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Map node icon for location type EVENT",
+  "category": "map_icon"
+ },
+ {
+  "id": "map_treasure",
+  "out": "sprites/map/location_treasure.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Map node icon for location type TREASURE",
+  "category": "map_icon"
+ },
+ {
+  "id": "map_shop",
+  "out": "sprites/map/location_shop.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Map node icon for location type SHOP",
+  "category": "map_icon"
+ },
+ {
+  "id": "map_rest_site",
+  "out": "sprites/map/location_rest_site.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Map node icon for location type REST_SITE",
+  "category": "map_icon"
+ },
+ {
+  "id": "bg_act_1",
+  "out": "external/sprites/backgrounds/act_1.png",
+  "size": [
+   1200,
+   700
+  ],
+  "transparent": false,
+  "brief": "Combat background for Act 1. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
+  "category": "background"
+ },
+ {
+  "id": "bg_act_2",
+  "out": "external/sprites/backgrounds/act_2.png",
+  "size": [
+   1200,
+   700
+  ],
+  "transparent": false,
+  "brief": "Combat background for Act 2. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
+  "category": "background"
+ },
+ {
+  "id": "bg_act_3",
+  "out": "external/sprites/backgrounds/act_3.png",
+  "size": [
+   1200,
+   700
+  ],
+  "transparent": false,
+  "brief": "Combat background for Act 3. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
+  "category": "background"
+ },
+ {
+  "id": "bg_title",
+  "out": "sprites/ui/title_background.png",
+  "size": [
+   1200,
+   700
+  ],
+  "transparent": false,
+  "brief": "Title screen key art. Left third is covered by menu buttons, top-center has the logo text (rendered by the game), so keep those areas quieter.",
+  "category": "background"
+ },
+ {
+  "id": "character_green",
+  "out": "external/sprites/characters/character_green/character_green.png",
+  "size": [
+   256,
+   256
+  ],
+  "transparent": true,
+  "brief": "Player character 'The Botanist': a former thermonuclear botanist fired for their experiments. Faces RIGHT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "character_green_icon",
+  "out": "external/sprites/characters/character_green/character_green_icon.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Portrait icon (bust) of The Botanist for character select",
+  "category": "icon"
+ },
+ {
+  "id": "enemy_1",
+  "out": "external/sprites/enemies/enemy_1.png",
+  "size": [
+   160,
+   160
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_1' (placeholder name 'Red Enemy', role: regular enemy). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_2",
+  "out": "external/sprites/enemies/enemy_2.png",
+  "size": [
+   160,
+   160
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_2' (placeholder name 'Blue Enemy', role: regular enemy). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_3",
+  "out": "external/sprites/enemies/enemy_3.png",
+  "size": [
+   160,
+   160
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_3' (placeholder name 'Green Enemy', role: regular enemy). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_4",
+  "out": "external/sprites/enemies/enemy_4.png",
+  "size": [
+   200,
+   200
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_4' (placeholder name 'Big Attack Enemy', role: regular enemy). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_act_1_miniboss_1",
+  "out": "external/sprites/enemies/enemy_act_1_miniboss_1.png",
+  "size": [
+   220,
+   220
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_act_1_miniboss_1' (placeholder name 'Act 1 Miniboss', role: boss). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_act_1_miniboss_2",
+  "out": "external/sprites/enemies/enemy_act_1_miniboss_2.png",
+  "size": [
+   220,
+   220
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_act_1_miniboss_2' (placeholder name 'Act 1 Miniboss', role: miniboss). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_act_1_boss_1",
+  "out": "external/sprites/enemies/enemy_act_1_boss_1.png",
+  "size": [
+   300,
+   300
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_act_1_boss_1' (placeholder name 'Act 1 Boss', role: boss). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_minion_1",
+  "out": "external/sprites/enemies/enemy_minion_1.png",
+  "size": [
+   160,
+   160
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_minion_1' (placeholder name 'Minion 1', role: minion). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "enemy_minion_2",
+  "out": "external/sprites/enemies/enemy_minion_2.png",
+  "size": [
+   160,
+   160
+  ],
+  "transparent": true,
+  "brief": "Enemy 'enemy_minion_2' (placeholder name 'Minion 2', role: minion). Faces LEFT. Full body.",
+  "category": "combatant",
+  "anchor": "bottom"
+ },
+ {
+  "id": "intent_attacking",
+  "out": "sprites/intents/enemy_intent_attacking.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Enemy intent icon: enemy is attacking next turn. Must read instantly at 32px.",
+  "category": "icon"
+ },
+ {
+  "id": "intent_blocking",
+  "out": "sprites/intents/enemy_intent_blocking.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Enemy intent icon: enemy is blocking next turn. Must read instantly at 32px.",
+  "category": "icon"
+ },
+ {
+  "id": "intent_buffing",
+  "out": "sprites/intents/enemy_intent_buffing.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Enemy intent icon: enemy is buffing next turn. Must read instantly at 32px.",
+  "category": "icon"
+ },
+ {
+  "id": "intent_debuffing",
+  "out": "sprites/intents/enemy_intent_debuffing.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Enemy intent icon: enemy is debuffing next turn. Must read instantly at 32px.",
+  "category": "icon"
+ },
+ {
+  "id": "intent_summoning",
+  "out": "sprites/intents/enemy_intent_summoning.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Enemy intent icon: enemy is summoning next turn. Must read instantly at 32px.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_overshield",
+  "out": "external/sprites/status_effects/status_effect_overshield.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Overshield'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_preserve_energy",
+  "out": "external/sprites/status_effects/status_effect_preserve_energy.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Preserve Energy'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_preserve_overshield",
+  "out": "external/sprites/status_effects/status_effect_preserve_overshield.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Preserve Overshield'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_pointy",
+  "out": "external/sprites/status_effects/status_effect_pointy.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Pointy'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_pollen",
+  "out": "external/sprites/status_effects/status_effect_pollen.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Pollen'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_corrosion",
+  "out": "external/sprites/status_effects/status_effect_corrosion.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Corrosion'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_critical",
+  "out": "external/sprites/status_effects/status_effect_critical.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Critical'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_overheat",
+  "out": "external/sprites/status_effects/status_effect_overheat.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Overheat'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_feedback_loop",
+  "out": "external/sprites/status_effects/status_effect_feedback_loop.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Feedback Loop'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_bomb",
+  "out": "external/sprites/status_effects/status_effect_bomb.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Bomb'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_damage_increase",
+  "out": "external/sprites/status_effects/status_effect_damage_increase.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Damage Increase'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_weaken",
+  "out": "external/sprites/status_effects/status_effect_weaken.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Weaken'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_vulnerable",
+  "out": "external/sprites/status_effects/status_effect_vulnerable.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Vulnerable'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_block_on_turn_end",
+  "out": "external/sprites/status_effects/status_effect_block_on_turn_end.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Block On Turn End'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_energy_next_turn",
+  "out": "external/sprites/status_effects/status_effect_energy_next_turn.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Energy Next Turn'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_increase_turn_draw",
+  "out": "external/sprites/status_effects/status_effect_increase_turn_draw.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Increase Draw'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_attached_card",
+  "out": "external/sprites/status_effects/status_effect_attached_card.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Attached Card'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_negate_damage",
+  "out": "external/sprites/status_effects/status_effect_negate_damage.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Negate Damage'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_cap_damage",
+  "out": "external/sprites/status_effects/status_effect_cap_damage.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Cap Damage'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_temp_preserve_block",
+  "out": "external/sprites/status_effects/status_effect_temp_preserve_block.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Temp Preserve Block'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_preserve_block",
+  "out": "external/sprites/status_effects/status_effect_preserve_block.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Preserve Block'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_negate_debuff",
+  "out": "external/sprites/status_effects/status_effect_negate_debuff.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Negate Debuff'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_rebound_card_plays",
+  "out": "external/sprites/status_effects/status_effect_rebound_card_plays.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Rebound Play'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_duplicate_card_plays",
+  "out": "external/sprites/status_effects/status_effect_duplicate_card_plays.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Duplicate Play'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_duplicate_attacks",
+  "out": "external/sprites/status_effects/status_effect_duplicate_attacks.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Duplicate Play'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "status_effect_block_on_special_discard",
+  "out": "external/sprites/status_effects/status_effect_block_on_special_discard.png",
+  "size": [
+   96,
+   96
+  ],
+  "transparent": true,
+  "brief": "Status effect icon 'Block on Special Discard'. Shown at 24px, must be bold and simple.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_add_money",
+  "out": "external/sprites/artifacts/artifact_add_money.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Add Money': Adds money when obtained",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_negate_money_gain",
+  "out": "external/sprites/artifacts/artifact_negate_money_gain.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Negate Money Gain': Gain 1 energy per turn. You can no longer gain money",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_heal_on_combat_ended",
+  "out": "external/sprites/artifacts/artifact_heal_on_combat_ended.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Heal On Combat End': Grants 5 health when combat is over",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_full_heal",
+  "out": "external/sprites/artifacts/artifact_full_heal.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Full Heal': Fully heals player when obtained",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_draw_on_kill",
+  "out": "external/sprites/artifacts/artifact_draw_on_kill.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Draw on Kill': Draws a card when an enemy is killed",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_draw_on_combat_start",
+  "out": "external/sprites/artifacts/artifact_draw_on_combat_start.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Draw on Combat': Draws 2 extra cards on the first turn",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_energy_on_combat_start",
+  "out": "external/sprites/artifacts/artifact_energy_on_combat_start.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Energy On Combat Start': Gain 1 energy on the first turn",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_easy_mode",
+  "out": "external/sprites/artifacts/artifact_easy_mode.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Easy Mode': Sets enemy HP to 1",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_block_on_attacks",
+  "out": "external/sprites/artifacts/artifact_block_on_attacks.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Block on Attacks': Grants 5 block every 3 attacks",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_retain_hand",
+  "out": "external/sprites/artifacts/artifact_retain_hand.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Retain Hand': Cards will be retained end of turn",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_preserve_energy",
+  "out": "external/sprites/artifacts/artifact_preserve_energy.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Preserve Energy': Energy will be preserved between turns",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_increase_attack_on_rest",
+  "out": "external/sprites/artifacts/artifact_increase_attack_on_rest.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Increase Attack on Rest': Allows a permanent attack boost at rest sites",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_see_top_of_draw_pile",
+  "out": "external/sprites/artifacts/artifact_see_top_of_draw_pile.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact See Draw Pile': See the top cards in your draw pile",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_top_deck_attack_card",
+  "out": "external/sprites/artifacts/artifact_top_deck_attack_card.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Make Attack Card Innate': Select an attack card to make appear at the top of your deck.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_right_click_shuffle_deck",
+  "out": "external/sprites/artifacts/artifact_right_click_shuffle_deck.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Reshuffle': Right click to shuffle discard into draw pile.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_boss_red",
+  "out": "external/sprites/artifacts/artifact_boss_red.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Red Boss': Test Red Boss Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_shop_red",
+  "out": "external/sprites/artifacts/artifact_shop_red.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Red Shop': Test Red Shop Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_boss_blue",
+  "out": "external/sprites/artifacts/artifact_boss_blue.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Blue Boss': Test Blue Boss Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_shop_blue",
+  "out": "external/sprites/artifacts/artifact_shop_blue.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Blue Shop': Test Blue Shop Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_boss_green",
+  "out": "external/sprites/artifacts/artifact_boss_green.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Green Boss': Test Green Boss Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_shop_green",
+  "out": "external/sprites/artifacts/artifact_shop_green.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Green Shop': Test Green Shop Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_boss_orange",
+  "out": "external/sprites/artifacts/artifact_boss_orange.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Orange Boss': Test Orange Boss Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_shop_orange",
+  "out": "external/sprites/artifacts/artifact_shop_orange.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact Orange Shop': Test Orange Shop Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_boss_white",
+  "out": "external/sprites/artifacts/artifact_boss_white.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact White Boss': Test White Boss Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "artifact_shop_white",
+  "out": "external/sprites/artifacts/artifact_shop_white.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Relic/artifact item icon 'Artifact White Shop': Test White Shop Artifact.",
+  "category": "icon"
+ },
+ {
+  "id": "consumable_heal",
+  "out": "external/sprites/consumables/consumable_heal.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Consumable potion/item icon 'Heal Item': Heals 20%",
+  "category": "icon"
+ },
+ {
+  "id": "consumable_block",
+  "out": "external/sprites/consumables/consumable_block.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Consumable potion/item icon 'Block Item': Adds 10 block",
+  "category": "icon"
+ },
+ {
+  "id": "consumable_damaging",
+  "out": "external/sprites/consumables/consumable_damaging.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Consumable potion/item icon 'Damage Item': Damages a target for 10",
+  "category": "icon"
+ },
+ {
+  "id": "consumable_multi_damaging",
+  "out": "external/sprites/consumables/consumable_multi_damaging.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "Consumable potion/item icon 'Multiple Damage Item': Damages all enemies for 10",
+  "category": "icon"
+ },
+ {
+  "id": "ui_deck",
+  "out": "sprites/ui/icon_deck.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: deck",
+  "category": "icon"
+ },
+ {
+  "id": "ui_map",
+  "out": "sprites/ui/icon_map.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: map",
+  "category": "icon"
+ },
+ {
+  "id": "ui_pause",
+  "out": "sprites/ui/icon_pause.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: pause",
+  "category": "icon"
+ },
+ {
+  "id": "ui_draw_pile",
+  "out": "sprites/ui/icon_draw_pile.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: draw pile",
+  "category": "icon"
+ },
+ {
+  "id": "ui_discard_pile",
+  "out": "sprites/ui/icon_discard_pile.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: discard pile",
+  "category": "icon"
+ },
+ {
+  "id": "ui_exhaust_pile",
+  "out": "sprites/ui/icon_exhaust_pile.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: exhaust pile",
+  "category": "icon"
+ },
+ {
+  "id": "ui_block",
+  "out": "sprites/ui/icon_block.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: block",
+  "category": "icon"
+ },
+ {
+  "id": "ui_gold",
+  "out": "sprites/ui/icon_gold.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: gold",
+  "category": "icon"
+ },
+ {
+  "id": "ui_health",
+  "out": "sprites/ui/icon_health.png",
+  "size": [
+   128,
+   128
+  ],
+  "transparent": true,
+  "brief": "HUD icon: health",
+  "category": "icon"
+ },
+ {
+  "id": "ui_chest",
+  "out": "sprites/ui/chest.png",
+  "size": [
+   256,
+   256
+  ],
+  "transparent": true,
+  "brief": "Treasure chest (closed) shown in treasure room",
+  "category": "icon"
+ },
+ {
+  "id": "ui_shop",
+  "out": "sprites/ui/shop.png",
+  "size": [
+   256,
+   256
+  ],
+  "transparent": true,
+  "brief": "Shop merchant stall/shopkeeper shown to enter the shop",
+  "category": "icon"
+ }
+]

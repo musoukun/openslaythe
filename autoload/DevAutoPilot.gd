@@ -19,11 +19,25 @@ func _ready() -> void:
 			var map := get_tree().root.find_child("Map", true, false)
 			if map:
 				map.show_map()
-		"combat":
+		"combat", "vfx":
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
 					break
+			if mode == "vfx":
+				await get_tree().create_timer(1.0).timeout
+				_preview_vfx()
+
+
+## 全トリガーを順番に再生する (VFX 確認用)
+func _preview_vfx() -> void:
+	var enemy := get_tree().get_first_node_in_group("enemies")
+	var player := get_tree().get_first_node_in_group("players")
+	for trigger in Vfx.triggers.keys():
+		var on_player: bool = trigger in ["enemy_attack", "block_gain", "heal", "status_buff", "overheat", "energy_gain", "card_play_power"]
+		print("VFX trigger: ", trigger)
+		Vfx.play_trigger(trigger, player if on_player else enemy, 12)
+		await get_tree().create_timer(0.8, true, false, true).timeout
 
 func _get_mode() -> String:
 	for arg in OS.get_cmdline_user_args():

@@ -39,6 +39,7 @@ DebugLogger="*res://autoload/DebugLogger.gd"
 HandManager="*res://autoload/HandManager.gd"
 SoundManager="*uid://bjkhgdroa1wwd"
 StatsHandler="*res://autoload/StatsHandler.gd"
+Vfx="*res://autoload/Vfx.gd"
 DevAutoPilot="*res://autoload/DevAutoPilot.gd"
 
 [debug]
