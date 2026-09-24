@@ -11,6 +11,7 @@
 1. [Godot 4.6](https://godotengine.org/download/) をインストール
 2. このリポジトリを開いて実行（F5）
 3. `New Game` → The Botanist を選んでスタート
+4. 言語は「設定 > 言語」で English / 日本語 を切り替え（初回はOSの言語）
 
 ## Codex へのアート委託の仕組み
 
@@ -45,4 +46,6 @@ python tools/codex_art/generate.py --only card_bud --force
 - フレームワーク: Slay the Robot © 2025 DesirePathGames — MIT License（`LICENSE`）
 - 旧インパクトエフェクト素材: sinestesiastudio (OpenGameArt) — `external/sprites/animated_effects/impact_default/credit.txt`
 - サウンド: Slay the Robot 同梱のもの
+- フォント: M PLUS Rounded 1c © The M+ FONTS Project Authors — SIL Open Font License 1.1（`fonts/OFL.txt`）
+- 日本語翻訳: `tools/i18n/ja.json` → `localization/strings.csv`（`python tools/i18n/build_csv.py`）
 - 生成アート: OpenAI Codex CLI（image generation）で本プロジェクト用に生成
