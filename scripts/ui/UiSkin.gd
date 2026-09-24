@@ -14,6 +14,13 @@ const BUTTON_ICONS := {
 }
 const TITLE_BACKGROUND := "res://sprites/ui/title_background.png"
 const TOP_BAR_COLOR := Color(0.03, 0.09, 0.09, 0.78)
+const BACKPLATE_COLOR := Color(0.05, 0.13, 0.14, 0.92)
+const BACKPLATE_BORDER := Color(0.95, 0.85, 0.62, 0.9)
+## 台座を敷く HUD ボタン (アイコン画像を差し替えるものは BUTTON_ICONS に書く)
+const BACKPLATE_BUTTONS := [
+	"RunScreen/Combat/PauseButton", "RunScreen/Combat/MapButton", "RunScreen/Combat/DeckButton",
+	"RunScreen/Combat/DrawPile", "RunScreen/Combat/DiscardPile", "RunScreen/Combat/ExhaustPile",
+]
 
 
 static func apply(root: Node) -> void:
@@ -22,6 +29,10 @@ static func apply(root: Node) -> void:
 		var tex := load_if_exists(BUTTON_ICONS[node_path])
 		if button and tex:
 			button.texture_normal = tex
+	for node_path in BACKPLATE_BUTTONS:
+		var control := root.get_node_or_null(node_path) as Control
+		if control:
+			add_backplate(control)
 	# 戦闘背景画像の上に上部バーを半透明で重ねて HUD を読みやすくする
 	var top_bar := root.get_node_or_null("RunScreen/Combat/Background2") as ColorRect
 	var bg_button := root.get_node_or_null("RunScreen/Combat/BackgroundButton")
@@ -32,6 +43,31 @@ static func apply(root: Node) -> void:
 	var title := root.get_node_or_null("TitleScreen")
 	if title:
 		add_background(title, TITLE_BACKGROUND, ["Background"])
+
+
+## アイコンの背後に暗い丸台座を敷いて背景から浮かせる (何度呼んでも1枚だけ)
+static func add_backplate(control: Control, margin: float = 3.0) -> void:
+	if control.has_node("Backplate"):
+		return
+	var style := StyleBoxFlat.new()
+	style.bg_color = BACKPLATE_COLOR
+	style.border_color = BACKPLATE_BORDER
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(999)
+	style.shadow_color = Color(0, 0, 0, 0.5)
+	style.shadow_size = 4
+	var plate := Panel.new()
+	plate.name = "Backplate"
+	plate.show_behind_parent = true
+	plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	plate.add_theme_stylebox_override("panel", style)
+	plate.set_anchors_preset(Control.PRESET_FULL_RECT)
+	plate.offset_left = -margin
+	plate.offset_top = -margin
+	plate.offset_right = margin
+	plate.offset_bottom = margin
+	control.add_child(plate)
+	control.move_child(plate, 0)
 
 
 static func load_if_exists(path: String) -> Texture2D:

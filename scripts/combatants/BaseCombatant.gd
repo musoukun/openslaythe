@@ -211,7 +211,7 @@ func unregister_all_custom_ui() -> void:
 
 #region Speech
 func queue_speech_message(message_bbcode: String) -> void:
-	speech_bubble.queue_message(message_bbcode)
+	speech_bubble.queue_message(tr(message_bbcode))
 
 #endregion
 

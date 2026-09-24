@@ -8,6 +8,7 @@ var consumable_slot_index: int = 0	# which consumable slot this button correspon
 signal consumable_slot_button_up(slot_index: int)
 
 func _ready():
+	UiSkin.add_backplate(self)
 	button_up.connect(_on_button_up)
 
 func init(_consumable_slot_index: int):
@@ -21,9 +22,10 @@ func init(_consumable_slot_index: int):
 			tooltip_text += "\n" + tr(consumable_data.consumable_description)
 		# texture
 		texture_normal = FileLoader.load_texture(consumable_data.consumable_texture_path)
+		self_modulate.a = 1.0
 	else:
-		# empty consumable slot
-		self_modulate.a = 0.3
+		# empty consumable slot (台座だけ表示)
+		texture_normal = null
 		tooltip_text = ""
 	
 

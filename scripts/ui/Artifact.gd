@@ -9,6 +9,7 @@ var artifact_script: BaseArtifact
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
+	UiSkin.add_backplate(self)
 	Signals.artifact_proc.connect(_on_artifact_proc)
 	Signals.artifact_counter_changed.connect(_on_artifact_counter_changed)
 	

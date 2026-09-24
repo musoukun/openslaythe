@@ -101,6 +101,55 @@ def clear_window(im: Image.Image, seed_pct: list) -> Image.Image:
     return im
 
 
+def trim(im: Image.Image) -> Image.Image:
+    bbox = im.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
+    return im.crop(bbox) if bbox else im
+
+
+def place(im: Image.Image, w: int, h: int, scale: float, pad: float, anchor) -> Image.Image:
+    """im を scale 倍して w x h のキャンバスに置く (anchor=bottom なら足元揃え)."""
+    im = im.resize((max(1, round(im.width * scale)), max(1, round(im.height * scale))), Image.LANCZOS)
+    canvas = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    x = (w - im.width) // 2
+    y = h - im.height - round(h * pad) if anchor == "bottom" else (h - im.height) // 2
+    canvas.paste(im, (x, y), im)
+    return canvas
+
+
+def split_sheet(im: Image.Image, count: int) -> list:
+    """横一列 count コマのシートを分割。各コマは足元 (下25%) の中心で左右位置をそろえ、下端を共通にする."""
+    cell = im.width / count
+    alpha = im.getchannel("A").point(lambda a: 255 if a > 8 else 0)
+    frames = []
+    for i in range(count):
+        box = (round(i * cell), 0, round((i + 1) * cell), im.height)
+        f = im.crop(box)
+        bbox = alpha.crop(box).getbbox()
+        if not bbox:
+            frames.append(f)
+            continue
+        feet = alpha.crop(box).crop((0, bbox[1] + (bbox[3] - bbox[1]) * 3 // 4, f.width, bbox[3])).getbbox()
+        cx = (feet[0] + feet[2]) // 2 if feet else (bbox[0] + bbox[2]) // 2
+        half = max(cx - bbox[0], bbox[2] - cx)
+        frames.append(f.crop((cx - half, bbox[1], cx + half, bbox[3])))
+    # 全コマ同じ高さ (最大) にして下端をそろえる
+    top_h = max(fr.height for fr in frames)
+    out = []
+    for fr in frames:
+        c = Image.new("RGBA", (fr.width, top_h), (0, 0, 0, 0))
+        c.paste(fr, (0, top_h - fr.height), fr)
+        out.append(c)
+    return out
+
+
+def pixelate(im: Image.Image, px: int) -> Image.Image:
+    """px 倍の大きさのドットに量子化し、アルファを 2 値化してくっきりさせる."""
+    small = im.resize((im.width // px, im.height // px), Image.NEAREST)
+    a = small.getchannel("A").point(lambda v: 255 if v > 110 else 0)
+    small.putalpha(a)
+    return small.resize((small.width * px, small.height * px), Image.NEAREST)
+
+
 def post_process(asset: dict) -> None:
     raw_path = RAW_DIR / f"{asset['id']}.png"
     out_path = REPO / asset["out"]
@@ -118,19 +167,24 @@ def post_process(asset: dict) -> None:
         im = im.resize((w, h), Image.LANCZOS)
         if asset.get("clear_window"):
             im = clear_window(im, asset["clear_window"])
+    elif asset.get("sheet"):
+        # 横一列のスプライトシート -> コマごとに共通スケールで足元揃え -> <out>_1.png ...
+        frames = split_sheet(im, asset["sheet"])
+        pad = asset.get("pad", 0.04)
+        scale = min(min(w * (1 - pad * 2) / f.width, h * (1 - pad * 2) / f.height) for f in frames)
+        for i, f in enumerate(frames, 1):
+            frame = place(f, w, h, scale, pad, asset.get("anchor"))
+            if asset.get("pixel"):
+                frame = pixelate(frame, asset["pixel"])
+            frame.save(out_path.with_name(f"{out_path.stem}_{i}.png"))
+        print(f"[OK] {asset['id']} -> {asset['out']} x{len(frames)} frames {w}x{h}")
+        return
     elif asset.get("transparent"):
         # 透明部分をトリムして、枠内に収まるよう縮小 → 中央(下揃え可)に配置
-        bbox = im.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
-        if bbox:
-            im = im.crop(bbox)
+        im = trim(im)
         pad = asset.get("pad", 0.04)
         scale = min(w * (1 - pad * 2) / im.width, h * (1 - pad * 2) / im.height)
-        im = im.resize((max(1, round(im.width * scale)), max(1, round(im.height * scale))), Image.LANCZOS)
-        canvas = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-        x = (w - im.width) // 2
-        y = h - im.height - round(h * pad) if asset.get("anchor") == "bottom" else (h - im.height) // 2
-        canvas.paste(im, (x, y), im)
-        im = canvas
+        im = place(im, w, h, scale, pad, asset.get("anchor"))
     else:
         # 目標アスペクトで中央クロップしてからリサイズ
         target = w / h
@@ -144,6 +198,8 @@ def post_process(asset: dict) -> None:
             im = im.crop((0, top, im.width, top + nh))
         im = im.resize((w, h), Image.LANCZOS)
 
+    if asset.get("pixel"):
+        im = pixelate(im, asset["pixel"])
     im.save(out_path)
     print(f"[OK] {asset['id']} -> {asset['out']} {w}x{h}")
 
@@ -154,9 +210,10 @@ def main() -> None:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--post-only", action="store_true")
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--manifest", default=str(MANIFEST), help="asset manifest json")
     args = ap.parse_args()
 
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    manifest = json.loads(Path(args.manifest).read_text(encoding="utf-8"))
     style = manifest["style"]
     prefixes = [p for p in args.only.split(",") if p]
     assets = [a for a in manifest["assets"]

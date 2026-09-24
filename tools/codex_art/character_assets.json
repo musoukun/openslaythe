@@ -1,0 +1,48 @@
+{
+  "style": "Create original fantasy pixel art with crisp 1px dark ink-teal outlines on the logical pixel grid, large readable clusters, and a limited palette. Use hard two-tone shading and integer nearest-neighbor scaling, with no anti-aliasing, blur, gradients, painterly texture, or soft glow. Use ink teal #142C30, factory teal #315558, ceramic cream #F3E8CF, copper #B8754E, peach #F4AD91, mint #83C9A0, lime #B8E986, cyan #72D9DD, coral #FF8068, plum #78516B, and luminous ivory #FFE9BA only. Keep the background transparent with no cast or ground shadows, text, symbols, logos, or watermarks. Maintain the same original adult warrior design across every asset, with practical battle poses and nonsexual general-audience fantasy presentation.",
+  "assets": [
+    {
+      "id": "hero_idle",
+      "out": "external/sprites/characters/character_green/hero_idle.png",
+      "size": [256, 256],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 4,
+      "pixel": 4,
+      "category": "combatant",
+      "brief": "ヴェラ・ソーンフォージ。長髪の成人女戦士が炉刃剪定剣を構える、呼吸と毛先だけが静かに動く4コマ待機ループ。",
+      "prompt": "Vera Thornforge, an original adult female thermonuclear botanist turned muscular greenhouse warrior, warm copper-brown skin with peach highlights, sharp brows and a restrained confident smile. Waist-length factory-teal hair held by one copper clasp, flowing behind her to the LEFT in two large locks. Ink-teal segmented armor with copper trim and a deep V neckline showing natural cleavage, opaque breast coverage, covered abdomen, full trousers, heavy gauntlets and armored boots; no exaggerated anatomy or sexual posing. One large ceramic-cream leaf-shaped rear shoulder plate, sparse thick mint vines, short split hip armor. A compact ceramic pot reactor with a protected glass bell and one mint sprout sits on her back. A cyan double-hexagon forearm mechanism represents Overshield; the other gauntlet has three thick plant thorns for Pointy; copper rear vents represent Overheat; a plum waste capsule with one tiny droplet at its seam sits at her belt. Hold a broad two-handed reactor pruning sword about two-thirds her height diagonally upward toward the RIGHT, with one branch-catching notch, copper conduit and a narrow lime core channel. exactly 4 frames in a single horizontal row, equal-width cells, same character size and same ground line in every frame, full body, facing RIGHT, no overlap between frames, transparent background, no text, no grid lines. Left to right: frame 1 planted ready stance; frame 2 inhale, shoulders and sword tip rise by one logical pixel, hair tips lag one pixel left; frame 3 hold the breath peak, hair tips shift one additional pixel; frame 4 exhale, shoulders and sword return to the initial stance and hair settles for a seamless return to frame 1. Both feet remain planted on a ground line at 94 percent of each cell height. Reserve at least 6 percent transparent margin on every side of each cell, containing all hair and weapon tips. Only subtle breathing and hair and weapon sway, no independent breast motion, no shield activation, no attack trail. Preserve identical anatomy, costume placement, weapon shape, camera and scale in all cells. Use crisp logical pixels enlarged in 4-pixel blocks."
+    },
+    {
+      "id": "hero_attack",
+      "out": "external/sprites/characters/character_green/hero_attack.png",
+      "size": [256, 256],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 4,
+      "pixel": 4,
+      "category": "combatant",
+      "brief": "同じ女戦士の構え→振りかぶり→右下への炉刃斬撃→待機への戻り。4コマ、斬撃の軌跡は3コマ目のみ。",
+      "prompt": "Vera Thornforge, the same original adult muscular female greenhouse warrior as the idle sheet: warm copper-brown skin with peach highlights, sharp brows, confident focused face, waist-length factory-teal hair secured with one copper clasp and trailing LEFT in two large locks. Wear ink-teal segmented armor with copper trim, a deep V neckline with natural cleavage and fully opaque breast coverage, covered abdomen, full trousers, heavy gauntlets, armored boots, short split hip armor, one large ceramic-cream rear leaf shoulder plate and sparse thick mint vines. Keep the compact ceramic pot reactor with protected glass bell and one mint sprout on her back, cyan double-hexagon forearm mechanism, three thick thorns on the opposite gauntlet, copper rear vents, and plum belt waste capsule with one tiny seam droplet. The same broad two-handed reactor pruning sword is about two-thirds her height, with a branch-catching notch, copper conduit and lime core channel. exactly 4 frames in a single horizontal row, equal-width cells, same character size and same ground line in every frame, full body, facing RIGHT, no overlap between frames, transparent background, no text, no grid lines. Left to right: frame 1 the identical planted idle ready stance with sword angled up toward the right; frame 2 knees flex and torso winds up, lifting the sword above her head while hair trails left; frame 3 a powerful diagonal downward slash toward the right, with one short angular lime arc and an ivory core wholly inside this cell, plus a small coral heat wave at the rear reactor vent; frame 4 return sword and weight to the original ready stance, no arc or heat wave, hair settling to reconnect to idle frame 1. Keep both feet grounded at 94 percent of cell height, retain at least 6 percent transparent margin on all sides, and fit the raised blade, hair and slash trail completely within their own cells. No body duplication, camera shifts, active shield, blood, nudity, sexual posing or exaggerated anatomy. Lock character scale, hair length, armor sides and sword design across frames. Use crisp logical pixels enlarged in 4-pixel blocks."
+    },
+    {
+      "id": "hero_icon",
+      "out": "external/sprites/characters/character_green/character_green_icon.png",
+      "size": [128, 128],
+      "transparent": true,
+      "pixel": 2,
+      "category": "icon",
+      "brief": "同じヴェラの胸上アイコン。右向きの顔、長髪、銅の髪留め、葉形肩甲を小さな表示でも判読できるドット絵。",
+      "prompt": "One chest-up pixel-art portrait of Vera Thornforge, the same original adult female greenhouse warrior, facing RIGHT in three-quarter view. Strong adult facial features, sharp brows, small confident smile, warm copper-brown skin with peach highlights. Waist-length factory-teal hair is cropped by this portrait framing but visibly falls in two large locks behind her, secured by one copper clasp. Show the ceramic-cream rear leaf shoulder plate, sparse mint vine, copper-trimmed ink-teal armor and the upper edge of its deep V neckline; maintain opaque breast coverage and a practical nonsexual presentation. Prioritize face, hair clasp and shoulder silhouette, omit tiny reactor and belt details rather than crowding the icon. Match the idle and attack character exactly. Single portrait, not a sprite sheet, crisp logical pixels enlarged in 2-pixel blocks, at least 10 percent transparent padding, no decorative frame, no text, no ground or cast shadow, transparent background."
+    },
+    {
+      "id": "hero_card_bust",
+      "out": "sprites/ui/hero_bust.png",
+      "size": [512, 512],
+      "transparent": true,
+      "category": "icon",
+      "brief": "タイトル/キャラ選択用の大きめバストアップ (ドット絵)",
+      "prompt": "A single large pixel-art bust from head to just above the waist of Vera Thornforge, the same original adult muscular female thermonuclear botanist turned greenhouse warrior. Three-quarter view facing RIGHT, squared battle-ready shoulders, sharp brows, restrained confident smile, warm copper-brown skin with peach highlights. Long factory-teal hair secured with one copper clasp flows behind her in two large locks, continuing below the crop. Ink-teal segmented armor with copper trim and a deep V neckline showing natural cleavage, fully opaque breast coverage, covered abdomen, no nudity or exaggerated anatomy, nonsexual general-audience fantasy styling. Show one large ceramic-cream rear leaf shoulder plate, sparse thick mint vines, the cyan double-hexagon mechanism on one armored forearm and three thick plant thorns on the other. Behind the shoulder show the upper protected glass bell of the ceramic pot reactor with one mint sprout and copper vents. Include the handle and a cropped portion of her broad reactor pruning sword at the right side, with its copper conduit and narrow lime core channel; the blade continues beyond the bust crop. Keep the head, hair silhouette and shoulders within at least 10 percent transparent padding. Match the combat sprites' face, palette and equipment placement. Deliberate coarse readable pixel clusters and crisp 1px logical dark outlines, hard shading, no painterly rendering or smooth gradients, no attack effects, no border, no text, transparent background."
+    }
+  ]
+}

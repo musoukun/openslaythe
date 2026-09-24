@@ -20,8 +20,8 @@ for f in glob.glob(str(REPO / "scenes/**/*.tscn"), recursive=True):
         add(m.group(1), "scene:" + Path(f).name)
 
 # スクリプトで UI に入れるリテラル
-code_pat = re.compile(r'(?:\.text\s*\+?=\s*|tooltip_text\s*\+?=\s*|\btr\(|parse_bbcode\(|set_bbcode\(|append_text\()' + QUOTED)
-for f in glob.glob(str(REPO / "scripts/**/*.gd"), recursive=True):
+code_pat = re.compile(r'(?:\btext\s*\+?=\s*|tooltip_text\s*\+?=\s*|\btr\(|parse_bbcode\(|set_bbcode\(|append_text\(|"(?:card_pick_text|message_bbcode|reward_button_text)"\s*:\s*)' + QUOTED)
+for f in glob.glob(str(REPO / "scripts/**/*.gd"), recursive=True) + glob.glob(str(REPO / "autoload/*.gd")):
     for m in code_pat.finditer(Path(f).read_text(encoding="utf-8")):
         add(m.group(1), "code:" + Path(f).name)
 
