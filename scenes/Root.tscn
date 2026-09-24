@@ -245,9 +245,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_top = 16.0
-offset_bottom = 67.0
+offset_bottom = 100.0
 grow_horizontal = 2
 theme = ExtResource("2_bi5lp")
+theme_override_font_sizes/font_size = 72
 text = "Petal Fallout"
 horizontal_alignment = 1
 
@@ -257,7 +258,7 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 32.0
-offset_top = -284.0
+offset_top = -340.0
 offset_right = 409.0
 grow_vertical = 0
 

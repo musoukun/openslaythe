@@ -7,6 +7,7 @@ class_name ArtOverrides
 ##   レリック      external/sprites/artifacts/<object_id>.png
 ##   消耗品        external/sprites/consumables/<object_id>.png
 ##   Act 背景      external/sprites/backgrounds/<act_id>.png
+##   キャラアイコン external/sprites/characters/<id>/<id>_icon.png
 ## 敵の表示名は res://sprites/enemy_names.json ({"enemies": {id: {name, description}}}) から上書きする。
 
 const ENEMY_NAMES_PATH := "res://sprites/enemy_names.json"
@@ -24,6 +25,8 @@ static func apply() -> void:
 		_override(consumable, "consumable_texture_path", "external/sprites/consumables/%s.png" % consumable.object_id)
 	for act: ActData in Global._id_to_act_data.values():
 		_override(act, "act_background_texture_path", "external/sprites/backgrounds/%s.png" % act.object_id)
+	for character: CharacterData in Global._id_to_character_data.values():
+		_override(character, "character_icon_texture_path", "external/sprites/characters/%s/%s_icon.png" % [character.object_id, character.object_id])
 	for enemy: EnemyData in Global._id_to_enemy_data.values():
 		if _override(enemy, "enemy_texture_path", "external/sprites/enemies/%s.png" % enemy.object_id):
 			var animation_data: AnimationData = Global.get_animation_data(enemy.enemy_animation_id)
