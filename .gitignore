@@ -14,3 +14,4 @@ external/profile.json
 
 # Codex raw generated images
 tools/codex_art/raw/
+external/user_settings.json

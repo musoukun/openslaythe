@@ -16,6 +16,12 @@ func _ready() -> void:
 		get_tree().quit()
 		return
 	await get_tree().create_timer(0.3).timeout
+	if mode == "settings":
+		var settings_button := get_tree().root.find_child("SettingsButton", true, false) as BaseButton
+		if settings_button:
+			settings_button.pressed.emit()
+			settings_button.button_up.emit()
+		return
 	Global.start_run(CHARACTER_ID, 12345)
 	await get_tree().create_timer(0.5).timeout
 	match mode:
