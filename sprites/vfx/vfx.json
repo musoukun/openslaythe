@@ -1,0 +1,619 @@
+{
+  "playback": {
+    "version": 1,
+    "units": {
+      "duration": "seconds",
+      "rotation": "degrees clockwise",
+      "offset": "pixels at fixed 1200x700; +x right, +y down",
+      "screen_shake": "maximum camera displacement in pixels",
+      "hit_stop": "seconds",
+      "particle_speed": "pixels per second",
+      "particle_gravity": "pixels per second squared on +y",
+      "scale": "multiplier of native 256x256 texture"
+    },
+    "origin": "Recipient combatant foot anchor plus offset; keep effect roots fixed in world space at spawn, texture pivot at center. An attack uses the damage recipient; block/heal/status/energy/power uses the recipient; overheat uses the self-damaged owner; death uses the dying unit's last foot position. attack_all emits once per living affected target.",
+    "timeline": "All effects listed for one trigger start simultaneously at the resolved gameplay event, not card selection. Main scale and rotation interpolate linearly over duration. Uniform main scale on both axes. random_rotation adds one uniform random angle in [0,360) to both rotation endpoints at spawn. Delete main sprite at duration; particles survive for their lifetime.",
+    "alpha_curves": {
+      "fade_out": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "flash": [
+        [
+          0,
+          0
+        ],
+        [
+          0.08,
+          1
+        ],
+        [
+          0.3,
+          0.85
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "fade_in_out": [
+        [
+          0,
+          0
+        ],
+        [
+          0.2,
+          1
+        ],
+        [
+          0.55,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "alpha_curve_units": "Normalized [time,alpha] keyframes, linearly interpolated; multiply texture alpha by curve value.",
+    "blend": "Use Godot CanvasItem additive blending for add, standard alpha blending for mix. Multiply RGB by hex color. For particles, use particle_blend_by_texture when present; otherwise inherit parent blend. Paths are repository relative; prefix res:// when loading in Godot.",
+    "particles": "Optional particles emit once at t=0 from the same origin; amount is total count. Choose speed and scale uniformly within their ranges, angle uniformly in a cone centered on up (-90 degrees), spread_deg is full cone width; 360 means all directions. Initial rotation uniform [0,360), held constant. Integrate gravity, retain initial scale, and linearly fade alpha from 1 to 0 across lifetime. Omitted particles means none.",
+    "feedback": "Missing screen_shake/hit_stop means zero. Shake lasts 0.16 seconds, updates at 30 Hz with random x/y in [-amplitude,+amplitude] times (1-t/0.16), then returns to base camera. Pause gameplay and actor animation during hit_stop, but let VFX and camera run in real time; UI remains responsive.",
+    "limits": "For effects/events in the same 80 ms burst, take the maximum shake and maximum hit_stop, never sum; one pause per burst, capped at 0.06 seconds and 6 px. At most 48 live particles; discard excess oldest particles. Clamp camera displacement, not gameplay positions.",
+    "routing": "attack_heavy replaces attack_single/attack_all/enemy_attack visuals for an individual hit of at least 20 resolved damage; for multi-target hits apply threshold per target and merge feedback by burst. Emit at each resolved hit, never add heavy feedback to default attack feedback. overshield_gain replaces block_gain for Overshield. pointy_retaliation replaces default attack visuals for Pointy damage. pollen_tick replaces generic debuff visuals for periodic Pollen activation, with draw handled by game UI. waste_exhaust replaces generic exhaust visuals; its random-target damage separately emits attack_single. photosynthesis replaces energy_gain only for energy actually gained through Photosynthesis; do not infer new mechanics. For a power card, emit card_play_power once on the caster and status_buff only for additional recipients. A status application on an existing recipient uses the appropriate status trigger once.",
+    "accessibility": "Reduced motion mode: set shake and hit_stop to zero, disable particle emission and rotation interpolation, halve peak alpha of additive sprites. Do not flash the full screen.",
+    "particle_blend_by_texture": {
+      "sprites/vfx/vfx_dot.png": "add",
+      "sprites/vfx/vfx_smoke.png": "mix",
+      "sprites/vfx/vfx_petal.png": "mix",
+      "sprites/vfx/vfx_thorn.png": "mix",
+      "sprites/vfx/vfx_leaf.png": "mix",
+      "sprites/vfx/vfx_spore.png": "mix"
+    }
+  },
+  "effects": {
+    "cut": {
+      "texture": "sprites/vfx/vfx_slash.png",
+      "blend": "add",
+      "duration": 0.2,
+      "scale_from": 0.35,
+      "scale_to": 0.7,
+      "rotation_from": -20,
+      "rotation_to": 15,
+      "random_rotation": false,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFE9BA",
+      "screen_shake": 2,
+      "hit_stop": 0.025
+    },
+    "hit": {
+      "texture": "sprites/vfx/vfx_impact.png",
+      "blend": "add",
+      "duration": 0.18,
+      "scale_from": 0.16,
+      "scale_to": 0.46,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": true,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FF8068",
+      "particles": {
+        "texture": "sprites/vfx/vfx_dot.png",
+        "amount": 5,
+        "speed": [
+          80,
+          160
+        ],
+        "lifetime": 0.28,
+        "gravity": 60,
+        "scale": [
+          0.25,
+          0.5
+        ],
+        "color": "#FFD178",
+        "spread_deg": 360
+      }
+    },
+    "sweep_hit": {
+      "texture": "sprites/vfx/vfx_impact.png",
+      "blend": "add",
+      "duration": 0.25,
+      "scale_from": 0.3,
+      "scale_to": 0.8,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": true,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFD178",
+      "screen_shake": 4,
+      "hit_stop": 0.04,
+      "particles": {
+        "texture": "sprites/vfx/vfx_leaf.png",
+        "amount": 6,
+        "speed": [
+          90,
+          190
+        ],
+        "lifetime": 0.42,
+        "gravity": 240,
+        "scale": [
+          0.07,
+          0.13
+        ],
+        "color": "#FFFFFF",
+        "spread_deg": 360
+      }
+    },
+    "robot_hit": {
+      "texture": "sprites/vfx/vfx_impact.png",
+      "blend": "add",
+      "duration": 0.2,
+      "scale_from": 0.22,
+      "scale_to": 0.56,
+      "rotation_from": 20,
+      "rotation_to": 20,
+      "random_rotation": false,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FF8068",
+      "screen_shake": 3,
+      "hit_stop": 0.03,
+      "particles": {
+        "texture": "sprites/vfx/vfx_dot.png",
+        "amount": 5,
+        "speed": [
+          90,
+          180
+        ],
+        "lifetime": 0.3,
+        "gravity": 130,
+        "scale": [
+          0.25,
+          0.5
+        ],
+        "color": "#FFD178",
+        "spread_deg": 360
+      }
+    },
+    "shield": {
+      "texture": "sprites/vfx/vfx_hex_shield.png",
+      "blend": "add",
+      "duration": 0.34,
+      "scale_from": 0.3,
+      "scale_to": 0.64,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "flash",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#72D9DD"
+    },
+    "overshield_shell": {
+      "texture": "sprites/vfx/vfx_hex_shield.png",
+      "blend": "add",
+      "duration": 0.48,
+      "scale_from": 0.48,
+      "scale_to": 0.9,
+      "rotation_from": 30,
+      "rotation_to": 30,
+      "random_rotation": false,
+      "alpha": "fade_in_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#B8E986"
+    },
+    "heal_bloom": {
+      "texture": "sprites/vfx/vfx_sparkle.png",
+      "blend": "add",
+      "duration": 0.5,
+      "scale_from": 0.16,
+      "scale_to": 0.5,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "fade_in_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFE9BA",
+      "particles": {
+        "texture": "sprites/vfx/vfx_petal.png",
+        "amount": 7,
+        "speed": [
+          35,
+          85
+        ],
+        "lifetime": 0.6,
+        "gravity": -65,
+        "scale": [
+          0.06,
+          0.11
+        ],
+        "color": "#FFFFFF",
+        "spread_deg": 70
+      }
+    },
+    "buff_bloom": {
+      "texture": "sprites/vfx/vfx_halo.png",
+      "blend": "add",
+      "duration": 0.44,
+      "scale_from": 0.18,
+      "scale_to": 0.68,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "fade_in_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#B8E986",
+      "particles": {
+        "texture": "sprites/vfx/vfx_leaf.png",
+        "amount": 5,
+        "speed": [
+          35,
+          75
+        ],
+        "lifetime": 0.5,
+        "gravity": -55,
+        "scale": [
+          0.06,
+          0.1
+        ],
+        "color": "#FFFFFF",
+        "spread_deg": 80
+      }
+    },
+    "debuff_spores": {
+      "texture": "sprites/vfx/vfx_spore.png",
+      "blend": "mix",
+      "duration": 0.45,
+      "scale_from": 0.16,
+      "scale_to": 0.42,
+      "rotation_from": -15,
+      "rotation_to": 20,
+      "random_rotation": false,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFFFFF",
+      "particles": {
+        "texture": "sprites/vfx/vfx_spore.png",
+        "amount": 6,
+        "speed": [
+          30,
+          75
+        ],
+        "lifetime": 0.55,
+        "gravity": 90,
+        "scale": [
+          0.06,
+          0.12
+        ],
+        "color": "#FFFFFF",
+        "spread_deg": 100
+      }
+    },
+    "heat_burst": {
+      "texture": "sprites/vfx/vfx_fireball.png",
+      "blend": "add",
+      "duration": 0.32,
+      "scale_from": 0.22,
+      "scale_to": 0.84,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "flash",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FF8068",
+      "screen_shake": 5,
+      "hit_stop": 0.045,
+      "particles": {
+        "texture": "sprites/vfx/vfx_dot.png",
+        "amount": 9,
+        "speed": [
+          100,
+          220
+        ],
+        "lifetime": 0.4,
+        "gravity": 160,
+        "scale": [
+          0.3,
+          0.65
+        ],
+        "color": "#FFD178",
+        "spread_deg": 360
+      }
+    },
+    "heat_ring": {
+      "texture": "sprites/vfx/vfx_halo.png",
+      "blend": "add",
+      "duration": 0.4,
+      "scale_from": 0.3,
+      "scale_to": 1.1,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFD178"
+    },
+    "energy_seed": {
+      "texture": "sprites/vfx/vfx_dot.png",
+      "blend": "add",
+      "duration": 0.38,
+      "scale_from": 0.75,
+      "scale_to": 1.8,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "flash",
+      "offset": [
+        0,
+        -90
+      ],
+      "color": "#B8E986",
+      "particles": {
+        "texture": "sprites/vfx/vfx_dot.png",
+        "amount": 6,
+        "speed": [
+          30,
+          85
+        ],
+        "lifetime": 0.4,
+        "gravity": -40,
+        "scale": [
+          0.35,
+          0.65
+        ],
+        "color": "#FFE9BA",
+        "spread_deg": 70
+      }
+    },
+    "death_puff": {
+      "texture": "sprites/vfx/vfx_smoke.png",
+      "blend": "mix",
+      "duration": 0.56,
+      "scale_from": 0.22,
+      "scale_to": 0.82,
+      "rotation_from": -10,
+      "rotation_to": 12,
+      "random_rotation": false,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#C1CED0",
+      "particles": {
+        "texture": "sprites/vfx/vfx_leaf.png",
+        "amount": 7,
+        "speed": [
+          65,
+          145
+        ],
+        "lifetime": 0.6,
+        "gravity": 260,
+        "scale": [
+          0.06,
+          0.12
+        ],
+        "color": "#FFFFFF",
+        "spread_deg": 360
+      },
+      "screen_shake": 3,
+      "hit_stop": 0.035
+    },
+    "power_corona": {
+      "texture": "sprites/vfx/vfx_halo.png",
+      "blend": "add",
+      "duration": 0.65,
+      "scale_from": 0.22,
+      "scale_to": 0.92,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "fade_in_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFD178",
+      "particles": {
+        "texture": "sprites/vfx/vfx_petal.png",
+        "amount": 9,
+        "speed": [
+          45,
+          110
+        ],
+        "lifetime": 0.7,
+        "gravity": -45,
+        "scale": [
+          0.07,
+          0.12
+        ],
+        "color": "#FFFFFF",
+        "spread_deg": 160
+      }
+    },
+    "thorn_retort": {
+      "texture": "sprites/vfx/vfx_thorn.png",
+      "blend": "mix",
+      "duration": 0.22,
+      "scale_from": 0.18,
+      "scale_to": 0.55,
+      "rotation_from": 65,
+      "rotation_to": 95,
+      "random_rotation": false,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFFFFF",
+      "screen_shake": 1,
+      "hit_stop": 0.015
+    },
+    "heavy_blast": {
+      "texture": "sprites/vfx/vfx_fireball.png",
+      "blend": "add",
+      "duration": 0.36,
+      "scale_from": 0.3,
+      "scale_to": 1.15,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": false,
+      "alpha": "flash",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFD178",
+      "particles": {
+        "texture": "sprites/vfx/vfx_dot.png",
+        "amount": 12,
+        "speed": [
+          110,
+          240
+        ],
+        "lifetime": 0.45,
+        "gravity": 180,
+        "scale": [
+          0.3,
+          0.7
+        ],
+        "color": "#FF8068",
+        "spread_deg": 360
+      },
+      "screen_shake": 6,
+      "hit_stop": 0.055
+    },
+    "waste_pop": {
+      "texture": "sprites/vfx/vfx_spore.png",
+      "blend": "mix",
+      "duration": 0.32,
+      "scale_from": 0.2,
+      "scale_to": 0.58,
+      "rotation_from": 0,
+      "rotation_to": 0,
+      "random_rotation": true,
+      "alpha": "fade_out",
+      "offset": [
+        0,
+        -64
+      ],
+      "color": "#FFFFFF",
+      "particles": {
+        "texture": "sprites/vfx/vfx_spore.png",
+        "amount": 5,
+        "speed": [
+          65,
+          125
+        ],
+        "lifetime": 0.45,
+        "gravity": 200,
+        "scale": [
+          0.07,
+          0.12
+        ],
+        "color": "#FFFFFF",
+        "spread_deg": 360
+      }
+    }
+  },
+  "triggers": {
+    "attack_single": [
+      "cut",
+      "hit"
+    ],
+    "attack_all": [
+      "sweep_hit"
+    ],
+    "enemy_attack": [
+      "robot_hit"
+    ],
+    "block_gain": [
+      "shield"
+    ],
+    "heal": [
+      "heal_bloom"
+    ],
+    "status_buff": [
+      "buff_bloom"
+    ],
+    "status_debuff": [
+      "debuff_spores"
+    ],
+    "overheat": [
+      "heat_burst",
+      "heat_ring"
+    ],
+    "energy_gain": [
+      "energy_seed"
+    ],
+    "death": [
+      "death_puff"
+    ],
+    "card_play_power": [
+      "power_corona"
+    ],
+    "attack_heavy": [
+      "heavy_blast",
+      "heat_ring"
+    ],
+    "overshield_gain": [
+      "shield",
+      "overshield_shell"
+    ],
+    "pointy_retaliation": [
+      "thorn_retort",
+      "hit"
+    ],
+    "pollen_tick": [
+      "debuff_spores"
+    ],
+    "waste_exhaust": [
+      "waste_pop"
+    ],
+    "photosynthesis": [
+      "energy_seed",
+      "buff_bloom"
+    ]
+  }
+}

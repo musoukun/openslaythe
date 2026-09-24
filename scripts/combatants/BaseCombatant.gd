@@ -23,9 +23,13 @@ class_name BaseCombatant
 var status_id_to_status_effects: Dictionary = {}	# maps status id to the array of ui element(s) it matches
 var custom_ui_object_id_to_custom_ui: Dictionary = {} # maps a custom ui id to the ui component it matches. Duplicate registrations will be ignored
 
-const BLOCK_TEXTURE: Texture = preload("res://icon.svg")
+const BLOCK_ICON_PATH := "res://sprites/ui/icon_block.png"
+var BLOCK_TEXTURE: Texture = UiSkin.load_if_exists(BLOCK_ICON_PATH) if ResourceLoader.exists(BLOCK_ICON_PATH) else load("res://icon.svg")
 
 func _ready():
+	if ResourceLoader.exists(BLOCK_ICON_PATH):
+		block.texture = BLOCK_TEXTURE
+		block.self_modulate = Color.WHITE
 	Signals.combat_started.connect(_on_combat_started)
 	Signals.combat_ended.connect(_on_combat_ended)
 	Signals.player_turn_started.connect(_on_player_turn_started)
@@ -39,6 +43,41 @@ func _on_selection_button_up():
 	breakpoint
 
 #region Animations
+
+## スプライトの足元 (ローカルy)。子の HP バーのすぐ上。
+const SPRITE_FEET_Y := 68.0
+## 待機中の呼吸アニメ (offset を上下に少し揺らす。子の HP バー等は動かさない)
+const BREATH_AMPLITUDE := 3.0
+const BREATH_DURATION := 1.2
+
+var _breath_tween: Tween
+
+## 画像サイズに合わせて足元を HP バー上に揃え、クリック判定をスプライトに合わせる。
+## Returns the sprite height.
+func fit_sprite_to_feet() -> float:
+	var frames := animated_sprite_2d.sprite_frames
+	var anim := animated_sprite_2d.animation
+	if frames == null or not frames.has_animation(anim) or frames.get_frame_count(anim) == 0:
+		return 0.0
+	var size: Vector2 = frames.get_frame_texture(anim, 0).get_size()
+	animated_sprite_2d.offset = Vector2(0, SPRITE_FEET_Y - size.y / 2.0)
+	var hit_w: float = max(size.x * 0.7, 96.0)
+	selection_button.offset_left = -hit_w / 2.0
+	selection_button.offset_right = hit_w / 2.0
+	selection_button.offset_top = SPRITE_FEET_Y - size.y * 0.9
+	selection_button.offset_bottom = SPRITE_FEET_Y
+	_start_breathing()
+	return size.y
+
+func _start_breathing() -> void:
+	if _breath_tween and _breath_tween.is_valid():
+		_breath_tween.kill()
+	var base := animated_sprite_2d.offset
+	_breath_tween = create_tween().set_loops()
+	# 個体ごとに位相をずらす
+	_breath_tween.tween_interval(randf() * 0.5)
+	_breath_tween.tween_property(animated_sprite_2d, "offset", base + Vector2(0, -BREATH_AMPLITUDE), BREATH_DURATION).set_trans(Tween.TRANS_SINE)
+	_breath_tween.tween_property(animated_sprite_2d, "offset", base, BREATH_DURATION).set_trans(Tween.TRANS_SINE)
 
 ## Keep.
 func play_animation(animation_name: String) -> void:

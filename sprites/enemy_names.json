@@ -1,0 +1,41 @@
+{
+  "game_title": "Petal Fallout",
+  "enemies": {
+    "enemy_1": {
+      "name": "Cloche Clobber",
+      "description": "A red enamel gardening robot hides under an oversized protective bell lid and pokes intruders with a pruning fork."
+    },
+    "enemy_2": {
+      "name": "Rinse Biscuit",
+      "description": "A tiny blue rinse robot wears a spotless filter bonnet and treats every visitor as a stain."
+    },
+    "enemy_3": {
+      "name": "Compost Cougher",
+      "description": "A leaking green compost robot keeps its corrosive leftovers in a tank that is one sneeze from bursting."
+    },
+    "enemy_4": {
+      "name": "Crimp Foreman",
+      "description": "A heavy clamp robot pinches protective shells open with an oversized pair of press jaws."
+    },
+    "enemy_act_1_miniboss_1": {
+      "name": "Hedge Accountant",
+      "description": "A boxy hedge robot tries to trim every living thing into the same approved rectangle."
+    },
+    "enemy_act_1_miniboss_2": {
+      "name": "Snip Etiquette",
+      "description": "A tall red pruning robot performs fussy little bows between rude mechanical snips."
+    },
+    "enemy_act_1_boss_1": {
+      "name": "Mother Pot",
+      "description": "A walking nursery boiler releases tiny maintenance robots from its belly and insists they are seedlings."
+    },
+    "enemy_minion_1": {
+      "name": "Boltling",
+      "description": "A red seed-capsule robot charges ahead on feet much too large for its body."
+    },
+    "enemy_minion_2": {
+      "name": "Washerling",
+      "description": "A blue washer-shaped nursery robot fusses over its shell before waddling into trouble."
+    }
+  }
+}

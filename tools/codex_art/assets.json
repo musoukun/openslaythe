@@ -1,0 +1,1779 @@
+{
+ "style": "Create original playful reactor-greenhouse game art with chunky hand-inked dark teal contours, flat gouache-like color masses and restrained dry-brush texture. Combine botanical shapes with improvised copper machinery and cream ceramics, using mint, lime, peach, coral and cyan accents over deep teal. Use bold readable silhouettes, two-step cel shading and selective warm ivory highlights; reserve soft emission for active energy and VFX. Keep the humor earnest and slightly ridiculous, with no imitation of existing game designs. Include no text, letters, numerals, labels, logos, watermarks or typographic symbols, and respect each asset's stated background and framing requirements.",
+ "assets": [
+  {
+   "id": "frame_attack",
+   "out": "sprites/ui/card_frame_attack.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "brief": "Card frame for ATTACK cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+   "category": "card_frame",
+   "prompt": "Portrait card frame with coral copper jaws, angular clipped shoulders and a small trowel notch. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
+  },
+  {
+   "id": "frame_skill",
+   "out": "sprites/ui/card_frame_skill.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "brief": "Card frame for SKILL cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+   "category": "card_frame",
+   "prompt": "Portrait card frame with cyan mint ceramic edging, smooth rounded shoulders and one leaf rib. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
+  },
+  {
+   "id": "frame_power",
+   "out": "sprites/ui/card_frame_power.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "brief": "Card frame for POWER cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+   "category": "card_frame",
+   "prompt": "Portrait card frame with amber copper concentric coils, stepped shoulders and a small seed crown. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
+  },
+  {
+   "id": "frame_status",
+   "out": "sprites/ui/card_frame_status.png",
+   "size": [
+    288,
+    368
+   ],
+   "transparent": true,
+   "brief": "Card frame for STATUS cards. Portrait 144:184. Upper square art window (about x 17%-83%, y 6%-59%) and lower text plate (y 61%-98%) must be plain dark flat areas so art/text can be overlaid. Cost gem slot at top-left corner.",
+   "category": "card_frame",
+   "prompt": "Portrait card frame with plum dented ceramic edging, asymmetrical chipped shoulders and sealed sludge seams. Keep the entire upper art window x=17%-83%, y=6%-59% and lower text plate y=61%-98% perfectly flat #142C30 with no ornament, texture, highlight or symbols. Place a plain empty circular cost socket at top-left, centered at x=10%, y=8%, wholly outside the art window. All ornament stays on the perimeter; retain identical window and plate geometry across card types. Opaque dark window and plate, transparent exterior only."
+  },
+  {
+   "id": "energy_green",
+   "out": "external/sprites/colors/green_energy_icon.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Energy (mana) orb icon for the green card color, shown in the card cost corner",
+   "category": "icon",
+   "prompt": "A round lime seed battery with two thick mint cotyledons hugging its rim; cream central face left broad and uncluttered for a game-drawn cost. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "energy_white",
+   "out": "external/sprites/colors/white_energy_icon.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Energy (mana) orb icon for the white card color, shown in the card cost corner",
+   "category": "icon",
+   "prompt": "A round ivory ceramic seed battery with a single copper equatorial band; broad pale center left uncluttered for a game-drawn cost, distinct from the leafy green battery. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "character_green",
+   "out": "external/sprites/characters/character_green/character_green.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "brief": "Player character 'The Botanist': a former thermonuclear botanist fired for their experiments. Faces RIGHT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "The Botanist: compact adult human with warm brown skin, a tuft of black curly hair holding one leaf, oversized round copper goggles, cream cropped lab coat, mint rubber gloves and broad terracotta boots. A copper flowerpot reactor backpack carries a lime sprout under a glass bell; hold a short copper garden trowel forward. Eager slightly hunched stance, three-quarter profile facing RIGHT, nose and tool point right. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "character_green_icon",
+   "out": "external/sprites/characters/character_green/character_green_icon.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Portrait icon (bust) of The Botanist for character select",
+   "category": "icon",
+   "prompt": "Bust portrait of The Botanist, a warm brown-skinned adult with black curly hair and one tucked leaf, oversized round copper goggles, cream lab coat collar and mint glove adjusting the goggles; a lime sprout and copper glass-bell backpack peek over the shoulder. Face angled right with an earnest crooked smile; recognizable at small size. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "enemy_1",
+   "out": "external/sprites/enemies/enemy_1.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_1' (placeholder name 'Red Enemy', role: regular enemy). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Squat red enamel robot with an oversized ivory bell-shaped protective lid, one copper pruning fork, a single wary eye slit and two stubby articulated feet. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_2",
+   "out": "external/sprites/enemies/enemy_2.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_2' (placeholder name 'Blue Enemy', role: regular enemy). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Small cyan biscuit-shaped rinse robot with a huge ivory pleated filter bonnet, copper spray nozzle nose, indignant eye slit and two narrow paddle feet. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_3",
+   "out": "external/sprites/enemies/enemy_3.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_3' (placeholder name 'Green Enemy', role: regular enemy). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Pear-shaped lime compost robot with a swollen translucent plum sludge tank, loose copper cap, anxious round eye and two splayed mechanical feet. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_4",
+   "out": "external/sprites/enemies/enemy_4.png",
+   "size": [
+    200,
+    200
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_4' (placeholder name 'Big Attack Enemy', role: regular enemy). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Broad plum industrial gardening robot with enormous coral press-clamp forearms, cyan chest plate, a small ivory head and squat copper piston legs; a sealed sludge tank on its back. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_act_1_miniboss_1",
+   "out": "external/sprites/enemies/enemy_act_1_miniboss_1.png",
+   "size": [
+    220,
+    220
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_act_1_miniboss_1' (placeholder name 'Act 1 Miniboss', role: boss). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Imposing square mint hedge-cutting robot, oversized copper shears forming two side arms, cream rectangular head with disapproving narrow eye slit and heavy terracotta stomping feet; no paperwork or lettering. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_act_1_miniboss_2",
+   "out": "external/sprites/enemies/enemy_act_1_miniboss_2.png",
+   "size": [
+    220,
+    220
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_act_1_miniboss_2' (placeholder name 'Act 1 Miniboss', role: miniboss). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Tall slender coral pruning robot with an ivory bow-shaped collar, long copper scissor arms, tiny tilted head and two curled mechanical feet, theatrical forward bow. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_act_1_boss_1",
+   "out": "external/sprites/enemies/enemy_act_1_boss_1.png",
+   "size": [
+    300,
+    300
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_act_1_boss_1' (placeholder name 'Act 1 Boss', role: boss). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Massive ivory egg-shaped nursery boiler robot with a copper greenhouse dome, peach pipe handles like proud hips, broad coral belly hatch, lime seed trays and two huge terracotta mechanical feet; a stern little eye slit looks left, hatch empty for independent minion spawning. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_minion_1",
+   "out": "external/sprites/enemies/enemy_minion_1.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_minion_1' (placeholder name 'Minion 1', role: minion). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Tiny coral seed-capsule robot with copper pointed snout, ivory single eye and comically oversized terracotta mechanical boots; compact forward lean. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_minion_2",
+   "out": "external/sprites/enemies/enemy_minion_2.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'enemy_minion_2' (placeholder name 'Minion 2', role: minion). Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Tiny cyan washer-ring robot with a cream central eye, copper rim, little paddle arms and two stubby cream mechanical feet; round open silhouette. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "bg_act_1",
+   "out": "external/sprites/backgrounds/act_1.png",
+   "size": [
+    1200,
+    700
+   ],
+   "transparent": false,
+   "brief": "Combat background for Act 1. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
+   "category": "background",
+   "prompt": "Side-view abandoned intake greenhouse: chunky mossy pipes at the extreme sides, sagging cream glass ribs across the upper quarter, absurdly large seedlings in distant copper pots. Muted moss and teal with soft amber afternoon light; distant props remain quiet. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is simple dark teal flooring beneath cards. No HUD."
+  },
+  {
+   "id": "map_background",
+   "out": "sprites/ui/map_background.png",
+   "size": [
+    1200,
+    700
+   ],
+   "transparent": false,
+   "brief": "Map screen background: top-down overworld map the player travels through. Center area should be calm/low contrast so node icons stay readable.",
+   "category": "map",
+   "prompt": "Top-down view of one absurd agricultural power station: mossy intake gardens along the lower-left perimeter, peach copper compost plumbing at the sides, ivory reactor conservatory at the upper-right edge. Keep x=240..960 and y=70..630 a quiet flat dark teal field with only faint terrain shapes; no baked routes, nodes, lettering or markers."
+  },
+  {
+   "id": "map_combat",
+   "out": "sprites/map/location_combat.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Map node icon for location type COMBAT",
+   "category": "map_icon",
+   "prompt": "A red enamel robot lid with one broad projecting copper pruning blade; compact asymmetric wedge silhouette. Centered isolated map icon on transparent background, ivory outer keyline and dark teal inner contour, 10 percent padding, no cast shadow, readable at 32px; use silhouette as well as color."
+  },
+  {
+   "id": "map_miniboss",
+   "out": "sprites/map/location_miniboss.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Map node icon for location type MINIBOSS",
+   "category": "map_icon",
+   "prompt": "A broad amber robot head with two huge lateral clamp jaws; wide heavy silhouette, ivory eye slit. Centered isolated map icon on transparent background, ivory outer keyline and dark teal inner contour, 10 percent padding, no cast shadow, readable at 32px; use silhouette as well as color."
+  },
+  {
+   "id": "map_boss",
+   "out": "sprites/map/location_boss.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Map node icon for location type BOSS",
+   "category": "map_icon",
+   "prompt": "A towering ivory nursery dome with a coral open seed hatch and three blunt exhaust chimneys; tall stepped silhouette. Centered isolated map icon on transparent background, ivory outer keyline and dark teal inner contour, 10 percent padding, no cast shadow, readable at 32px; use silhouette as well as color."
+  },
+  {
+   "id": "map_event",
+   "out": "sprites/map/location_event.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Map node icon for location type EVENT",
+   "category": "map_icon",
+   "prompt": "A peach seed pod opening around a single curious ivory robotic eye; tilted teardrop silhouette, no question mark. Centered isolated map icon on transparent background, ivory outer keyline and dark teal inner contour, 10 percent padding, no cast shadow, readable at 32px; use silhouette as well as color."
+  },
+  {
+   "id": "map_treasure",
+   "out": "sprites/map/location_treasure.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Map node icon for location type TREASURE",
+   "category": "map_icon",
+   "prompt": "A closed cream seed chest with copper hinge and a lime sprout-shaped latch; square silhouette. Centered isolated map icon on transparent background, ivory outer keyline and dark teal inner contour, 10 percent padding, no cast shadow, readable at 32px; use silhouette as well as color."
+  },
+  {
+   "id": "map_shop",
+   "out": "sprites/map/location_shop.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Map node icon for location type SHOP",
+   "category": "map_icon",
+   "prompt": "A copper watering-can kiosk beneath a peach scalloped awning; short wide silhouette. Centered isolated map icon on transparent background, ivory outer keyline and dark teal inner contour, 10 percent padding, no cast shadow, readable at 32px; use silhouette as well as color."
+  },
+  {
+   "id": "map_rest_site",
+   "out": "sprites/map/location_rest_site.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Map node icon for location type REST_SITE",
+   "category": "map_icon",
+   "prompt": "A mint hammock cradling a cream flowerpot beneath one drooping leaf; broad relaxed crescent silhouette. Centered isolated map icon on transparent background, ivory outer keyline and dark teal inner contour, 10 percent padding, no cast shadow, readable at 32px; use silhouette as well as color."
+  },
+  {
+   "id": "card_basic_attack_green",
+   "out": "external/sprites/cards/green/card_basic_attack_green.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Basic Attack' (ATTACK): Deal 7 damage.",
+   "category": "card_art",
+   "prompt": "An oversized copper garden trowel punches diagonally upward through a robot's red enamel lid, scattering two bolts; lime vine grip, coral impact wedge on deep teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_basic_block_green",
+   "out": "external/sprites/cards/green/card_basic_block_green.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Basic Block' (SKILL): Gain 5 block.",
+   "category": "card_art",
+   "prompt": "A broad mint cabbage leaf folds into a sturdy shield in front of a cream gardening glove; centered curved silhouette, dark teal background and pale cyan rim. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_energy_next_turn",
+   "out": "external/sprites/cards/white/card_energy_next_turn.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Energy Next Turn' (SKILL): Gain [status_charge_amount] energy next turn.",
+   "category": "card_art",
+   "prompt": "A sealed cream seed timer cradles a luminous lime seed beneath a dormant curled leaf; amber dawn crescent behind it, calm upright composition on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blossom",
+   "out": "external/sprites/cards/green/card_blossom.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Blossom' (SKILL): Gain [health_amount] HP",
+   "category": "card_art",
+   "prompt": "A peach flower opens from a cracked cream reactor cooling pipe, releasing warm ivory sap into a tiny heart-shaped leaf; close-up circular composition on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_bud",
+   "out": "external/sprites/cards/green/card_bud.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Bud' (SKILL): Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy. Exhaust.",
+   "category": "card_art",
+   "prompt": "Two copper robotic grippers share a thorn-covered lime bud, with sharp prickles pointing toward both hands; balanced diagonal on deep teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_cell_wall",
+   "out": "external/sprites/cards/green/card_cell_wall.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Cell Wall' (SKILL): Convert Block into Overshield",
+   "category": "card_art",
+   "prompt": "A single cyan leaf shield thickens into nested mint hexagonal cell walls; cutaway view with clear concentric layers, a dark teal center and restrained white edge. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_chloroplast",
+   "out": "external/sprites/cards/green/card_chloroplast.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Chloroplast' (ATTACK): Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone.",
+   "category": "card_art",
+   "prompt": "A glass chloroplast capsule bursts above small robot silhouettes, its lime core throwing a circular wave toward every edge including a cream glove in the foreground; amber stress cracks on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_clippers",
+   "out": "external/sprites/cards/green/card_clippers.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Clippers' (ATTACK): Attack for [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Strength. On pickup, Gain [health_amount] HP.",
+   "category": "card_art",
+   "prompt": "Chunky coral-handled pruning shears snap along a rising diagonal with two separated blade echoes and a bright green sap bead at the hinge; dark teal ground. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_differentiation",
+   "out": "external/sprites/cards/green/card_differentiation.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Differentiation' (ATTACK): Do [attack_damage]. Lose [self_damage] HP.",
+   "category": "card_art",
+   "prompt": "A lime stem divides into a sharp copper spear and a wilted peach branch; spear strikes a small robot plate while the connected branch visibly shrivels, diagonal teal composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_fertilize",
+   "out": "external/sprites/cards/green/card_fertilize.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Fertilize' (SKILL): Gain {0}{0}. Lose [self_damage] HP.",
+   "category": "card_art",
+   "prompt": "A cream glove squeezes a hot compost pouch into a seed battery; amber energy swells from the soil while a coral heat sting bites the glove, close-up on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_fruit",
+   "out": "external/sprites/cards/green/card_fruit.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Fruit' (SKILL): Randomly gain [small_max_health_amount] Max HP, [big_max_health_amount] Max HP, or {0}",
+   "category": "card_art",
+   "prompt": "One oversized translucent peach fruit hangs from a copper stem, containing a heart-shaped seed and a lime energy seed; warm ambiguous inner glow, centered on deep teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_growth",
+   "out": "external/sprites/cards/green/card_growth.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Growth' (SKILL): Gain [status_charge_amount] Overshield and draw 1 card.",
+   "category": "card_art",
+   "prompt": "A lime sprout pushes up through nested cyan hexagonal shells, lifting one blank cream specimen card at its tip; strong vertical composition on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_lotus",
+   "out": "external/sprites/cards/green/card_lotus.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Lotus' (SKILL): Double Overshield charges.",
+   "category": "card_art",
+   "prompt": "A mint lotus unfolds a second larger layer of hexagonal cyan petals around its first shell; centered symmetrical growth, dark teal interior, pale ivory rim. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_moss",
+   "out": "external/sprites/cards/green/card_moss.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Moss' (ATTACK): Gain [status_charge_amount]. Deal damage equal to Overshield.",
+   "category": "card_art",
+   "prompt": "A moss-covered cyan hexagonal shield becomes a heavy fist striking a red robot lid; compact diagonal mass with mint crumbs against ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_pollen",
+   "out": "external/sprites/cards/green/card_pollen.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Pollen' (POWER): Take [status_charge_amount] damage at the start of your turn and draw [status_secondary_charge_amount] cards",
+   "category": "card_art",
+   "prompt": "A peach reactor flower sprays amber pollen, teasing blank cream specimen cards out of its petals while a thorn pricks the supporting cream glove; swirling composition on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_petals",
+   "out": "external/sprites/cards/green/card_petals.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Petals' (SKILL): Gain [block] block. Keep block for [status_charge_amount] turns. Exhaust. On pickup, gain [health_amount] HP.",
+   "category": "card_art",
+   "prompt": "Thick peach petals overlap like roof tiles over a cyan leaf shield, each petal held by a copper clip; warm ivory sap bead beneath, centered on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_reap",
+   "out": "external/sprites/cards/green/card_reap.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Reap' (ATTACK): Attack for [damage] damage and gain Overshield for unblocked damage\\nExhaust",
+   "category": "card_art",
+   "prompt": "A copper sickle slices a robot seam and pulls the released mint energy into a nested cyan shell on its handle; left-to-right sweeping diagonal on dark teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_wildflower",
+   "out": "external/sprites/cards/green/card_wildflower.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Wildflower' (ATTACK): Attack for [damage] damage. Costs 0 if damage was taken this turn.",
+   "category": "card_art",
+   "prompt": "A stubborn coral wildflower springs from a dented cream glove and headbutts a robot panel; the stem emerges from the fresh dent, exuberant diagonal on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_symbiosis",
+   "out": "external/sprites/cards/green/card_symbiosis.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Symbiosis' (POWER): Overshield no longer decays",
+   "category": "card_art",
+   "prompt": "Lime roots and a copper coolant tube form a closed living loop around a nested cyan hexagonal shell; a secure central graft, calm symmetric composition on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_thorns",
+   "out": "external/sprites/cards/green/card_thorns.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Thorns' (SKILL): Gain [block] Block and [status_charge_amount] Pointy",
+   "category": "card_art",
+   "prompt": "A mint cabbage shield sprouts three bold copper-tipped thorns along its outer rim; compact frontal silhouette, cyan edge on deep teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_verdant",
+   "out": "external/sprites/cards/green/card_verdant.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Verdant' (SKILL): When drawn, cap incoming damage to [status_secondary_charge_amount] for [status_charge_amount] and Exhaust.",
+   "category": "card_art",
+   "prompt": "A low flat canopy of mint leaves stops a huge coral impact wedge at the same horizontal height across its crown; clear protective ceiling silhouette on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_vines",
+   "out": "external/sprites/cards/green/card_vines.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Vines' (ATTACK): Do [damage] to all enemies [number_of_attacks] times. Not affected by Pointy",
+   "category": "card_art",
+   "prompt": "Two thick lime cable-vines whip across a row of tiny red robot housings, arching above their pointed armor; broad parallel curves on deep teal, no tangled fine strands. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_conclusion",
+   "out": "external/sprites/cards/green/card_conclusion.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Conclusion' (ATTACK): Retain. Do [damage]. Gain 4 damage for each unused energy at turn end. Exhaust",
+   "category": "card_art",
+   "prompt": "A tightly compressed amber seed reactor at the base of a copper stalk fires one decisive ivory lance diagonally upward; concentric storage rings behind the seed on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_datum",
+   "out": "external/sprites/cards/green/card_datum.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Datum' (SKILL): Gain [block] Block. Duplicates on draw. Exhaust.",
+   "category": "card_art",
+   "prompt": "One blank cream specimen tile splits into two matching cyan protective tiles, with a seed-shaped recess on each; spare mirrored composition on dark teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_photoelectric_synthesis",
+   "out": "external/sprites/cards/green/card_photoelectric_synthesis.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Photoelectric Synthesis' (POWER): Gain 10 strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed.",
+   "category": "card_art",
+   "prompt": "A broad lime sunflower solar collector funnels amber light into an oversized copper mechanical fist; an ivory charged core sits at the graft, low-angle triangular composition on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_big_boom",
+   "out": "external/sprites/cards/green/card_big_boom.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Big Boom' (ATTACK): Do [damage] damage to all enemies. Gain [status_charge_amount] Overheat.",
+   "category": "card_art",
+   "prompt": "A squat greenhouse reactor shaped like a flowerpot erupts into a huge coral cauliflower-shaped fireball above tiny scattered robot lids; lime leaves buckle in the heat, ivory center on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_containment",
+   "out": "external/sprites/cards/green/card_containment.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Containment' (SKILL): Gain [block] Block. Add [number_of_cards] Wastes to hand",
+   "category": "card_art",
+   "prompt": "A heavy cyan leaf-shaped containment door closes securely while squeezing a small plum sludge capsule out of its lower seam; strong centered arch on dark teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_critical",
+   "out": "external/sprites/cards/green/card_critical.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Critical' (POWER): Gain [status_charge_amount] Overheat each turn.",
+   "category": "card_art",
+   "prompt": "An amber reactor seed swells inside an undersized copper flower cage, with coral heat vents and taut lime tendrils; centered upright pressure silhouette on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_feedback_loop",
+   "out": "external/sprites/cards/green/card_feedback_loop.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Feedback Loop' (POWER): Gain {0} whenever you Overheat.",
+   "category": "card_art",
+   "prompt": "A copper cooling tube curls into a complete loop, catching coral exhaust from a hot flowerpot and returning a lime energy bead to its root; clear circular composition on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_fusion_cannon",
+   "out": "external/sprites/cards/green/card_fusion_cannon.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Special Discard' (ATTACK): Do [damage] damage for each Waste card in your exhaust pile. Add 1 Waste to your hand.",
+   "category": "card_art",
+   "prompt": "A squat copper seed cannon draws spent plum sludge capsules from an ash tray and fires a concentrated ivory bolt; one fresh leaking capsule drops beside its breech, diagonal on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_meltdown",
+   "out": "external/sprites/cards/green/card_meltdown.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Meltdown' (ATTACK): Do [damage] damage. Gain [status_charge_amount] Overheat.",
+   "category": "card_art",
+   "prompt": "A sagging amber reactor flower pours a thick coral-hot stream onto a single robot housing while its own copper stem warps; close-up downward diagonal on deep teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_particle_accelerator",
+   "out": "external/sprites/cards/green/card_particle_accelerator.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Particle Accelerator' (SKILL): Gain [energy_amount] Energy. Add [number_of_cards] Wastes to discard pile.",
+   "category": "card_art",
+   "prompt": "An open copper circular seed raceway whirls a luminous lime seed around its center; plum waste capsules tumble from a side chute, crisp tilted ellipse on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_unstable",
+   "out": "external/sprites/cards/green/card_unstable.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Unstable' (SKILL): Draw [draw_count] cards. Gain [status_charge_amount] Overheat",
+   "category": "card_art",
+   "prompt": "A trembling amber seed incubator springs open, ejecting blank cream specimen cards and a coral puff of heat; off-balance triangular composition on teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_waste",
+   "out": "external/sprites/cards/green/card_waste.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Waste' (STATUS): At end of turn gain [status_charge_amount] Overheat and do [damage] damage to a random enemy. Exhaust",
+   "category": "card_art",
+   "prompt": "One dented plum waste capsule sprouts a sickly lime shoot and bulges with coral heat; a single sideways spark escapes its loose cap, isolated close-up on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "bg_act_2",
+   "out": "external/sprites/backgrounds/act_2.png",
+   "size": [
+    1200,
+    700
+   ],
+   "transparent": false,
+   "brief": "Combat background for Act 2. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
+   "category": "background",
+   "prompt": "Side-view compost heat exchange hall: enormous peach copper elbows, plum sealed sludge vats and suspended seed conveyors confined to upper and side edges. Muted plum and rust with narrow coral furnace light; no active explosion. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is simple dark teal flooring beneath cards. No HUD."
+  },
+  {
+   "id": "bg_act_3",
+   "out": "external/sprites/backgrounds/act_3.png",
+   "size": [
+    1200,
+    700
+   ],
+   "transparent": false,
+   "brief": "Combat background for Act 3. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
+   "category": "background",
+   "prompt": "Side-view pristine reactor conservatory: ivory ceramic ribs curve around a small distant artificial sun high above a disciplined ring of huge pale leaves. Cold teal and ivory with sparse lime light; comic tiny watering spout at an upper edge, no central obstruction. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is simple dark teal flooring beneath cards. No HUD."
+  },
+  {
+   "id": "bg_title",
+   "out": "sprites/ui/title_background.png",
+   "size": [
+    1200,
+    700
+   ],
+   "transparent": false,
+   "brief": "Title screen key art. Left third is covered by menu buttons, top-center has the logo text (rendered by the game), so keep those areas quieter.",
+   "category": "background",
+   "prompt": "At right-center, The Botanist in cream cropped lab coat, copper round goggles, mint gloves and terracotta boots proudly wheels a copper flowerpot reactor with a ridiculous giant peach cauliflower bloom; a red lid robot recoils at the far right. Lime seed backpack, curling black hair with one leaf, warm ivory light against dark teal greenhouse ribs. Keep left x=0..400 and top-center x=400..950,y=0..180 quiet dark teal for menu and game-rendered title. No lettering or logo."
+  },
+  {
+   "id": "vfx_slash",
+   "out": "sprites/vfx/vfx_slash.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static slash texture for add blending.",
+   "prompt": "A single thick tapered crescent slash sweeping from lower-left to upper-right; bright white inner spine, soft pale outer edge and empty center; no extra arcs. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Neutral grayscale emission for engine color tinting; brightest white at the luminous core and smoothly transparent at outer edges, never an opaque background."
+  },
+  {
+   "id": "vfx_impact",
+   "out": "sprites/vfx/vfx_impact.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static impact texture for add blending.",
+   "prompt": "A single asymmetric six-point impact star, two long diagonal spikes and four short blunt spikes; brilliant white core with edges fading smoothly to zero alpha. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Neutral grayscale emission for engine color tinting; brightest white at the luminous core and smoothly transparent at outer edges, never an opaque background."
+  },
+  {
+   "id": "vfx_hex_shield",
+   "out": "sprites/vfx/vfx_hex_shield.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static hex shield texture for add blending.",
+   "prompt": "A single broad regular hexagonal rim with a small leaf-shaped thickening at its lower tip; pale white luminous rim fading both inward and outward, fully transparent hollow center. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Neutral grayscale emission for engine color tinting; brightest white at the luminous core and smoothly transparent at outer edges, never an opaque background."
+  },
+  {
+   "id": "vfx_leaf",
+   "out": "sprites/vfx/vfx_leaf.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static leaf texture for mix blending.",
+   "prompt": "One broad mint leaf with a dark teal contour, one cream midrib and a short copper stem; tilted 25 degrees clockwise, opaque flat fill. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+  },
+  {
+   "id": "vfx_petal",
+   "out": "sprites/vfx/vfx_petal.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static petal texture for mix blending.",
+   "prompt": "One round peach flower petal with a small ivory base, dark teal contour and a single broad fold; tip points upward, opaque flat fill. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+  },
+  {
+   "id": "vfx_halo",
+   "out": "sprites/vfx/vfx_halo.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static halo texture for add blending.",
+   "prompt": "One circular luminous ring, white hot on the ring centerline and fading to full transparency on both sides; completely transparent center and no symbol. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Neutral grayscale emission for engine color tinting; brightest white at the luminous core and smoothly transparent at outer edges, never an opaque background."
+  },
+  {
+   "id": "vfx_fireball",
+   "out": "sprites/vfx/vfx_fireball.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static fireball texture for add blending.",
+   "prompt": "One compact cauliflower-shaped thermal fireball with a brilliant white center and pale gray outer lobes fading to transparent; preserve a chunky silhouette, no smoke or debris. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Neutral grayscale emission for engine color tinting; brightest white at the luminous core and smoothly transparent at outer edges, never an opaque background."
+  },
+  {
+   "id": "vfx_sparkle",
+   "out": "sprites/vfx/vfx_sparkle.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static sparkle texture for add blending.",
+   "prompt": "One rounded four-point healing glint with a white central bead, broad short vertical points and soft transparent tips. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Neutral grayscale emission for engine color tinting; brightest white at the luminous core and smoothly transparent at outer edges, never an opaque background."
+  },
+  {
+   "id": "vfx_dot",
+   "out": "sprites/vfx/vfx_dot.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static dot texture for add blending.",
+   "prompt": "One small circular light mote centered on the canvas, with a white core occupying 8 percent of canvas width and a smooth radial alpha falloff ending at 20 percent width. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Neutral grayscale emission for engine color tinting; brightest white at the luminous core and smoothly transparent at outer edges, never an opaque background."
+  },
+  {
+   "id": "vfx_thorn",
+   "out": "sprites/vfx/vfx_thorn.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static thorn texture for mix blending.",
+   "prompt": "One ivory triangular plant thorn on a tiny coral base, bold dark teal outline, tip pointing upward; solid readable silhouette. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+  },
+  {
+   "id": "vfx_spore",
+   "out": "sprites/vfx/vfx_spore.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static spore texture for mix blending.",
+   "prompt": "One opaque plum pollen clump shaped like three fused rounded lobes, peach rim light and dark teal contour; no face or detached particles. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+  },
+  {
+   "id": "vfx_smoke",
+   "out": "sprites/vfx/vfx_smoke.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "category": "vfx",
+   "anchor": "center",
+   "brief": "Single static smoke texture for mix blending.",
+   "prompt": "One soft rounded off-white vapor puff with three uneven lobes, a translucent center and smoothly fading edges; no hard contour or embedded debris. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+  },
+  {
+   "id": "intent_attacking",
+   "out": "sprites/intents/enemy_intent_attacking.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Enemy intent icon: enemy is attacking next turn. Must read instantly at 32px.",
+   "category": "icon",
+   "prompt": "One coral copper-tipped trowel blade on an upward diagonal, broad triangular point. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "intent_blocking",
+   "out": "sprites/intents/enemy_intent_blocking.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Enemy intent icon: enemy is blocking next turn. Must read instantly at 32px.",
+   "category": "icon",
+   "prompt": "One cyan convex leaf shield with a single broad central rib. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "intent_buffing",
+   "out": "sprites/intents/enemy_intent_buffing.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Enemy intent icon: enemy is buffing next turn. Must read instantly at 32px.",
+   "category": "icon",
+   "prompt": "One lime sprout growing upward from an amber seed, tall open silhouette. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "intent_debuffing",
+   "out": "sprites/intents/enemy_intent_debuffing.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Enemy intent icon: enemy is debuffing next turn. Must read instantly at 32px.",
+   "category": "icon",
+   "prompt": "One plum droplet biting into an ivory leaf edge, clear concave notch. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "intent_summoning",
+   "out": "sprites/intents/enemy_intent_summoning.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Enemy intent icon: enemy is summoning next turn. Must read instantly at 32px.",
+   "category": "icon",
+   "prompt": "One ivory robot head emerging from a coral split seed pod, two simple separated halves. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "ui_deck",
+   "out": "sprites/ui/icon_deck.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: deck",
+   "category": "icon",
+   "prompt": "Three neatly squared cream specimen cards bound by one copper strap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_map",
+   "out": "sprites/ui/icon_map.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: map",
+   "category": "icon",
+   "prompt": "A folded mint greenhouse plan with a simple raised copper branching pipe, no drawn route markers. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_pause",
+   "out": "sprites/ui/icon_pause.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: pause",
+   "category": "icon",
+   "prompt": "Two separate upright ivory ceramic rods of equal height, sturdy dark outlines. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_draw_pile",
+   "out": "sprites/ui/icon_draw_pile.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: draw pile",
+   "category": "icon",
+   "prompt": "A cream card stack held in an upright mint feed tray with the top card lifting upward. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_discard_pile",
+   "out": "sprites/ui/icon_discard_pile.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: discard pile",
+   "category": "icon",
+   "prompt": "A cream card sliding downward into a wide open copper catch tray. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_exhaust_pile",
+   "out": "sprites/ui/icon_exhaust_pile.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: exhaust pile",
+   "category": "icon",
+   "prompt": "A plum ash cup holding one crumbling cream card corner and two pale ash flecks. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_block",
+   "out": "sprites/ui/icon_block.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: block",
+   "category": "icon",
+   "prompt": "One broad cyan leaf shield with a single mint midrib. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_gold",
+   "out": "sprites/ui/icon_gold.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: gold",
+   "category": "icon",
+   "prompt": "Two overlapping plain amber coin discs with copper rims and blank faces. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_health",
+   "out": "sprites/ui/icon_health.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "HUD icon: health",
+   "category": "icon",
+   "prompt": "One peach heart-shaped fleshy leaf with a short mint stem. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_chest",
+   "out": "sprites/ui/chest.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "brief": "Treasure chest (closed) shown in treasure room",
+   "category": "icon",
+   "prompt": "A closed squat cream ceramic seed chest with chunky copper hinges, terracotta feet and a lime sprout-shaped latch; three-quarter view, entire object visible. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "ui_shop",
+   "out": "sprites/ui/shop.png",
+   "size": [
+    256,
+    256
+   ],
+   "transparent": true,
+   "brief": "Shop merchant stall/shopkeeper shown to enter the shop",
+   "category": "icon",
+   "prompt": "A friendly copper watering-can merchant robot stands behind a cream seed counter under a peach scalloped leaf awning, offering a single lime seed in a dish; compact three-quarter vignette with all feet visible. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_overshield",
+   "out": "external/sprites/status_effects/status_effect_overshield.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Overshield'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "Two nested cyan hexagonal outlines with a small mint center; thick separated rims. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_preserve_energy",
+   "out": "external/sprites/status_effects/status_effect_preserve_energy.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Preserve Energy'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A lime seed battery trapped inside a closed copper U-shaped clasp. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_preserve_overshield",
+   "out": "external/sprites/status_effects/status_effect_preserve_overshield.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Preserve Overshield'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A double cyan hexagonal shell secured by a bold ivory latch at its base. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_pointy",
+   "out": "external/sprites/status_effects/status_effect_pointy.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Pointy'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "Three stout ivory thorns fanning outward from a coral curved stem. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_pollen",
+   "out": "external/sprites/status_effects/status_effect_pollen.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Pollen'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "Three amber pollen circles clustered above one peach petal. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_corrosion",
+   "out": "external/sprites/status_effects/status_effect_corrosion.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Corrosion'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A plum droplet dissolving the lower corner of a cream metal plate. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_critical",
+   "out": "external/sprites/status_effects/status_effect_critical.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Critical'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A swollen amber seed inside a split coral circular cage, broad empty cracks. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_overheat",
+   "out": "external/sprites/status_effects/status_effect_overheat.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Overheat'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A coral radiator cap with two thick rising ivory heat curls. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_feedback_loop",
+   "out": "external/sprites/status_effects/status_effect_feedback_loop.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Feedback Loop'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A lime seed in the center of one thick copper loop with a bright coral junction. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_bomb",
+   "out": "external/sprites/status_effects/status_effect_bomb.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Bomb'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A round coral seed grenade with a short copper fuse and one ivory spark. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_damage_increase",
+   "out": "external/sprites/status_effects/status_effect_damage_increase.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Damage Increase'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "An upright coral trowel blade with an enlarged ivory tip and sturdy copper hilt. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_weaken",
+   "out": "external/sprites/status_effects/status_effect_weaken.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Weaken'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A wilted coral trowel blade bent downward at its middle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_vulnerable",
+   "out": "external/sprites/status_effects/status_effect_vulnerable.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Vulnerable'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "An ivory shell split by one wide plum zigzag crack. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_block_on_turn_end",
+   "out": "external/sprites/status_effects/status_effect_block_on_turn_end.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Block On Turn End'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A cyan leaf shield beneath a thick closed amber crescent. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_energy_next_turn",
+   "out": "external/sprites/status_effects/status_effect_energy_next_turn.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Energy Next Turn'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A lime seed battery beneath a thick open amber dawn arch. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_increase_turn_draw",
+   "out": "external/sprites/status_effects/status_effect_increase_turn_draw.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Increase Draw'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "Two cream blank cards fanning upward from a lime sprout. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_attached_card",
+   "out": "external/sprites/status_effects/status_effect_attached_card.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Attached Card'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "One cream blank card fastened by a large copper seed-shaped clip. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_negate_damage",
+   "out": "external/sprites/status_effects/status_effect_negate_damage.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Negate Damage'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "An unbroken ivory domed shell deflecting a small coral wedge at its outer edge. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_cap_damage",
+   "out": "external/sprites/status_effects/status_effect_cap_damage.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Cap Damage'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A coral impact wedge flattened beneath a bold mint horizontal canopy. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_temp_preserve_block",
+   "out": "external/sprites/status_effects/status_effect_temp_preserve_block.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Temp Preserve Block'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A cyan leaf shield enclosed by an open peach petal crescent with a visible gap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_preserve_block",
+   "out": "external/sprites/status_effects/status_effect_preserve_block.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Preserve Block'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A cyan leaf shield enclosed by a complete thick mint vine loop. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_negate_debuff",
+   "out": "external/sprites/status_effects/status_effect_negate_debuff.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Negate Debuff'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "An ivory leaf umbrella shedding a plum droplet to one side. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_rebound_card_plays",
+   "out": "external/sprites/status_effects/status_effect_rebound_card_plays.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Rebound Play'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "One cream blank card above a bold copper U-shaped spring, single card silhouette. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_duplicate_card_plays",
+   "out": "external/sprites/status_effects/status_effect_duplicate_card_plays.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Duplicate Play'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "Two offset cream blank cards with clearly separated corners. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_duplicate_attacks",
+   "out": "external/sprites/status_effects/status_effect_duplicate_attacks.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Duplicate Play'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "Two parallel coral trowel blades separated by a dark open gap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "status_effect_block_on_special_discard",
+   "out": "external/sprites/status_effects/status_effect_block_on_special_discard.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Block on Special Discard'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A plum capsule disappearing into a cyan shield-shaped catch tray. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+  },
+  {
+   "id": "artifact_add_money",
+   "out": "external/sprites/artifacts/artifact_add_money.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Add Money': Adds money when obtained",
+   "category": "icon",
+   "prompt": "A copper seed purse bursting with three plain amber coin discs, lime drawstring. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_negate_money_gain",
+   "out": "external/sprites/artifacts/artifact_negate_money_gain.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Negate Money Gain': Gain 1 energy per turn. You can no longer gain money",
+   "category": "icon",
+   "prompt": "A sealed copper coin slot welded onto a bright lime hand-cranked seed dynamo. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_heal_on_combat_ended",
+   "out": "external/sprites/artifacts/artifact_heal_on_combat_ended.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Heal On Combat End': Grants 5 health when combat is over",
+   "category": "icon",
+   "prompt": "A cream lunch tin opening around a peach restorative sprout, mint hinge. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_full_heal",
+   "out": "external/sprites/artifacts/artifact_full_heal.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Full Heal': Fully heals player when obtained",
+   "category": "icon",
+   "prompt": "A plump peach heart-shaped irrigation reservoir enclosed in a cream ceramic cradle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_draw_on_kill",
+   "out": "external/sprites/artifacts/artifact_draw_on_kill.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Draw on Kill': Draws a card when an enemy is killed",
+   "category": "icon",
+   "prompt": "A copper bolt collector gripping one blank cream specimen card with its little claw. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_draw_on_combat_start",
+   "out": "external/sprites/artifacts/artifact_draw_on_combat_start.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Draw on Combat': Draws 2 extra cards on the first turn",
+   "category": "icon",
+   "prompt": "A mint spring-loaded seed file with two blank cream cards popping from its top. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_energy_on_combat_start",
+   "out": "external/sprites/artifacts/artifact_energy_on_combat_start.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Energy On Combat Start': Gain 1 energy on the first turn",
+   "category": "icon",
+   "prompt": "A squat lime seed starter with a large copper pull handle and ivory ceramic base. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_easy_mode",
+   "out": "external/sprites/artifacts/artifact_easy_mode.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Easy Mode': Sets enemy HP to 1",
+   "category": "icon",
+   "prompt": "An absurdly soft peach rubber mallet with a tiny ivory robot-face relief, visibly toy-like. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_block_on_attacks",
+   "out": "external/sprites/artifacts/artifact_block_on_attacks.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Block on Attacks': Grants 5 block every 3 attacks",
+   "category": "icon",
+   "prompt": "A copper ratchet trowel fitted with a broad cyan leaf-shaped knuckle guard. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_retain_hand",
+   "out": "external/sprites/artifacts/artifact_retain_hand.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Retain Hand': Cards will be retained end of turn",
+   "category": "icon",
+   "prompt": "A mint mitten-shaped specimen clamp holding a fan of blank cream cards. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_preserve_energy",
+   "out": "external/sprites/artifacts/artifact_preserve_energy.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Preserve Energy': Energy will be preserved between turns",
+   "category": "icon",
+   "prompt": "A sealed ivory vacuum flask with a glowing lime seed visible through a round inset. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_increase_attack_on_rest",
+   "out": "external/sprites/artifacts/artifact_increase_attack_on_rest.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Increase Attack on Rest': Allows a permanent attack boost at rest sites",
+   "category": "icon",
+   "prompt": "A copper garden-tool sharpening cradle lined with a peach cushion. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_see_top_of_draw_pile",
+   "out": "external/sprites/artifacts/artifact_see_top_of_draw_pile.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact See Draw Pile': See the top cards in your draw pile",
+   "category": "icon",
+   "prompt": "A round copper magnifying lens hovering over the top blank cream card of a short stack. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_top_deck_attack_card",
+   "out": "external/sprites/artifacts/artifact_top_deck_attack_card.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Make Attack Card Innate': Select an attack card to make appear at the top of your deck.",
+   "category": "icon",
+   "prompt": "A coral trowel-shaped bookmark clipped firmly over a short cream card stack. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_right_click_shuffle_deck",
+   "out": "external/sprites/artifacts/artifact_right_click_shuffle_deck.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Reshuffle': Right click to shuffle discard into draw pile.",
+   "category": "icon",
+   "prompt": "A copper hand-cranked seed tumbler with blank cream specimen cards visible through its mint round window. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_boss_red",
+   "out": "external/sprites/artifacts/artifact_boss_red.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Red Boss': Test Red Boss Artifact.",
+   "category": "icon",
+   "prompt": "A ceremonial coral enamel pruning jaw mounted vertically on a cream ceramic root base, copper hinge. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_shop_red",
+   "out": "external/sprites/artifacts/artifact_shop_red.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Red Shop': Test Red Shop Artifact.",
+   "category": "icon",
+   "prompt": "A small coral enamel folding pruner inside a copper circular retail tray, cream handle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_boss_blue",
+   "out": "external/sprites/artifacts/artifact_boss_blue.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Blue Boss': Test Blue Boss Artifact.",
+   "category": "icon",
+   "prompt": "A ceremonial cyan cooling impeller mounted vertically on a cream ceramic root base, copper axle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_shop_blue",
+   "out": "external/sprites/artifacts/artifact_shop_blue.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Blue Shop': Test Blue Shop Artifact.",
+   "category": "icon",
+   "prompt": "A small cyan coolant tap inside a copper circular retail tray, cream valve. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_boss_green",
+   "out": "external/sprites/artifacts/artifact_boss_green.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Green Boss': Test Green Boss Artifact.",
+   "category": "icon",
+   "prompt": "A ceremonial lime seed turbine mounted vertically on a cream ceramic root base, copper spindle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_shop_green",
+   "out": "external/sprites/artifacts/artifact_shop_green.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Green Shop': Test Green Shop Artifact.",
+   "category": "icon",
+   "prompt": "A small lime grafting clip inside a copper circular retail tray, cream jaws. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_boss_orange",
+   "out": "external/sprites/artifacts/artifact_boss_orange.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Orange Boss': Test Orange Boss Artifact.",
+   "category": "icon",
+   "prompt": "A ceremonial amber thermal bell mounted vertically on a cream ceramic root base, copper yoke. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_shop_orange",
+   "out": "external/sprites/artifacts/artifact_shop_orange.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Orange Shop': Test Orange Shop Artifact.",
+   "category": "icon",
+   "prompt": "A small amber soldering bulb inside a copper circular retail tray, cream cap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_boss_white",
+   "out": "external/sprites/artifacts/artifact_boss_white.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact White Boss': Test White Boss Artifact.",
+   "category": "icon",
+   "prompt": "A ceremonial ivory germination crown mounted vertically on a cream ceramic root base, copper roots. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_shop_white",
+   "out": "external/sprites/artifacts/artifact_shop_white.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact White Shop': Test White Shop Artifact.",
+   "category": "icon",
+   "prompt": "A small ivory ceramic seed scoop inside a copper circular retail tray, mint grip. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "consumable_heal",
+   "out": "external/sprites/consumables/consumable_heal.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Consumable potion/item icon 'Heal Item': Heals 20%",
+   "category": "icon",
+   "prompt": "A peach pear-shaped sap ampoule with a cream stopper and a heart-shaped mint leaf inside. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "consumable_block",
+   "out": "external/sprites/consumables/consumable_block.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Consumable potion/item icon 'Block Item': Adds 10 block",
+   "category": "icon",
+   "prompt": "A squat cyan hexagonal coolant ampoule with a cream stopper and broad leaf-shaped inner plate. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "consumable_damaging",
+   "out": "external/sprites/consumables/consumable_damaging.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Consumable potion/item icon 'Damage Item': Damages a target for 10",
+   "category": "icon",
+   "prompt": "A long coral pointed seed ampoule with a copper cap and one ivory spark trapped inside. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "consumable_multi_damaging",
+   "out": "external/sprites/consumables/consumable_multi_damaging.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Consumable potion/item icon 'Multiple Damage Item': Damages all enemies for 10",
+   "category": "icon",
+   "prompt": "A round amber cluster-seed ampoule with a copper cap and three separate coral internal lobes. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  }
+ ]
+}

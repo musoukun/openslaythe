@@ -5,7 +5,16 @@ extends Node
 ## 画面揺れ + ヒットストップを手続き的に再生する。
 
 const VFX_JSON_PATH := "res://sprites/vfx/vfx.json"
-const OVERHEAT_STATUS_ID := "status_effect_overheat"
+## 特定ステータス付与時の専用トリガー (無ければ buff/debuff 汎用)
+const STATUS_TRIGGERS := {
+	"status_effect_overheat": "overheat",
+	"status_effect_overshield": "overshield_gain",
+	"status_effect_pollen": "pollen_tick",
+}
+const PHOTOSYNTHESIS_CARD_ID := "card_photoelectric_synthesis"
+const WASTE_CARD_ID := "card_waste"
+## このダメージ以上は attack_heavy
+const HEAVY_DAMAGE := 15
 
 var effects: Dictionary = {}
 var triggers: Dictionary = {}
@@ -28,6 +37,7 @@ func _ready() -> void:
 	Signals.combatant_block_added.connect(func(c): play_trigger("block_gain", c))
 	Signals.enemy_killed.connect(func(e): play_trigger("death", e))
 	Signals.card_played.connect(_on_card_played)
+	Signals.card_exhausted.connect(_on_card_exhausted)
 	Signals.energy_changed.connect(func(): play_trigger("energy_gain", _get_player()))
 	Signals.player_health_changed.connect(_on_player_health_changed)
 	Signals.combat_started.connect(func(_id): _last_player_health = _player_health())
@@ -57,14 +67,24 @@ func _on_combatant_damaged(combatant: BaseCombatant, unblocked_damage: int, _cap
 func _flush_enemy_hits() -> void:
 	var trigger := "attack_all" if _pending_enemy_hits.size() > 1 else "attack_single"
 	for hit in _pending_enemy_hits:
-		play_trigger(trigger, hit[0], hit[1])
+		var t := "attack_heavy" if hit[1] >= HEAVY_DAMAGE and triggers.has("attack_heavy") else trigger
+		play_trigger(t, hit[0], hit[1])
 	_pending_enemy_hits.clear()
 
 
 func _on_card_played(card_play_request) -> void:
 	var card_data: CardData = card_play_request.card_data
-	if card_data and card_data.card_type == CardData.CARD_TYPES.POWER:
+	if card_data == null:
+		return
+	if card_data.object_id == PHOTOSYNTHESIS_CARD_ID:
+		play_trigger("photosynthesis", _get_player())
+	elif card_data.card_type == CardData.CARD_TYPES.POWER:
 		play_trigger("card_play_power", _get_player())
+
+
+func _on_card_exhausted(card_data: CardData) -> void:
+	if card_data and card_data.object_id == WASTE_CARD_ID:
+		play_trigger("waste_exhaust", _get_player())
 
 
 func _on_player_health_changed() -> void:
@@ -78,8 +98,8 @@ func _on_player_health_changed() -> void:
 func on_status_applied(combatant: BaseCombatant, status_effect_data: StatusEffectData, charge_amount: int) -> void:
 	if charge_amount <= 0:
 		return
-	if status_effect_data.object_id == OVERHEAT_STATUS_ID:
-		play_trigger("overheat", combatant)
+	if STATUS_TRIGGERS.has(status_effect_data.object_id):
+		play_trigger(STATUS_TRIGGERS[status_effect_data.object_id], combatant)
 	elif status_effect_data.status_effect_type == StatusEffectData.STATUS_EFFECT_TYPES.DEBUFF:
 		play_trigger("status_debuff", combatant)
 	elif status_effect_data.status_effect_type == StatusEffectData.STATUS_EFFECT_TYPES.BUFF:
@@ -233,8 +253,9 @@ func _get_center(combatant: Node) -> Vector2:
 			var t := frames.get_frame_texture(sprite.animation, 0)
 			if t:
 				h = t.get_height() * sprite.global_scale.y
-		# スプライト中心 (centered の場合は位置そのもの、足元基準の場合は半分上)
-		return sprite.global_position + (Vector2.ZERO if sprite.centered else Vector2(0, -h / 2.0))
+		# スプライト中心 (centered の場合は位置 + offset、そうでなければ半分上)
+		var center_offset: Vector2 = sprite.offset * sprite.global_scale if sprite.centered else Vector2(0, -h / 2.0)
+		return sprite.global_position + center_offset
 	if combatant is Control:
 		return combatant.get_global_rect().get_center()
 	return combatant.global_position

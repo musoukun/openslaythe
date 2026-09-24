@@ -122,7 +122,7 @@ def main() -> None:
         todo = [a for a in assets if args.force or not (RAW_DIR / f"{a['id']}.png").exists()]
         print(f"generating {len(todo)} assets with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:
-            list(ex.map(lambda a: generate_raw(codex, style, a), todo))
+            list(ex.map(lambda a: (generate_raw(codex, style, a) or generate_raw(codex, style, a)) and post_process(a), todo))
 
     for a in assets:
         if (RAW_DIR / f"{a['id']}.png").exists():

@@ -185,6 +185,7 @@ func _ready():
 	#FileLoader._generate_mod_list_data() # generates the mod list used for loading ALL external files
 	#FileLoader._generate_base_mod_data() # generates mod data for base game. uncomment, run once, then comment back after updating SCHEMA
 	FileLoader.load_read_only_data() # loads all mods and base game exteral data
+	ArtOverrides.apply() # assigns Codex generated art by naming convention
 	
 	### Generated from loaded data
 	# custom signals generated from CustomSignalData

@@ -93,21 +93,8 @@ func _build_path_segments(id_to_map_location: Dictionary) -> Array:
 	return segments
 
 func _setup_background() -> void:
-	if not ResourceLoader.exists(BACKGROUND_PATH):
-		return
-	var bg := TextureRect.new()
-	bg.texture = load(BACKGROUND_PATH)
-	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(bg)
-	move_child(bg, 0)
 	# 画像背景に置き換えるので元の単色背景は隠す
-	for node_name in ["Background", "Background2"]:
-		var node := get_node_or_null(node_name)
-		if node:
-			node.visible = false
+	UiSkin.add_background(self, BACKGROUND_PATH, ["Background", "Background2"])
 
 func clear_locations() -> void:
 	for child in location_container.get_children():

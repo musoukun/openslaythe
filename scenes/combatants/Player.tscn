@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bu5jx208ipx8i" path="res://scripts/combatants/Player.gd" id="1_hkgmy"]
 [ext_resource type="AnimationLibrary" uid="uid://c6xlbg8p1y2er" path="res://animations/Player.res" id="2_6d0fj"]
 [ext_resource type="AnimationLibrary" uid="uid://dvbwuh87t2tha" path="res://animations/Combatant.res" id="2_p0uf2"]
-[ext_resource type="Texture2D" uid="uid://nh32y87hcke5" path="res://icon.svg" id="2_snepv"]
+[ext_resource type="Texture2D" path="res://sprites/intents/enemy_intent_attacking.png" id="2_snepv"]
 [ext_resource type="PackedScene" uid="uid://b0qk0vn81d0kp" path="res://scenes/combatants/LayeredHealthBar.tscn" id="3_ef7si"]
 [ext_resource type="Texture2D" uid="uid://dw4k1k81ap581" path="res://sprites/missing_texture.png" id="4_m3o5b"]
 [ext_resource type="PackedScene" uid="uid://d3ay0q2ywlmkj" path="res://scenes/combatants/SpeechBubble.tscn" id="6_jg3sr"]
