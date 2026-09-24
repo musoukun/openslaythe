@@ -1519,7 +1519,16 @@ func add_action_interceptors() -> void:
 	interceptor_duplicate_attacks.action_intercepted_action_paths = [Scripts.ACTION_CARD_PLAY]
 	
 	Global.register_rod(interceptor_duplicate_attacks)
-	
+
+	# uses a consumable to prevent player death
+	var interceptor_consumable_auto_revive: ActionInterceptorData = ActionInterceptorData.new("interceptor_consumable_auto_revive")
+	interceptor_consumable_auto_revive.action_interceptor_priority = 10000
+	interceptor_consumable_auto_revive.action_interceptor_modifies_parent = true
+	interceptor_consumable_auto_revive.action_interceptor_script_path = Scripts.INTERCEPTOR_CONSUMABLE_AUTO_REVIVE
+	interceptor_consumable_auto_revive.action_intercepted_action_paths = [Scripts.ACTION_DEATH]
+
+	Global.register_rod(interceptor_consumable_auto_revive)
+
 	# prevents gaining money
 	var interceptor_negate_add_money: ActionInterceptorData = ActionInterceptorData.new("interceptor_negate_add_money")
 	interceptor_negate_add_money.action_interceptor_priority = 10000
@@ -1705,7 +1714,8 @@ func add_characters() -> void:
 		["external/sprites/characters/character_{0}/character_{0}.png".format([character_color])],
 		["external/sprites/characters/character_{0}/character_{0}.png".format([character_color])],
 		)
-	
+	Global.register_rod(animation_character_green)
+
 	Global.register_rod(character_green)
 
 #endregion
