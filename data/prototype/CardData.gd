@@ -178,11 +178,11 @@ func _to_string():
 func get_card_name() -> String:
 	if card_upgrade_amount > 0:
 		if card_upgrade_amount > 1:
-			return card_name + "+" + str(card_upgrade_amount - 1)
+			return tr(card_name) + "+" + str(card_upgrade_amount - 1)
 		else:
-			return card_name + "+"
+			return tr(card_name) + "+"
 	else:
-		return card_name
+		return tr(card_name)
 
 #region Card Energy
 ## Returns the card's modified energy cost, which allows for energy types to be applied in a hierarchy.
@@ -234,22 +234,22 @@ func set_card_energy_cost_until_combat(energy_cost: int) -> void:
 
 ## Gets the card description, including built in card related keywords
 func get_card_description() -> String:
-	var modified_card_description: String = card_description
+	var modified_card_description: String = tr(card_description)
 	
 	if card_first_shuffle_priority > 0:
-		modified_card_description = "[color=orange]Top Deck[/color]\n" + modified_card_description
+		modified_card_description = "[color=orange]" + tr("Top Deck") + "[/color]\n" + modified_card_description
 	if card_first_shuffle_priority < 0:
-		modified_card_description = "[color=orange]Bottom Deck[/color]\n" + modified_card_description
+		modified_card_description = "[color=orange]" + tr("Bottom Deck") + "[/color]\n" + modified_card_description
 	if not card_is_playable:
-		modified_card_description = "[color=orange]Unplayable[/color]\n" + modified_card_description
+		modified_card_description = "[color=orange]" + tr("Unplayable") + "[/color]\n" + modified_card_description
 	if card_is_retained:
-		modified_card_description = "[color=orange]Retain[/color]\n" + modified_card_description
+		modified_card_description = "[color=orange]" + tr("Retain") + "[/color]\n" + modified_card_description
 	if is_card_ethereal():
-		modified_card_description = "[color=orange]Ethereal[/color]\n" + modified_card_description
+		modified_card_description = "[color=orange]" + tr("Ethereal") + "[/color]\n" + modified_card_description
 	if does_card_exhaust():
-		modified_card_description = modified_card_description + "\n[color=orange]Exhaust[/color]"
+		modified_card_description = modified_card_description + "\n[color=orange]" + tr("Exhaust") + "[/color]"
 	if does_card_banish():
-		modified_card_description = modified_card_description + "\n[color=orange]Banish[/color]"
+		modified_card_description = modified_card_description + "\n[color=orange]" + tr("Banish") + "[/color]"
 	
 	return modified_card_description
 

@@ -76,10 +76,10 @@ func _populate_run_history(run_index: int = -1) -> void:
 		run_history_character_icon.texture = FileLoader.load_texture(character_data.character_icon_texture_path)
 	
 	run_history_difficulty_label.text = str(run_stats_data.run_difficulty_level)
-	run_history_seed_label.text = "Seed: {0}".format([run_stats_data.run_seed])
-	run_history_health_label.text = "HP: {0}/{1}".format([run_stats_data.run_player_health, run_stats_data.run_player_health_max])
-	run_history_money_label.text = "Money: {0}".format([run_stats_data.run_player_money])
-	run_history_floor_label.text = "Floor: {0}".format([run_stats_data.run_floor])
+	run_history_seed_label.text = tr("Seed: {0}").format([run_stats_data.run_seed])
+	run_history_health_label.text = tr("HP: {0}/{1}").format([run_stats_data.run_player_health, run_stats_data.run_player_health_max])
+	run_history_money_label.text = tr("Money: {0}").format([run_stats_data.run_player_money])
+	run_history_floor_label.text = tr("Floor: {0}").format([run_stats_data.run_floor])
 	
 	if run_stats_data.run_victory:
 		# victory
@@ -93,10 +93,10 @@ func _populate_run_history(run_index: int = -1) -> void:
 			run_history_message_label.parse_bbcode(tr(defeat_event_data.event_death_message_bbcode))
 	
 	var completion_date_str: String = Time.get_date_string_from_unix_time(run_stats_data.run_completion_timestamp)
-	run_history_completion_date_label.text = "Completed {0}".format([completion_date_str])
+	run_history_completion_date_label.text = tr("Completed {0}").format([completion_date_str])
 	
 	var run_time_str = Time.get_time_string_from_unix_time(int(run_stats_data.run_completion_time))
-	run_history_run_time_label.text = "Run Length: {0}".format([run_time_str])
+	run_history_run_time_label.text = tr("Run Length: {0}").format([run_time_str])
 	
 	# consumables remaining end of run
 	var run_consumable_ids: Array = run_stats_data.run_consumable_ids

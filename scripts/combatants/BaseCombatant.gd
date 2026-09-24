@@ -220,7 +220,7 @@ func queue_speech_message(message_bbcode: String) -> void:
 func create_block_text() -> void:
 	var text_fade: TextFade = Scenes.TEXT_FADE.instantiate()
 	fade_container.add_child(text_fade)
-	text_fade.init("Blocked", BLOCK_TEXT_COLOR)
+	text_fade.init(tr("Blocked"), BLOCK_TEXT_COLOR)
 	text_fade.pop(1.3)
 
 func create_damage_text(damage_amount: int) -> void:

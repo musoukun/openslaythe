@@ -11,6 +11,10 @@ func _ready() -> void:
 	var mode := _get_mode()
 	if mode == "":
 		return
+	if mode == "dump_strings":
+		StringDumper.dump()
+		get_tree().quit()
+		return
 	await get_tree().create_timer(0.3).timeout
 	Global.start_run(CHARACTER_ID, 12345)
 	await get_tree().create_timer(0.5).timeout

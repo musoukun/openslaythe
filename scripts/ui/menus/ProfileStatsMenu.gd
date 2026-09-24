@@ -18,26 +18,26 @@ func populate_menu() -> void:
 	# Aggregate stats
 	
 	# wins/losses
-	profile_wins_label.text = "Wins: {0}".format([profile_data.profile_total_wins])
-	profile_losses_label.text = "Losses: {0}".format([profile_data.profile_total_losses])
+	profile_wins_label.text = tr("Wins: {0}").format([profile_data.profile_total_wins])
+	profile_losses_label.text = tr("Losses: {0}").format([profile_data.profile_total_losses])
 	
 	# win rate
 	var total_runs: int = profile_data.profile_total_wins + profile_data.profile_total_losses
 	var win_rate: float = float(profile_data.profile_total_wins) / float(max(total_runs, 1))
 	var win_rate_formatted: String = "%0.2f" % (win_rate * 100)
-	profile_win_rate_label.text = "Win Rate: {0}%".format([win_rate_formatted])
+	profile_win_rate_label.text = tr("Win Rate: {0}%").format([win_rate_formatted])
 	
 	# win/loss streaks
-	profile_current_win_streak_label.text = "Current Win Streak: {0}".format([profile_data.profile_current_win_streak]) 
-	profile_highest_win_streak_label.text = "Highest Win Streak: {0}".format([profile_data.profile_highest_win_streak]) 
-	profile_current_loss_streak_label.text = "Current Loss Streak: {0}".format([profile_data.profile_current_loss_streak]) 
-	profile_highest_loss_streak_label.text = "Highest Loss Streak: {0}".format([profile_data.profile_highest_loss_streak]) 
+	profile_current_win_streak_label.text = tr("Current Win Streak: {0}").format([profile_data.profile_current_win_streak]) 
+	profile_highest_win_streak_label.text = tr("Highest Win Streak: {0}").format([profile_data.profile_highest_win_streak]) 
+	profile_current_loss_streak_label.text = tr("Current Loss Streak: {0}").format([profile_data.profile_current_loss_streak]) 
+	profile_highest_loss_streak_label.text = tr("Highest Loss Streak: {0}").format([profile_data.profile_highest_loss_streak]) 
 	
 	# format total run time
 	var total_run_time_seconds: int = profile_data.profile_total_run_time
 	var datetime_dict: Dictionary = Time.get_datetime_dict_from_unix_time(int(profile_data.profile_total_run_time))
 	# HH:MM:SS
-	profile_play_time_label.text = "Total Play Time: %02d:%02d:%02d" % [datetime_dict["hour"],
+	profile_play_time_label.text = tr("Total Play Time: %02d:%02d:%02d") % [datetime_dict["hour"],
 		datetime_dict["minute"],
 		datetime_dict["second"],
 	]
@@ -46,7 +46,7 @@ func populate_menu() -> void:
 	var fastest_run_time_seconds: int = int(profile_data.profile_fastest_win_run_time)
 	datetime_dict = Time.get_datetime_dict_from_unix_time(fastest_run_time_seconds)
 	# HH:MM:SS
-	profile_fastest_run_time.text = "Fastest Win Time: %02d:%02d:%02d" % [datetime_dict["hour"],
+	profile_fastest_run_time.text = tr("Fastest Win Time: %02d:%02d:%02d") % [datetime_dict["hour"],
 		datetime_dict["minute"],
 		datetime_dict["second"],
 	]

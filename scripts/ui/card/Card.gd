@@ -99,7 +99,7 @@ func update_card_display(selected_enemy: Enemy = null) -> void:
 	# updates the card's display
 	card_name.set_bbcode("[center]" + card_data.get_card_name() + "[/center]")
 	card_description.set_bbcode(get_card_description(selected_enemy))
-	card_type.text = CardData.CARD_RARITIES.keys()[card_data.card_rarity] + " " + CardData.CARD_TYPES.keys()[card_data.card_type]
+	card_type.text = tr(CardData.CARD_RARITIES.keys()[card_data.card_rarity]) + " " + tr(CardData.CARD_TYPES.keys()[card_data.card_type])
 	
 	# update energy
 	_update_energy_display(selected_enemy)

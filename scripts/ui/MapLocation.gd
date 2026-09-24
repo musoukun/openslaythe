@@ -29,7 +29,7 @@ func init(_location_data: LocationData):
 		map_label.text = "???" # unvisited obfuscated locations are marked hidden
 		type_key = UNKNOWN_TYPE
 	else:
-		map_label.text = type_key.replace("_", " ").capitalize()
+		map_label.text = tr(type_key.replace("_", " ").capitalize())
 
 	var icon_path := ICON_PATH % type_key
 	if ResourceLoader.exists(icon_path):

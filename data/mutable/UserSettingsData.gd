@@ -6,7 +6,8 @@ extends SerializableData
 class_name UserSettingsData
 
 ## Language
-@export var settings_language: String = "en"
+## 初回は OS の言語 (日本語環境なら ja)
+@export var settings_language: String = "ja" if OS.get_locale_language() == "ja" else "en"
 
 ## Resolution
 @export var settings_window_size: Vector2 = Vector2(1200, 700)

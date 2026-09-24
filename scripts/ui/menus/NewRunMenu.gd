@@ -84,8 +84,8 @@ func populate_character_info(character_object_id: String) -> void:
 	var character_data: CharacterData = Global.get_character_data(character_object_id)
 	if character_data != null:
 		character_name_label.text = tr(character_data.character_name)
-		character_health_label.text = "HP: {0}".format([character_data.character_starting_health])
-		character_money_label.text = "Money: {0}".format([character_data.character_starting_money])
+		character_health_label.text = tr("HP: {0}").format([character_data.character_starting_health])
+		character_money_label.text = tr("Money: {0}").format([character_data.character_starting_money])
 		character_description_label.text = tr(character_data.character_description)
 		
 		# TODO potentially update ui to support multiple starter artifacts displayed

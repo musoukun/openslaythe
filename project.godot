@@ -77,3 +77,11 @@ limits/debugger/max_chars_per_second=131072
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+
+[gui]
+
+theme/custom_font="res://fonts/MPLUSRounded1c-Bold.ttf"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://localization/strings.ja.translation")
