@@ -24,6 +24,18 @@ func _ready() -> void:
 		return
 	Global.start_run(CHARACTER_ID, 12345)
 	await get_tree().create_timer(0.5).timeout
+	if mode.begins_with("event:"):
+		# --auto=event:<event_id>[:<選択肢番号>,<選択肢番号>...]
+		# 1階の部屋を指定イベントにして訪れ、指定があれば選択肢を順に押して結果を出力する
+		var parts := mode.split(":")
+		var location: LocationData = Global.get_next_locations()[0]
+		location.location_type = LocationData.LOCATION_TYPES.EVENT
+		location.location_obfuscated = false
+		location.location_event_object_id = parts[1]
+		ActionGenerator.generate_visition_location(location.location_id)
+		if parts.size() > 2:
+			await _click_event_options(parts[2].split(","))
+		return
 	match mode:
 		"map":
 			_print_map_stats()
@@ -86,6 +98,28 @@ func _profile() -> void:
 			total += ms
 		print("PROFILE %s: avg %.1f ms, worst %.1f ms, cards %d" % [phase, total / 60.0, worst, get_tree().get_nodes_in_group("cards").size()])
 	get_tree().quit()
+
+
+## イベントの選択肢を順に押し、各段階のプレイヤー状態を出力 (イベント確認用)
+func _click_event_options(indices: PackedStringArray) -> void:
+	var overlay := get_tree().root.find_child("DialogueOverlay", true, false)
+	await get_tree().create_timer(0.5).timeout
+	print("EVENT before: ", _player_summary())
+	for index_text in indices:
+		var options := overlay.find_children("*", "DialogueOption", true, false)
+		var index := int(index_text)
+		if index >= options.size():
+			print("EVENT no option ", index)
+			break
+		print("EVENT click ", index, " / ", options.size(), " options")
+		options[index].dialogue_option_clicked.emit(options[index])
+		await get_tree().create_timer(1.0).timeout
+		print("EVENT after: ", _player_summary())
+
+
+func _player_summary() -> String:
+	var p := Global.player_data
+	return "hp=%d/%d gold=%d deck=%d relics=%d potions=%s waste=%d" % [p.player_health, p.player_health_max, p.player_money, p.player_deck.size(), p.player_artifact_uid_to_artifact_data.size(), p.player_consumable_slot_to_consumable_object_id.values(), p.player_deck.filter(func(c): return c.object_id == "card_waste").size()]
 
 
 ## マップの部屋の種類ごとの数と階数を出力 (生成ルール確認用)

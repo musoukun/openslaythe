@@ -101,6 +101,7 @@
  "Consumable Name": "scene:ConsumableShopButton.tscn",
  "Heal": "code:ActionGrantRewards.gd",
  "Blocked": "code:BaseCombatant.gd",
+ "Legend": "code:Map.gd",
  "[color=red]Current run stats not found[/color]": "code:RunSummaryOverlay.gd",
  "Turn %s": "code:TurnOverlay.gd",
  "[center]": "code:Card.gd",

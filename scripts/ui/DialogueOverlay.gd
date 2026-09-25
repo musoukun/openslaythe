@@ -13,6 +13,8 @@ var current_dialogue_data: DialogueData = null # the current DialogueData object
 var current_dialogue_state: DialogueStateData = null # the current DialogueStateData object
 
 func _ready():
+	# 本文を読みやすい大きさに
+	dialogue_prompt_label.add_theme_font_size_override("normal_font_size", 19)
 	Signals.run_started.connect(_on_run_started)
 	Signals.run_ended.connect(_on_run_ended)
 	Signals.dialogue_ended.connect(_on_dialogue_ended)

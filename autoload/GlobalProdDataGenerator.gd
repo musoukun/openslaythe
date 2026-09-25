@@ -1259,12 +1259,10 @@ func add_events() -> void:
 	Global.register_rod(event_pool_act_1_hard)
 	
 	# act 1 dialogue event pool
+	# オリジナルの「?」イベント (docs/events.md, scripts/content/EventContent.gd)
+	var content_events: Array[EventData] = EventContent.register()
 	var event_pool_act_1_dialogue: EventPoolData = EventPoolData.new("event_pool_act_1_dialogue")
-	event_pool_act_1_dialogue.add_events_to_pool(
-		event_pick_something,
-		[
-		event_pick_something,
-		])
+	event_pool_act_1_dialogue.add_events_to_pool(content_events[0], content_events)
 	
 	Global.register_rod(event_pool_act_1_dialogue)
 	

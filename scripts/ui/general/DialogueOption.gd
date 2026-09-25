@@ -14,8 +14,27 @@ var option_enabled: bool = false
 
 signal dialogue_option_clicked(dialogue_option: DialogueOption)
 
+## 読みやすい見た目 (暗い板 + 縁、ホバーで明るく)
+const FONT_SIZE := 17
+const PANEL_COLOR := Color(0.05, 0.13, 0.14, 0.95)
+const PANEL_HOVER_COLOR := Color(0.13, 0.27, 0.27, 0.98)
+const BORDER_COLOR := Color(0.51, 0.79, 0.63, 0.8)
+
+var _style: StyleBoxFlat
+
 func _ready():
 	gui_input.connect(_on_gui_input)
+	self_modulate = Color.WHITE
+	_style = StyleBoxFlat.new()
+	_style.bg_color = PANEL_COLOR
+	_style.border_color = BORDER_COLOR
+	_style.set_border_width_all(2)
+	_style.set_corner_radius_all(8)
+	_style.set_content_margin_all(10)
+	add_theme_stylebox_override("panel", _style)
+	rich_text_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
+	mouse_entered.connect(func(): _style.bg_color = PANEL_HOVER_COLOR if option_enabled else PANEL_COLOR)
+	mouse_exited.connect(func(): _style.bg_color = PANEL_COLOR)
 
 func init(_dialogue_option_object_id: String, option_bbcode: String, option_failed_validator_bbcode: String, _action_data: Array[Dictionary], _validators: Array[Dictionary]) -> void:
 	dialogue_option_object_id = _dialogue_option_object_id

@@ -1,6 +1,6 @@
 # 画面キャプチャ: .\tools\shot.ps1 combat  (map / combat / 空=タイトル)
 param([string]$mode = "", [int]$frames = 40)
-$name = if ($mode) { $mode } else { "title" }
+$name = if ($mode) { $mode -replace "[^A-Za-z0-9_-]", "_" } else { "title" }
 $out = Join-Path $env:TEMP ("openslay_shots\" + $name + "_" + (Get-Date -Format "HHmmss"))
 New-Item -ItemType Directory -Force $out | Out-Null
 $gargs = @("--path", "$PSScriptRoot\..", "--write-movie", "$out\f.png", "--fixed-fps", "10", "--quit-after", "$frames")
