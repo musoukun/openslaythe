@@ -52,9 +52,6 @@ func populate_locations(locations: Array[LocationData] = Global.get_all_act_loca
 	var id_to_map_location: Dictionary = {}
 
 	for location_data in locations:
-		if location_data.location_type == LocationData.LOCATION_TYPES.STARTING:
-			continue	# starting area not displayed
-
 		var map_location: MapLocation = Scenes.MAP_LOCATION.instantiate()
 		location_container.add_child(map_location)
 		map_location.init(location_data)
