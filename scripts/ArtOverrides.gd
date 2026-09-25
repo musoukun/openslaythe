@@ -13,6 +13,7 @@ class_name ArtOverrides
 const ENEMY_NAMES_PATH := "res://sprites/enemy_names.json"
 const HERO_IDLE_FPS := 5.0
 const HERO_ATTACK_FPS := 12.0
+const HERO_REACTION_FPS := 8.0
 
 
 static func apply() -> void:
@@ -49,6 +50,13 @@ static func _apply_hero_animations(character: CharacterData) -> void:
 	animation_data.add_animation(AnimationData.ANIMATION_IDLE, AnimationData.ANIMATION_IDLE, idle, HERO_IDLE_FPS)
 	animation_data.add_animation(AnimationData.ANIMATION_ATTACK, AnimationData.ANIMATION_IDLE, attack if attack else idle, HERO_ATTACK_FPS)
 	animation_data.add_animation(AnimationData.ANIMATION_DEATH, AnimationData.ANIMATION_NONE, [idle[0]], HERO_IDLE_FPS)
+	# 被ダメージ / 防御のリアクション (終わったら待機へ)
+	var hurt := _frame_paths(dir + "hero_hurt_%d.png")
+	if hurt:
+		animation_data.add_animation(AnimationData.ANIMATION_HURT, AnimationData.ANIMATION_IDLE, hurt, HERO_REACTION_FPS)
+	var block := _frame_paths(dir + "hero_block_%d.png")
+	if block:
+		animation_data.add_animation(AnimationData.ANIMATION_BLOCK, AnimationData.ANIMATION_IDLE, block, HERO_REACTION_FPS)
 
 
 ## 連番ファイル (1 始まり) を存在する分だけ返す

@@ -25,8 +25,6 @@ func _ready():
 func reset_player() -> void:
 	var character_data: CharacterData = Global.get_player_character_data()
 	animated_sprite_2d.sprite_frames = get_animation_sprite_frames()
-	# 主人公はドット絵なのでぼかさずに表示
-	animated_sprite_2d.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	# 暗い背景に沈まないよう明るい縁取り
 	var outline := ShaderMaterial.new()
 	outline.shader = OUTLINE_SHADER
@@ -92,6 +90,7 @@ func damage(_damage: int, bypass_block: bool = false) -> Array[int]:
 		return [0,0,0]
 	
 	create_damage_text(bypassed_damage)
+	play_reaction(AnimationData.ANIMATION_HURT)
 	overkill_damage = max(0, bypassed_damage - player_data.player_health)
 	bypassed_damage_capped = bypassed_damage - overkill_damage
 	
@@ -115,6 +114,7 @@ func add_block(amount: int) -> void:
 	set_block(Global.player_data.player_block + amount)
 	if amount > 0:
 		create_block_fade()
+		play_reaction(AnimationData.ANIMATION_BLOCK)
 		Signals.combatant_block_added.emit(self)
 
 #region Health

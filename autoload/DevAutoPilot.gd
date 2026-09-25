@@ -26,6 +26,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	match mode:
 		"map":
+			_print_map_stats()
 			var map := get_tree().root.find_child("Map", true, false)
 			if map:
 				map.show_map()
@@ -85,6 +86,19 @@ func _profile() -> void:
 			total += ms
 		print("PROFILE %s: avg %.1f ms, worst %.1f ms, cards %d" % [phase, total / 60.0, worst, get_tree().get_nodes_in_group("cards").size()])
 	get_tree().quit()
+
+
+## マップの部屋の種類ごとの数と階数を出力 (生成ルール確認用)
+func _print_map_stats() -> void:
+	var counts := {}
+	var max_floor := 0
+	var hidden := 0
+	for location: LocationData in Global.get_all_act_locations():
+		var type_name: String = LocationData.LOCATION_TYPES.keys()[location.location_type]
+		counts[type_name] = counts.get(type_name, 0) + 1
+		max_floor = max(max_floor, location.location_floor)
+		hidden += 1 if location.location_obfuscated else 0
+	print("MAPSTATS floors=%d types=%s unknown(?)=%d" % [max_floor, counts, hidden])
 
 
 ## 全トリガーを順番に再生する (VFX 確認用)

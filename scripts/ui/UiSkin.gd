@@ -94,10 +94,10 @@ static func load_if_exists(path: String) -> Texture2D:
 
 
 ## parent の最背面に全面画像を敷き、hide_nodes (単色背景など) を隠す
-static func add_background(parent: Control, path: String, hide_nodes: Array = []) -> void:
+static func add_background(parent: Control, path: String, hide_nodes: Array = []) -> TextureRect:
 	var tex := load_if_exists(path)
 	if tex == null:
-		return
+		return null
 	var bg := TextureRect.new()
 	bg.texture = tex
 	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -110,3 +110,4 @@ static func add_background(parent: Control, path: String, hide_nodes: Array = []
 		var node := parent.get_node_or_null(node_name) as CanvasItem
 		if node:
 			node.visible = false
+	return bg

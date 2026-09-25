@@ -17,6 +17,8 @@ const ANIMATION_NONE: String = ""
 const ANIMATION_IDLE: String = "animation_idle"
 const ANIMATION_ATTACK: String = "animation_attack" # used by ActionAttackGenerator
 const ANIMATION_DEATH: String = "animation_death"
+const ANIMATION_HURT: String = "animation_hurt" # 被ダメージのリアクション
+const ANIMATION_BLOCK: String = "animation_block" # 防御のリアクション
 
 # standard name used by VFX animations
 const ANIMATION_VFX: String = "animation_default"

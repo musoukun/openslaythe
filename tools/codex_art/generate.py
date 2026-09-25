@@ -101,6 +101,18 @@ def clear_window(im: Image.Image, seed_pct: list) -> Image.Image:
     return im
 
 
+def seamless_y(im: Image.Image, band_ratio: float = 0.2) -> Image.Image:
+    """下端の帯を上端にクロスフェードして縦に継ぎ目なく並ぶようにする."""
+    w, h = im.size
+    b = int(h * band_ratio)
+    out = im.crop((0, 0, w, h - b))
+    top = im.crop((0, 0, w, b))
+    bottom = im.crop((0, h - b, w, h))
+    mask = Image.linear_gradient("L").resize((w, b))  # 上が 0 (bottom), 下が 255 (top)
+    out.paste(Image.composite(top, bottom, mask), (0, 0))
+    return out.resize((w, h), Image.LANCZOS)
+
+
 def trim(im: Image.Image) -> Image.Image:
     bbox = im.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
     return im.crop(bbox) if bbox else im
@@ -128,26 +140,27 @@ def clean_cell(f: Image.Image) -> Image.Image:
         for x0 in range(w):
             if px[x0, y0] > 8 and not label[y0][x0]:
                 cid = len(comps) + 1
-                stack, pts, touches_left = [(x0, y0)], [], False
+                stack, pts, touches_left, touches_right = [(x0, y0)], [], False, False
                 label[y0][x0] = cid
                 while stack:
                     x, y = stack.pop()
                     pts.append((x, y))
                     touches_left |= x == 0
+                    touches_right |= x == w - 1
                     for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
                         if 0 <= nx < w and 0 <= ny < h and not label[ny][nx] and px[nx, ny] > 8:
                             label[ny][nx] = cid
                             stack.append((nx, ny))
-                comps.append((pts, touches_left))
+                comps.append((pts, touches_left, touches_right))
     if not comps:
         return f
     biggest = max(len(c[0]) for c in comps)
     out = f.copy()
     opx = out.load()
-    for pts, touches_left in comps:
+    for pts, touches_left, touches_right in comps:
         if len(pts) == biggest:
             continue
-        if touches_left or len(pts) < biggest * 0.01:
+        if touches_left or (touches_right and len(pts) < biggest * 0.15) or len(pts) < biggest * 0.01:
             for x, y in pts:
                 for dx in range(step):
                     for dy in range(step):
@@ -185,6 +198,12 @@ def split_sheet(im: Image.Image, count: int) -> list:
     return out
 
 
+def body_height(frame: Image.Image) -> int:
+    """コマ内の不透明部分の高さ (足元から頭/武器の先まで)."""
+    bbox = frame.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
+    return (bbox[3] - bbox[1]) if bbox else frame.height
+
+
 def pixelate(im: Image.Image, px: int) -> Image.Image:
     """px 倍の大きさのドットに量子化し、アルファを 2 値化してくっきりさせる."""
     small = im.resize((im.width // px, im.height // px), Image.NEAREST)
@@ -212,11 +231,15 @@ def post_process(asset: dict) -> None:
         im = im.resize((w, h), Image.LANCZOS)
         if asset.get("clear_window"):
             im = clear_window(im, asset["clear_window"])
+        if asset.get("seamless_y"):
+            im = seamless_y(im)
     elif asset.get("sheet"):
         # 横一列のスプライトシート -> コマごとに共通スケールで足元揃え -> <out>_1.png ...
         frames = split_sheet(im, asset["sheet"])
         pad = asset.get("pad", 0.04)
-        scale = min(min(w * (1 - pad * 2) / f.width, h * (1 - pad * 2) / f.height) for f in frames)
+        heights = sorted(body_height(f) for f in frames)
+        median_h = heights[len(heights) // 2]
+        scale = min(h * asset.get("body_ratio", 0.82) / median_h, min(w * (1 - pad * 2) / f.width for f in frames))
         for i, f in enumerate(frames, 1):
             frame = place(f, w, h, scale, pad, asset.get("anchor"))
             if asset.get("pixel"):

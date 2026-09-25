@@ -6,6 +6,7 @@ const ICON_PATH := "res://sprites/map/location_%s.png"
 const UNKNOWN_TYPE := "event"
 const VISITED_MODULATE := Color(0.55, 0.55, 0.55, 1.0)
 const HOVER_SCALE := Vector2(1.2, 1.2)
+const BOSS_SIZE := Vector2(112, 112)
 
 var location_data: LocationData = null
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -38,6 +39,11 @@ func init(_location_data: LocationData):
 		tooltip_text = map_label.text
 	if location_data.location_visited:
 		self_modulate = VISITED_MODULATE
+	if location_data.location_type == LocationData.LOCATION_TYPES.BOSS:
+		# ボスは大きく (中心位置は保つ)
+		position -= (BOSS_SIZE - size) / 2.0
+		size = BOSS_SIZE
+		pivot_offset = size / 2.0
 
 ## Center of the icon in the parent (LocationContainer) coordinates
 func get_center() -> Vector2:

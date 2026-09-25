@@ -87,6 +87,15 @@ func _start_breathing() -> void:
 	_breath_tween.tween_property(animated_sprite_2d, "offset", base + Vector2(0, -BREATH_AMPLITUDE), BREATH_DURATION).set_trans(Tween.TRANS_SINE)
 	_breath_tween.tween_property(animated_sprite_2d, "offset", base, BREATH_DURATION).set_trans(Tween.TRANS_SINE)
 
+## 被ダメージ・防御などのリアクションアニメ。そのアニメがあり、攻撃/死亡アニメ中でなければ再生する
+func play_reaction(animation_name: String) -> void:
+	var frames := animated_sprite_2d.sprite_frames
+	if frames == null or not frames.has_animation(animation_name):
+		return
+	if animated_sprite_2d.animation in [AnimationData.ANIMATION_ATTACK, AnimationData.ANIMATION_DEATH] and animated_sprite_2d.is_playing():
+		return
+	animated_sprite_2d.play(animation_name)
+
 ## Keep.
 func play_animation(animation_name: String) -> void:
 	animated_sprite_2d.play(animation_name)
