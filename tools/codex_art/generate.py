@@ -19,7 +19,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageFilter
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
@@ -116,6 +116,48 @@ def place(im: Image.Image, w: int, h: int, scale: float, pad: float, anchor) -> 
     return canvas
 
 
+def clean_cell(f: Image.Image) -> Image.Image:
+    """セル内の連結成分を調べ、最大成分以外で「左端に接するもの (前コマのはみ出し)」と小さなゴミを消す."""
+    step = 2
+    small = f.getchannel("A").resize((f.width // step, f.height // step), Image.NEAREST)
+    w, h = small.size
+    px = small.load()
+    label = [[0] * w for _ in range(h)]
+    comps = []
+    for y0 in range(h):
+        for x0 in range(w):
+            if px[x0, y0] > 8 and not label[y0][x0]:
+                cid = len(comps) + 1
+                stack, pts, touches_left = [(x0, y0)], [], False
+                label[y0][x0] = cid
+                while stack:
+                    x, y = stack.pop()
+                    pts.append((x, y))
+                    touches_left |= x == 0
+                    for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                        if 0 <= nx < w and 0 <= ny < h and not label[ny][nx] and px[nx, ny] > 8:
+                            label[ny][nx] = cid
+                            stack.append((nx, ny))
+                comps.append((pts, touches_left))
+    if not comps:
+        return f
+    biggest = max(len(c[0]) for c in comps)
+    out = f.copy()
+    opx = out.load()
+    for pts, touches_left in comps:
+        if len(pts) == biggest:
+            continue
+        if touches_left or len(pts) < biggest * 0.01:
+            for x, y in pts:
+                for dx in range(step):
+                    for dy in range(step):
+                        X, Y = x * step + dx, y * step + dy
+                        if X < out.width and Y < out.height:
+                            r, g, b, _ = opx[X, Y]
+                            opx[X, Y] = (r, g, b, 0)
+    return out
+
+
 def split_sheet(im: Image.Image, count: int) -> list:
     """横一列 count コマのシートを分割。各コマは足元 (下25%) の中心で左右位置をそろえ、下端を共通にする."""
     cell = im.width / count
@@ -123,12 +165,13 @@ def split_sheet(im: Image.Image, count: int) -> list:
     frames = []
     for i in range(count):
         box = (round(i * cell), 0, round((i + 1) * cell), im.height)
-        f = im.crop(box)
-        bbox = alpha.crop(box).getbbox()
+        f = clean_cell(im.crop(box))
+        cell_alpha = f.getchannel("A").point(lambda a: 255 if a > 8 else 0)
+        bbox = cell_alpha.getbbox()
         if not bbox:
             frames.append(f)
             continue
-        feet = alpha.crop(box).crop((0, bbox[1] + (bbox[3] - bbox[1]) * 3 // 4, f.width, bbox[3])).getbbox()
+        feet = cell_alpha.crop((0, bbox[1] + (bbox[3] - bbox[1]) * 3 // 4, f.width, bbox[3])).getbbox()
         cx = (feet[0] + feet[2]) // 2 if feet else (bbox[0] + bbox[2]) // 2
         half = max(cx - bbox[0], bbox[2] - cx)
         frames.append(f.crop((cx - half, bbox[1], cx + half, bbox[3])))
@@ -145,7 +188,9 @@ def split_sheet(im: Image.Image, count: int) -> list:
 def pixelate(im: Image.Image, px: int) -> Image.Image:
     """px 倍の大きさのドットに量子化し、アルファを 2 値化してくっきりさせる."""
     small = im.resize((im.width // px, im.height // px), Image.NEAREST)
-    a = small.getchannel("A").point(lambda v: 255 if v > 110 else 0)
+    # 2 値化してから内側の小さな穴を埋める (縁取りシェーダーが穴に付かないように)
+    a = small.getchannel("A").point(lambda v: 255 if v > 60 else 0)
+    a = a.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3))
     small.putalpha(a)
     return small.resize((small.width * px, small.height * px), Image.NEAREST)
 

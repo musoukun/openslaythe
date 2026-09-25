@@ -843,7 +843,7 @@
    "transparent": false,
    "brief": "Title screen key art. Left third is covered by menu buttons, top-center has the logo text (rendered by the game), so keep those areas quieter.",
    "category": "background",
-   "prompt": "At right-center, The Botanist in cream cropped lab coat, copper round goggles, mint gloves and terracotta boots proudly wheels a copper flowerpot reactor with a ridiculous giant peach cauliflower bloom; a red lid robot recoils at the far right. Lime seed backpack, curling black hair with one leaf, warm ivory light against dark teal greenhouse ribs. Keep left x=0..400 and top-center x=400..950,y=0..180 quiet dark teal for menu and game-rendered title. No lettering or logo."
+   "prompt": "Title screen background with NO characters and NO people: a grand ruined reactor greenhouse interior at golden hour, huge glass dome ribs, a glowing lime reactor core in a copper flowerpot far in the background, giant leaves and vines framing the edges, gardening robots silhouettes lurking in the far shadows. Keep the right half slightly open and calm (a character will be composited there) and the left third darker for menu buttons. Painterly, same style as the other backgrounds."
   },
   {
    "id": "vfx_slash",

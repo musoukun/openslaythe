@@ -8,6 +8,8 @@ class_name Player
 const INTENT_UPDATES_LAZILY: bool = true	# batches intent updates
 var _intent_is_updating: bool = false
 
+const OUTLINE_SHADER := preload("res://sprites/shaders/outline.gdshader")
+
 func _ready():
 	super()
 	Signals.enemy_intent_changed.connect(_on_enemy_intent_changed)
@@ -23,6 +25,12 @@ func _ready():
 func reset_player() -> void:
 	var character_data: CharacterData = Global.get_player_character_data()
 	animated_sprite_2d.sprite_frames = get_animation_sprite_frames()
+	# 主人公はドット絵なのでぼかさずに表示
+	animated_sprite_2d.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	# 暗い背景に沈まないよう明るい縁取り
+	var outline := ShaderMaterial.new()
+	outline.shader = OUTLINE_SHADER
+	animated_sprite_2d.material = outline
 	animated_sprite_2d.play(AnimationData.ANIMATION_IDLE)
 	var sprite_height: float = fit_sprite_to_feet()
 	if sprite_height > 0.0:

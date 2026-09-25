@@ -13,6 +13,7 @@ const BUTTON_ICONS := {
 	"RunScreen/Combat/Shop": "res://sprites/ui/shop.png",
 }
 const TITLE_BACKGROUND := "res://sprites/ui/title_background.png"
+const TITLE_HERO := "res://sprites/ui/hero_bust.png"
 const TOP_BAR_COLOR := Color(0.03, 0.09, 0.09, 0.78)
 const BACKPLATE_COLOR := Color(0.05, 0.13, 0.14, 0.92)
 const BACKPLATE_BORDER := Color(0.95, 0.85, 0.62, 0.9)
@@ -43,6 +44,7 @@ static func apply(root: Node) -> void:
 	var title := root.get_node_or_null("TitleScreen")
 	if title:
 		add_background(title, TITLE_BACKGROUND, ["Background"])
+		_add_title_hero(title)
 
 
 ## アイコンの背後に暗い丸台座を敷いて背景から浮かせる (何度呼んでも1枚だけ)
@@ -68,6 +70,23 @@ static func add_backplate(control: Control, margin: float = 3.0) -> void:
 	plate.offset_bottom = margin
 	control.add_child(plate)
 	control.move_child(plate, 0)
+
+
+## タイトル画面の右側に主人公のバストアップ (ドット絵) を置く
+static func _add_title_hero(title: Control) -> void:
+	var tex := load_if_exists(TITLE_HERO)
+	if tex == null:
+		return
+	var hero := TextureRect.new()
+	hero.texture = tex
+	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	hero.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	hero.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+	hero.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hero.position = Vector2(640, 120)
+	hero.size = Vector2(580, 580)
+	title.add_child(hero)
+	title.move_child(hero, 1)	# 背景のすぐ上、メニューの下
 
 
 static func load_if_exists(path: String) -> Texture2D:

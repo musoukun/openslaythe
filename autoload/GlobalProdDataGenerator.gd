@@ -1675,8 +1675,8 @@ func add_characters() -> void:
 	character_color = "green"
 	var character_green: CharacterData = CharacterData.new("character_{0}".format([character_color]))
 	character_green.character_player_id = "player_{0}".format([character_color])
-	character_green.character_name = "The Botanist"
-	character_green.character_description = "A former thermonuclear botanist seeking employment after being fired for their previous experiments."
+	character_green.character_name = "Vera Thornforge"
+	character_green.character_description = "A thermonuclear botanist fired for saving mutant sprouts, now a greenhouse warrior who carves through rogue gardening robots with a reactor-forged pruning greatsword."
 	character_green.character_color_id = "color_{0}".format([character_color])
 	character_green.character_starting_health = 75
 	character_green.character_starting_card_draft_card_pack_ids = ["card_pack_{0}".format([character_color])]

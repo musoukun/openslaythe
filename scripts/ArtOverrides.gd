@@ -11,6 +11,8 @@ class_name ArtOverrides
 ## 敵の表示名は res://sprites/enemy_names.json ({"enemies": {id: {name, description}}}) から上書きする。
 
 const ENEMY_NAMES_PATH := "res://sprites/enemy_names.json"
+const HERO_IDLE_FPS := 5.0
+const HERO_ATTACK_FPS := 12.0
 
 
 static func apply() -> void:
@@ -27,12 +29,36 @@ static func apply() -> void:
 		_override(act, "act_background_texture_path", "external/sprites/backgrounds/%s.png" % act.object_id)
 	for character: CharacterData in Global._id_to_character_data.values():
 		_override(character, "character_icon_texture_path", "external/sprites/characters/%s/%s_icon.png" % [character.object_id, character.object_id])
+		_apply_hero_animations(character)
 	for enemy: EnemyData in Global._id_to_enemy_data.values():
 		if _override(enemy, "enemy_texture_path", "external/sprites/enemies/%s.png" % enemy.object_id):
 			var animation_data: AnimationData = Global.get_animation_data(enemy.enemy_animation_id)
 			if animation_data:
 				animation_data.add_combatant_animations([enemy.enemy_texture_path])
 	_apply_enemy_names()
+
+
+## ドット絵アニメ (hero_idle_1..4.png / hero_attack_1..4.png) があればキャラのアニメに差し替える
+static func _apply_hero_animations(character: CharacterData) -> void:
+	var dir := "external/sprites/characters/%s/" % character.object_id
+	var idle := _frame_paths(dir + "hero_idle_%d.png")
+	var attack := _frame_paths(dir + "hero_attack_%d.png")
+	var animation_data: AnimationData = Global.get_animation_data(character.character_animation_id)
+	if idle.is_empty() or animation_data == null:
+		return
+	animation_data.add_animation(AnimationData.ANIMATION_IDLE, AnimationData.ANIMATION_IDLE, idle, HERO_IDLE_FPS)
+	animation_data.add_animation(AnimationData.ANIMATION_ATTACK, AnimationData.ANIMATION_IDLE, attack if attack else idle, HERO_ATTACK_FPS)
+	animation_data.add_animation(AnimationData.ANIMATION_DEATH, AnimationData.ANIMATION_NONE, [idle[0]], HERO_IDLE_FPS)
+
+
+## 連番ファイル (1 始まり) を存在する分だけ返す
+static func _frame_paths(pattern: String) -> Array[String]:
+	var paths: Array[String] = []
+	var i := 1
+	while FileAccess.file_exists(FileLoader._get_modified_filepath(pattern % i)):
+		paths.append(pattern % i)
+		i += 1
+	return paths
 
 
 ## ファイルが存在すれば property をそのパスに差し替えて true を返す

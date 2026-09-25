@@ -1,5 +1,4 @@
 {
- "A former thermonuclear botanist seeking employment after being fired for their previous experiments.": "過去の実験が原因でクビになり、再就職先を探している元・熱核植物学者。",
  "Act 1": "第1幕",
  "Act 2": "第2幕",
  "Act 3": "第3幕",
@@ -205,7 +204,6 @@
  "Test Red Shop Artifact.": "テスト用の赤ショップレリック。",
  "Test White Boss Artifact.": "テスト用の白ボスレリック。",
  "Test White Shop Artifact.": "テスト用の白ショップレリック。",
- "The Botanist": "ボタニスト",
  "Thorns": "トゲの鎧",
  "Throw": "投げる",
  "Top Deck": "山札の一番上",
@@ -356,5 +354,7 @@
  "Select An Attack Card": "アタックカードを選ぶ",
  "Select A Red Card": "赤のカードを選ぶ",
  "Select A Card": "カードを選ぶ",
- "Yes": "はい"
+ "Yes": "はい",
+ "Vera Thornforge": "ヴェラ・ソーンフォージ",
+ "A thermonuclear botanist fired for saving mutant sprouts, now a greenhouse warrior who carves through rogue gardening robots with a reactor-forged pruning greatsword.": "突然変異の芽をかばってクビになった熱核植物学者。いまは炉で鍛えた剪定大剣を振るい、暴走した園芸ロボットを切り開く温室の戦士。"
 }
