@@ -3,7 +3,7 @@ extends Control
 
 var _option_type_to_option_ids: Dictionary = {}
 const MIXED_OPTION_COUNT: int = 3	# number of options to populate that have both an upside and downside
-const COMPLETE_OPTION_COUNT: int = 1	# number of unique options to populate
+const COMPLETE_OPTION_COUNT: int = 3	# number of unique options to populate (weapons from BuildContent + artifact swap)
 
 @onready var starting_option_container = $StartingOptionContainer
 @onready var map = $%Map

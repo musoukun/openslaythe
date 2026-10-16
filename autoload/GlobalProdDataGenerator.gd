@@ -33,6 +33,7 @@ func generate_production_data() -> void:
 	add_artifacts()
 	add_card_decorators()
 	add_cards()
+	BuildContent.register() # ビルド軸のタグ付けと武器 (scripts/content/BuildContent.gd)。カード登録の後に呼ぶ
 	
 	add_card_packs()
 	add_artifact_packs()

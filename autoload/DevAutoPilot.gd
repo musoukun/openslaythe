@@ -3,6 +3,7 @@ extends Node
 ## 例: godot --path . --write-movie shots/x.png --fixed-fps 10 --quit-after 60 -- --auto=combat
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=combat : ラン開始して最初の戦闘に入る
+## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## 引数が無い場合は何もしない。
 
 const CHARACTER_ID := "character_green"
@@ -35,6 +36,38 @@ func _ready() -> void:
 		ActionGenerator.generate_visition_location(location.location_id)
 		if parts.size() > 2:
 			await _click_event_options(parts[2].split(","))
+		return
+	if mode.begins_with("weapon:"):
+		# --auto=weapon:<artifact_id|none>
+		# ラン開始の武器選択肢 (BuildContent) を選んだ扱いで最初の戦闘に入り、手札のカード説明 (補正後の数値) を出力する
+		var weapon_id := mode.trim_prefix("weapon:")
+		if weapon_id != "none":
+			# RunStartOptions._on_dialogue_option_clicked() と同じ経路で選択肢の actions を流す
+			var option: RunStartOptionData = Global.get_run_start_option_data("run_start_option_" + weapon_id)
+			var player: Player = Global.get_player()
+			var request: CardPlayRequest = HandManager.create_card_play_request(null, player, false, false)
+			ActionHandler.add_actions(ActionGenerator.create_actions(player, request, [player], option.run_start_option_actions, null))
+		await get_tree().create_timer(0.5).timeout
+		print("WEAPON ", weapon_id, " values=", Global.player_data.player_values)
+		for location in Global.get_next_locations():
+			if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+				ActionGenerator.generate_visition_location(location.location_id)
+				break
+		await get_tree().create_timer(2.0).timeout
+		for card: Card in get_tree().root.find_children("*", "Card", true, false):
+			if HandManager.player_hand.has(card.card_data):
+				print("WEAPON hand ", card.card_data.object_id, " : ", card.get_card_description())
+		# 手札に来ないカードも含め、デッキ内の攻撃カードの補正後ダメージ (Card.get_card_description と同じ計算)
+		var checked: Array[String] = []
+		for card_data: CardData in Global.player_data.player_deck:
+			if card_data.card_type != CardData.CARD_TYPES.ATTACK or checked.has(card_data.object_id):
+				continue
+			checked.append(card_data.object_id)
+			var targets: Array[BaseCombatant] = [null]
+			var request: CardPlayRequest = HandManager.create_card_play_request(card_data, null, true, true)
+			var action: BaseAction = ActionGenerator.create_actions(Global.get_player(), request, targets, [{Scripts.ACTION_ATTACK: {}}], null)[0]
+			var damage: int = action._intercept_action(targets, true)[0].get_shadowed_action_values("damage", 0)
+			print("WEAPON deck ", card_data.object_id, " tags=", card_data.card_tags, " damage ", card_data.card_values.get("damage", 0), " -> ", damage)
 		return
 	match mode:
 		"map":

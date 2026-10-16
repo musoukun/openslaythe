@@ -2535,10 +2535,11 @@ script = ExtResource("25_ll3o0")
 
 [node name="StartingOptionContainer" type="VBoxContainer" parent="RunScreen/RunStartOptions" unique_id=21744175]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 528.0
-offset_right = 520.0
-offset_bottom = 640.0
+offset_left = 640.0
+offset_top = 568.0
+offset_right = 1176.0
+offset_bottom = 680.0
+grow_vertical = 0
 
 [node name="RewardOverlay" type="Control" parent="RunScreen" unique_id=50214048]
 unique_name_in_owner = true
