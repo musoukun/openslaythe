@@ -53,7 +53,7 @@
  "Block on Special Discard": "特殊捨て札でブロック",
  "Blue": "青",
  "Bomb": "爆弾",
- "Bosses are tough": "ボスは手ごわい",
+ "Bosses are tough": "ボスの前に、力尽きた。",
  "Bottom Deck": "山札の一番下",
  "Cap Damage": "ダメージ上限",
  "Cards will be retained end of turn": "ターン終了時、手札を保留する",
@@ -69,7 +69,7 @@
  "Deals damage each turn ": "毎ターン、ダメージを与える",
  "Deals damage to all enemies when timer runs out ": "カウントが0になると敵全体にダメージを与える",
  "Description of Modifier": "モディファイアの説明",
- "Died to easy event": "簡単なイベントで力尽きた",
+ "Died to easy event": "準備不足だった。",
  "Difficulty 1: Harder Enemies": "難易度1：敵が強化",
  "Difficulty 2: Harder Minibosses": "難易度2：エリートが強化",
  "Difficulty 3: Harder Bosses": "難易度3：ボスが強化",
@@ -458,5 +458,8 @@
  "SHOP": "ショップ",
  "BOSS": "ボス",
  "EVENT": "イベント",
- "LEGENDARY": "レジェンド"
+ "LEGENDARY": "レジェンド",
+ "Death...": "死……",
+ "Continue on": "続ける",
+ "Your journey ends here.": "旅は、ここで終わった。"
 }

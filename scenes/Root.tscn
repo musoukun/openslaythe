@@ -56,6 +56,7 @@
 [ext_resource type="Theme" uid="uid://2714jm71pkv4" path="res://themes/keyword_tooltip_theme.tres" id="41_0h1ar"]
 [ext_resource type="Script" uid="uid://d2fxhtmdfmtdf" path="res://scripts/ui/general/KeywordContainer.gd" id="42_wtekq"]
 [ext_resource type="Script" uid="uid://c5i0sjwlko88l" path="res://addons/label_font_auto_sizer/rich_label_auto_sizer.gd" id="43_gs3rm"]
+[ext_resource type="Script" path="res://scripts/ui/DeathScreen.gd" id="90_death"]
 
 [sub_resource type="Animation" id="Animation_m5prp"]
 resource_name = "end_turn"
@@ -2267,6 +2268,17 @@ text = "HH:MM:SS"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("30_plfau")
+
+[node name="DeathScreen" type="Control" parent="RunScreen"]
+process_mode = 1
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("90_death")
 
 [node name="RestOverlay" type="Control" parent="RunScreen" unique_id=15522777]
 unique_name_in_owner = true

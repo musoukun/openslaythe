@@ -72,6 +72,7 @@ signal run_ended # player has ended a run (does not necessarily mean victory/def
 signal run_victory # player has won a run
 signal player_killed(player: Player)
 signal player_death_animation_finished(player: Player)
+signal death_screen_closed # 死亡画面で「続ける」を押した (このあと統計画面)
 
 # rewards
 signal reward_grant_requested(reward_group: int, money_amount: int, card_drafts: Array[Array], artifact_ids: Array[String], custom_action_data: Array[Array])
