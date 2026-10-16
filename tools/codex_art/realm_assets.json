@@ -5,8 +5,8 @@
    "id": "card_basic_attack_green",
    "out": "external/sprites/cards/green/card_basic_attack_green.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Basic Attack' (ATTACK): Deal 7 damage.",
@@ -17,8 +17,8 @@
    "id": "card_basic_block_green",
    "out": "external/sprites/cards/green/card_basic_block_green.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Basic Block' (SKILL): Gain 5 block.",
@@ -29,8 +29,8 @@
    "id": "card_blossom",
    "out": "external/sprites/cards/green/card_blossom.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Rekindle' (SKILL): Gain [health_amount] HP",
@@ -41,8 +41,8 @@
    "id": "card_bud",
    "out": "external/sprites/cards/green/card_bud.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Bristling Scales' (SKILL): Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy. Exhaust.",
@@ -53,8 +53,8 @@
    "id": "card_cell_wall",
    "out": "external/sprites/cards/green/card_cell_wall.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Harden Scales' (SKILL): Convert Block into Overshield",
@@ -65,8 +65,8 @@
    "id": "card_chloroplast",
    "out": "external/sprites/cards/green/card_chloroplast.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Wildfire Orb' (ATTACK): Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone.",
@@ -77,8 +77,8 @@
    "id": "card_clippers",
    "out": "external/sprites/cards/green/card_clippers.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Twin Claws' (ATTACK): Attack for [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Strength. On pickup, Gain [health_amount] HP.",
@@ -89,8 +89,8 @@
    "id": "card_differentiation",
    "out": "external/sprites/cards/green/card_differentiation.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Reckless Rend' (ATTACK): Do [attack_damage]. Lose [self_damage] HP.",
@@ -101,8 +101,8 @@
    "id": "card_fertilize",
    "out": "external/sprites/cards/green/card_fertilize.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Blood Kindling' (SKILL): Gain {0}{0}. Lose [self_damage] HP.",
@@ -113,8 +113,8 @@
    "id": "card_fruit",
    "out": "external/sprites/cards/green/card_fruit.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Dragon Egg' (SKILL): Randomly gain [small_max_health_amount] Max HP, [big_max_health_amount] Max HP, or {0}",
@@ -125,8 +125,8 @@
    "id": "card_growth",
    "out": "external/sprites/cards/green/card_growth.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Shed Skin' (SKILL): Gain [status_charge_amount] Overshield and draw 1 card.",
@@ -137,8 +137,8 @@
    "id": "card_lotus",
    "out": "external/sprites/cards/green/card_lotus.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Layered Scales' (SKILL): Double Overshield charges.",
@@ -149,8 +149,8 @@
    "id": "card_moss",
    "out": "external/sprites/cards/green/card_moss.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Scale Bash' (ATTACK): Gain [status_charge_amount]. Deal damage equal to Overshield.",
@@ -161,8 +161,8 @@
    "id": "card_pollen",
    "out": "external/sprites/cards/green/card_pollen.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Fever Dream' (POWER): Take [status_charge_amount] damage at the start of your turn and draw [status_secondary_charge_amount] cards",
@@ -173,8 +173,8 @@
    "id": "card_petals",
    "out": "external/sprites/cards/green/card_petals.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Wing Shroud' (SKILL): Gain [block] block. Keep block for [status_charge_amount] turns. Exhaust. On pickup, gain [health_amount] HP.",
@@ -185,8 +185,8 @@
    "id": "card_reap",
    "out": "external/sprites/cards/green/card_reap.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Devour' (ATTACK): Attack for [damage] damage and gain Overshield for unblocked damage\\nExhaust",
@@ -197,8 +197,8 @@
    "id": "card_wildflower",
    "out": "external/sprites/cards/green/card_wildflower.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Wrath Claw' (ATTACK): Attack for [damage] damage. Costs 0 if damage was taken this turn.",
@@ -209,8 +209,8 @@
    "id": "card_symbiosis",
    "out": "external/sprites/cards/green/card_symbiosis.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Dragonhide' (POWER): Overshield no longer decays",
@@ -221,8 +221,8 @@
    "id": "card_thorns",
    "out": "external/sprites/cards/green/card_thorns.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Spined Guard' (SKILL): Gain [block] Block and [status_charge_amount] Pointy",
@@ -233,8 +233,8 @@
    "id": "card_verdant",
    "out": "external/sprites/cards/green/card_verdant.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Unbreakable Hide' (SKILL): When drawn, cap incoming damage to [status_secondary_charge_amount] for [status_charge_amount] and Exhaust.",
@@ -245,8 +245,8 @@
    "id": "card_vines",
    "out": "external/sprites/cards/green/card_vines.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Tail Lash' (ATTACK): Do [damage] to all enemies [number_of_attacks] times. Not affected by Pointy",
@@ -257,8 +257,8 @@
    "id": "card_conclusion",
    "out": "external/sprites/cards/green/card_conclusion.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Banked Flame' (ATTACK): Retain. Do [damage]. Gain 4 damage for each unused energy at turn end. Exhaust",
@@ -269,8 +269,8 @@
    "id": "card_datum",
    "out": "external/sprites/cards/green/card_datum.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Mirror Scale' (SKILL): Gain [block] Block. Duplicates on draw. Exhaust.",
@@ -281,8 +281,8 @@
    "id": "card_photoelectric_synthesis",
    "out": "external/sprites/cards/green/card_photoelectric_synthesis.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Dragon Awakening' (POWER): Gain 10 strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed.",
@@ -293,8 +293,8 @@
    "id": "card_big_boom",
    "out": "external/sprites/cards/green/card_big_boom.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Inferno' (ATTACK): Do [damage] damage to all enemies. Gain [status_charge_amount] Overheat.",
@@ -305,8 +305,8 @@
    "id": "card_containment",
    "out": "external/sprites/cards/green/card_containment.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Swallow the Fire' (SKILL): Gain [block] Block. Add [number_of_cards] Wastes to hand",
@@ -317,8 +317,8 @@
    "id": "card_critical",
    "out": "external/sprites/cards/green/card_critical.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Boiling Blood' (POWER): Gain [status_charge_amount] Overheat each turn.",
@@ -329,8 +329,8 @@
    "id": "card_feedback_loop",
    "out": "external/sprites/cards/green/card_feedback_loop.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Fire Feeds Fire' (POWER): Gain {0} whenever you Overheat.",
@@ -341,8 +341,8 @@
    "id": "card_fusion_cannon",
    "out": "external/sprites/cards/green/card_fusion_cannon.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Cinder Volley' (ATTACK): Do [damage] damage for each Waste card in your exhaust pile. Add 1 Waste to your hand.",
@@ -353,8 +353,8 @@
    "id": "card_meltdown",
    "out": "external/sprites/cards/green/card_meltdown.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Searing Breath' (ATTACK): Do [damage] damage. Gain [status_charge_amount] Overheat.",
@@ -365,8 +365,8 @@
    "id": "card_particle_accelerator",
    "out": "external/sprites/cards/green/card_particle_accelerator.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Stoke the Heart' (SKILL): Gain [energy_amount] Energy. Add [number_of_cards] Wastes to discard pile.",
@@ -377,8 +377,8 @@
    "id": "card_unstable",
    "out": "external/sprites/cards/green/card_unstable.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Flare Up' (SKILL): Draw [draw_count] cards. Gain [status_charge_amount] Overheat",
@@ -389,8 +389,8 @@
    "id": "card_waste",
    "out": "external/sprites/cards/green/card_waste.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Cinder' (STATUS): At end of turn gain [status_charge_amount] Overheat and do [damage] damage to a random enemy. Exhaust",

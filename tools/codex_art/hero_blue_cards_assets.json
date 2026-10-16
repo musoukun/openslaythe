@@ -5,8 +5,8 @@
    "id": "card_basic_attack_blue",
    "out": "external/sprites/cards/blue/card_basic_attack_blue.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -17,8 +17,8 @@
    "id": "card_basic_block_blue",
    "out": "external/sprites/cards/blue/card_basic_block_blue.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -29,8 +29,8 @@
    "id": "card_blue_mana_blade",
    "out": "external/sprites/cards/blue/card_blue_mana_blade.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -41,8 +41,8 @@
    "id": "card_blue_gather_mana",
    "out": "external/sprites/cards/blue/card_blue_gather_mana.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -53,8 +53,8 @@
    "id": "card_blue_meditate",
    "out": "external/sprites/cards/blue/card_blue_meditate.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -65,8 +65,8 @@
    "id": "card_blue_quickcast",
    "out": "external/sprites/cards/blue/card_blue_quickcast.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -77,8 +77,8 @@
    "id": "card_blue_arcane_edge",
    "out": "external/sprites/cards/blue/card_blue_arcane_edge.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -89,8 +89,8 @@
    "id": "card_blue_mana_spring",
    "out": "external/sprites/cards/blue/card_blue_mana_spring.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -101,8 +101,8 @@
    "id": "card_blue_flash",
    "out": "external/sprites/cards/blue/card_blue_flash.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -113,8 +113,8 @@
    "id": "card_blue_mana_shards",
    "out": "external/sprites/cards/blue/card_blue_mana_shards.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -125,8 +125,8 @@
    "id": "card_blue_frost_ward",
    "out": "external/sprites/cards/blue/card_blue_frost_ward.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -137,8 +137,8 @@
    "id": "card_blue_torrent",
    "out": "external/sprites/cards/blue/card_blue_torrent.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -149,8 +149,8 @@
    "id": "card_blue_extend_blade",
    "out": "external/sprites/cards/blue/card_blue_extend_blade.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
@@ -161,8 +161,8 @@
    "id": "card_blue_twin_blade",
    "out": "external/sprites/cards/blue/card_blue_twin_blade.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "category": "card_art",
