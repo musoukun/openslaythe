@@ -1,0 +1,77 @@
+{
+ "style": "Create original high-fantasy game art with chunky hand-inked dark contours, flat gouache-like color masses and restrained dry-brush texture, matching a painted fantasy deckbuilder. This art belongs to ONE playable hero, an original boy spellblade, and shows his power only through his motifs: glowing pale-blue mana orbs, a silver vambrace and blade of pale-blue light, blue runes, ice-cyan crystals and silver filigree. Never draw his face or body. Palette: deep navy #1B2A55, sapphire, ice cyan, pale-blue light #7FD3FF, silver and white; absolutely no purple or violet. Bold readable silhouettes, two-step cel shading; reserve soft emission for mana and runes. Do not imitate any existing game, champion, franchise character, emblem or official artwork. Include no text, letters, numerals, labels, logos or watermarks.",
+ "assets": [
+  {
+   "id": "energy_blue",
+   "out": "external/sprites/colors/blue_energy_icon.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "category": "icon",
+   "brief": "Energy orb icon for the blue card color, shown in the card cost corner",
+   "prompt": "A round sapphire crystal orb rimmed with silver filigree and a soft pale-blue glow; broad calm ice-blue center left uncluttered for a game-drawn cost. Centered isolated icon on transparent background with 10 percent clear margin, bold dark-navy outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_blue_earring",
+   "out": "external/sprites/artifacts/artifact_blue_earring.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "category": "icon",
+   "brief": "Starter relic Azure Crystal Earring",
+   "prompt": "A small elegant silver earring with a dangling teardrop crystal of sapphire glowing with a pale-blue mana light. Centered isolated icon on transparent background with 10 percent clear margin, bold dark-navy outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_mana",
+   "out": "external/sprites/status_effects/status_effect_mana.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "category": "icon",
+   "brief": "Status icon 'Mana', shown at 24px",
+   "prompt": "A single bright glowing pale-blue mana orb with a white highlight and a thin silver ring around it. Centered isolated icon on transparent background with 10 percent clear margin, bold dark-navy outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_blade_edge",
+   "out": "external/sprites/status_effects/status_effect_blade_edge.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "category": "icon",
+   "brief": "Status icon 'Blade Edge' (Mana Blade deals more damage), shown at 24px",
+   "prompt": "A straight blade of pale-blue light pointing upward with a bright upward chevron of light along its edge. Centered isolated icon on transparent background with 10 percent clear margin, bold dark-navy outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_blade_twin",
+   "out": "external/sprites/status_effects/status_effect_blade_twin.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "category": "icon",
+   "brief": "Status icon 'Blade Twin' (Mana Blade hits more times), shown at 24px",
+   "prompt": "Two parallel blades of pale-blue light pointing upward side by side, a small spark between them. Centered isolated icon on transparent background with 10 percent clear margin, bold dark-navy outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_mana_spring",
+   "out": "external/sprites/status_effects/status_effect_mana_spring.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "category": "icon",
+   "brief": "Status icon 'Mana Spring' (gain Mana each turn), shown at 24px",
+   "prompt": "A small fountain of pale-blue water rising from a stone basin with one mana orb floating at its top. Centered isolated icon on transparent background with 10 percent clear margin, bold dark-navy outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  }
+ ]
+}

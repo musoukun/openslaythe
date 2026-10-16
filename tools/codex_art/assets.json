@@ -168,8 +168,8 @@
    "id": "card_energy_next_turn",
    "out": "external/sprites/cards/white/card_energy_next_turn.png",
    "size": [
-    192,
-    192
+    384,
+    384
    ],
    "transparent": false,
    "brief": "Card illustration for card 'Energy Next Turn' (SKILL): Gain [status_charge_amount] energy next turn.",
