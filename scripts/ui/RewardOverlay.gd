@@ -221,7 +221,10 @@ func _on_continue_button_up():
 	# increment the act and potentially generate a new one
 	if Global.is_end_of_act():
 		if not Global.is_end_of_run():
+			# 次の幕の開始地点で祝福のキャラが出て、選び終わるとマップが開く (RunStartOptions)
+			visible = false
 			ActionGenerator.generate_next_act()
+			return
 	
 	if not Global.is_end_of_run():
 		map.show_map()

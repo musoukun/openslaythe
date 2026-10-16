@@ -26,7 +26,8 @@ func generate_production_data() -> void:
 	
 	add_run_modifiers()
 	add_run_start_options()
-	
+	BlessingContent.register() # 幕の開始地点で祝福をくれるキャラ (scripts/content/BlessingContent.gd)
+
 	add_custom_ui()
 	add_custom_signals()
 	

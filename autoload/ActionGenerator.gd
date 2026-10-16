@@ -110,6 +110,7 @@ func generate_next_act() -> void:
 		var next_act_id: String = act_next_act_ids[0]
 		# generate the next act
 		generate_act(next_act_id, act_number + 1)
+		Signals.act_started.emit()
 	else:
 		DebugLogger.log_error("ActionGenerator.generate_next_act(): No next acts defined in act \"{0}\"".format([act_data.object_id]))
 

@@ -4,6 +4,7 @@ extends Node
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=combat : ラン開始して最初の戦闘に入る
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
+## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
 ## 引数が無い場合は何もしない。
 
 const CHARACTER_ID := "character_green"
@@ -36,6 +37,9 @@ func _ready() -> void:
 		ActionGenerator.generate_visition_location(location.location_id)
 		if parts.size() > 2:
 			await _click_event_options(parts[2].split(","))
+		return
+	if mode.begins_with("blessing"):
+		await _blessing(mode.split(":"))
 		return
 	if mode.begins_with("weapon:"):
 		# --auto=weapon:<artifact_id|none>
@@ -139,6 +143,24 @@ func _profile() -> void:
 			total += ms
 		print("PROFILE %s: avg %.1f ms, worst %.1f ms, cards %d" % [phase, total / 60.0, worst, get_tree().get_nodes_in_group("cards").size()])
 	get_tree().quit()
+
+
+## 祝福の画面 (RunStartOptions)。幕の指定があれば、その幕の開始として出し直す
+func _blessing(parts: PackedStringArray) -> void:
+	if parts.size() > 2:
+		Global.player_data.player_act = int(parts[2])
+		Signals.act_started.emit()
+	var run_start_options := get_tree().root.find_child("RunStartOptions", true, false)
+	await get_tree().create_timer(2.5).timeout
+	var options := run_start_options.find_children("*", "DialogueOption", true, false)
+	print("BLESSING act=", Global.player_data.player_act, " options=", options.map(func(o): return o.rich_text_label.get_parsed_text()))
+	if parts.size() < 2 or parts[1] == "":
+		return
+	print("BLESSING before: ", _player_summary())
+	var option: DialogueOption = options[int(parts[1])]
+	option.dialogue_option_clicked.emit(option)
+	await get_tree().create_timer(3.0).timeout
+	print("BLESSING after: ", _player_summary())
 
 
 ## イベントの選択肢を順に押し、各段階のプレイヤー状態を出力 (イベント確認用)
