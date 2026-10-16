@@ -45,6 +45,15 @@
       "category": "map",
       "brief": "マップ画面の外側（羊皮紙の外、暗くして表示）。中央は羊皮紙で隠れる。",
       "prompt": "Top-down painterly view of an original fantasy land seen from very high above at dusk: dark enchanted forests along the lower-left, a winding river, a volcanic dragon mountain with a glowing crater at the upper-left edge, a tiny white-stone castle on a cliff at the right edge, mountain ridges along the top. Muted deep green, slate blue and charcoal tones. Keep x=240..960 and y=70..630 quiet and low contrast with only faint terrain shapes; no baked routes, nodes, lettering, compass or markers."
+    },
+    {
+      "id": "world_rest_site",
+      "out": "external/sprites/backgrounds/rest_site.png",
+      "size": [1200, 700],
+      "transparent": false,
+      "category": "background",
+      "brief": "休憩所の背景: LoL でリコールして戻る陣地のような、森の遺跡の聖域。左の台座に主人公が休む。右半分には行動のアイコンを重ねる。",
+      "prompt": "Side-view stage of a peaceful sanctuary hidden in the enchanted forest ruins, the adventurers' safe home base at twilight. On the LEFT half, a broad round raised platform of pale weathered stone (its top surface spans about x=130..560 at y=470..560) inlaid with a ring of softly glowing teal rune lines; the middle of the platform is EMPTY because a character will be placed standing there. Behind the platform, a small white-stone healing spring with a basin of glowing teal-green water, and a tall faceted amber-and-teal guardian crystal floating above a tarnished bronze clockwork pedestal with slowly turning gear rings, gentle light beams rising from it. Mossy broken arches, ivy, ferns and a few warm hanging lanterns frame the scene; deep blue-violet dusk sky and fireflies glimpsed through the canopy. The RIGHT half (x=640..1170, y=110..600) stays calm, dim and low contrast with only soft distant ruins and foliage, because game UI icons and tooltips will be drawn over it. Lower 12 percent is a simple dark mossy flagstone floor. Fixed 1200x700; no characters, creatures, people, foreground obstructions or baked shadows."
     }
   ]
 }

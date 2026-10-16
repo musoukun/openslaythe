@@ -32,6 +32,11 @@ EXTRA = {
     "Combat": "map location", "Miniboss": "map location", "Boss": "map location", "Event": "map location",
     "Treasure": "map location", "Shop": "map location", "Rest site": "map location",
     "Money %s": "reward button",
+    # 休憩所のツールチップ (RestOverlay.gd)
+    "You can choose only one of: {0}": "rest site tooltip",
+    "Once per visit. Can be combined with other actions.": "rest site tooltip",
+    "Can be done any number of times.": "rest site tooltip",
+    "Not available right now.": "rest site tooltip",
 }
 
 keys = {}

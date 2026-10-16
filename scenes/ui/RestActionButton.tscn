@@ -1,10 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://btufs4xipxb5t"]
+[gd_scene load_steps=4 format=3 uid="uid://btufs4xipxb5t"]
 
 [ext_resource type="Script" uid="uid://dv7mjgtd73m7l" path="res://scripts/ui/RestActionButton.gd" id="1_t1ki4"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tile"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame"]
+bg_color = Color(0.0745098, 0.141176, 0.14902, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.721569, 0.580392, 0.309804, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
 [node name="RestActionButton" type="Button"]
-custom_minimum_size = Vector2(240, 240)
-theme_override_font_sizes/font_size = 30
-text = "Rest Action"
-text_overrun_behavior = 3
+custom_minimum_size = Vector2(136, 172)
+pivot_offset = Vector2(68, 60)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tile")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tile")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_tile")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tile")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tile")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tile")
 script = ExtResource("1_t1ki4")
+
+[node name="Frame" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 116.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="Icon" type="TextureRect" parent="Frame"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Rest Action"
+horizontal_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 2
