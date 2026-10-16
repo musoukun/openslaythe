@@ -108,3 +108,20 @@
 5. コード：`add_characters()` に `character_blue` を足し、マナ・蒼刃・カードは `scripts/content/` に別ファイルで切り出す（`GlobalProdDataGenerator.gd` はすでに3500行を超えているため）。
 
 注意：同じフォルダで「基本アタックを育てるビルド軸」の作業が進んでいる（同じ `BuildContent.gd` と生成スクリプトに触る）。コードの実装は、その作業が取り込まれてから別の作業場所（worktree）で行う。
+
+## 実装メモ（2026-10-17）
+
+データは `scripts/content/HeroBlueContent.gd` にまとめた。名前は仮で「Luca Azurine（ルカ・アズリーン）」。
+
+| 仕組み | 実装 |
+| --- | --- |
+| マナ | 状態異常 `status_effect_mana`（自然減少なし、上限10）。払うときは同じ状態異常を負の charges で付けて減らし、足りるかは `ValidatorStatusCharges` で判定する（足りないカードは光らず使えない） |
+| 蒼刃 | `card_blue_mana_blade`。開始デッキに1枚、最初の手札に入る（`card_first_shuffle_priority`）、保留、使うと山札の一番上に戻る |
+| 刃を伸ばす / 刃を重ねる | 状態異常 `status_effect_blade_edge`（ダメージ+）/ `status_effect_blade_twin`（回数+）。`card_tags` に `mana_blade` を持つカードだけを、それぞれの interceptor が書き換える |
+| 開始レリック | 蒼晶の耳飾り：ターン開始時にマナ+1 |
+| 開始武器 | Vera 用の2つ（爪・竜炎）は `run_start_option_character_ids` で Vera だけに出す。青用の武器はまだない |
+
+実装したカード：蒼刃、マナ集め、蒼閃（以上は開始デッキ）、瞑想、詠唱加速、魔力の刃、満ちる泉、蒼の礫、霜の結界、蒼の奔流、刃を伸ばす、刃を重ねる。
+まだのもの：刃を分ける（全体攻撃化）、結晶の守り、蒼渡り（連唱）、受け流しの紋、青用の開始武器、カード絵・レリック・マナのアイコン・青のエネルギー玉の絵（今は仮の画像）。
+
+確認は `godot --headless --path . -- --auto=mana_check --hero=character_blue`（マナの支払い・不足時に使えないこと・上限・蒼刃の強化と戻り先を出力する）。

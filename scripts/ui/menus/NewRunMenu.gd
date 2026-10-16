@@ -87,7 +87,12 @@ func populate_character_info(character_object_id: String) -> void:
 		character_health_label.text = tr("HP: {0}").format([character_data.character_starting_health])
 		character_money_label.text = tr("Money: {0}").format([character_data.character_starting_money])
 		character_description_label.text = tr(character_data.character_description)
-		
+
+		# 中央の全身の立ち絵を選んだキャラのものにする (UiSkin が置く)
+		var hero := get_node_or_null(UiSkin.NEW_RUN_HERO_NODE) as TextureRect
+		if hero:
+			hero.texture = UiSkin.hero_standing_texture(character_data)
+
 		# TODO potentially update ui to support multiple starter artifacts displayed
 		if len(character_data.character_starting_artifact_ids) > 0:
 			var artifact_data: ArtifactData = Global.get_artifact_data(character_data.character_starting_artifact_ids[0])

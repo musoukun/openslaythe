@@ -179,6 +179,7 @@ const VALIDATOR_LOCATION_TYPE: String = "res://scripts/validators/ValidatorLocat
 const VALIDATOR_MONEY: String = "res://scripts/validators/ValidatorMoney.gd"
 const VALIDATOR_PLAYER_HEALTH: String = "res://scripts/validators/ValidatorPlayerHealth.gd"
 const VALIDATOR_PLAYER_CHARACTER: String = "res://scripts/validators/ValidatorPlayerCharacter.gd"
+const VALIDATOR_STATUS_CHARGES: String = "res://scripts/validators/ValidatorStatusCharges.gd"
 const VALIDATOR_RNG: String = "res://scripts/validators/ValidatorRNG.gd"
 
 #endregion
@@ -191,6 +192,8 @@ const DECORATOR_DYNAMIC_VALUE_MODIFIER: String = "res://scripts/card_decorators/
 #region Interceptors
 const INTERCEPTOR_DAMAGE_INCREASE: String = "res://scripts/action_interceptors/InterceptorDamageIncrease.gd"
 const INTERCEPTOR_TAG_SCALING: String = "res://scripts/action_interceptors/InterceptorTagScaling.gd"
+const INTERCEPTOR_MANA_BLADE_EDGE: String = "res://scripts/action_interceptors/InterceptorManaBladeEdge.gd"
+const INTERCEPTOR_MANA_BLADE_TWIN: String = "res://scripts/action_interceptors/InterceptorManaBladeTwin.gd"
 const INTERCEPTOR_WEAKEN: String = "res://scripts/action_interceptors/InterceptorWeaken.gd"
 const INTERCEPTOR_VULNERABLE: String = "res://scripts/action_interceptors/InterceptorVulnerable.gd"
 const INTERCEPTOR_OVERSHIELD: String = "res://scripts/action_interceptors/InterceptorOvershield.gd"

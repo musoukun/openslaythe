@@ -72,6 +72,7 @@ static func _register_weapon(artifact_id: String, weapon_name: String, axis_name
 	option.run_start_option_bb_code = "[color=green]Equip %s[/color]: %s" % [weapon_name, description]
 	option.run_start_option_type = RunStartOptionData.RUN_START_OPTION_TYPES.COMPLETE
 	option.run_start_option_actions = [{Scripts.ACTION_ADD_ARTIFACT: {"artifact_id": artifact_id}}]
+	option.run_start_option_character_ids = ["character_green"] # 爪と竜炎は Vera 専用の武器
 	Global.register_rod(option)
 
 
