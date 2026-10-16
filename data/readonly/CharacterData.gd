@@ -19,6 +19,8 @@ class_name CharacterData
 # animations
 ## Corresponds to the AnimationData object id for this character
 @export var character_animation_id: String = ""
+## 倒れ方の締めくくり (HeroDeath.STYLE_*)。hero_death_N.png があれば、その絵を流してからこの演出に入る
+@export var character_death_style: String = "dissolve"
 # sounds
 ## Optional. Sound that plays when you select the character on the main menu
 @export var character_selection_audio_path: String = ""

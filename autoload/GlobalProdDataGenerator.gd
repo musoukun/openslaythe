@@ -1709,6 +1709,7 @@ func add_characters() -> void:
 	# green character animations
 	var animation_character_green: AnimationData = AnimationData.new("animation_character_{0}".format([character_color]))
 	character_green.character_animation_id = animation_character_green.object_id
+	character_green.character_death_style = "collapse" # 膝から崩れ落ち、火の粉になって消える
 	animation_character_green.add_combatant_animations(
 		["external/sprites/characters/character_{0}/character_{0}.png".format([character_color])],
 		["external/sprites/characters/character_{0}/character_{0}.png".format([character_color])],

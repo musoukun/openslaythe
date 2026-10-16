@@ -8,6 +8,7 @@ extends Node
 ## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
+## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## 引数が無い場合は何もしない。
 
 const CHARACTER_ID := "character_green"
@@ -49,6 +50,9 @@ func _ready() -> void:
 		return
 	if mode.begins_with("blessing"):
 		await _blessing(mode.split(":"))
+		return
+	if mode.begins_with("death"):
+		await _death(mode.split(":"))
 		return
 	if mode.begins_with("weapon:"):
 		# --auto=weapon:<artifact_id|none>
@@ -178,6 +182,24 @@ func _blessing(parts: PackedStringArray) -> void:
 
 
 ## イベントの選択肢を順に押し、各段階のプレイヤー状態を出力 (イベント確認用)
+func _death(parts: PackedStringArray) -> void:
+	var character: CharacterData = Global.get_player_character_data()
+	if parts.size() > 1 and parts[1] != "":
+		character.character_death_style = parts[1]
+	if parts.size() > 2 and parts[2] == "plain":
+		# 倒れる絵が無い主人公と同じにする (待機の1枚だけ)
+		var frames: SpriteFrames = Global.get_animation_data(character.character_animation_id).animations
+		var idle := frames.get_frame_texture(AnimationData.ANIMATION_IDLE, 0)
+		frames.clear(AnimationData.ANIMATION_DEATH)
+		frames.add_frame(AnimationData.ANIMATION_DEATH, idle)
+	for location in Global.get_next_locations():
+		if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+			ActionGenerator.generate_visition_location(location.location_id)
+			break
+	await get_tree().create_timer(1.5).timeout
+	Global.get_player().damage(9999, true)
+
+
 func _click_event_options(indices: PackedStringArray) -> void:
 	var overlay := get_tree().root.find_child("DialogueOverlay", true, false)
 	await get_tree().create_timer(0.5).timeout
