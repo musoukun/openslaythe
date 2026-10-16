@@ -44,7 +44,7 @@ func _ready():
 	Signals.run_started.connect(_on_run_started)
 	Signals.run_ended.connect(_on_run_ended)
 	Signals.run_victory.connect(_on_run_victory)
-	Signals.player_death_animation_finished.connect(_on_player_death_animation_finished)
+	Signals.death_screen_closed.connect(_on_death_screen_closed)
 
 ## Pulls stats and then inserts and formats the text into a rich text
 func generate_run_summary_text() -> void:
@@ -90,8 +90,8 @@ func _on_run_victory():
 	visible = true
 	player_run_end_state = Global.RUN_ENDS.VICTORY
 
-# loss of a run
-func _on_player_death_animation_finished(_player: Player):
+# loss of a run (死亡画面の「続ける」のあと)
+func _on_death_screen_closed():
 	victory_label.visible = false
 	defeat_label.visible = true
 	

@@ -15,6 +15,7 @@ const ENEMY_NAMES_PATH := "res://sprites/enemy_names.json"
 const HERO_IDLE_FPS := 5.0
 const HERO_ATTACK_FPS := 12.0
 const HERO_REACTION_FPS := 8.0
+const HERO_DEATH_FPS := 6.0
 
 
 static func apply() -> void:
@@ -42,7 +43,7 @@ static func apply() -> void:
 	_apply_enemy_names()
 
 
-## ドット絵アニメ (hero_idle_1..4.png / hero_attack_1..4.png) があればキャラのアニメに差し替える
+## 主人公アニメ (hero_idle_N.png / hero_attack_N.png / hero_death_N.png など) があればキャラのアニメに差し替える
 static func _apply_hero_animations(character: CharacterData) -> void:
 	var dir := "external/sprites/characters/%s/" % character.object_id
 	var idle := _frame_paths(dir + "hero_idle_%d.png")
@@ -52,7 +53,9 @@ static func _apply_hero_animations(character: CharacterData) -> void:
 		return
 	animation_data.add_animation(AnimationData.ANIMATION_IDLE, AnimationData.ANIMATION_IDLE, idle, HERO_IDLE_FPS)
 	animation_data.add_animation(AnimationData.ANIMATION_ATTACK, AnimationData.ANIMATION_IDLE, attack if attack else idle, HERO_ATTACK_FPS)
-	animation_data.add_animation(AnimationData.ANIMATION_DEATH, AnimationData.ANIMATION_NONE, [idle[0]], HERO_IDLE_FPS)
+	# 倒れる絵 (hero_death_1..N.png) があればそれを、無ければ待機の1枚を HeroDeath が演出する
+	var death := _frame_paths(dir + "hero_death_%d.png")
+	animation_data.add_animation(AnimationData.ANIMATION_DEATH, AnimationData.ANIMATION_NONE, death if death else [idle[0]], HERO_DEATH_FPS)
 	# 被ダメージ / 防御のリアクション (終わったら待機へ)
 	var hurt := _frame_paths(dir + "hero_hurt_%d.png")
 	if hurt:
