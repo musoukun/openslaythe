@@ -10,7 +10,6 @@ const BUTTON_ICONS := {
 	"RunScreen/Combat/DiscardPile": "res://sprites/ui/icon_discard_pile.png",
 	"RunScreen/Combat/ExhaustPile": "res://sprites/ui/icon_exhaust_pile.png",
 	"RunScreen/Combat/Chest": "res://sprites/ui/chest.png",
-	"RunScreen/Combat/Shop": "res://sprites/ui/shop.png",
 }
 const TITLE_BACKGROUND := "res://sprites/ui/title_background.png"
 const TITLE_HERO := "res://sprites/ui/hero_bust.png"

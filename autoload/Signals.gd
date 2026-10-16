@@ -92,6 +92,7 @@ signal act_started	# 2幕目以降の幕が始まった (開始地点の祝福�
 signal chest_opened	# player has opened a chest
 signal shop_opened	# player has opened a shop
 signal shop_visited_first_time # player has visited a shop for the first time
+signal shop_card_removal_purchased # player paid the shop to remove a card from their deck
 signal dialogue_started
 signal dialogue_ended
 signal rest_action_ended(rest_action_id: String) # a rest action has finished

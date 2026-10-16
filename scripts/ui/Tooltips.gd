@@ -129,7 +129,7 @@ func display_codex_artifact_tooltip(artifact_data: ArtifactData) -> void:
 	if artifact_data != null:
 		var rarity_text: String = "\n"
 		if len(artifact_data.ARTIFACT_RARITIES.keys()) > artifact_data.artifact_rarity:
-			rarity_text += "[" + artifact_data.ARTIFACT_RARITIES.keys()[artifact_data.artifact_rarity] + "]"
+			rarity_text += "[" + tr(artifact_data.ARTIFACT_RARITIES.keys()[artifact_data.artifact_rarity]) + "]"
 		
 		var artifact_tooltip_bbcode: String = "[color=orange]{0}[/color]{1}\n{2}".format([
 			tr(artifact_data.artifact_name), rarity_text, tr(artifact_data.artifact_description)
@@ -140,7 +140,7 @@ func display_codex_consumable_tooltip(consumable_data: ConsumableData) -> void:
 	if consumable_data != null:
 		var rarity_text: String = "\n"
 		if len(consumable_data.CONSUMABLE_RARITIES.keys()) > consumable_data.consumable_rarity:
-			rarity_text += "[" + consumable_data.CONSUMABLE_RARITIES.keys()[consumable_data.consumable_rarity] + "]"
+			rarity_text += "[" + tr(consumable_data.CONSUMABLE_RARITIES.keys()[consumable_data.consumable_rarity]) + "]"
 		
 		var consumable_tooltip_bbcode: String = "[color=orange]{0}[/color]{1}\n{2}".format([
 			tr(consumable_data.consumable_name), rarity_text, tr(consumable_data.consumable_description)

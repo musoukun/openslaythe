@@ -1,18 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2owal2ufl8kh"]
+[gd_scene load_steps=3 format=3 uid="uid://d2owal2ufl8kh"]
 
 [ext_resource type="Script" uid="uid://wfe4p5kajrby" path="res://scripts/ui/shop/BaseShopButton.gd" id="1_mdd7l"]
+[ext_resource type="Texture2D" path="res://sprites/ui/icon_gold.png" id="2_gold"]
 
 [node name="BaseShopButton" type="Control"]
+custom_minimum_size = Vector2(96, 124)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 96.0
+offset_bottom = 124.0
 script = ExtResource("1_mdd7l")
 
-[node name="PriceLabel" type="Label" parent="."]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 112.0
-offset_bottom = 63.0
+[node name="PriceRow" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="PriceRow"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_gold")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PriceLabel" type="Label" parent="PriceRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.06, 0.04, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 19
 text = "999"
-horizontal_alignment = 1

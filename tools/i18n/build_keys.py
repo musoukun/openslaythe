@@ -32,6 +32,14 @@ EXTRA = {
     "Combat": "map location", "Miniboss": "map location", "Boss": "map location", "Event": "map location",
     "Treasure": "map location", "Shop": "map location", "Rest site": "map location",
     "Money %s": "reward button",
+    # ショップ (ShopScene / ShopCounter / CardRemovalShopButton)
+    "Proceed": "shop button", "Back": "shop button", "Sold Out": "shop price",
+    "Phew... finally, a place to catch my breath.": "shop hero line", "Ooh, shiny things...": "shop hero line",
+    "Let's see what you've got.": "shop hero line", "My coin purse is feeling heavy.": "shop hero line",
+    "[color=orange]Card Removal[/color]\nRemove a card from your deck.": "shop tooltip",
+    "[color=grey]Only once per shop.[/color]": "shop tooltip",
+    # レリック / ポーションのレアリティ (説明のツールチップ)
+    "SHOP": "relic rarity", "BOSS": "relic rarity", "EVENT": "relic rarity", "LEGENDARY": "potion rarity",
 }
 
 keys = {}

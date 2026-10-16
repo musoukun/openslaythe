@@ -10,7 +10,8 @@ func perform_action():
 		var consumable_object_id: String = action_interceptor_processor.get_shadowed_action_values("consumable_object_id", "")
 		var consumable_slot_index: int = action_interceptor_processor.get_shadowed_action_values("consumable_slot_index", 0)
 		var artifact_id: String = action_interceptor_processor.get_shadowed_action_values("artifact_id", "")
-		
+		var card_removal: bool = action_interceptor_processor.get_shadowed_action_values("card_removal", false)
+
 		# check if shop at player location
 		var shop_data: ShopData = Global.get_shop_at_player_location()
 		if shop_data != null:
@@ -32,6 +33,25 @@ func perform_action():
 					Signals.card_purchased.emit(card_data)
 				return
 			
+			# card removal service: pick a deck card; paying happens only when a card is picked
+			if card_removal:
+				var removal_price: int = shop_data.get_card_removal_price()
+				if player_money >= removal_price and not shop_data.shop_card_removal_used:
+					action_data.append({Scripts.ACTION_PICK_CARDS: {
+						"card_pick_type": HandManager.DECK,
+						"min_card_amount": 1,
+						"max_card_amount": 1,
+						"min_cards_are_required_for_action": true,
+						"can_back_out": true,
+						"card_pick_text": "Choose {0} card(s) to remove. {1} cards selected",
+						"action_data": [
+							{Scripts.ACTION_REMOVE_CARDS_FROM_DECK: {}},
+							{Scripts.ACTION_SHOP_CARD_REMOVED: {"money_amount": removal_price}},
+						],
+					}})
+					ActionHandler.add_actions(ActionGenerator.create_actions(player, null, [], action_data, null))
+				return
+
 			# purchasing artifacts
 			if artifact_id != "":
 				var artifact_price: int = shop_data.get_shop_artifact_price(artifact_id)

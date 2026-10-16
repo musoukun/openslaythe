@@ -441,5 +441,17 @@
  "Boss": "map location",
  "Event": "map location",
  "Treasure": "map location",
- "Rest site": "map location"
+ "Rest site": "map location",
+ "Proceed": "shop button",
+ "Sold Out": "shop price",
+ "Phew... finally, a place to catch my breath.": "shop hero line",
+ "Ooh, shiny things...": "shop hero line",
+ "Let's see what you've got.": "shop hero line",
+ "My coin purse is feeling heavy.": "shop hero line",
+ "[color=orange]Card Removal[/color]\nRemove a card from your deck.": "shop tooltip",
+ "[color=grey]Only once per shop.[/color]": "shop tooltip",
+ "SHOP": "relic rarity",
+ "BOSS": "relic rarity",
+ "EVENT": "relic rarity",
+ "LEGENDARY": "potion rarity"
 }

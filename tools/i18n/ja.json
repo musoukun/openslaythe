@@ -446,5 +446,17 @@
  "[color=green]Draft a card[/color].": "[color=green]3枚から1枚選んで獲得[/color]。",
  "[color=red]Lose 8 Max HP[/color]. [color=green]Remove 2 cards[/color].": "[color=red]最大HPを8失う[/color]。[color=green]カードを2枚取り除く[/color]。",
  "[color=red]Add 1 Cinder to your deck[/color]. [color=green]Draft a rare card[/color].": "[color=red]燃えさしを1枚デッキに加える[/color]。[color=green]レアカードを3枚から1枚選んで獲得[/color]。",
- "Fullscreen (F11 / Alt+Enter)": "全画面表示（F11 / Alt+Enter）"
+ "Fullscreen (F11 / Alt+Enter)": "全画面表示（F11 / Alt+Enter）",
+ "Proceed": "次へ",
+ "Phew... finally, a place to catch my breath.": "ふう…やっとひと息つける場所だ。",
+ "Ooh, shiny things...": "おお、キラキラしたものがいっぱい…",
+ "Let's see what you've got.": "さて、何を売ってるのかな。",
+ "My coin purse is feeling heavy.": "財布が重くてしかたないな。",
+ "Sold Out": "売り切れ",
+ "[color=orange]Card Removal[/color]\nRemove a card from your deck.": "[color=orange]カード削除[/color]\nデッキからカードを1枚取り除く。",
+ "[color=grey]Only once per shop.[/color]": "[color=grey]1つの店で1回だけ。[/color]",
+ "SHOP": "ショップ",
+ "BOSS": "ボス",
+ "EVENT": "イベント",
+ "LEGENDARY": "レジェンド"
 }
