@@ -1544,7 +1544,7 @@ func add_action_interceptors() -> void:
 
 func add_colors() -> void:
 	var color_green: ColorData = ColorData.new("color_green")
-	color_green.color = Color.WEB_GREEN
+	color_green.color = Color("#B5532E") # 主人公 Vera の赤銅 (カードの軌跡・図鑑のパック色)
 	color_green.color_name = "Green"
 	color_green.color_energy_icon_texture_path = "external/sprites/colors/green_energy_icon.png"
 	Global.register_rod(color_green)
