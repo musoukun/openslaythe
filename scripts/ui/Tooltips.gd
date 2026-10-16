@@ -108,7 +108,8 @@ func display_card_keywords(card: Card) -> void:
 	# use remaining screen size to determine which side of the card should display
 	var screen_size: Vector2 = DisplayServer.window_get_size()
 	var card_visual_global_pos: Vector2 = card.card_visual.global_position
-	var card_right_side_pos: Vector2 = card_visual_global_pos + Vector2(card.size.x + CARD_KEYWORD_PANEL_MARGIN_X, 0)
+	# ホバーで拡大中のカードにも重ならないよう、拡大後の幅を使う
+	var card_right_side_pos: Vector2 = card_visual_global_pos + Vector2(card.card_visual.get_global_rect().size.x + CARD_KEYWORD_PANEL_MARGIN_X, 0)
 	var card_left_side_pos: Vector2 = card_visual_global_pos - Vector2(keyword_container.size.x + CARD_KEYWORD_PANEL_MARGIN_X, 0)
 	
 	if card_right_side_pos.x + CARD_KEYWORD_RIGHT_SCREEN_SIZE_MARGIN < screen_size.x:
