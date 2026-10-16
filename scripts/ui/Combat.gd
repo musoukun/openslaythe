@@ -23,7 +23,6 @@ extends Control
 @onready var player = $Player
 @onready var hand = $Hand
 @onready var chest = $Chest
-@onready var shop = $Shop
 
 @onready var background_button: TextureButton = %BackgroundButton
 
@@ -84,8 +83,7 @@ func _on_map_location_selected(location_data: LocationData):
 	var location_type: int = location_data.location_type
 	
 	chest.visible = false
-	shop.visible = false
-	
+
 	set_combat_display_visibility(false)
 	
 	match location_type:
@@ -94,7 +92,8 @@ func _on_map_location_selected(location_data: LocationData):
 		LocationData.LOCATION_TYPES.TREASURE:
 			chest.visible = true
 		LocationData.LOCATION_TYPES.SHOP:
-			shop.visible = true
+			# go straight into the merchant's tent (after other overlays have reacted to the location change)
+			Signals.shop_opened.emit.call_deferred()
 	
 	_update_background()
 	
@@ -129,6 +128,11 @@ func _update_background() -> void:
 		if event_data.event_background_texture_path != "":
 			background_texture_path = event_data.event_background_texture_path
 	
+	# the shop's tent is laid under the top bar here, with the merchant drawn by ShopScene on top
+	if location_data.location_type == LocationData.LOCATION_TYPES.SHOP:
+		background_button.texture_normal = load(ShopScene.BACKGROUND_PATH)
+		return
+
 	if background_texture_path != "":
 		background_button.texture_normal = FileLoader.load_texture(background_texture_path)
 	

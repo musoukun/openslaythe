@@ -47,6 +47,15 @@
       "prompt": "Top-down painterly view of an original fantasy land seen from very high above at dusk: dark enchanted forests along the lower-left, a winding river, a volcanic dragon mountain with a glowing crater at the upper-left edge, a tiny white-stone castle on a cliff at the right edge, mountain ridges along the top. Muted deep green, slate blue and charcoal tones. Keep x=240..960 and y=70..630 quiet and low contrast with only faint terrain shapes; no baked routes, nodes, lettering, compass or markers."
     },
     {
+      "id": "world_shop",
+      "out": "sprites/ui/shop_background.png",
+      "size": [1536, 896],
+      "transparent": false,
+      "category": "background",
+      "brief": "ショップの場面: 遺跡の中の商人の天幕。左の敷物に主人公、右の緑の布に商人 (どちらも別の絵を上に重ねる)。上端は資源バーで隠れる。",
+      "prompt": "Interior of a cozy wandering merchant's tent pitched among ancient white-stone ruins in an enchanted forest, seen from a slightly elevated side view like a theater stage. Patched canvas tent cloth in muted plum, ochre and faded red is strung between two broken mossy stone pillars at the back; through a wide opening in the back wall the misty forest ruins glow in teal and gold. The floor is packed earth with flagstones. On the LEFT half of the floor lies an empty round woven rug with a simple border pattern, centered around x=27% y=72%, completely clear of objects (a character will stand on it later). On the RIGHT half lies an empty flat green cloth mat around x=72% y=70% with a few blank parchment slips and small coin stacks scattered at its edges, its center left completely empty (a seated merchant will be placed there later). Fill the space around them with merchant clutter: wooden barrels and crates, stacked rolled rugs, shelves of glass jars and corked potion bottles, a glowing violet crystal ball on a little stand near the right edge, burlap coin sacks, a brass hanging lantern and a warm paper lantern hanging from the tent poles, a few lit candles, an old animal skull and some rusty weapons leaning on the left wall. Dark silhouetted props frame the bottom-left and bottom-right foreground. Warm amber lantern light inside, cool teal light from the opening behind. Keep the top 10 percent calm and dark (a resource bar covers it). No people, no creatures, no merchant, no characters and no dragons anywhere."
+    },
+    {
       "id": "world_rest_site",
       "out": "external/sprites/backgrounds/rest_site.png",
       "size": [1200, 700],

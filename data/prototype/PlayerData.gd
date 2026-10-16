@@ -43,6 +43,9 @@ var player_block: int = 0 # in combat block. Not saved.
 ## Consider removing the @export flag unless you want to save the game while at a shop.
 @export var player_shop_data: ShopData = null
 
+## How many times the shop card removal service has been used this run. Raises its price.
+@export var player_shop_card_removal_count: int = 0
+
 #region RNG
 @export var player_run_seed: int = 0
 

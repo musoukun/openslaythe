@@ -29,6 +29,7 @@ var BASE_SHOP_BUTTON: PackedScene = load("res://scenes/ui/shop/BaseShopButton.ts
 var CARD_SHOP_BUTTON: PackedScene = load("res://scenes/ui/shop/CardShopButton.tscn")
 var ARTIFACT_SHOP_BUTTON: PackedScene = load("res://scenes/ui/shop/ArtifactShopButton.tscn")
 var CONSUMABLE_SHOP_BUTTON: PackedScene = load("res://scenes/ui/shop/ConsumableShopButton.tscn")
+var CARD_REMOVAL_SHOP_BUTTON: PackedScene = load("res://scenes/ui/shop/CardRemovalShopButton.tscn")
 
 var TEXT_FADE: PackedScene = load("res://scenes/combatants/fades/TextFade.tscn")
 var ARTIFACT_FADE: PackedScene = load("res://scenes/combatants/fades/ArtifactFade.tscn")

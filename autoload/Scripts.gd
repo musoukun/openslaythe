@@ -84,6 +84,7 @@ const ACTION_CLEAR_REWARDS = "res://scripts/actions/rewards/ActionClearRewards.g
 # shop
 const ACTION_SHOP_PURCHASE_ITEMS: String = "res://scripts/actions/shop_actions/ActionShopPurchaseItems.gd"
 const ACTION_SHOP_POPULATE_ITEMS: String = "res://scripts/actions/shop_actions/ActionShopPopulateItems.gd"
+const ACTION_SHOP_CARD_REMOVED: String = "res://scripts/actions/shop_actions/ActionShopCardRemoved.gd"
 
 # artifact actions
 const ACTION_INCREASE_ARTIFACT_CHARGE: String = "res://scripts/actions/artifact_actions/ActionIncreaseArtifactCharge.gd"

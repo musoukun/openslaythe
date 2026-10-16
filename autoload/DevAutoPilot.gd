@@ -8,6 +8,10 @@ extends Node
 ## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
+## --auto=shop : 1階の部屋をショップにして訪れ、商人の場面を出す
+## --auto=shop_buy : 購入画面を開き、商品にカーソルを乗せる (指さしとツールチップの確認用)
+## --auto=shop_remove : 購入画面からカード削除を押す
+## --auto=shop_check : カード削除とカードの購入を実際に行い、お金とデッキの変化を出力する
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## 引数が無い場合は何もしない。
@@ -48,6 +52,9 @@ func _ready() -> void:
 		ActionGenerator.generate_visition_location(location.location_id)
 		if parts.size() > 2:
 			await _click_event_options(parts[2].split(","))
+		return
+	if mode.begins_with("shop"):
+		await _shop(mode)
 		return
 	if mode.begins_with("rest"):
 		await _rest_site(mode.split(":"))
@@ -201,6 +208,56 @@ func _blessing(parts: PackedStringArray) -> void:
 	option.dialogue_option_clicked.emit(option)
 	await get_tree().create_timer(3.0).timeout
 	print("BLESSING after: ", _player_summary())
+
+
+## ショップ。1階の部屋をショップにして訪れる。
+## shop: 商人の場面 / shop_buy: 購入画面を開き、カーソルを商品に乗せて指さしとツールチップを見る
+## shop_remove: 購入画面からカード削除を押す
+func _shop(mode: String) -> void:
+	var run_start_options := get_tree().root.find_child("RunStartOptions", true, false) as Control
+	if run_start_options:
+		run_start_options.visible = false
+	var location: LocationData = Global.get_next_locations()[0]
+	location.location_type = LocationData.LOCATION_TYPES.SHOP
+	location.location_obfuscated = false
+	ActionGenerator.generate_visition_location(location.location_id)
+	if mode == "shop":
+		return
+	await get_tree().create_timer(1.2).timeout
+	var overlay := get_tree().root.find_child("ShopOverlay", true, false)
+	overlay.open_counter()
+	await get_tree().create_timer(0.8).timeout
+	if mode == "shop_remove" or mode == "shop_check":
+		print("SHOP before: ", _player_summary(), " removal price ", Global.get_shop_at_player_location().get_card_removal_price())
+		overlay.find_child("CardRemovalButton", true, false).get_node("Button").button_up.emit()
+		if mode == "shop_remove":
+			return
+		# shop_check: デッキの先頭のカードを選んで削除し、カードを1枚買って、お金とデッキの変化を出力する
+		await get_tree().create_timer(1.0).timeout
+		var selection := get_tree().root.find_child("CardSelectionOverlay", true, false)
+		selection.current_card_pick_action.picked_cards = [Global.player_data.player_deck[0]] as Array[CardData]
+		Signals.card_pick_confirmed.emit()
+		await get_tree().create_timer(1.0).timeout
+		print("SHOP removed: ", _player_summary(), " used ", Global.get_shop_at_player_location().shop_card_removal_used, " next price ", Global.get_shop_at_player_location().get_card_removal_price())
+		var card_button: BaseShopButton = overlay.get_shop_items()[0]
+		print("SHOP buy card price ", card_button.price_label.text)
+		card_button.card.card_selected.emit(card_button.card)
+		await get_tree().create_timer(1.0).timeout
+		print("SHOP bought: ", _player_summary(), " items left ", overlay.get_shop_items().size())
+		get_tree().quit()
+		return
+	# 下段の最初のレリックの上にカーソルを置く
+	var target := overlay.get_shop_items()[6] as Control
+	_move_mouse(target.get_global_rect().get_center())
+
+
+## マウスをその位置へ動かしたことにする (ホバーと指さしの確認用)
+func _move_mouse(position: Vector2) -> void:
+	get_viewport().warp_mouse(position)
+	var motion := InputEventMouseMotion.new()
+	motion.position = position
+	motion.global_position = position
+	Input.parse_input_event(motion)
 
 
 ## イベントの選択肢を順に押し、各段階のプレイヤー状態を出力 (イベント確認用)

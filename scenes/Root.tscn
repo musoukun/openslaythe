@@ -26,7 +26,6 @@
 [ext_resource type="Script" uid="uid://bepy2gle06uwf" path="res://scripts/ui/CardDraftSelectionOverlay.gd" id="11_yys3c"]
 [ext_resource type="Script" uid="uid://dm6o2678kafwr" path="res://scripts/ui/menus/RunScreen.gd" id="12_elxq6"]
 [ext_resource type="Script" uid="uid://c2i6b2ert5jls" path="res://scripts/ui/PauseButton.gd" id="13_i7igs"]
-[ext_resource type="Script" uid="uid://cdp0fx5l64nnt" path="res://scripts/ui/Shop.gd" id="13_w8i8k"]
 [ext_resource type="PackedScene" uid="uid://btxmfagad05n5" path="res://scenes/ui/card/Card.tscn" id="14_dohly"]
 [ext_resource type="Script" uid="uid://dnvcyccyhfcmu" path="res://scripts/ui/Map.gd" id="14_fc5ht"]
 [ext_resource type="Script" uid="uid://b2hl2ln4jm0mj" path="res://scripts/ui/RestOverlay.gd" id="14_k6wys"]
@@ -2009,34 +2008,6 @@ theme_override_font_sizes/font_size = 30
 text = "Chest"
 horizontal_alignment = 1
 
-[node name="Shop" type="TextureButton" parent="RunScreen/Combat" unique_id=302804716]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 168.0
-offset_right = 360.0
-offset_top = -94.0
-offset_bottom = 98.0
-grow_horizontal = 2
-grow_vertical = 2
-visible = false
-texture_normal = ExtResource("3_8ax2e")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("13_w8i8k")
-
-[node name="Label" type="Label" parent="RunScreen/Combat/Shop" unique_id=709235408]
-layout_mode = 0
-offset_top = -56.0
-offset_right = 192.0
-offset_bottom = -11.0
-theme_override_font_sizes/font_size = 30
-text = "Shop"
-horizontal_alignment = 1
-
 [node name="Energy" type="TextureButton" parent="RunScreen/Combat" unique_id=517286826]
 layout_mode = 1
 anchors_preset = -1
@@ -2518,90 +2489,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_stqr4")
-
-[node name="Background" type="ColorRect" parent="RunScreen/ShopOverlay" unique_id=78866647]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.203922, 0.188235, 0.215686, 0.635294)
-
-[node name="Background2" type="ColorRect" parent="RunScreen/ShopOverlay" unique_id=1833017692]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -568.0
-offset_top = -286.0
-offset_right = 568.0
-offset_bottom = 290.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0941176, 0.0862745, 0.101961, 0.67451)
-
-[node name="CardContainer" type="HBoxContainer" parent="RunScreen/ShopOverlay" unique_id=2063475107]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -528.0
-offset_top = -278.0
-offset_right = 536.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="ArtifactContainer" type="VBoxContainer" parent="RunScreen/ShopOverlay" unique_id=899795513]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -528.0
-offset_top = 34.0
-offset_right = -248.0
-offset_bottom = 282.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="ConsumableContainer" type="VBoxContainer" parent="RunScreen/ShopOverlay" unique_id=1859136117]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -216.0
-offset_top = 34.0
-offset_right = 64.0
-offset_bottom = 282.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="ContinueButton" type="Button" parent="RunScreen/ShopOverlay" unique_id=1269696807]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -72.0
-offset_right = 72.0
-offset_top = 306.0
-offset_bottom = 337.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Continue"
 
 [node name="DialogueOverlay" type="Control" parent="RunScreen" unique_id=2021660251]
 unique_name_in_owner = true

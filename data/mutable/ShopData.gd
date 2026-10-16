@@ -19,6 +19,13 @@ class_name ShopData
 @export var shop_artifact_prices: Array[int] = []
 @export var shop_consumable_slot_to_consumable_price: Dictionary = {}
 
+## The card removal service can be used once per shop
+@export var shop_card_removal_used: bool = false
+
+## Card removal costs 75 gold, +25 for each removal already bought this run (as in StS)
+const CARD_REMOVAL_BASE_PRICE: int = 75
+const CARD_REMOVAL_PRICE_STEP: int = 25
+
 const GENERATED_CARD_COUNT: int = 6
 const GENERATED_ARTIFACT_COUNT: int = 2
 const GENERATED_SHOP_SPECIFIC_ARTIFACT_COUNT: int = 1
@@ -187,3 +194,8 @@ func remove_shop_consumable(consumable_slot_index: int) -> void:
 
 func get_shop_consumable_price(consumable_slot_index: int) -> int:
 	return shop_consumable_slot_to_consumable_price.get(consumable_slot_index, 0)
+
+### Card Removal ###
+
+func get_card_removal_price() -> int:
+	return CARD_REMOVAL_BASE_PRICE + CARD_REMOVAL_PRICE_STEP * Global.player_data.player_shop_card_removal_count
