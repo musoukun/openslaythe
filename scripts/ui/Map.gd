@@ -141,7 +141,15 @@ func _setup_legend() -> void:
 	style.shadow_color = Color(0, 0, 0, 0.4)
 	style.shadow_size = 6
 	panel.add_theme_stylebox_override("panel", style)
-	panel.position = Vector2(1052, 110)
+	# 羊皮紙と同じく画面中央を基準に置く (横長の画面でも地図の右隣に付いてくる)
+	panel.anchor_left = 0.5
+	panel.anchor_right = 0.5
+	panel.anchor_top = 0.5
+	panel.anchor_bottom = 0.5
+	panel.offset_left = 452.0
+	panel.offset_right = 452.0
+	panel.offset_top = -240.0
+	panel.offset_bottom = -240.0
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var box := VBoxContainer.new()
 	panel.add_child(box)

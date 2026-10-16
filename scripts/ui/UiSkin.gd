@@ -72,18 +72,27 @@ static func add_backplate(control: Control, margin: float = 3.0) -> void:
 	control.move_child(plate, 0)
 
 
-## タイトル画面の右側に主人公のバストアップ (手描き) を置く
+## タイトル画面の右側に主人公のバストアップ (手描き) を置く。
+## 絵は胸の下で切れているので、切れ目が常に画面の下端に来るよう右下に固定する
+## (固定座標だと縦に広い画面で切れ目が画面の途中に浮き、胴体が消えて見える)。
 static func _add_title_hero(title: Control) -> void:
 	var tex := load_if_exists(TITLE_HERO)
 	if tex == null:
 		return
+	const SIZE := 580.0
+	# 画像の下にある透明な余白の分だけ画面の外へ下げる
+	var used := tex.get_image().get_used_rect()
+	var bottom_padding := (tex.get_height() - used.end.y) * SIZE / tex.get_height()
 	var hero := TextureRect.new()
 	hero.texture = tex
 	hero.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	hero.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
 	hero.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hero.position = Vector2(640, 120)
-	hero.size = Vector2(580, 580)
+	hero.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+	hero.offset_left = -SIZE + 20.0
+	hero.offset_right = 20.0
+	hero.offset_top = -SIZE + bottom_padding
+	hero.offset_bottom = bottom_padding
 	title.add_child(hero)
 	title.move_child(hero, 1)	# 背景のすぐ上、メニューの下
 

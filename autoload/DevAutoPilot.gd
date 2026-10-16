@@ -3,12 +3,16 @@ extends Node
 ## 例: godot --path . --write-movie shots/x.png --fixed-fps 10 --quit-after 60 -- --auto=combat
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=combat : ラン開始して最初の戦闘に入る
+## --auto=new_run : タイトルから「新しいラン」画面を開く
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## 引数が無い場合は何もしない。
 
 const CHARACTER_ID := "character_green"
 
 func _ready() -> void:
+	var shot_path := _get_user_arg("--shot=")
+	if shot_path != "":
+		_save_shot_later(shot_path)
 	var mode := _get_mode()
 	if mode == "":
 		return
@@ -17,11 +21,12 @@ func _ready() -> void:
 		get_tree().quit()
 		return
 	await get_tree().create_timer(0.3).timeout
-	if mode == "settings":
-		var settings_button := get_tree().root.find_child("SettingsButton", true, false) as BaseButton
-		if settings_button:
-			settings_button.pressed.emit()
-			settings_button.button_up.emit()
+	if mode == "settings" or mode == "new_run":
+		var button_name := "SettingsButton" if mode == "settings" else "NewRunButton"
+		var menu_button := get_tree().root.find_child(button_name, true, false) as BaseButton
+		if menu_button:
+			menu_button.pressed.emit()
+			menu_button.button_up.emit()
 		return
 	Global.start_run(CHARACTER_ID, 12345)
 	await get_tree().create_timer(0.5).timeout
@@ -187,7 +192,19 @@ func _preview_vfx() -> void:
 		await get_tree().create_timer(0.8, true, false, true).timeout
 
 func _get_mode() -> String:
+	return _get_user_arg("--auto=")
+
+func _get_user_arg(prefix: String) -> String:
 	for arg in OS.get_cmdline_user_args():
-		if arg.begins_with("--auto="):
-			return arg.trim_prefix("--auto=")
+		if arg.begins_with(prefix):
+			return arg.trim_prefix(prefix)
 	return ""
+
+## --shot=<png>: 8秒後 (手札が配られた後) に画面を実際の解像度のまま保存して終了する
+## (--write-movie は基準サイズ 1200x700 に縮めて書き出すので、全画面の見た目はこちらで撮る)
+func _save_shot_later(path: String) -> void:
+	await get_tree().create_timer(8.0, true, false, true).timeout
+	await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(path)
+	print("SHOT ", path)
+	get_tree().quit()

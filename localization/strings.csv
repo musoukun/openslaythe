@@ -431,3 +431,4 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "[wave amp=50.0 freq=2.0 connected=1][color=green]Pick something[/color][/wave]","[wave amp=50.0 freq=2.0 connected=1][color=green]何かを選ぼう[/color][/wave]"
 "decorator_value_block","decorator_value_block"
 "decorator_value_extra_draw","decorator_value_extra_draw"
+"Fullscreen (F11 / Alt+Enter)","全画面表示（F11 / Alt+Enter）"

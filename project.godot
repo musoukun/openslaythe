@@ -42,6 +42,7 @@ StatsHandler="*res://autoload/StatsHandler.gd"
 Vfx="*res://autoload/Vfx.gd"
 DevAutoPilot="*res://autoload/DevAutoPilot.gd"
 PerfOverlay="*res://autoload/PerfOverlay.gd"
+DisplayMode="*res://autoload/DisplayMode.gd"
 
 [debug]
 
@@ -52,7 +53,8 @@ gdscript/warnings/integer_division=0
 
 window/size/viewport_width=1200
 window/size/viewport_height=700
-window/size/resizable=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
