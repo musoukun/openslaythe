@@ -14,6 +14,7 @@ const BUTTON_ICONS := {
 const TITLE_BACKGROUND := "res://sprites/ui/title_background.png"
 const TITLE_HERO := "res://sprites/ui/hero_bust.png"
 const NEW_RUN_HERO := "res://sprites/ui/hero_standing.png"
+const NEW_RUN_HERO_NODE := "NewRunHero"
 const TOP_BAR_COLOR := Color(0.03, 0.09, 0.09, 0.78)
 const BACKPLATE_COLOR := Color(0.05, 0.13, 0.14, 0.92)
 const BACKPLATE_BORDER := Color(0.95, 0.85, 0.62, 0.9)
@@ -107,6 +108,7 @@ static func _add_new_run_hero(title: Control, bust: TextureRect) -> void:
 	if menu == null or tex == null:
 		return
 	var hero := TextureRect.new()
+	hero.name = NEW_RUN_HERO_NODE	# NewRunMenu が選んだキャラの立ち絵に差し替える
 	hero.texture = tex
 	hero.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	hero.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -122,6 +124,13 @@ static func _add_new_run_hero(title: Control, bust: TextureRect) -> void:
 	menu.move_child(hero, 0)	# パネルやボタンより奥
 	if bust:
 		menu.visibility_changed.connect(func() -> void: bust.visible = not menu.visible)
+
+
+## キャラごとの全身の立ち絵。sprites/ui/hero_standing_<色>.png があればそれ、無ければ最初の主人公の絵
+static func hero_standing_texture(character_data: CharacterData) -> Texture2D:
+	var color := character_data.character_color_id.trim_prefix("color_")
+	var tex := load_if_exists(NEW_RUN_HERO.replace(".png", "_%s.png" % color))
+	return tex if tex else load_if_exists(NEW_RUN_HERO)
 
 
 static func load_if_exists(path: String) -> Texture2D:

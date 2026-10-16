@@ -55,7 +55,9 @@ static func _apply_hero_animations(character: CharacterData) -> void:
 	animation_data.add_animation(AnimationData.ANIMATION_ATTACK, AnimationData.ANIMATION_IDLE, attack if attack else idle, HERO_ATTACK_FPS)
 	# 倒れる絵 (hero_death_1..N.png) があればそれを、無ければ待機の1枚を HeroDeath が演出する
 	var death := _frame_paths(dir + "hero_death_%d.png")
-	animation_data.add_animation(AnimationData.ANIMATION_DEATH, AnimationData.ANIMATION_NONE, death if death else [idle[0]], HERO_DEATH_FPS)
+	if death.is_empty():
+		death.append(idle[0]) # [idle[0]] と書くと型なしの配列になり add_animation が受け付けない
+	animation_data.add_animation(AnimationData.ANIMATION_DEATH, AnimationData.ANIMATION_NONE, death, HERO_DEATH_FPS)
 	# 被ダメージ / 防御のリアクション (終わったら待機へ)
 	var hurt := _frame_paths(dir + "hero_hurt_%d.png")
 	if hurt:

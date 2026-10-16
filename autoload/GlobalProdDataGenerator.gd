@@ -35,6 +35,7 @@ func generate_production_data() -> void:
 	add_card_decorators()
 	add_cards()
 	BuildContent.register() # ビルド軸のタグ付けと武器 (scripts/content/BuildContent.gd)。カード登録の後に呼ぶ
+	HeroBlueContent.register_cards() # 2人目の主人公のカード (scripts/content/HeroBlueContent.gd)
 	
 	add_card_packs()
 	add_artifact_packs()
@@ -1724,6 +1725,9 @@ func add_characters() -> void:
 	Global.register_rod(animation_character_green)
 
 	Global.register_rod(character_green)
+
+	# 2人目の主人公 (青の少年魔法剣士)。基本カードは add_card_basics() がキャラの色ごとに作る
+	HeroBlueContent.register_character()
 
 #endregion
 

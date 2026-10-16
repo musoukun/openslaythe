@@ -59,7 +59,9 @@ func populate_run_start_options() -> void:
 	if Global.player_data.player_act != 1:
 		return
 	# populate complete options (1幕目だけ: 開始武器とボスレリック交換)
-	var complete_option_ids: Array[String] = _option_type_to_option_ids[RunStartOptionData.RUN_START_OPTION_TYPES.COMPLETE].duplicate()
+	var complete_option_ids: Array[String] = []
+	complete_option_ids.assign(_option_type_to_option_ids[RunStartOptionData.RUN_START_OPTION_TYPES.COMPLETE].filter(
+		func(id: String) -> bool: return Global.get_run_start_option_data(id).is_offered_to(Global.player_data.player_character_object_id)))
 	for i in min(COMPLETE_OPTION_COUNT, len(complete_option_ids)):
 		# get option
 		var complete_option_id: String = complete_option_ids.pop_back()

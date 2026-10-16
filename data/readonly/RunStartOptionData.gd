@@ -13,3 +13,9 @@ enum RUN_START_OPTION_TYPES {
 @export var run_start_option_type: int = RUN_START_OPTION_TYPES.COMPLETE
 
 @export var run_start_option_actions: Array[Dictionary] = []	# the action data to use when selecting this option
+
+## Characters this option is offered to (e.g. a hero's own starting weapons). Empty means every character.
+@export var run_start_option_character_ids: Array[String] = []
+
+func is_offered_to(character_object_id: String) -> bool:
+	return run_start_option_character_ids.is_empty() or run_start_option_character_ids.has(character_object_id)

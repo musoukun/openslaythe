@@ -14,6 +14,7 @@ extends Node
 ## --auto=shop_check : カード削除とカードの購入を実際に行い、お金とデッキの変化を出力する
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
+## --hero=<character_id> : ラン開始系のモードで使う主人公 (省略時は character_green。例 --hero=character_blue)
 ## 引数が無い場合は何もしない。
 
 const CHARACTER_ID := "character_green"
@@ -38,8 +39,14 @@ func _ready() -> void:
 		if menu_button:
 			menu_button.pressed.emit()
 			menu_button.button_up.emit()
+		# 新しいラン画面で --hero のキャラを選んだ状態にする
+		var new_run_menu := get_tree().root.find_child("NewRunMenu", true, false)
+		if new_run_menu and _get_user_arg("--hero=") != "":
+			await get_tree().process_frame
+			new_run_menu._on_character_selected(_get_user_arg("--hero="))
 		return
-	Global.start_run(CHARACTER_ID, 12345)
+	var hero_id := _get_user_arg("--hero=")
+	Global.start_run(hero_id if hero_id != "" else CHARACTER_ID, 12345)
 	await get_tree().create_timer(0.5).timeout
 	if mode.begins_with("event:"):
 		# --auto=event:<event_id>[:<選択肢番号>,<選択肢番号>...]
@@ -146,6 +153,58 @@ func _ready() -> void:
 			if mode == "profile":
 				await get_tree().create_timer(1.0).timeout
 				_profile()
+		"mana_check":
+			# 青の主人公 (--hero=character_blue) で戦闘に入り、マナの支払い・蒼刃の強化・蒼刃の戻り先を出力する
+			for location in Global.get_next_locations():
+				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+					ActionGenerator.generate_visition_location(location.location_id)
+					break
+			await get_tree().create_timer(3.0).timeout
+			await _mana_check()
+			get_tree().quit()
+
+
+func _mana_check() -> void:
+	var player: Player = Global.get_player()
+	var mana := func() -> int: return player.get_status_charges(HeroBlueContent.STATUS_MANA)
+	var blade: CardData = null
+	for card_data: CardData in HandManager.player_hand:
+		if card_data.object_id == "card_blue_mana_blade":
+			blade = card_data
+	print("MANA hand ", HandManager.player_hand.map(func(c): return c.object_id), " mana=", mana.call(), " energy=", Global.player_data.player_energy)
+	if blade == null:
+		print("MANA blade is not in the opening hand")
+		return
+	# 1. 強化前の蒼刃を振る: 8 ダメージで、山札の一番上に戻る
+	var enemy: BaseCombatant = Global.get_alive_enemies()[0]
+	var hp_before: int = enemy.get_combatant_health()
+	var blade_request: CardPlayRequest = HandManager.create_card_play_request(blade, enemy)
+	blade_request.card_destination_pile = blade.card_play_destination # Hand.gd と同じく行き先はカードの設定から
+	blade_request.card_destination_strategy = blade.card_play_destination_strategy
+	HandManager.add_card_to_play_queue(blade_request)
+	await get_tree().create_timer(2.0).timeout
+	print("MANA blade hit: enemy hp ", hp_before, " -> ", enemy.get_combatant_health(), " (expected -8)")
+	print("MANA blade back on top of draw pile: ", not HandManager.player_draw.is_empty() and HandManager.player_draw.back() == blade)
+	# 2. マナで払う呪文: マナが足りないと使えない
+	var flash: CardData = Global.get_card_data_from_prototype("card_blue_flash")
+	player.add_status_effect_charges(HeroBlueContent.STATUS_MANA, -mana.call())
+	print("MANA flash playable with mana=", mana.call(), ": ", Global.validate(flash.card_play_validators, flash, null), " (expected false)")
+	player.add_status_effect_charges(HeroBlueContent.STATUS_MANA, 99)
+	print("MANA mana capped at ", mana.call(), " (expected ", HeroBlueContent.MANA_MAX, ")")
+	print("MANA flash playable with mana=", mana.call(), ": ", Global.validate(flash.card_play_validators, flash, null), " (expected true)")
+	# 3. マナを注いで蒼刃を強化する
+	var extend: CardData = Global.get_card_data_from_prototype("card_blue_extend_blade")
+	var twin: CardData = Global.get_card_data_from_prototype("card_blue_twin_blade")
+	HandManager.add_cards_to_hand([extend, twin] as Array[CardData], 99)
+	await get_tree().create_timer(0.5).timeout
+	for card_data: CardData in [extend, twin]:
+		HandManager.add_card_to_play_queue(HandManager.create_card_play_request(card_data, null))
+		await get_tree().create_timer(1.5).timeout
+		print("MANA played ", card_data.object_id, " mana=", mana.call(), " edge=", player.get_status_charges(HeroBlueContent.STATUS_BLADE_EDGE), " twin=", player.get_status_charges(HeroBlueContent.STATUS_BLADE_TWIN))
+	var targets: Array[BaseCombatant] = [enemy]
+	var request: CardPlayRequest = HandManager.create_card_play_request(blade, enemy, true, true)
+	var preview: BaseAction = ActionGenerator.create_actions(player, request, targets, [{Scripts.ACTION_ATTACK: {}}], null)[0]
+	print("MANA blade damage per hit after Extend Blade: ", preview._intercept_action(targets, true)[0].get_shadowed_action_values("damage", 0), " (expected 14)")
 
 
 ## 性能計測: 何もしない時 / デッキ一覧を開いた直後 のフレーム時間

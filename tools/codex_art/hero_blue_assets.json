@@ -1,0 +1,145 @@
+{
+ "style": "Create original high-fantasy game art with chunky hand-inked dark contours, flat gouache-like color masses and restrained dry-brush texture, matching the painted hero style of this game. Arcane fantasy palette limited to deep navy, sapphire blue, ice cyan, silver steel and white, with glowing pale-blue mana light; absolutely no purple or violet. Bold readable silhouettes, two-step cel shading and selective cool highlights; reserve soft emission for active magic and mana orbs. Faces are drawn in a Japanese anime style on painted bodies, like the game's first hero. These are ORIGINAL characters: do not imitate any existing game, champion, franchise character, costume, mask, emblem or official artwork. Include no text, letters, numerals, labels, logos or watermarks.",
+ "assets": [
+  {
+   "id": "blue_concepts_mash",
+   "out": "tools/codex_art/refs/mage_concepts.png",
+   "size": [
+    1774,
+    887
+   ],
+   "category": "concept",
+   "brief": "2人目の主人公（中性的なマッシュの少年魔法剣士）のデザイン候補4案を1枚に並べる",
+   "prompt": "A character design lineup sheet showing FOUR candidate designs for ONE original hero: an androgynous teenage boy mage (about 15-17 years old, slim, gentle and slightly mysterious, could almost be mistaken for a girl but is a boy) with a neat rounded MUSHROOM-CUT bob hairstyle (thick rounded fringe falling to the eyebrows, hair rounded around the head to the ears or jaw), calm half-lidded eyes with a cool glint, and a small confident smile. He is a magic swordsman who gathers floating blue mana orbs and releases them through a blade. Every candidate has 3 to 5 small glowing pale-blue mana orbs floating around him. Arrange the four candidates side by side in one horizontal row, evenly spaced with clear empty space between them, each a full-body front three-quarter view standing on the same ground line at the same height, facing slightly RIGHT, so the outfit and weapon shape are clearly readable. Keep the same boy, face type and mushroom-cut hair concept in all four, but vary hair color, outfit and weapon so each has a distinctly different silhouette:\n(1) LEFT: navy-black mushroom-cut hair with a sapphire sheen; a long high-collared navy mage coat with silver clasps and wide sleeves; a silver vambrace on his right forearm that projects a straight blade made of pale-blue light.\n(2) CENTER-LEFT: silver-white mushroom-cut hair; a short white-and-sapphire hooded cape worn with the hood DOWN, shorts and tall boots; a slim staff whose tip is a crystal blade, like a sword-staff.\n(3) CENTER-RIGHT: ice-blue mushroom-cut hair; a layered sapphire robe with a wide sash and loose sleeves; three translucent ice-crystal short swords orbiting behind his shoulders instead of a held weapon.\n(4) RIGHT: dark-blue mushroom-cut hair with lighter tips; a fitted navy academy jacket with a short shoulder cape and a book chained at his hip; a thin rapier held low, its blade etched with glowing blue runes.\nAll four share the same painted style, line weight, lighting and palette, and all show their faces clearly (no masks, no hoods over the face). Plain flat light-grey background, no scenery, no floor, no cast shadows, no frames, no dividers, no labels or numbers."
+  },
+  {
+   "id": "hero_blue_master",
+   "out": "tools/codex_art/refs/hero_blue_master.png",
+   "size": [
+    1024,
+    1024
+   ],
+   "transparent": true,
+   "category": "icon",
+   "refs": [
+    "tools/codex_art/refs/hero_blue_concept1.png"
+   ],
+   "ref_rule": "Reference: attached image 1 is the approved concept sketch of this character. Match it exactly for the face, mushroom-cut hair, body proportions, coat, clasps, tassels, vambrace, light blade, boots and colors, but re-render everything in the Art direction's hand-inked gouache painted style (chunky dark contours, flat color masses, dry-brush texture), not the sketch's glossy anime cel style. Follow the Subject text for pose and framing; do not copy the reference's grey background or canvas.\n\n",
+   "brief": "青の主人公の正本 (master)。ほかのアセットの参照画像",
+   "prompt": "A full-body character design of an original androgynous teenage boy mage-swordsman (about 16, slim and gentle, could almost be mistaken for a girl but is a boy), a single figure, NOT an animation sheet, on a fully transparent background. His face is drawn in a Japanese anime style: calm half-lidded deep-blue eyes with a cool glint, thin brows, a tiny single-stroke nose and a small confident smile; fair skin. His hair is a neat rounded MUSHROOM-CUT bob in navy-black with a sapphire sheen, thick fringe falling to the eyebrows. He wears a long high-collared navy (#1B2A55) mage coat reaching his shins, with wide bell sleeves lined in lighter blue, a row of ornate silver clasps down the chest, silver-trimmed hems and silver diamond ornaments, a white tassel and a small glowing blue orb hanging from the belt at the front; black trousers and tall black boots with silver plates. On his RIGHT forearm he wears an ornate silver vambrace that projects a long straight blade made of pale-blue (#7FD3FF) light, pointing down and forward; his LEFT hand is raised palm-up with three glowing pale-blue mana orbs floating above it. Three-quarter view turned toward the RIGHT, standing calmly with feet planted. Show every identifying detail clearly: the mushroom-cut hair, the high collar, the silver clasps, both sleeves, the vambrace and light blade, the mana orbs, the belt tassel and orb, and the boots. Complete figure from the top of his hair to his boot soles and the blade tip, with at least 6 percent transparent margin on every side. No scenery, floor, shadow, border or text. This image is the canonical design reference for all other assets of this hero."
+  },
+  {
+   "id": "hero_blue_idle",
+   "out": "external/sprites/characters/character_blue/hero_idle.png",
+   "size": [
+    300,
+    300
+   ],
+   "transparent": true,
+   "anchor": "bottom",
+   "sheet": 1,
+   "category": "combatant",
+   "brief": "待機 1コマ (正本の raw を流用、呼吸は Tween)",
+   "reuse_raw": "hero_blue_master",
+   "prompt": "(reuses hero_blue_master raw)"
+  },
+  {
+   "id": "hero_blue_standing",
+   "out": "sprites/ui/hero_standing_blue.png",
+   "size": [
+    640,
+    1024
+   ],
+   "transparent": true,
+   "anchor": "bottom",
+   "pad": 0.02,
+   "category": "icon",
+   "brief": "新規ラン画面の立ち絵 (正本の raw を流用)",
+   "reuse_raw": "hero_blue_master",
+   "prompt": "(reuses hero_blue_master raw)"
+  },
+  {
+   "id": "hero_blue_attack",
+   "out": "external/sprites/characters/character_blue/hero_attack.png",
+   "size": [
+    450,
+    300
+   ],
+   "transparent": true,
+   "anchor": "bottom",
+   "sheet": 4,
+   "category": "combatant",
+   "refs": [
+    "tools/codex_art/refs/hero_blue_master.png"
+   ],
+   "ref_rule": "Reference: attached image 1 is the canonical design of this character. Match it exactly for the face, mushroom-cut hair, body proportions, coat, clasps, tassels, vambrace, light blade, mana orbs, boots, colors and rendering style. Follow the Subject text only for pose, framing, frame count and effects; do not copy the reference's pose or canvas.\n\n",
+   "brief": "攻撃 4コマ: マナを刃に注いで斬る",
+   "prompt": "An original androgynous teenage boy mage-swordsman (about 16, slim and gentle) with an anime-style face: calm half-lidded deep-blue eyes, a small confident smile, fair skin, and a neat navy-black MUSHROOM-CUT bob with a sapphire sheen. He wears a long high-collared navy mage coat with wide bell sleeves lined in lighter blue, silver clasps down the chest and silver-trimmed hems, a white tassel and small blue orb hanging from his belt, black trousers and tall black boots with silver plates. An ornate silver vambrace on his RIGHT forearm projects a straight blade of pale-blue (#7FD3FF) light; pale-blue mana orbs float near his LEFT hand. Keep this same face, hair, coat and equipment sides in every asset; never mirror the design. exactly 4 frames in a single horizontal row, equal-width cells, the SAME character at the SAME size and the SAME ground line in every frame, full body, facing RIGHT, clear empty gap between frames, nothing crosses a cell border, fully transparent background (no dark backdrop, no vignette, no glow haze behind the character; glow only on the light blade, orbs and magic itself), no text, no grid lines, no motion trail outside the cell. Read the frames from left to right. Use the same fixed camera, character scale and baseline across all animation sheets. STRICT CELL RULE: every pixel of a frame, including coat hems, blade, orbs and magic effects, must stay inside that frame's own cell with a clear transparent gap to the neighboring cells. Place the soles at approximately 94 percent of cell height, leaving at least 6 percent clear margin on all sides of each cell. No ground plane, contact shadow or cast shadow. This is his signature mana-blade strike. Frame 1: calm ready stance, light blade angled down-forward, three mana orbs floating by his left hand. Frame 2: wind-up, he draws the light blade back across his body while the mana orbs stream into the vambrace and the blade grows brighter and longer. Frame 3: a swift lunging diagonal slash to the right with a long, bright pale-blue crescent arc of light inside the cell, coat hem flaring. Frame 4: recover to the ready stance, the blade back to normal length, a few blue sparkles fading."
+  },
+  {
+   "id": "hero_blue_hurt",
+   "out": "external/sprites/characters/character_blue/hero_hurt.png",
+   "size": [
+    300,
+    300
+   ],
+   "transparent": true,
+   "anchor": "bottom",
+   "sheet": 3,
+   "category": "combatant",
+   "refs": [
+    "tools/codex_art/refs/hero_blue_master.png"
+   ],
+   "ref_rule": "Reference: attached image 1 is the canonical design of this character. Match it exactly for the face, mushroom-cut hair, body proportions, coat, clasps, tassels, vambrace, light blade, mana orbs, boots, colors and rendering style. Follow the Subject text only for pose, framing, frame count and effects; do not copy the reference's pose or canvas.\n\n",
+   "brief": "被弾 3コマ",
+   "prompt": "An original androgynous teenage boy mage-swordsman (about 16, slim and gentle) with an anime-style face: calm half-lidded deep-blue eyes, a small confident smile, fair skin, and a neat navy-black MUSHROOM-CUT bob with a sapphire sheen. He wears a long high-collared navy mage coat with wide bell sleeves lined in lighter blue, silver clasps down the chest and silver-trimmed hems, a white tassel and small blue orb hanging from his belt, black trousers and tall black boots with silver plates. An ornate silver vambrace on his RIGHT forearm projects a straight blade of pale-blue (#7FD3FF) light; pale-blue mana orbs float near his LEFT hand. Keep this same face, hair, coat and equipment sides in every asset; never mirror the design. exactly 3 frames in a single horizontal row, equal-width cells, the SAME character at the SAME size and the SAME ground line in every frame, full body, facing RIGHT, clear empty gap between frames, nothing crosses a cell border, fully transparent background (no dark backdrop, no vignette, no glow haze behind the character; glow only on the light blade, orbs and magic itself), no text, no grid lines, no motion trail outside the cell. Read the frames from left to right. Use the same fixed camera, character scale and baseline across all animation sheets. STRICT CELL RULE: every pixel of a frame, including coat hems, blade, orbs and magic effects, must stay inside that frame's own cell with a clear transparent gap to the neighboring cells. Place the soles at approximately 94 percent of cell height, leaving at least 6 percent clear margin on all sides of each cell. No ground plane, contact shadow or cast shadow. Frame 1: recoil backward to the left from an unseen hit arriving from the right, shoulders pulled back, light blade lowered, orbs scattering. Frame 2: deepest stagger, eyes squeezed shut, leaning back, coat flaring forward. Frame 3: regain balance with a cool determined look, blade raised again."
+  },
+  {
+   "id": "hero_blue_block",
+   "out": "external/sprites/characters/character_blue/hero_block.png",
+   "size": [
+    300,
+    300
+   ],
+   "transparent": true,
+   "anchor": "bottom",
+   "sheet": 3,
+   "category": "combatant",
+   "refs": [
+    "tools/codex_art/refs/hero_blue_master.png"
+   ],
+   "ref_rule": "Reference: attached image 1 is the canonical design of this character. Match it exactly for the face, mushroom-cut hair, body proportions, coat, clasps, tassels, vambrace, light blade, mana orbs, boots, colors and rendering style. Follow the Subject text only for pose, framing, frame count and effects; do not copy the reference's pose or canvas.\n\n",
+   "brief": "防御 3コマ: マナの玉が光の障壁になる",
+   "prompt": "An original androgynous teenage boy mage-swordsman (about 16, slim and gentle) with an anime-style face: calm half-lidded deep-blue eyes, a small confident smile, fair skin, and a neat navy-black MUSHROOM-CUT bob with a sapphire sheen. He wears a long high-collared navy mage coat with wide bell sleeves lined in lighter blue, silver clasps down the chest and silver-trimmed hems, a white tassel and small blue orb hanging from his belt, black trousers and tall black boots with silver plates. An ornate silver vambrace on his RIGHT forearm projects a straight blade of pale-blue (#7FD3FF) light; pale-blue mana orbs float near his LEFT hand. Keep this same face, hair, coat and equipment sides in every asset; never mirror the design. exactly 3 frames in a single horizontal row, equal-width cells, the SAME character at the SAME size and the SAME ground line in every frame, full body, facing RIGHT, clear empty gap between frames, nothing crosses a cell border, fully transparent background (no dark backdrop, no vignette, no glow haze behind the character; glow only on the light blade, orbs and magic itself), no text, no grid lines, no motion trail outside the cell. Read the frames from left to right. Use the same fixed camera, character scale and baseline across all animation sheets. STRICT CELL RULE: every pixel of a frame, including coat hems, blade, orbs and magic effects, must stay inside that frame's own cell with a clear transparent gap to the neighboring cells. Place the soles at approximately 94 percent of cell height, leaving at least 6 percent clear margin on all sides of each cell. No ground plane, contact shadow or cast shadow. Frame 1: he raises the vambrace across his chest and the mana orbs begin to spread in front of him. Frame 2: the orbs connect into a translucent pale-blue hexagonal barrier of light in front of him, inside the cell. Frame 3: the barrier dissolves into sparkles and he returns to the ready stance."
+  },
+  {
+   "id": "hero_blue_bust",
+   "out": "sprites/ui/hero_bust_blue.png",
+   "size": [
+    512,
+    512
+   ],
+   "transparent": true,
+   "category": "icon",
+   "refs": [
+    "tools/codex_art/refs/hero_blue_master.png"
+   ],
+   "ref_rule": "Reference: attached image 1 is the canonical design of this character. Match it exactly for the face, mushroom-cut hair, body proportions, coat, clasps, tassels, vambrace, light blade, mana orbs, boots, colors and rendering style. Follow the Subject text only for pose, framing, frame count and effects; do not copy the reference's pose or canvas.\n\n",
+   "brief": "バストアップ (アイコンもここから縮小して作る)",
+   "prompt": "An original androgynous teenage boy mage-swordsman (about 16, slim and gentle) with an anime-style face: calm half-lidded deep-blue eyes, a small confident smile, fair skin, and a neat navy-black MUSHROOM-CUT bob with a sapphire sheen. He wears a long high-collared navy mage coat with wide bell sleeves lined in lighter blue, silver clasps down the chest and silver-trimmed hems, a white tassel and small blue orb hanging from his belt, black trousers and tall black boots with silver plates. An ornate silver vambrace on his RIGHT forearm projects a straight blade of pale-blue (#7FD3FF) light; pale-blue mana orbs float near his LEFT hand. Keep this same face, hair, coat and equipment sides in every asset; never mirror the design. Create one single upper-body bust portrait, not an animation sheet, on a transparent background. He turns toward the RIGHT with a calm, slightly mysterious smile, the high collar framing his face, his left hand raised near his shoulder with three pale-blue mana orbs floating above it, and the tip of the vambrace's light blade crossing the lower corner. Make the face and mushroom-cut hair large and readable, since this image will also be shrunk to a 128-pixel icon. Leave at least 10 percent transparent outer margin. No border, background scene, text or cast shadow."
+  },
+  {
+   "id": "hero_blue_icon",
+   "out": "external/sprites/characters/character_blue/character_blue_icon.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "category": "icon",
+   "brief": "アイコン (バストアップの raw を流用して縮小)",
+   "reuse_raw": "hero_blue_bust",
+   "prompt": "(reuses hero_blue_bust raw)"
+  }
+ ]
+}
