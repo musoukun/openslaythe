@@ -701,7 +701,7 @@ func add_status_effects() -> void:
 	
 	# damages the player at the start of their turn and increases number of cards drawn
 	var status_effect_pollen: StatusEffectData = StatusEffectData.new("status_effect_pollen")
-	status_effect_pollen.status_effect_name = "Pollen"
+	status_effect_pollen.status_effect_name = "Fever Dream"
 	status_effect_pollen.status_effect_texture_path = "external/sprites/status_effects/status_effect_green.png"
 	status_effect_pollen.status_effect_decay_rate = 0
 	status_effect_pollen.status_effect_priority = 10
@@ -770,7 +770,7 @@ func add_status_effects() -> void:
 	
 	# status effect that grants overheat each turn
 	var status_effect_critical: StatusEffectData = StatusEffectData.new("status_effect_critical")
-	status_effect_critical.status_effect_name = "Critical"
+	status_effect_critical.status_effect_name = "Boiling Blood"
 	status_effect_critical.status_effect_texture_path = "external/sprites/status_effects/status_effect_green.png"
 	status_effect_critical.status_effect_decay_type = StatusEffectData.STATUS_EFFECT_DECAY_TYPES.LINEAR
 	status_effect_critical.status_effect_type = StatusEffectData.STATUS_EFFECT_TYPES.BUFF
@@ -798,7 +798,7 @@ func add_status_effects() -> void:
 	
 	# status effect that damages all combatants when overflowed
 	var status_effect_overheat: StatusEffectData = StatusEffectData.new("status_effect_overheat")
-	status_effect_overheat.status_effect_name = "Overheat"
+	status_effect_overheat.status_effect_name = "Blood Heat"
 	status_effect_overheat.status_effect_texture_path = "external/sprites/status_effects/status_effect_green.png"
 	status_effect_overheat.status_effect_decay_type = StatusEffectData.STATUS_EFFECT_DECAY_TYPES.HALF_LIFE_ROUND_UP
 	status_effect_overheat.status_effect_type = StatusEffectData.STATUS_EFFECT_TYPES.BUFF
@@ -831,7 +831,7 @@ func add_status_effects() -> void:
 	
 	# grants energy on overheat
 	var status_effect_feedback_loop: StatusEffectData = StatusEffectData.new("status_effect_feedback_loop")
-	status_effect_feedback_loop.status_effect_name = "Feedback Loop"
+	status_effect_feedback_loop.status_effect_name = "Fire Feeds Fire"
 	status_effect_feedback_loop.status_effect_texture_path = "external/sprites/status_effects/status_effect_green.png"
 	status_effect_feedback_loop.status_effect_script_path = "res://scripts/status_effects/StatusEffectFeedbackLoop.gd"
 	status_effect_feedback_loop.status_effect_decay_rate = 0
@@ -2456,7 +2456,7 @@ func add_cards_green() -> void:
 	
 	# Blossom
 	var card_blossom: CardData = CardData.new("card_blossom")
-	card_blossom.card_name = "Blossom"
+	card_blossom.card_name = "Rekindle"
 	card_blossom.card_color_id = "color_{0}".format([color])
 	card_blossom.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_blossom.card_description = "Gain [health_amount] HP"
@@ -2472,7 +2472,7 @@ func add_cards_green() -> void:
 	
 	# Bud
 	var card_bud: CardData = CardData.new("card_bud")
-	card_bud.card_name = "Bud"
+	card_bud.card_name = "Bristling Scales"
 	card_bud.card_color_id = "color_{0}".format([color])
 	card_bud.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_bud.card_description = "Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy. Exhaust."
@@ -2504,7 +2504,7 @@ func add_cards_green() -> void:
 	
 	# Cell Wall
 	var card_cell_wall: CardData = CardData.new("card_cell_wall")
-	card_cell_wall.card_name = "Cell Wall"
+	card_cell_wall.card_name = "Harden Scales"
 	card_cell_wall.card_color_id = "color_{0}".format([color])
 	card_cell_wall.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_cell_wall.card_description = "Convert Block into Overshield"
@@ -2527,7 +2527,7 @@ func add_cards_green() -> void:
 	
 	# Chloroplast
 	var card_chloroplast: CardData = CardData.new("card_chloroplast")
-	card_chloroplast.card_name = "Chloroplast"
+	card_chloroplast.card_name = "Wildfire Orb"
 	card_chloroplast.card_color_id = "color_{0}".format([color])
 	card_chloroplast.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_chloroplast.card_description = "Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone."
@@ -2562,7 +2562,7 @@ func add_cards_green() -> void:
 	
 	# Clippers
 	var card_clippers: CardData = CardData.new("card_clippers")
-	card_clippers.card_name = "Clippers"
+	card_clippers.card_name = "Twin Claws"
 	card_clippers.card_color_id = "color_{0}".format([color])
 	card_clippers.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_clippers.card_description = "Attack for [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Strength. On pickup, Gain [health_amount] HP."
@@ -2587,7 +2587,7 @@ func add_cards_green() -> void:
 	
 	# Differentiation
 	var card_differentiation: CardData = CardData.new("card_differentiation")
-	card_differentiation.card_name = "Differentiation"
+	card_differentiation.card_name = "Reckless Rend"
 	card_differentiation.card_color_id = "color_{0}".format([color])
 	card_differentiation.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_differentiation.card_description = "Do [attack_damage]. Lose [self_damage] HP."
@@ -2618,7 +2618,7 @@ func add_cards_green() -> void:
 	
 	# Fertilize
 	var card_fertilize: CardData = CardData.new("card_fertilize")
-	card_fertilize.card_name = "Fertilize"
+	card_fertilize.card_name = "Blood Kindling"
 	card_fertilize.card_color_id = "color_{0}".format([color])
 	card_fertilize.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_fertilize.card_description = "Gain {0}{0}. Lose [self_damage] HP.".format([Card.ENERGY_ICON_KEYWORD])
@@ -2643,7 +2643,7 @@ func add_cards_green() -> void:
 	
 	# Fruit
 	var card_fruit: CardData = CardData.new("card_fruit")
-	card_fruit.card_name = "Fruit"
+	card_fruit.card_name = "Dragon Egg"
 	card_fruit.card_color_id = "color_{0}".format([color])
 	card_fruit.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_fruit.card_description = "Randomly gain [small_max_health_amount] Max HP, [big_max_health_amount] Max HP, or {0}".format([Card.ENERGY_ICON_KEYWORD])
@@ -2671,7 +2671,7 @@ func add_cards_green() -> void:
 	
 	# Growth
 	var card_growth: CardData = CardData.new("card_growth")
-	card_growth.card_name = "Growth"
+	card_growth.card_name = "Shed Skin"
 	card_growth.card_color_id = "color_{0}".format([color])
 	card_growth.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_growth.card_description = "Gain [status_charge_amount] Overshield and draw 1 card."
@@ -2697,7 +2697,7 @@ func add_cards_green() -> void:
 	
 	# Lotus
 	var card_lotus: CardData = CardData.new("card_lotus")
-	card_lotus.card_name = "Lotus"
+	card_lotus.card_name = "Layered Scales"
 	card_lotus.card_color_id = "color_{0}".format([color])
 	card_lotus.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_lotus.card_description = "Double Overshield charges."
@@ -2721,7 +2721,7 @@ func add_cards_green() -> void:
 	
 	# Moss
 	var card_moss: CardData = CardData.new("card_moss")
-	card_moss.card_name = "Moss"
+	card_moss.card_name = "Scale Bash"
 	card_moss.card_color_id = "color_{0}".format([color])
 	card_moss.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_moss.card_description = "Gain [status_charge_amount]. Deal damage equal to Overshield."
@@ -2751,7 +2751,7 @@ func add_cards_green() -> void:
 	
 	# Pollen
 	var card_pollen: CardData = CardData.new("card_pollen")
-	card_pollen.card_name = "Pollen"
+	card_pollen.card_name = "Fever Dream"
 	card_pollen.card_color_id = "color_{0}".format([color])
 	card_pollen.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_pollen.card_description = "Take [status_charge_amount] damage at the start of your turn and draw [status_secondary_charge_amount] cards"
@@ -2773,7 +2773,7 @@ func add_cards_green() -> void:
 	
 	# Petals
 	var card_petals: CardData = CardData.new("card_petals")
-	card_petals.card_name = "Petals"
+	card_petals.card_name = "Wing Shroud"
 	card_petals.card_color_id = "color_{0}".format([color])
 	card_petals.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_petals.card_description = "Gain [block] block. Keep block for [status_charge_amount] turns. Exhaust. On pickup, gain [health_amount] HP."
@@ -2807,7 +2807,7 @@ func add_cards_green() -> void:
 	
 	# Reap
 	var card_reap: CardData = CardData.new("card_reap")
-	card_reap.card_name = "Reap"
+	card_reap.card_name = "Devour"
 	card_reap.card_color_id = "color_{0}".format([color])
 	card_reap.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_reap.card_description = "Attack for [damage] damage and gain Overshield for unblocked damage\nExhaust"
@@ -2837,7 +2837,7 @@ func add_cards_green() -> void:
 	
 	# Wildflower
 	var card_wildflower: CardData = CardData.new("card_wildflower")
-	card_wildflower.card_name = "Wildflower"
+	card_wildflower.card_name = "Wrath Claw"
 	card_wildflower.card_color_id = "color_{0}".format([color])
 	card_wildflower.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_wildflower.card_energy_cost = 2
@@ -2865,7 +2865,7 @@ func add_cards_green() -> void:
 	
 	# Symbiosis
 	var card_symbiosis: CardData = CardData.new("card_symbiosis")
-	card_symbiosis.card_name = "Symbiosis"
+	card_symbiosis.card_name = "Dragonhide"
 	card_symbiosis.card_color_id = "color_{0}".format([color])
 	card_symbiosis.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_symbiosis.card_description = "Overshield no longer decays"
@@ -2905,7 +2905,7 @@ func add_cards_green() -> void:
 	
 	# Thorns
 	var card_thorns: CardData = CardData.new("card_thorns")
-	card_thorns.card_name = "Thorns"
+	card_thorns.card_name = "Spined Guard"
 	card_thorns.card_color_id = "color_{0}".format([color])
 	card_thorns.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_thorns.card_description = "Gain [block] Block and [status_charge_amount] Pointy"
@@ -2934,7 +2934,7 @@ func add_cards_green() -> void:
 	
 	# Verdant
 	var card_verdant: CardData = CardData.new("card_verdant")
-	card_verdant.card_name = "Verdant"
+	card_verdant.card_name = "Unbreakable Hide"
 	card_verdant.card_color_id = "color_{0}".format([color])
 	card_verdant.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_verdant.card_description = "When drawn, cap incoming damage to [status_secondary_charge_amount] for [status_charge_amount] and Exhaust."
@@ -2967,7 +2967,7 @@ func add_cards_green() -> void:
 	
 	# Vines
 	var card_vines: CardData = CardData.new("card_vines")
-	card_vines.card_name = "Vines"
+	card_vines.card_name = "Tail Lash"
 	card_vines.card_color_id = "color_{0}".format([color])
 	card_vines.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_vines.card_description = "Do [damage] to all enemies [number_of_attacks] times. Not affected by Pointy"
@@ -2991,7 +2991,7 @@ func add_cards_green() -> void:
 	#region Research Archetype
 	# Conclusion
 	var card_conclusion: CardData = CardData.new("card_conclusion")
-	card_conclusion.card_name = "Conclusion"
+	card_conclusion.card_name = "Banked Flame"
 	card_conclusion.card_color_id = "color_{0}".format([color])
 	card_conclusion.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_conclusion.card_description = "Retain. Do [damage]. Gain 4 damage for each unused energy at turn end. Exhaust"
@@ -3029,7 +3029,7 @@ func add_cards_green() -> void:
 	
 	# Datum
 	var card_datum: CardData = CardData.new("card_datum")
-	card_datum.card_name = "Datum"
+	card_datum.card_name = "Mirror Scale"
 	card_datum.card_color_id = "color_{0}".format([color])
 	card_datum.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_datum.card_description = "Gain [block] Block. Duplicates on draw. Exhaust."
@@ -3109,7 +3109,7 @@ func add_cards_green() -> void:
 	
 	# Photoelectric Synthesis
 	var card_photoelectric_synthesis: CardData = CardData.new("card_photoelectric_synthesis")
-	card_photoelectric_synthesis.card_name = "Photoelectric Synthesis"
+	card_photoelectric_synthesis.card_name = "Dragon Awakening"
 	card_photoelectric_synthesis.card_color_id = "color_{0}".format([color])
 	card_photoelectric_synthesis.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
 	card_photoelectric_synthesis.card_description = "Gain 10 strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed."
@@ -3158,10 +3158,10 @@ func add_cards_green() -> void:
 	
 	# Big Boom
 	var card_big_boom: CardData = CardData.new("card_big_boom")
-	card_big_boom.card_name = "Big Boom"
+	card_big_boom.card_name = "Inferno"
 	card_big_boom.card_color_id = "color_{0}".format([color])
 	card_big_boom.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_big_boom.card_description = "Do [damage] damage to all enemies. Gain [status_charge_amount] Overheat."
+	card_big_boom.card_description = "Do [damage] damage to all enemies. Gain [status_charge_amount] Blood Heat."
 	card_big_boom.card_type = CardData.CARD_TYPES.ATTACK
 	card_big_boom.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_big_boom.card_requires_target = false
@@ -3186,10 +3186,10 @@ func add_cards_green() -> void:
 	
 	# Creates cards and adds them to hand
 	var card_containment: CardData = CardData.new("card_containment")
-	card_containment.card_name = "Containment"
+	card_containment.card_name = "Swallow the Fire"
 	card_containment.card_color_id = "color_{0}".format([color])
 	card_containment.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_containment.card_description = "Gain [block] Block. Add [number_of_cards] Wastes to hand"
+	card_containment.card_description = "Gain [block] Block. Add [number_of_cards] Cinders to hand"
 	card_containment.card_type = CardData.CARD_TYPES.SKILL
 	card_containment.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_containment.card_requires_target = false
@@ -3214,10 +3214,10 @@ func add_cards_green() -> void:
 	
 	# Critical
 	var card_critical: CardData = CardData.new("card_critical")
-	card_critical.card_name = "Critical"
+	card_critical.card_name = "Boiling Blood"
 	card_critical.card_color_id = "color_{0}".format([color])
 	card_critical.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_critical.card_description = "Gain [status_charge_amount] Overheat each turn."
+	card_critical.card_description = "Gain [status_charge_amount] Blood Heat each turn."
 	card_critical.card_type = CardData.CARD_TYPES.POWER
 	card_critical.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_critical.card_requires_target = false
@@ -3236,10 +3236,10 @@ func add_cards_green() -> void:
 	
 	# Feedback Loop
 	var card_feedback_loop: CardData = CardData.new("card_feedback_loop")
-	card_feedback_loop.card_name = "Feedback Loop"
+	card_feedback_loop.card_name = "Fire Feeds Fire"
 	card_feedback_loop.card_color_id = "color_{0}".format([color])
 	card_feedback_loop.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_feedback_loop.card_description = "Gain {0} whenever you Overheat.".format([Card.ENERGY_ICON_KEYWORD])
+	card_feedback_loop.card_description = "Gain {0} whenever your Blood Heat boils over.".format([Card.ENERGY_ICON_KEYWORD])
 	card_feedback_loop.card_type = CardData.CARD_TYPES.POWER
 	card_feedback_loop.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_feedback_loop.card_requires_target = false
@@ -3258,10 +3258,10 @@ func add_cards_green() -> void:
 	
 	# Fusion Cannon
 	var card_fusion_cannon: CardData = CardData.new("card_fusion_cannon")
-	card_fusion_cannon.card_name = "Special Discard"
+	card_fusion_cannon.card_name = "Cinder Volley"
 	card_fusion_cannon.card_color_id = "color_{0}".format([color])
 	card_fusion_cannon.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_fusion_cannon.card_description = "Do [damage] damage for each Waste card in your exhaust pile. Add 1 Waste to your hand."
+	card_fusion_cannon.card_description = "Do [damage] damage for each Cinder in your exhaust pile. Add 1 Cinder to your hand."
 	card_fusion_cannon.card_type = CardData.CARD_TYPES.ATTACK
 	card_fusion_cannon.card_rarity = CardData.CARD_RARITIES.RARE
 	card_fusion_cannon.card_energy_cost = 4
@@ -3300,10 +3300,10 @@ func add_cards_green() -> void:
 	
 	# Meltdown
 	var card_meltdown: CardData = CardData.new("card_meltdown")
-	card_meltdown.card_name = "Meltdown"
+	card_meltdown.card_name = "Searing Breath"
 	card_meltdown.card_color_id = "color_{0}".format([color])
 	card_meltdown.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_meltdown.card_description = "Do [damage] damage. Gain [status_charge_amount] Overheat."
+	card_meltdown.card_description = "Do [damage] damage. Gain [status_charge_amount] Blood Heat."
 	card_meltdown.card_type = CardData.CARD_TYPES.ATTACK
 	card_meltdown.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_meltdown.card_requires_target = true
@@ -3327,10 +3327,10 @@ func add_cards_green() -> void:
 	
 	# Particle Accelerator
 	var card_particle_accelerator: CardData = CardData.new("card_particle_accelerator")
-	card_particle_accelerator.card_name = "Particle Accelerator"
+	card_particle_accelerator.card_name = "Stoke the Heart"
 	card_particle_accelerator.card_color_id = "color_{0}".format([color])
 	card_particle_accelerator.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_particle_accelerator.card_description = "Gain [energy_amount] Energy. Add [number_of_cards] Wastes to discard pile."
+	card_particle_accelerator.card_description = "Gain [energy_amount] Energy. Add [number_of_cards] Cinders to discard pile."
 	card_particle_accelerator.card_type = CardData.CARD_TYPES.SKILL
 	card_particle_accelerator.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_particle_accelerator.card_requires_target = false
@@ -3361,10 +3361,10 @@ func add_cards_green() -> void:
 	
 	# Unstable
 	var card_unstable: CardData = CardData.new("card_unstable")
-	card_unstable.card_name = "Unstable"
+	card_unstable.card_name = "Flare Up"
 	card_unstable.card_color_id = "color_{0}".format([color])
 	card_unstable.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_unstable.card_description = "Draw [draw_count] cards. Gain [status_charge_amount] Overheat"
+	card_unstable.card_description = "Draw [draw_count] cards. Gain [status_charge_amount] Blood Heat"
 	card_unstable.card_type = CardData.CARD_TYPES.SKILL
 	card_unstable.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_unstable.card_requires_target = false
@@ -3386,10 +3386,10 @@ func add_cards_green() -> void:
 	
 	# Waste
 	var card_waste: CardData = CardData.new("card_waste")
-	card_waste.card_name = "Waste"
+	card_waste.card_name = "Cinder"
 	card_waste.card_color_id = "color_{0}".format([color])
 	card_waste.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_waste.card_description = "At end of turn gain [status_charge_amount] Overheat and do [damage] damage to a random enemy. Exhaust"
+	card_waste.card_description = "At end of turn gain [status_charge_amount] Blood Heat and do [damage] damage to a random enemy. Exhaust"
 	card_waste.card_type = CardData.CARD_TYPES.STATUS
 	card_waste.card_rarity = CardData.CARD_RARITIES.GENERATED
 	card_waste.card_requires_target = false

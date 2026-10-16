@@ -70,7 +70,7 @@ func _ready() -> void:
 			print("WEAPON deck ", card_data.object_id, " tags=", card_data.card_tags, " damage ", card_data.card_values.get("damage", 0), " -> ", damage)
 		return
 	match mode:
-		"map":
+		"map", "map_top":
 			_print_map_stats()
 			# ラン開始の選択肢パネルがマップを覆うので閉じてから表示する
 			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false) as Control
@@ -79,6 +79,10 @@ func _ready() -> void:
 			var map := get_tree().root.find_child("Map", true, false)
 			if map:
 				map.show_map()
+				# map_top: ボス紋章のある上端までスクロールして見せる
+				if mode == "map_top":
+					await get_tree().process_frame
+					map.scroll_container.scroll_vertical = 0
 		"deck":
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:

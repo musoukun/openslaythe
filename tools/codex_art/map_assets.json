@@ -24,8 +24,8 @@
    ],
    "transparent": true,
    "category": "map_icon",
-   "brief": "normal enemy",
-   "prompt": "A small round robot head icon with two angry eye slits and a tiny antenna, front view, compact and bold."
+   "brief": "normal enemy (golem)",
+   "prompt": "A small round stone golem head icon with a single narrow eye slit, a mossy crack across its brow and a tiny fern sprouting on top, front view, compact and bold."
   },
   {
    "id": "mapicon_miniboss",
@@ -36,8 +36,8 @@
    ],
    "transparent": true,
    "category": "map_icon",
-   "brief": "elite enemy",
-   "prompt": "A fierce horned robot skull icon with big jagged pincer jaws and angry eyes, bolder and more menacing than a normal enemy, front view."
+   "brief": "elite enemy (golem)",
+   "prompt": "A fierce horned stone golem skull icon with heavy bronze jaw plates, a cracked brow and two narrow angry eye slits, bolder and more menacing than a normal enemy, front view."
   },
   {
    "id": "mapicon_event",
@@ -61,7 +61,7 @@
    "transparent": true,
    "category": "map_icon",
    "brief": "merchant",
-   "prompt": "A merchant icon: a tied coin sack with a small sprout growing from its knot."
+   "prompt": "A merchant icon: a tied coin sack with a few coins spilling out beside it."
   },
   {
    "id": "mapicon_treasure",
@@ -96,8 +96,8 @@
    ],
    "transparent": true,
    "category": "map_icon",
-   "brief": "boss",
-   "prompt": "A big menacing boiler-robot face icon with a greenhouse dome on its head and a grill mouth, framed by a spiky ring."
+   "brief": "boss (Brood Cauldron)",
+   "prompt": "A big menacing cauldron-golem face icon: a round stone-and-bronze cauldron head with a cracked glass dome on top, handle loops at its sides and an arched hatch for a mouth, framed by a spiky ring."
   },
   {
    "id": "map_boss_emblem",
@@ -109,7 +109,7 @@
    "transparent": true,
    "category": "map",
    "brief": "boss illustration at the top of the map",
-   "prompt": "A large ink illustration of the act boss 'Mother Pot': a massive egg-shaped nursery boiler robot with a glass greenhouse dome on top, pipe handles like hips, a belly hatch and little seedling robots peeking out, sitting on a cloud of billowing steam. Drawn in the single sepia ink with light hatching, like an illustration printed on a map. Front view, centered."
+   "prompt": "A large ink illustration of the act boss 'Brood Cauldron': a massive egg-shaped stone-and-bronze cauldron golem with a cracked glass dome on top, handle loops like proud hips, an arched belly hatch with two little pebble golems peeking out, and two huge stone feet, standing on a curling cloud of mist and ivy. Drawn in the single sepia ink with light hatching, like an illustration printed on a map. Front view, centered."
   },
   {
    "id": "mapicon_starting_dragon",

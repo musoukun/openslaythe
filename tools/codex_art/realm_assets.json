@@ -1,0 +1,518 @@
+{
+ "style": "Create original high-fantasy game art with chunky hand-inked dark contours, flat gouache-like color masses and restrained dry-brush texture, matching a painted dragon-and-kingdom deckbuilder; heroic with a light touch of humor. ENEMIES are ancient clockwork golems that overran an enchanted forest: weathered pale stone and colored sandstone bodies, tarnished bronze and brass plates, gears and rivets, creeping moss, ivy and tiny ferns, and softly glowing teal rune light in their eyes and seams (runes are abstract glowing lines, never letters). They are characterful and a little ridiculous, never modern robots: no screens, no wires, no plastic, no sci-fi parts. CARD art shows the power of an original half-dragon warrior through her parts and effects: copper-red dragon-scale gauntlets ending in four curved black-iron claws with glowing ember-orange cracks, a crimson spade-tipped dragon tail, translucent ember-fire wings and copper-red scales; plus golems, enchanted forest ruins, volcanic basalt and dragon fire. When the warrior appears, show only her gauntlets, claws, tail or wings, or a small silhouette from behind; never draw her face. Palette: blackened iron #2A2426, copper-red #B5532E, crimson #8E1B23, ivory #EFE2C4, amber #F2A93B, ember #FF8A2A, mossy greens, weathered stone and teal rune light. Bold readable silhouettes, two-step cel shading and selective warm highlights; reserve soft emission for fire, runes and VFX. Do not imitate any existing game, champion, franchise character, emblem or official artwork. Include no text, letters, numerals, labels, logos, emblems, watermarks or typographic symbols, and respect each asset's stated background and framing requirements.",
+ "assets": [
+  {
+   "id": "enemy_1",
+   "out": "external/sprites/enemies/enemy_1.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Bellhelm Sentry' (regular enemy), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Squat round golem of weathered red sandstone hiding under an oversized tarnished-bronze bell-shaped helmet that covers most of its body, moss and one tiny fern on the helm's crown, a single glowing teal rune eye slit peeking out under the rim, a short rusty bronze trident, two stubby stone feet. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_2",
+   "out": "external/sprites/enemies/enemy_2.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Tidy Shardling' (regular enemy), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Small fussy golem of polished pale-blue crystal and white stone wearing a huge pleated ivory stone ruff collar like a fancy bonnet, a little bronze spout nose, an indignant glowing teal eye slit and two narrow paddle feet; prim upright posture, spotless with no moss at all. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_3",
+   "out": "external/sprites/enemies/enemy_3.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Bog Belcher' (regular enemy), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Pear-shaped golem of mossy green clay with a swollen cracked glass belly vessel full of bubbling plum-purple swamp acid, a loose bronze stopper on top, an anxious round glowing teal eye, a drip of acid on its chin and two splayed stone feet. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_4",
+   "out": "external/sprites/enemies/enemy_4.png",
+   "size": [
+    200,
+    200
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Vise Colossus' (regular enemy), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Broad heavy golem of dark plum-gray basalt with two enormous tarnished-bronze vise-jaw forearms, a glowing teal rune core in its chest plate, a small ivory stone head with a narrow eye slit, squat pillar legs, moss in its cracks and a sealed glass jar of purple swamp acid strapped to its back. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_act_1_miniboss_1",
+   "out": "external/sprites/enemies/enemy_act_1_miniboss_1.png",
+   "size": [
+    220,
+    220
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Topiary Warden' (boss), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Imposing boxy golem whose body is a perfectly trimmed rectangular hedge block over a white stone frame, two oversized bronze garden-shear blades forming its arms, a cream stone rectangular head with a disapproving narrow glowing teal eye slit and heavy terracotta stone stomping feet; prim and rigid, no paperwork or lettering. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_act_1_miniboss_2",
+   "out": "external/sprites/enemies/enemy_act_1_miniboss_2.png",
+   "size": [
+    220,
+    220
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Courtly Shears' (miniboss), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Tall slender golem of ivory stone and polished bronze shaped like a court dancer, an ivory ruffled stone collar, two long bronze scissor-blade arms, a tiny tilted head with one glowing teal eye and two curled pointed feet, performing a theatrical forward bow with one blade arm extended. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_act_1_boss_1",
+   "out": "external/sprites/enemies/enemy_act_1_boss_1.png",
+   "size": [
+    300,
+    300
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Brood Cauldron' (boss), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Massive egg-shaped golem built like a giant stone-and-bronze cauldron, a cracked glass dome on top with moss and glowing teal runes inside, bronze handle loops like proud hips, a broad arched belly hatch glowing with warm rune light, little mossy ledges on its shoulders and two huge terracotta stone feet; a stern little glowing eye slit looks left, hatch empty for independent minion spawning. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_minion_1",
+   "out": "external/sprites/enemies/enemy_minion_1.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Pebbling' (minion), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Tiny round red-clay golem with a pointed bronze snout, one ivory stone eye with a glowing teal pupil, a sprig of moss on its head and comically oversized terracotta stone boots; compact eager forward lean. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "enemy_minion_2",
+   "out": "external/sprites/enemies/enemy_minion_2.png",
+   "size": [
+    160,
+    160
+   ],
+   "transparent": true,
+   "brief": "Enemy 'Millring' (minion), a clockwork golem. Faces LEFT. Full body.",
+   "category": "combatant",
+   "anchor": "bottom",
+   "prompt": "Tiny blue-gray millstone golem shaped like a round stone ring with one big cream eye in its center hole, a bronze rim, little paddle stone arms and two stubby cream stone feet; round open silhouette. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
+  },
+  {
+   "id": "card_basic_attack_green",
+   "out": "external/sprites/cards/green/card_basic_attack_green.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Basic Attack' (ATTACK): Deal 7 damage.",
+   "category": "card_art",
+   "prompt": "A copper-red dragon-scale gauntlet slashes diagonally upward with four curved black-iron claws, leaving three bright ember-orange claw streaks across a mossy stone golem's chipped shoulder plate; dusky enchanted forest ruins behind. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_basic_block_green",
+   "out": "external/sprites/cards/green/card_basic_block_green.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Basic Block' (SKILL): Gain 5 block.",
+   "category": "card_art",
+   "prompt": "Two crossed copper-red dragon-scale gauntlets raised in guard, a translucent ember-fire wing curling in front of them like a shield; centered, cool dark stone background with warm rim light. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blossom",
+   "out": "external/sprites/cards/green/card_blossom.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Rekindle' (SKILL): Gain [health_amount] HP",
+   "category": "card_art",
+   "prompt": "A small warm ember flame cupped between two clawed copper-red gauntlets, glowing like a heartbeat and mending cracked scales with golden light; calm centered composition on a dark warm background. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_bud",
+   "out": "external/sprites/cards/green/card_bud.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Bristling Scales' (SKILL): Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy. Exhaust.",
+   "category": "card_art",
+   "prompt": "Copper-red scales along a forearm bristle up into sharp ivory spikes while a stone golem hand recoils from matching thorny spines sprouting on its own fingers; balanced diagonal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_cell_wall",
+   "out": "external/sprites/cards/green/card_cell_wall.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Harden Scales' (SKILL): Convert Block into Overshield",
+   "category": "card_art",
+   "prompt": "A copper-red dragon-scale gauntlet whose scales thicken and lock into nested layers of glowing amber armor plates, shown like a cutaway with clear concentric layers; dark iron background. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_chloroplast",
+   "out": "external/sprites/cards/green/card_chloroplast.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Wildfire Orb' (ATTACK): Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone.",
+   "category": "card_art",
+   "prompt": "A crackling translucent orb of wild ember fire bursts above small mossy golem silhouettes, throwing a circular wave of flame toward every edge, including toward a clawed gauntlet in the foreground; amber stress cracks in the orb. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_clippers",
+   "out": "external/sprites/cards/green/card_clippers.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Twin Claws' (ATTACK): Attack for [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Strength. On pickup, Gain [health_amount] HP.",
+   "category": "card_art",
+   "prompt": "Two clawed copper-red gauntlets cross in a rapid double slash, two separated sets of ember claw streaks along a rising diagonal, sparks of teal rune light flying from a golem's stone plate. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_differentiation",
+   "out": "external/sprites/cards/green/card_differentiation.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Reckless Rend' (ATTACK): Do [attack_damage]. Lose [self_damage] HP.",
+   "category": "card_art",
+   "prompt": "Black-iron claws rip deep into a golem's bronze plate while the attacking arm's own scales crack and leak ember light; aggressive diagonal where the sacrifice is clearly visible. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_fertilize",
+   "out": "external/sprites/cards/green/card_fertilize.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Blood Kindling' (SKILL): Gain {0}{0}. Lose [self_damage] HP.",
+   "category": "card_art",
+   "prompt": "A clawed gauntlet squeezes drops of glowing crimson blood onto a small iron brazier, where they ignite into a tall amber flame; a coral sting of pain flares on the knuckles; close-up. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_fruit",
+   "out": "external/sprites/cards/green/card_fruit.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Dragon Egg' (SKILL): Randomly gain [small_max_health_amount] Max HP, [big_max_health_amount] Max HP, or {0}",
+   "category": "card_art",
+   "prompt": "One large speckled ivory-and-crimson dragon egg resting in a nest of glowing embers, faint cracks hinting at a heart-shaped warmth and a spark of energy inside; mysterious centered glow. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_growth",
+   "out": "external/sprites/cards/green/card_growth.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Shed Skin' (SKILL): Gain [status_charge_amount] Overshield and draw 1 card.",
+   "category": "card_art",
+   "prompt": "A translucent old layer of copper-red scaled skin peels away from a forearm, revealing fresh glowing scales beneath, and one blank cream parchment card flutters out from the peeled layer; strong vertical composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_lotus",
+   "out": "external/sprites/cards/green/card_lotus.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Layered Scales' (SKILL): Double Overshield charges.",
+   "category": "card_art",
+   "prompt": "A symmetrical rosette of overlapping copper-red dragon scales unfolds a second, larger ring of glowing amber scales around the first, like a protective flower made of armor; centered. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_moss",
+   "out": "external/sprites/cards/green/card_moss.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Scale Bash' (ATTACK): Gain [status_charge_amount]. Deal damage equal to Overshield.",
+   "category": "card_art",
+   "prompt": "A heavy forearm covered in thick glowing layered scales slams into a golem's stone chest and cracks it, chips of stone flying; compact diagonal mass. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_pollen",
+   "out": "external/sprites/cards/green/card_pollen.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Fever Dream' (POWER): Take [status_charge_amount] damage at the start of your turn and draw [status_secondary_charge_amount] cards",
+   "category": "card_art",
+   "prompt": "Swirling heat haze and amber sparks rise around a pair of clawed hands, and blank cream parchment cards drift out of the smoke while an ember singes one knuckle; dreamy swirling composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_petals",
+   "out": "external/sprites/cards/green/card_petals.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Wing Shroud' (SKILL): Gain [block] block. Keep block for [status_charge_amount] turns. Exhaust. On pickup, gain [health_amount] HP.",
+   "category": "card_art",
+   "prompt": "Translucent ember-fire dragon wings fold tightly forward in overlapping layers like cloak panels, forming a glowing shelter with warm ivory light inside; centered. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_reap",
+   "out": "external/sprites/cards/green/card_reap.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Devour' (ATTACK): Attack for [damage] damage and gain Overshield for unblocked damage\\nExhaust",
+   "category": "card_art",
+   "prompt": "A clawed gauntlet tears a glowing teal rune core out of a broken stone golem, and the stolen light flows up the arm into hardening amber scales; left-to-right sweeping diagonal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_wildflower",
+   "out": "external/sprites/cards/green/card_wildflower.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Wrath Claw' (ATTACK): Attack for [damage] damage. Costs 0 if damage was taken this turn.",
+   "category": "card_art",
+   "prompt": "A dented, scratched gauntlet clenches as its cracks flare ember-bright with rage, a single reversed scale blazing at the wrist, lunging at a stone golem; exuberant angry diagonal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_symbiosis",
+   "out": "external/sprites/cards/green/card_symbiosis.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Dragonhide' (POWER): Overshield no longer decays",
+   "category": "card_art",
+   "prompt": "A crimson spade-tipped dragon tail curls into a closed loop around a glowing layered scale shield, ember veins pulsing steadily through both; calm symmetric composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_thorns",
+   "out": "external/sprites/cards/green/card_thorns.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Spined Guard' (SKILL): Gain [block] Block and [status_charge_amount] Pointy",
+   "category": "card_art",
+   "prompt": "A raised copper-red gauntlet in guard with three bold ivory spikes jutting from its outer edge, teal rune light glinting on the spikes; compact frontal silhouette. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_verdant",
+   "out": "external/sprites/cards/green/card_verdant.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Unbreakable Hide' (SKILL): When drawn, cap incoming damage to [status_secondary_charge_amount] for [status_charge_amount] and Exhaust.",
+   "category": "card_art",
+   "prompt": "A broad low wall of interlocking black-iron and copper-red scales stops a huge stone golem fist at the same height across its top edge, sparks spraying; clear protective ceiling silhouette. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_vines",
+   "out": "external/sprites/cards/green/card_vines.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Tail Lash' (ATTACK): Do [damage] to all enemies [number_of_attacks] times. Not affected by Pointy",
+   "category": "card_art",
+   "prompt": "A thick crimson spade-tipped dragon tail whips across a row of small mossy golems in a wide arc, two motion streaks showing two sweeps; broad parallel curves, no tangled fine strands. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_conclusion",
+   "out": "external/sprites/cards/green/card_conclusion.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Banked Flame' (ATTACK): Retain. Do [damage]. Gain 4 damage for each unused energy at turn end. Exhaust",
+   "category": "card_art",
+   "prompt": "A tightly compressed white-hot core of ember fire held in a clawed fist, concentric rings of stored heat around it, firing one decisive lance of flame diagonally upward. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_datum",
+   "out": "external/sprites/cards/green/card_datum.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Mirror Scale' (SKILL): Gain [block] Block. Duplicates on draw. Exhaust.",
+   "category": "card_art",
+   "prompt": "One polished copper-red dragon scale splits into two identical glowing scales side by side, each reflecting ember light; spare mirrored composition on dark iron. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_photoelectric_synthesis",
+   "out": "external/sprites/cards/green/card_photoelectric_synthesis.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Dragon Awakening' (POWER): Gain 10 strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed.",
+   "category": "card_art",
+   "prompt": "Huge translucent ember-fire wings flare open behind a small warrior silhouette seen from behind, one clawed gauntlet raised to a swirling sun of fire whose amber light pours into its cracks; low-angle triangular composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_big_boom",
+   "out": "external/sprites/cards/green/card_big_boom.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Inferno' (ATTACK): Do [damage] damage to all enemies. Gain [status_charge_amount] Overheat.",
+   "category": "card_art",
+   "prompt": "A gigantic roaring column of dragon fire erupts above tiny scattered mossy golems, its ivory-hot center mushrooming into a coral-orange fireball over volcanic basalt ground. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_containment",
+   "out": "external/sprites/cards/green/card_containment.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Swallow the Fire' (SKILL): Gain [block] Block. Add [number_of_cards] Wastes to hand",
+   "category": "card_art",
+   "prompt": "A clawed gauntlet clamps shut around a burst of flame, squeezing it into a glowing fist, while a few small smoldering black cinders drop from between the claws; strong centered composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_critical",
+   "out": "external/sprites/cards/green/card_critical.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Boiling Blood' (POWER): Gain [status_charge_amount] Overheat each turn.",
+   "category": "card_art",
+   "prompt": "Glowing ember veins pulse and swell under a crimson-scaled forearm, steam rising off the scales, a molten heart-shaped core of light at the wrist; upright pressure silhouette. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_feedback_loop",
+   "out": "external/sprites/cards/green/card_feedback_loop.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Fire Feeds Fire' (POWER): Gain {0} whenever you Overheat.",
+   "category": "card_art",
+   "prompt": "A ring of flame curls into a complete loop around a clawed gauntlet, its exhaust returning as one bright amber energy bead into the open palm; clear circular composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_fusion_cannon",
+   "out": "external/sprites/cards/green/card_fusion_cannon.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Cinder Volley' (ATTACK): Do [damage] damage for each Waste card in your exhaust pile. Add 1 Waste to your hand.",
+   "category": "card_art",
+   "prompt": "A clawed gauntlet hurls a volley of glowing black cinders scooped from a smoldering ash pile, one concentrated ember bolt leading the shot, a fresh smoking cinder dropping beside the hand; diagonal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_meltdown",
+   "out": "external/sprites/cards/green/card_meltdown.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Searing Breath' (ATTACK): Do [damage] damage. Gain [status_charge_amount] Overheat.",
+   "category": "card_art",
+   "prompt": "A torrent of molten orange dragon breath pours in from the upper left onto a single stone golem whose stone glows and sags; close-up downward diagonal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_particle_accelerator",
+   "out": "external/sprites/cards/green/card_particle_accelerator.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Stoke the Heart' (SKILL): Gain [energy_amount] Energy. Add [number_of_cards] Wastes to discard pile.",
+   "category": "card_art",
+   "prompt": "A clawed hand feeds a burning coal into a glowing dragon-heart brazier that whirls bright amber energy around itself, spent black cinders tumbling out of a side vent; crisp tilted ellipse. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_unstable",
+   "out": "external/sprites/cards/green/card_unstable.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Flare Up' (SKILL): Draw [draw_count] cards. Gain [status_charge_amount] Overheat",
+   "category": "card_art",
+   "prompt": "A trembling ball of ember fire bursts open between two clawed hands, ejecting blank cream parchment cards and a coral puff of heat; off-balance triangular composition. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_waste",
+   "out": "external/sprites/cards/green/card_waste.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "brief": "Card illustration for card 'Cinder' (STATUS): At end of turn gain [status_charge_amount] Overheat and do [damage] damage to a random enemy. Exhaust",
+   "category": "card_art",
+   "prompt": "One smoldering black cinder lump with glowing orange cracks and a thin curl of smoke, a single spark escaping sideways; isolated close-up on dark ash. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  }
+ ]
+}

@@ -40,7 +40,7 @@ static func _leaking_sprinkler() -> EventData:
 static func _radioactive_bloom() -> EventData:
 	return _event("event_bloom", "Radioactive Bloom", [
 		_state("start", "A gorgeous flower blooms from a leaking waste barrel. Its roots are tangled in coins.", "event_bloom", [
-			_option("Pick it. [color=green]Gain 250 Gold[/color]. [color=red]Add 2 Radioactive Waste to your deck[/color].", [_gold(250), _add_card(WASTE_CARD_ID, 2)]),
+			_option("Pick it. [color=green]Gain 250 Gold[/color]. [color=red]Add 2 Cinders to your deck[/color].", [_gold(250), _add_card(WASTE_CARD_ID, 2)]),
 			_option("Admire it. [color=green]Heal 10 HP[/color].", [_heal(10)]),
 		]),
 	])
@@ -104,7 +104,7 @@ static func _pruning_barber() -> EventData:
 	return _event("event_barber", "Pruning Barber", [
 		_state("start", "A dapper pruning robot snaps its scissor hands. \"A little off the top?\"", "event_barber", [
 			_option("[color=red]Pay 75 Gold[/color]. [color=green]Remove a card[/color].", [_gold(-75)] + remove, [_need_gold(75)] + has_removable, "Not enough Gold"),
-			_option("Free trim. [color=green]Remove a card[/color]. [color=red]Add 1 Radioactive Waste[/color].", remove + [_add_card(WASTE_CARD_ID, 1)], has_removable, "No removable cards"),
+			_option("Free trim. [color=green]Remove a card[/color]. [color=red]Add 1 Cinder[/color].", remove + [_add_card(WASTE_CARD_ID, 1)], has_removable, "No removable cards"),
 			_leave(),
 		]),
 	])

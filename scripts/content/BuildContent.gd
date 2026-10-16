@@ -1,5 +1,5 @@
 class_name BuildContent
-## ビルド軸 (LoL の AD / AP に当たる「物理」と「炉心」) の定義。
+## ビルド軸 (LoL の AD / AP に当たる「物理」と「竜炎」) の定義。
 ## カードに軸のタグを付け、ラン開始時に選ぶ武器レリックがその軸のダメージを伸ばす。
 ## 計算は InterceptorTagScaling が player_values["tag_damage_<tag>"] を読んで行う。
 ## GlobalProdDataGenerator.generate_production_data() から、カード登録後に register() が呼ばれる。
@@ -8,11 +8,11 @@ const TAG_PHYSICAL := "physical"
 const TAG_REACTOR := "reactor"
 const INTERCEPTOR_ID := "interceptor_tag_scaling"
 
-## 刃物・植物の攻撃。手数で伸びる
+## 爪・尾の攻撃。手数で伸びる
 const PHYSICAL_CARD_IDS: Array[String] = [
 	"card_basic_attack_green", "card_clippers", "card_reap", "card_wildflower", "card_vines",
 ]
-## 炉心の攻撃。枚数は少ないが1発の上乗せが大きい
+## 竜炎の攻撃 (タグ ID は reactor のまま)。枚数は少ないが1発の上乗せが大きい
 const REACTOR_CARD_IDS: Array[String] = [
 	"card_meltdown", "card_big_boom", "card_fusion_cannon", "card_chloroplast", "card_conclusion",
 ]
@@ -21,9 +21,9 @@ const REACTOR_CARD_IDS: Array[String] = [
 static func register() -> void:
 	_register_interceptor()
 	_register_axis(TAG_PHYSICAL, "Physical", PHYSICAL_CARD_IDS)
-	_register_axis(TAG_REACTOR, "Reactor", REACTOR_CARD_IDS)
-	_register_weapon("artifact_weapon_pruning_blade", "Pruning Blade", TAG_PHYSICAL, 2, "artifact_increase_attack_on_rest")
-	_register_weapon("artifact_weapon_reactor_gauntlet", "Reactor Gauntlet", TAG_REACTOR, 5, "artifact_boss_green")
+	_register_axis(TAG_REACTOR, "Dragonfire", REACTOR_CARD_IDS)
+	_register_weapon("artifact_weapon_pruning_blade", "Honed Claws", "Physical", TAG_PHYSICAL, 2, "artifact_increase_attack_on_rest")
+	_register_weapon("artifact_weapon_reactor_gauntlet", "Dragonfire Gauntlet", "Dragonfire", TAG_REACTOR, 5, "artifact_boss_green")
 
 
 static func _register_interceptor() -> void:
@@ -53,9 +53,9 @@ static func _register_axis(tag: String, axis_name: String, card_ids: Array[Strin
 
 
 ## 武器レリックと、それをラン開始時に選ぶ選択肢を作る
-static func _register_weapon(artifact_id: String, weapon_name: String, tag: String, damage_bonus: int, texture_name: String) -> void:
+static func _register_weapon(artifact_id: String, weapon_name: String, axis_name: String, tag: String, damage_bonus: int, texture_name: String) -> void:
 	var value_name: String = InterceptorTagScaling.TAG_DAMAGE_VALUE_PREFIX + tag
-	var description: String = "%s attacks deal +%d damage per hit." % [tag.capitalize(), damage_bonus]
+	var description: String = "%s attacks deal +%d damage per hit." % [axis_name, damage_bonus]
 
 	var weapon: ArtifactData = ArtifactData.new(artifact_id)
 	weapon.artifact_name = weapon_name

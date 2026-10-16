@@ -2,40 +2,40 @@
   "game_title": "Petal Fallout",
   "enemies": {
     "enemy_1": {
-      "name": "Cloche Clobber",
-      "description": "A red enamel gardening robot hides under an oversized protective bell lid and pokes intruders with a pruning fork."
+      "name": "Bellhelm Sentry",
+      "description": "A red sandstone golem hides under an oversized bronze bell helm that shrugs off the first blow, then pokes intruders with a rusty trident."
     },
     "enemy_2": {
-      "name": "Rinse Biscuit",
-      "description": "A tiny blue rinse robot wears a spotless filter bonnet and treats every visitor as a stain."
+      "name": "Tidy Shardling",
+      "description": "A tiny crystal golem in a spotless stone ruff lets every curse slide right off and treats each visitor as a smudge."
     },
     "enemy_3": {
-      "name": "Compost Cougher",
-      "description": "A leaking green compost robot keeps its corrosive leftovers in a tank that is one sneeze from bursting."
+      "name": "Bog Belcher",
+      "description": "A mossy clay golem whose glass belly sloshes with swamp acid, one hiccup away from bursting."
     },
     "enemy_4": {
-      "name": "Crimp Foreman",
-      "description": "A heavy clamp robot pinches protective shells open with an oversized pair of press jaws."
+      "name": "Vise Colossus",
+      "description": "A basalt golem pries armor open with enormous bronze vise jaws while a jar of swamp acid sloshes on its back."
     },
     "enemy_act_1_miniboss_1": {
-      "name": "Hedge Accountant",
-      "description": "A boxy hedge robot tries to trim every living thing into the same approved rectangle."
+      "name": "Topiary Warden",
+      "description": "A hedge golem tries to trim every living thing into the same approved rectangle."
     },
     "enemy_act_1_miniboss_2": {
-      "name": "Snip Etiquette",
-      "description": "A tall red pruning robot performs fussy little bows between rude mechanical snips."
+      "name": "Courtly Shears",
+      "description": "A slender bronze golem performs fussy little bows between rude, very sharp snips."
     },
     "enemy_act_1_boss_1": {
-      "name": "Mother Pot",
-      "description": "A walking nursery boiler releases tiny maintenance robots from its belly and insists they are seedlings."
+      "name": "Brood Cauldron",
+      "description": "A walking stone cauldron pours little golems out of its belly and insists they are its children."
     },
     "enemy_minion_1": {
-      "name": "Boltling",
-      "description": "A red seed-capsule robot charges ahead on feet much too large for its body."
+      "name": "Pebbling",
+      "description": "A red clay pebble golem charges ahead on boots much too large for its body."
     },
     "enemy_minion_2": {
-      "name": "Washerling",
-      "description": "A blue washer-shaped nursery robot fusses over its shell before waddling into trouble."
+      "name": "Millring",
+      "description": "A millstone golem no bigger than a plate fusses over its rim before rolling into trouble."
     }
   }
 }
