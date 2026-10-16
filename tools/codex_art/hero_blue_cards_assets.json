@@ -1,0 +1,173 @@
+{
+ "style": "Create original high-fantasy game art with chunky hand-inked dark contours, flat gouache-like color masses and restrained dry-brush texture, matching a painted dragon-and-kingdom deckbuilder; heroic with a light touch of wonder. CARD art shows the power of an original boy spellblade through his parts and effects: an ornate silver vambrace on his right forearm projecting a straight blade of pale-blue light, glowing pale-blue mana orbs, navy coat sleeves with silver trim, blue runes, crystal shards and blue arcane spells; plus the clockwork golem enemies, enchanted forest ruins and weathered stone. When the spellblade appears, show only his gloved hand, vambrace, light blade, coat sleeve, or a small silhouette from behind; never draw his face. Palette: deep navy #1B2A55, sapphire, ice cyan, pale-blue light #7FD3FF, silver steel and white, with mossy greens and weathered stone in the scenery; absolutely no purple or violet. Bold readable silhouettes, two-step cel shading and selective cool highlights; reserve soft emission for light blades, mana, runes and VFX. Do not imitate any existing game, champion, franchise character, emblem or official artwork. Include no text, letters, numerals, labels, logos, emblems, watermarks or typographic symbols, and respect each asset's stated background and framing requirements.",
+ "assets": [
+  {
+   "id": "card_basic_attack_blue",
+   "out": "external/sprites/cards/blue/card_basic_attack_blue.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Slash'",
+   "prompt": "A pale-blue light blade projected from a silver vambrace slashes diagonally across a mossy stone golem's chipped shoulder, leaving a bright cyan arc; dusky forest ruins behind. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_basic_block_blue",
+   "out": "external/sprites/cards/blue/card_basic_block_blue.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Brace'",
+   "prompt": "A navy coat sleeve and silver vambrace raised across the frame, a small pale-blue hexagonal shimmer of light catching a golem's stone fist; forest ruins behind. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_mana_blade",
+   "out": "external/sprites/cards/blue/card_blue_mana_blade.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Mana Blade'",
+   "prompt": "The signature weapon: an ornate silver vambrace projecting a long, straight, brilliant blade of pale-blue light, three mana orbs spiraling into it, held ready against a dark forest ruin; the blade is the clear hero of the image. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_gather_mana",
+   "out": "external/sprites/cards/blue/card_blue_gather_mana.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Gather Mana'",
+   "prompt": "A gloved open palm with three glowing pale-blue mana orbs gathering above it, thin streams of blue light flowing in from the surrounding air and a faint protective shimmer. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_meditate",
+   "out": "external/sprites/cards/blue/card_blue_meditate.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Meditate'",
+   "prompt": "A small calm silhouette seen from behind, sitting cross-legged on a mossy ruin step, a ring of floating pale-blue mana orbs slowly circling above him at night. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_quickcast",
+   "out": "external/sprites/cards/blue/card_blue_quickcast.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Quickcast'",
+   "prompt": "A gloved hand flicking two spinning blue spell cards of pure light out of the air while small runes burst around the fingers like sparks. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_arcane_edge",
+   "out": "external/sprites/cards/blue/card_blue_arcane_edge.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Arcane Edge'",
+   "prompt": "A quick horizontal cut of the pale-blue light blade through a bronze golem's arm, one bright mana orb popping out of the cut like a spark. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_mana_spring",
+   "out": "external/sprites/cards/blue/card_blue_mana_spring.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Mana Spring'",
+   "prompt": "A small spring of glowing pale-blue water bubbling up between mossy ruin stones, mana orbs rising from it like bubbles into the dusk. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_flash",
+   "out": "external/sprites/cards/blue/card_blue_flash.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Blue Flash'",
+   "prompt": "A single bright pale-blue bolt of light fired from a gloved fingertip, streaking straight into a stone golem's chest plate with a star-shaped burst. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_mana_shards",
+   "out": "external/sprites/cards/blue/card_blue_mana_shards.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Mana Shards'",
+   "prompt": "Two sharp ice-cyan crystal shards flying in a pair from an open palm toward a mossy golem, small sparkles trailing behind them. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_frost_ward",
+   "out": "external/sprites/cards/blue/card_blue_frost_ward.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Frost Ward'",
+   "prompt": "A translucent barrier of interlocking ice-blue hexagonal crystals forming in front of a raised silver vambrace, a golem's blow cracking against it. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_torrent",
+   "out": "external/sprites/cards/blue/card_blue_torrent.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Azure Torrent'",
+   "prompt": "A roaring river of pale-blue magic light pouring down from a raised hand and sweeping over a row of small golem silhouettes, three bright waves of light. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_extend_blade",
+   "out": "external/sprites/cards/blue/card_blue_extend_blade.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Extend Blade'",
+   "prompt": "Mana orbs flowing into a silver vambrace while its pale-blue light blade stretches to double length, a bright ring of runes sliding along the blade. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  },
+  {
+   "id": "card_blue_twin_blade",
+   "out": "external/sprites/cards/blue/card_blue_twin_blade.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": false,
+   "category": "card_art",
+   "brief": "Card illustration for 'Twin Blade'",
+   "prompt": "A silver vambrace projecting TWO parallel pale-blue light blades side by side, crossed sparks of mana between them, ready to strike twice. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+  }
+ ]
+}
