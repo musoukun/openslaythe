@@ -88,6 +88,7 @@ signal combat_stat_changed(stat_enum: int)	# can be used to hook into certain st
 
 #region Overworld
 signal map_location_selected(location_data: LocationData)	# the player clicked on a location that can be traveled to
+signal act_started	# 2幕目以降の幕が始まった (開始地点の祝福を出す。1幕目は map_location_selected の STARTING)
 signal chest_opened	# player has opened a chest
 signal shop_opened	# player has opened a shop
 signal shop_visited_first_time # player has visited a shop for the first time

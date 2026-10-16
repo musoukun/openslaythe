@@ -52,14 +52,16 @@ const HAND_CARD_ROTATION_CURVE_MULTIPLIER: float = 6.0 # multiplies the curve sa
 const HAND_CARD_Y_OFFSET_CURVE_MULTIPLIER: float = -20.0 # multiplies the curve sampling
 
 const CARD_WIDTH: float = 144.0 # how big the Card asset is. NOTE: Update this if you update Card's size at all
-const CARD_SEPERATION_WIDTH: float = CARD_WIDTH * .75 # how far apart each card should be from one another. Generally between .5 to 1X the card width
+const CARD_SEPERATION_WIDTH: float = CARD_WIDTH * .85 # how far apart each card should be from one another. Generally between .5 to 1X the card width
 
 const MIDDLE_OFFSET: float = CARD_WIDTH / 2
 var middle: float = (size[0] / 2) - MIDDLE_OFFSET # calculate middle X position of hand container, with optional offset for fine tuning
 
-# y offsets for when the player hovers over a card
-const CARD_UNHOVERED_HEIGHT = 0.0
-const CARD_HOVERED_HEIGHT = -30
+# ホバー中のカードは StS のように拡大してまっすぐにし、下端を画面下にそろえて前に出す。両隣は左右へ押しのける
+const CARD_HOVER_SCALE: float = 1.6
+const CARD_HOVER_PUSH: float = 50.0 # 両隣のカードを押しのける距離
+const CARD_VISUAL_BOTTOM: float = 94.0 # Pivot から CardVisual の下端までの距離 (Card.tscn)
+var hovered_card: Card = null
 
 const CARD_PICK_POSITIONS: Array = [
 	[0.0],
@@ -119,7 +121,8 @@ func tween_hand():
 	var hand_index: int = 0	# counter for number of cards in hand
 	var pick_index: int = 0 # counter for number of cards picked
 	var z_index_counter: int = 0
-	
+	var hovered_index: int = _get_hovered_hand_index()
+
 	for card_data: CardData in HandManager.player_hand:
 		var card: Card = card_data_to_hand_card.get(card_data)
 		if card == null:
@@ -130,7 +133,8 @@ func tween_hand():
 		# values of rotation and position after calculations
 		var new_position: Vector2 = Vector2()
 		var new_rot: float = 0.0
-		
+		var new_scale: float = 1.0
+
 		# figure out if the card is in hand or picked
 		var is_card_in_hand: bool = true
 		if current_card_pick_action != null:
@@ -159,7 +163,16 @@ func tween_hand():
 				var card_x_offset: float = middle + (card_x_seperation * card_index_offset)
 				# final position
 				new_position = Vector2(card_x_offset, card_y_offset)
-			
+
+			if hovered_index != -1:
+				if hand_index == hovered_index:
+					new_rot = 0
+					new_scale = CARD_HOVER_SCALE
+					new_position.y = _get_hovered_card_y(card)
+					card.z_index = 50
+				else:
+					new_position.x += CARD_HOVER_PUSH * sign(hand_index - hovered_index)
+
 			hand_index += 1
 		else:
 			# card not in hand
@@ -172,31 +185,36 @@ func tween_hand():
 		tween.tween_property(card.pivot, "position", new_position, CARD_TWEEN_TIME)
 		var tween_2: Tween = create_tween()
 		tween_2.tween_property(card.pivot, "rotation_degrees", new_rot, CARD_TWEEN_TIME)
+		var tween_3: Tween = create_tween()
+		tween_3.tween_property(card.pivot, "scale", Vector2.ONE * new_scale, CARD_TWEEN_TIME)
+
+## ホバー中のカードが、選択済み (pick) を除いた手札の列で何番目かを返す。無ければ -1
+func _get_hovered_hand_index() -> int:
+	if not is_instance_valid(hovered_card):
+		return -1
+	var index: int = 0
+	for card_data: CardData in HandManager.player_hand:
+		if current_card_pick_action != null and current_card_pick_action.picked_cards.has(card_data):
+			continue
+		if card_data_to_hand_card.get(card_data) == hovered_card:
+			return index
+		index += 1
+	return -1
+
+## 拡大したカードの下端が画面下にそろう Pivot の y 位置
+func _get_hovered_card_y(card: Card) -> float:
+	return get_viewport_rect().size.y - card.global_position.y - CARD_VISUAL_BOTTOM * CARD_HOVER_SCALE
 
 
 func _on_card_hovered(card: Card):
-	update_hand_card_hover(card)
-		
+	hovered_card = card
+	tween_hand()
 
-func _on_card_unhovered(_card: Card):
-	update_hand_card_hover(null)
 
-func update_hand_card_hover(hovered_card: Card = null) -> void:
-	var z_index_counter: int = 0
-	for card_data: CardData in HandManager.player_hand:
-		var card_in_hand: Card = card_data_to_hand_card.get(card_data)
-		if card_in_hand == null:
-			continue
-		
-		if hovered_card == card_in_hand:
-			# hovered card
-			card_in_hand.position.y = CARD_HOVERED_HEIGHT
-			card_in_hand.z_index = 50
-		else:
-			# unhovered cards
-			card_in_hand.position.y = CARD_UNHOVERED_HEIGHT
-			card_in_hand.z_index = z_index_counter
-			z_index_counter += 1
+func _on_card_unhovered(card: Card):
+	if hovered_card == card:
+		hovered_card = null
+		tween_hand()
 
 func _on_card_selected(card: Card):
 	# card clicked, attempt to do something with it

@@ -27,6 +27,7 @@
  "Music": "scene:Root.tscn",
  "Effects": "scene:Root.tscn",
  "Language": "scene:Root.tscn",
+ "Fullscreen (F11 / Alt+Enter)": "scene:Root.tscn",
  "Cards": "scene:Root.tscn",
  "Artifacts": "scene:Root.tscn",
  "Consumables": "scene:Root.tscn",

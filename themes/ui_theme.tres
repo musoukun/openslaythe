@@ -1,0 +1,157 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="Texture2D" path="res://themes/icons/checkbox_checked.svg" id="1_checked"]
+[ext_resource type="Texture2D" path="res://themes/icons/checkbox_unchecked.svg" id="2_unchecked"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.04, 0.1, 0.11, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.85, 0.62, 0.55)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0784314, 0.172549, 0.188235, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.513725, 0.788235, 0.627451, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.721569, 0.458824, 0.305882, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.913725, 0.729412, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(1, 0.819608, 0.470588, 0.35)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.5, 0.3, 0.19, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.913725, 0.729412, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.06, 0.1, 0.11, 0.7)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.5, 0.48, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_check"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[resource]
+BackPanel/base_type = &"PanelContainer"
+BackPanel/styles/panel = SubResource("StyleBoxFlat_panel")
+Button/colors/font_color = Color(0.968627, 0.941176, 0.858824, 1)
+Button/colors/font_disabled_color = Color(0.72, 0.72, 0.68, 1)
+Button/colors/font_focus_color = Color(0.968627, 0.941176, 0.858824, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0.0392157, 0.0705882, 0.0705882, 1)
+Button/colors/font_pressed_color = Color(1, 0.858824, 0.54902, 1)
+Button/constants/outline_size = 4
+Button/styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+Button/styles/hover = SubResource("StyleBoxFlat_button_hover")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_button_pressed")
+Button/styles/normal = SubResource("StyleBoxFlat_button_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+CheckBox/colors/font_color = Color(0.968627, 0.941176, 0.858824, 1)
+CheckBox/colors/font_focus_color = Color(0.968627, 0.941176, 0.858824, 1)
+CheckBox/colors/font_hover_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_hover_pressed_color = Color(1, 0.858824, 0.54902, 1)
+CheckBox/colors/font_outline_color = Color(0.0392157, 0.0705882, 0.0705882, 1)
+CheckBox/colors/font_pressed_color = Color(1, 0.858824, 0.54902, 1)
+CheckBox/constants/outline_size = 4
+CheckBox/icons/checked = ExtResource("1_checked")
+CheckBox/icons/checked_disabled = ExtResource("1_checked")
+CheckBox/icons/unchecked = ExtResource("2_unchecked")
+CheckBox/icons/unchecked_disabled = ExtResource("2_unchecked")
+CheckBox/styles/disabled = SubResource("StyleBoxEmpty_check")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_check")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_check")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_check")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_check")
+CheckButton/colors/font_color = Color(0.968627, 0.941176, 0.858824, 1)
+CheckButton/colors/font_hover_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_outline_color = Color(0.0392157, 0.0705882, 0.0705882, 1)
+CheckButton/colors/font_pressed_color = Color(1, 0.858824, 0.54902, 1)
+CheckButton/constants/outline_size = 4
+CheckButton/icons/checked = ExtResource("1_checked")
+CheckButton/icons/checked_disabled = ExtResource("1_checked")
+CheckButton/icons/unchecked = ExtResource("2_unchecked")
+CheckButton/icons/unchecked_disabled = ExtResource("2_unchecked")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_check")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_check")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_check")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_check")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_check")
+Label/colors/font_color = Color(0.968627, 0.941176, 0.858824, 1)
+Label/colors/font_outline_color = Color(0.0392157, 0.0705882, 0.0705882, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.45)
+Label/constants/outline_size = 5
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 5
+LinkButton/colors/font_color = Color(1, 0.858824, 0.54902, 1)
+LinkButton/colors/font_focus_color = Color(1, 0.858824, 0.54902, 1)
+LinkButton/colors/font_hover_color = Color(1, 1, 1, 1)
+LinkButton/colors/font_outline_color = Color(0.0392157, 0.0705882, 0.0705882, 1)
+LinkButton/colors/font_pressed_color = Color(1, 0.94, 0.8, 1)
+LinkButton/constants/outline_size = 5
+RichTextLabel/colors/default_color = Color(0.968627, 0.941176, 0.858824, 1)
+RichTextLabel/colors/font_outline_color = Color(0.0392157, 0.0705882, 0.0705882, 1)
+RichTextLabel/constants/outline_size = 4

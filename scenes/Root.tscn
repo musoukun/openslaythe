@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ckfi22o2jit0b" path="res://scripts/Root.gd" id="1_ak6de"]
 [ext_resource type="Theme" uid="uid://cd5rw86bhiyn" path="res://themes/title_screen_theme.tres" id="2_bi5lp"]
+[ext_resource type="Theme" path="res://themes/ui_theme.tres" id="2_uitheme"]
 [ext_resource type="Script" uid="uid://dw0xyfu580mkb" path="res://scripts/ui/menus/TitleScreen.gd" id="2_m6atk"]
 [ext_resource type="Texture2D" uid="uid://d33u8m744fh03" path="res://icon.svg" id="3_8ax2e"]
 [ext_resource type="Script" uid="uid://dao05mln2rw4g" path="res://scripts/ui/Combat.gd" id="3_h4evn"]
@@ -201,6 +202,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_uitheme")
 script = ExtResource("1_ak6de")
 
 [node name="TitleScreen" type="Control" parent="." unique_id=1833198571]
@@ -350,74 +352,55 @@ theme = ExtResource("2_bi5lp")
 text = "New Run"
 horizontal_alignment = 1
 
-[node name="CharacterSelect" type="Control" parent="TitleScreen/NewRunMenu" unique_id=1360860974]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
+[node name="CharacterSelect" type="PanelContainer" parent="TitleScreen/NewRunMenu" unique_id=1360860974]
+layout_mode = 0
+offset_left = 16.0
 offset_top = 96.0
-offset_right = 368.0
-grow_vertical = 2
+offset_right = 416.0
+offset_bottom = 380.0
+theme_type_variation = &"BackPanel"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/NewRunMenu/CharacterSelect" unique_id=225630526]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="CharacterNameLabel" type="Label" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer" unique_id=1473832797]
 unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
 theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 28
 text = "Character Name"
-horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="Control" type="Control" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer" unique_id=1904766542]
-custom_minimum_size = Vector2(0, 48)
+[node name="Control" type="HBoxContainer" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer" unique_id=1904766542]
 layout_mode = 2
+theme_override_constants/separation = 24
 
 [node name="CharacterHealthLabel" type="Label" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer/Control" unique_id=1228433366]
 unique_name_in_owner = true
 layout_direction = 2
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 32.0
-offset_top = -12.0
-offset_right = 160.0
-offset_bottom = 12.0
-grow_vertical = 2
-theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 17
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.858824, 0.54902, 1)
+theme_override_font_sizes/font_size = 18
 text = "HP: "
 vertical_alignment = 1
 
 [node name="CharacterMoneyLabel" type="Label" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer/Control" unique_id=948848595]
 unique_name_in_owner = true
 layout_direction = 2
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 120.0
-offset_top = -12.0
-offset_right = 323.0
-offset_bottom = 12.0
-grow_vertical = 2
-theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 17
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.858824, 0.54902, 1)
+theme_override_font_sizes/font_size = 18
 text = "Money:"
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer" unique_id=2122819924]
 layout_mode = 2
-theme_override_constants/margin_left = 32
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
 
 [node name="CharacterDescriptionLabel" type="Label" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer/MarginContainer" unique_id=1051847027]
 unique_name_in_owner = true
@@ -428,38 +411,35 @@ theme_override_font_sizes/font_size = 16
 text = "Character Description"
 autowrap_mode = 2
 
-[node name="Control2" type="Control" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer" unique_id=455039422]
-custom_minimum_size = Vector2(0, 200)
+[node name="Control2" type="HBoxContainer" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer" unique_id=455039422]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="CharacterArtifactTextureRect" type="TextureRect" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer/Control2" unique_id=2017348455]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-offset_left = 16.0
-offset_top = 10.0
-offset_right = 80.0
-offset_bottom = 74.0
+layout_mode = 2
+size_flags_vertical = 0
 texture = ExtResource("3_8ax2e")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer/Control2" unique_id=1888833082]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 10.0
-offset_right = 360.0
-offset_bottom = 178.0
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CharacterArtifactNameLabel" type="Label" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer/Control2/VBoxContainer" unique_id=1043437012]
 unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.858824, 0.54902, 1)
 theme_override_font_sizes/font_size = 16
 text = "Artifact Name"
-clip_text = true
+autowrap_mode = 3
 
 [node name="CharacterArtifactDescriptionLabel" type="Label" parent="TitleScreen/NewRunMenu/CharacterSelect/VBoxContainer/Control2/VBoxContainer" unique_id=1447978852]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
 layout_direction = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -600,36 +580,33 @@ shortcut_feedback = false
 shortcut_in_tooltip = false
 text = "Back"
 
-[node name="CustomModifiers" type="Control" parent="TitleScreen/NewRunMenu" unique_id=1333666331]
+[node name="CustomModifiers" type="PanelContainer" parent="TitleScreen/NewRunMenu" unique_id=1333666331]
 layout_mode = 1
-anchors_preset = 11
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -344.0
+offset_left = -376.0
 offset_top = 96.0
+offset_right = -16.0
+offset_bottom = 300.0
 grow_horizontal = 0
-grow_vertical = 2
+theme_type_variation = &"BackPanel"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/NewRunMenu/CustomModifiers" unique_id=1733328188]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="Label" type="Label" parent="TitleScreen/NewRunMenu/CustomModifiers/VBoxContainer" unique_id=296747209]
 layout_direction = 2
 layout_mode = 2
 theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 26
 text = "Custom Modifiers"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TitleScreen/NewRunMenu/CustomModifiers/VBoxContainer" unique_id=708751212]
-custom_minimum_size = Vector2(41.25, 400)
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TitleScreen/NewRunMenu/CustomModifiers/VBoxContainer/ScrollContainer" unique_id=2060070545]
 layout_mode = 2
@@ -654,6 +631,15 @@ script = ExtResource("17_giapx")
 navigation_button_to_menu = {
 NodePath("MainMenuButton"): NodePath("../MainMenu")
 }
+
+[node name="Backplate" type="Panel" parent="TitleScreen/SettingsMenu" unique_id=1760423311]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 88.0
+offset_right = 720.0
+offset_bottom = 512.0
+mouse_filter = 2
+theme_type_variation = &"BackPanel"
 
 [node name="MainMenuButton" type="Button" parent="TitleScreen/SettingsMenu" unique_id=309892979]
 layout_mode = 0

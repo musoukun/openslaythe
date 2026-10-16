@@ -4,7 +4,10 @@ extends Node
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=combat : ラン開始して最初の戦闘に入る
 ## --auto=new_run : タイトルから「新しいラン」画面を開く
+## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
+## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
+## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
 ## 引数が無い場合は何もしない。
 
 const CHARACTER_ID := "character_green"
@@ -21,8 +24,10 @@ func _ready() -> void:
 		get_tree().quit()
 		return
 	await get_tree().create_timer(0.3).timeout
-	if mode == "settings" or mode == "new_run":
-		var button_name := "SettingsButton" if mode == "settings" else "NewRunButton"
+	var menu_aliases := {"settings": "menu:SettingsButton", "new_run": "menu:NewRunButton"}
+	mode = menu_aliases.get(mode, mode)
+	if mode.begins_with("menu:"):
+		var button_name := mode.trim_prefix("menu:")
 		var menu_button := get_tree().root.find_child(button_name, true, false) as BaseButton
 		if menu_button:
 			menu_button.pressed.emit()
@@ -41,6 +46,9 @@ func _ready() -> void:
 		ActionGenerator.generate_visition_location(location.location_id)
 		if parts.size() > 2:
 			await _click_event_options(parts[2].split(","))
+		return
+	if mode.begins_with("blessing"):
+		await _blessing(mode.split(":"))
 		return
 	if mode.begins_with("weapon:"):
 		# --auto=weapon:<artifact_id|none>
@@ -92,11 +100,16 @@ func _ready() -> void:
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:
 				deck_button.button_up.emit()
-		"combat", "vfx", "profile", "hitstop":
+		"combat", "combat_hover", "vfx", "profile", "hitstop":
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
 					break
+			if mode == "combat_hover":
+				await get_tree().create_timer(2.0).timeout
+				var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
+				if hand_cards.size() > 2:
+					HandManager.hand._on_card_hovered(hand_cards[2])
 			if mode == "vfx":
 				await get_tree().create_timer(1.0).timeout
 				_preview_vfx()
@@ -144,6 +157,24 @@ func _profile() -> void:
 			total += ms
 		print("PROFILE %s: avg %.1f ms, worst %.1f ms, cards %d" % [phase, total / 60.0, worst, get_tree().get_nodes_in_group("cards").size()])
 	get_tree().quit()
+
+
+## 祝福の画面 (RunStartOptions)。幕の指定があれば、その幕の開始として出し直す
+func _blessing(parts: PackedStringArray) -> void:
+	if parts.size() > 2:
+		Global.player_data.player_act = int(parts[2])
+		Signals.act_started.emit()
+	var run_start_options := get_tree().root.find_child("RunStartOptions", true, false)
+	await get_tree().create_timer(2.5).timeout
+	var options := run_start_options.find_children("*", "DialogueOption", true, false)
+	print("BLESSING act=", Global.player_data.player_act, " options=", options.map(func(o): return o.rich_text_label.get_parsed_text()))
+	if parts.size() < 2 or parts[1] == "":
+		return
+	print("BLESSING before: ", _player_summary())
+	var option: DialogueOption = options[int(parts[1])]
+	option.dialogue_option_clicked.emit(option)
+	await get_tree().create_timer(3.0).timeout
+	print("BLESSING after: ", _player_summary())
 
 
 ## イベントの選択肢を順に押し、各段階のプレイヤー状態を出力 (イベント確認用)
