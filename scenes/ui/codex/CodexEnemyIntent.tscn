@@ -40,7 +40,7 @@ bbcode_enabled = true
 text = "Intent Description"
 scroll_active = false
 script = ExtResource("2_bryxj")
-_max_size = 16
+_max_size = 14
 _current_font_size = 1
 _editor_defaults_set = true
 

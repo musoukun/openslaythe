@@ -250,7 +250,7 @@ offset_top = 16.0
 offset_bottom = 100.0
 grow_horizontal = 2
 theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 70
 text = "OpenSlayThe"
 horizontal_alignment = 1
 
@@ -317,13 +317,13 @@ offset_bottom = 176.0
 
 [node name="LinkButton" type="LinkButton" parent="TitleScreen/MainMenu/VBoxContainer2" unique_id=2020267856]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Project Wiki and Tutorials"
 uri = "https://github.com/DesirePathGames/Slay-The-Robot/wiki"
 
 [node name="LinkButton2" type="LinkButton" parent="TitleScreen/MainMenu/VBoxContainer2" unique_id=1067582963]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Support the Creator"
 uri = "https://buymeacoffee.com/desirepathgames"
 
@@ -356,7 +356,7 @@ horizontal_alignment = 1
 layout_mode = 0
 offset_left = 16.0
 offset_top = 96.0
-offset_right = 416.0
+offset_right = 356.0
 offset_bottom = 380.0
 theme_type_variation = &"BackPanel"
 
@@ -369,7 +369,7 @@ unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
 theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "Character Name"
 autowrap_mode = 3
 
@@ -382,7 +382,7 @@ unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.858824, 0.54902, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "HP: "
 vertical_alignment = 1
 
@@ -391,7 +391,7 @@ unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.858824, 0.54902, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Money:"
 vertical_alignment = 1
 
@@ -407,7 +407,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_direction = 2
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Character Description"
 autowrap_mode = 2
 
@@ -433,7 +433,7 @@ unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.858824, 0.54902, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Artifact Name"
 autowrap_mode = 3
 
@@ -442,22 +442,22 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(1, 0)
 layout_direction = 2
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Description "
 autowrap_mode = 2
 
 [node name="StartRun" type="Control" parent="TitleScreen/NewRunMenu" unique_id=142426646]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -216.0
+offset_left = -336.0
 offset_top = -204.0
-offset_right = 216.0
+offset_right = -16.0
 offset_bottom = -12.0
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/NewRunMenu/StartRun" unique_id=1570393276]
@@ -482,11 +482,11 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -352.0
+offset_right = -240.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 toggle_mode = true
 text = "Seed"
 
@@ -499,7 +499,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -344.0
+offset_left = -232.0
 offset_top = -35.0
 offset_bottom = -4.0
 grow_horizontal = 0
@@ -540,19 +540,19 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -144.0
-offset_right = 144.0
+offset_left = -96.0
+offset_right = 96.0
 offset_bottom = 31.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Difficulty 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
 script = ExtResource("8_lhx3c")
-_max_size = 16
-_current_font_size = 16
+_max_size = 14
+_current_font_size = 14
 _editor_defaults_set = true
 
 [node name="IncreaseDifficultyButton" type="Button" parent="TitleScreen/NewRunMenu/StartRun/VBoxContainer/DifficultySelect" unique_id=2036982424]
@@ -585,7 +585,7 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -376.0
+offset_left = -336.0
 offset_top = 96.0
 offset_right = -16.0
 offset_bottom = 300.0
@@ -599,7 +599,7 @@ layout_mode = 2
 layout_direction = 2
 layout_mode = 2
 theme = ExtResource("2_bi5lp")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 24
 text = "Custom Modifiers"
 horizontal_alignment = 1
 
@@ -1266,7 +1266,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer" unique_id=851969620]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 text = "Profile Stats"
 horizontal_alignment = 1
 
@@ -1296,60 +1296,60 @@ columns = 3
 [node name="ProfileWinsLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=643452300]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Wins: 0"
 
 [node name="ProfileLossesLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=539442114]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Losses: 0"
 
 [node name="ProfileWinRateLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=287249939]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Win rate: XX.XX%"
 
 [node name="ProfileCurrentWinStreakLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=1978181270]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Current Win Streak: 0"
 
 [node name="ProfileHighestWinStreakLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=277560648]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Highest Win Streak: 0"
 
 [node name="ProfilePlayTimeLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=397748388]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Play Time: HHHH:MM:SS"
 
 [node name="ProfileCurrentLossStreakLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=1897494379]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Current Loss Streak: 0"
 
 [node name="ProfileHighestLossStreakLabel" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=1511849071]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Highest Loss Streak: 0"
 
 [node name="ProfileFastestRunTime" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer/ProfileStats/CenterContainer/GridContainer" unique_id=216947908]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Fastest Run: HH:MM:SS"
 
 [node name="Label2" type="Label" parent="TitleScreen/ProfileStatsMenu/SmoothScrollContainer/VBoxContainer" unique_id=1037753955]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 text = "Character Stats"
 horizontal_alignment = 1
 
@@ -1425,7 +1425,7 @@ offset_left = 32.0
 offset_top = 32.0
 offset_right = 72.0
 offset_bottom = 72.0
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1524,7 +1524,7 @@ layout_mode = 0
 offset_top = 176.0
 offset_right = 1200.0
 offset_bottom = 221.0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Cards"
 horizontal_alignment = 1
 
@@ -1598,7 +1598,7 @@ layout_mode = 0
 offset_top = 424.0
 offset_right = 1200.0
 offset_bottom = 469.0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Artifacts"
 horizontal_alignment = 1
 
@@ -1795,7 +1795,7 @@ offset_top = 8.0
 offset_bottom = 56.0
 unique_name_in_owner = true
 mouse_filter = 1
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "$10000"
 horizontal_alignment = 2
 
@@ -1808,7 +1808,7 @@ offset_top = 8.0
 offset_bottom = 56.0
 unique_name_in_owner = true
 mouse_filter = 1
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "99/99"
 horizontal_alignment = 2
 
@@ -1900,7 +1900,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 184.0
 offset_bottom = 40.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 expand_icon = true
 
 [node name="HSplitContainer" type="HSplitContainer" parent="RunScreen/Combat/Consumables/ConsumableActionDropdown/UseConsumableButton" unique_id=740926753]
@@ -1961,7 +1961,7 @@ offset_left = 8.0
 offset_top = 48.0
 offset_right = 184.0
 offset_bottom = 79.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Discard"
 
 [node name="Chest" type="TextureButton" parent="RunScreen/Combat" unique_id=336087146]
@@ -1988,7 +1988,7 @@ layout_mode = 0
 offset_top = -56.0
 offset_right = 192.0
 offset_bottom = -11.0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Chest"
 horizontal_alignment = 1
 
@@ -2016,7 +2016,7 @@ layout_mode = 0
 offset_top = -56.0
 offset_right = 192.0
 offset_bottom = -11.0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Shop"
 horizontal_alignment = 1
 
@@ -2042,7 +2042,7 @@ offset_left = 24.0
 offset_top = 32.0
 offset_right = 66.0
 offset_bottom = 58.0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "30"
 horizontal_alignment = 1
 
@@ -2068,7 +2068,7 @@ offset_left = 24.0
 offset_top = 32.0
 offset_right = 66.0
 offset_bottom = 58.0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "30"
 horizontal_alignment = 1
 
@@ -2097,7 +2097,7 @@ offset_left = 24.0
 offset_top = 32.0
 offset_right = 66.0
 offset_bottom = 58.0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "30"
 horizontal_alignment = 1
 
@@ -2126,7 +2126,7 @@ offset_left = 24.0
 offset_top = 32.0
 offset_right = 66.0
 offset_bottom = 58.0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "30"
 horizontal_alignment = 1
 
@@ -2239,7 +2239,7 @@ anchor_right = 1.0
 offset_top = 192.0
 offset_bottom = 240.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "Select a target"
 horizontal_alignment = 1
 
@@ -2291,7 +2291,7 @@ offset_top = 8.0
 offset_bottom = 56.0
 grow_horizontal = 0
 process_mode = 4
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "HH:MM:SS"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -2516,7 +2516,7 @@ offset_top = -278.0
 offset_bottom = -214.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -2551,7 +2551,7 @@ offset_top = -254.0
 offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "[color=green]Dialogue Prompt Rich Text[/color]"
 
@@ -2617,7 +2617,7 @@ offset_top = 64.0
 offset_bottom = 184.0
 grow_horizontal = 2
 unique_name_in_owner = true
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 48
 text = "Victory"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -2632,7 +2632,7 @@ offset_top = 64.0
 offset_bottom = 184.0
 grow_horizontal = 2
 unique_name_in_owner = true
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 48
 text = "Defeat"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -2663,11 +2663,11 @@ offset_top = -102.0
 offset_bottom = 138.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 14
 scroll_active = false
 script = ExtResource("43_gs3rm")
-_max_size = 16
-_current_font_size = 16
+_max_size = 14
+_current_font_size = 14
 _editor_defaults_set = true
 
 [node name="EndRunButton" type="Button" parent="RunScreen/RunSummaryOverlay" unique_id=403156587]
@@ -2676,7 +2676,7 @@ offset_left = 352.0
 offset_top = 528.0
 offset_right = 856.0
 offset_bottom = 609.0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Back To Main Menu"
 
 [node name="RunStartOptions" type="Control" parent="RunScreen" unique_id=330842242]

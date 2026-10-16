@@ -1,9 +1,9 @@
 [gd_resource type="Theme" format=3 uid="uid://cd5rw86bhiyn"]
 
 [resource]
-Button/font_sizes/font_size = 24
+Button/font_sizes/font_size = 22
 Label/colors/font_color = Color(1, 0.913725, 0.729412, 1)
 Label/colors/font_outline_color = Color(0.0784314, 0.172549, 0.188235, 1)
 Label/constants/outline_size = 14
-Label/font_sizes/font_size = 48
+Label/font_sizes/font_size = 46
 Label/styles/normal = null

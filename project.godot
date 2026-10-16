@@ -84,6 +84,7 @@ renderer/rendering_method="gl_compatibility"
 [gui]
 
 theme/custom_font="res://fonts/MPLUSRounded1c-Bold.ttf"
+theme/default_font_size=14
 
 [internationalization]
 
