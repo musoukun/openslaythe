@@ -9,6 +9,8 @@ const INTENT_UPDATES_LAZILY: bool = true	# batches intent updates
 var _intent_is_updating: bool = false
 
 const OUTLINE_SHADER := preload("res://sprites/shaders/outline.gdshader")
+## 倒れ方の演出中 (二重に始めない)
+var _is_dying: bool = false
 
 func _ready():
 	super()
@@ -29,6 +31,12 @@ func reset_player() -> void:
 	var outline := ShaderMaterial.new()
 	outline.shader = OUTLINE_SHADER
 	animated_sprite_2d.material = outline
+	# 前のランの倒れ方の演出を戻す
+	_is_dying = false
+	animated_sprite_2d.self_modulate = Color.WHITE
+	animated_sprite_2d.rotation = 0.0
+	animated_sprite_2d.scale = Vector2.ONE
+	layered_health_bar.visible = true
 	animated_sprite_2d.play(AnimationData.ANIMATION_IDLE)
 	var sprite_height: float = fit_sprite_to_feet()
 	if sprite_height > 0.0:
@@ -251,8 +259,11 @@ func _on_death_animtation_finished():
 func play_attack_animation() -> void:
 	animation_player.play("Player/attack")
 
+## 主人公ごとの倒れ方 (HeroDeath) を演じ、終わったら死亡画面へ
 func play_death_animation() -> void:
-	if not animation_player.is_playing():
-		animated_sprite_2d.play(AnimationData.ANIMATION_DEATH)
-		animation_player.play("Player/death")
-		Signals.player_killed.emit(self)
+	if _is_dying:
+		return
+	_is_dying = true
+	Signals.player_killed.emit(self)
+	await HeroDeath.play(self, Global.get_player_character_data().character_death_style)
+	_on_death_animtation_finished()
