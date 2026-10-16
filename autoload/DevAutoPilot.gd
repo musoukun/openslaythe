@@ -14,6 +14,9 @@ extends Node
 ## --auto=shop_check : カード削除とカードの購入を実際に行い、お金とデッキの変化を出力する
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
+## --auto=click_test : 最初の戦闘で、手札の各カードのどこを押せば CardButton に届くかを数え、実際にクリックでカードを出す
+## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る)
+## --warp-mouse : 本物のカーソルも動かす (shop_buy の指さしを撮るとき用。使っている人のマウスを奪うので普段は付けない)
 ## --hero=<character_id> : ラン開始系のモードで使う主人公 (省略時は character_green。例 --hero=character_blue)
 ## 引数が無い場合は何もしない。
 
@@ -30,6 +33,10 @@ func _ready() -> void:
 		StringDumper.dump()
 		get_tree().quit()
 		return
+	if DisplayServer.get_name() == "headless":
+		# ウィンドウなしで回すとき: 画面を基準サイズにし、マウスが画面内にいる扱いにする (でないとホバーもクリックも届かない)
+		get_tree().root.size = Vector2i(1200, 700)
+		get_tree().root.notification(NOTIFICATION_WM_MOUSE_ENTER)
 	await get_tree().create_timer(0.3).timeout
 	var menu_aliases := {"settings": "menu:SettingsButton", "new_run": "menu:NewRunButton"}
 	mode = menu_aliases.get(mode, mode)
@@ -53,6 +60,19 @@ func _ready() -> void:
 			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false)
 			if run_start_options:
 				print("BLESSING options=", run_start_options.find_children("*", "DialogueOption", true, false).map(func(o): return o.rich_text_label.get_parsed_text()))
+		return
+	if mode == "playthrough":
+		# --auto=playthrough [--seed=<数>] : タイトルからクリックだけで最後まで遊ぶ (scripts/dev/PlaythroughBot.gd)
+		var bot := PlaythroughBot.new()
+		add_child(bot)
+		if _get_user_arg("--hero=") != "":
+			bot.hero_id = _get_user_arg("--hero=")
+		if _get_user_arg("--seed=") != "":
+			bot.run_seed = int(_get_user_arg("--seed="))
+		bot.god_mode = OS.get_cmdline_user_args().has("--god")
+		bot.shots_dir = _get_user_arg("--shots=")
+		await bot.run()
+		get_tree().quit()
 		return
 	var hero_id := _get_user_arg("--hero=")
 	Global.start_run(hero_id if hero_id != "" else CHARACTER_ID, 12345)
@@ -162,6 +182,14 @@ func _ready() -> void:
 			if mode == "profile":
 				await get_tree().create_timer(1.0).timeout
 				_profile()
+		"click_test":
+			for location in Global.get_next_locations():
+				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+					ActionGenerator.generate_visition_location(location.location_id)
+					break
+			await get_tree().create_timer(3.0).timeout
+			await _click_map()
+			await _click_test()
 		"mana_check":
 			# 青の主人公 (--hero=character_blue) で戦闘に入り、マナの支払い・蒼刃の強化・蒼刃の戻り先を出力する
 			for location in Global.get_next_locations():
@@ -226,11 +254,7 @@ func _profile() -> void:
 			if phase == "mouse_sweep":
 				# 手札 (y=620) と敵 (y=380) の上を往復させる
 				var pos := Vector2(200 + (i % 30) * 30, 620 if i < 30 else 380)
-				var motion := InputEventMouseMotion.new()
-				motion.position = pos
-				motion.global_position = pos
-				get_viewport().warp_mouse(pos)
-				Input.parse_input_event(motion)
+				_move_mouse(pos)
 			if phase == "open_deck" and i == 0:
 				var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 				deck_button.button_up.emit()
@@ -319,13 +343,83 @@ func _shop(mode: String) -> void:
 	_move_mouse(target.get_global_rect().get_center())
 
 
+## 手札のカードを本物のマウス入力 (移動 → 押す → 離す) でクリックし、出せたかを出力する
+func _click_test() -> void:
+	for attempt in 3:
+		var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
+		if hand_cards.is_empty():
+			break
+		var card: Card = hand_cards[[hand_cards.size() / 2, hand_cards.size() - 1, 0][attempt]]
+		var pos: Vector2 = card.card_button.get_global_rect().get_center()
+		_move_mouse(pos)
+		await get_tree().create_timer(0.4).timeout
+		var hovered_control := get_viewport().gui_get_hovered_control()
+		print("CLICK hover at ", pos, " hovered=", hovered_control.get_path() if hovered_control else null, " script=", hovered_control.get_script().resource_path if hovered_control and hovered_control.get_script() else "", " filter=", hovered_control.mouse_filter if hovered_control else -1, " card=", card.card_data.object_id, " hand=", HandManager.player_hand.size(), " energy=", Global.player_data.player_energy)
+		await _click(pos)
+		await get_tree().create_timer(0.3).timeout
+		print("CLICK after: target_label=", HandManager.hand.select_target_label.visible, " selected=", HandManager.hand.current_selected_card, " queue=", HandManager.card_play_queue.size())
+		if HandManager.hand.current_selected_card != null:
+			var enemy := get_tree().get_first_node_in_group("enemies") as Control
+			var enemy_pos: Vector2 = enemy.get_global_rect().get_center() if enemy else Vector2.ZERO
+			print("CLICK enemy at ", enemy_pos, " node=", enemy)
+			_move_mouse(enemy_pos)
+			await get_tree().create_timer(0.2).timeout
+			await _click(enemy_pos)
+		await get_tree().create_timer(1.5).timeout
+		print("CLICK result: hand=", HandManager.player_hand.size(), " energy=", Global.player_data.player_energy, " enemy hp=", Global.get_alive_enemies().map(func(e): return e.get_combatant_health()))
+
+
+## 手札の各カードの上を格子状にマウスで動き、そこでクリックが CardButton に届くかを数える
+## (ホバーで拡大した後の状態で調べる。届かない場所は何が塞いでいるかを出力する)
+func _click_map() -> void:
+	var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
+	for index in hand_cards.size():
+		var card: Card = hand_cards[index]
+		var rect: Rect2 = card.card_button.get_global_rect()
+		var hits := 0
+		var total := 0
+		var blockers := {}
+		for gy in 5:
+			for gx in 5:
+				var pos := rect.position + rect.size * Vector2((gx + 0.5) / 5.0, (gy + 0.5) / 5.0)
+				if pos.y >= get_viewport().get_visible_rect().size.y:
+					continue
+				_move_mouse(pos)
+				await get_tree().create_timer(0.25).timeout
+				var hovered := get_viewport().gui_get_hovered_control()
+				total += 1
+				if hovered == card.card_button:
+					hits += 1
+				else:
+					var key: String = str(hovered.get_path()) if hovered else "null"
+					blockers[key] = blockers.get(key, 0) + 1
+		print("CLICKMAP card %d %s rect=%s clickable %d/%d blockers=%s" % [index, card.card_data.object_id, rect, hits, total, blockers])
+	_move_mouse(Vector2(10, 10))
+
+
+## マウスの左ボタンをその位置で押して離す (ウィンドウが受けたクリックと同じく Viewport の GUI に流す)
+func _click(position: Vector2) -> void:
+	for pressed in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.pressed = pressed
+		event.button_mask = MOUSE_BUTTON_MASK_LEFT if pressed else 0
+		event.position = position
+		event.global_position = position
+		get_viewport().push_input(event)
+		await get_tree().process_frame
+
+
 ## マウスをその位置へ動かしたことにする (ホバーと指さしの確認用)
+## NOTE: warp_mouse は Windows の本物のカーソルを動かす (使っている人の操作を奪う) ので、既定ではゲームの中にだけ流す。
+## ショップの指さしのように OS のカーソル位置を読む絵を撮るときだけ --warp-mouse を付ける
 func _move_mouse(position: Vector2) -> void:
-	get_viewport().warp_mouse(position)
+	if OS.get_cmdline_user_args().has("--warp-mouse"):
+		get_viewport().warp_mouse(position)
 	var motion := InputEventMouseMotion.new()
 	motion.position = position
 	motion.global_position = position
-	Input.parse_input_event(motion)
+	get_viewport().push_input(motion)
 
 
 ## イベントの選択肢を順に押し、各段階のプレイヤー状態を出力 (イベント確認用)
