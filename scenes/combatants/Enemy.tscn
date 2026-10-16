@@ -156,6 +156,7 @@ stretch_mode = 5
 [node name="IntentAmount" type="Label" parent="Visible/Intent"]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "15"
 
 [node name="FadeContainer" type="Node2D" parent="Visible"]
