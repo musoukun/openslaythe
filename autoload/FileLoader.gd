@@ -144,6 +144,9 @@ func load_texture(image_partial_path, is_absolute: bool = false) -> ImageTexture
 			if image == null:
 				texture = ImageTexture.new()
 			else:
+				# 縮小表示用のミップマップ。TEXTURE_FILTER_LINEAR_WITH_MIPMAPS のノード (カード絵など) で
+				# 大きい絵を小さく描いてもギザギザにならない。それ以外のノードの見た目は変わらない
+				image.generate_mipmaps()
 				texture = ImageTexture.create_from_image(image)
 			texture.take_over_path(full_path)
 			self._cached_textures[full_path] = texture

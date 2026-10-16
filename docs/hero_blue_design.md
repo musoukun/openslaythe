@@ -122,6 +122,8 @@
 | 開始武器 | Vera 用の2つ（爪・竜炎）は `run_start_option_character_ids` で Vera だけに出す。青用の武器はまだない |
 
 実装したカード：蒼刃、マナ集め、蒼閃（以上は開始デッキ）、瞑想、詠唱加速、魔力の刃、満ちる泉、蒼の礫、霜の結界、蒼の奔流、刃を伸ばす、刃を重ねる。
-まだのもの：刃を分ける（全体攻撃化）、結晶の守り、蒼渡り（連唱）、受け流しの紋、青用の開始武器、カード絵・レリック・マナのアイコン・青のエネルギー玉の絵（今は仮の画像）。
+まだのもの：刃を分ける（全体攻撃化）、結晶の守り、蒼渡り（連唱）、受け流しの紋、青用の開始武器。
+
+絵：カード絵14枚は `tools/codex_art/hero_blue_cards_assets.json`（`generate.py --grid` で4枚を1回にまとめて描き、Codex 4回）。レリック・状態異常4つ・青のエネルギー玉は `tools/codex_art/hero_blue_ui_assets.json`（同じく4個ずつ、Codex 2回）。カード枠 `sprites/ui/card_frame_blue_*.png` は、塗り替える前の緑の枠を `recolor_frames.py --palette=azure` で紺〜サファイアに塗り替えた（Codex なし）。
 
 確認は `godot --headless --path . -- --auto=mana_check --hero=character_blue`（マナの支払い・不足時に使えないこと・上限・蒼刃の強化と戻り先を出力する）。

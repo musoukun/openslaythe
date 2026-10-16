@@ -51,6 +51,15 @@ func _ready() -> void:
 		if new_run_menu and _get_user_arg("--hero=") != "":
 			await get_tree().process_frame
 			new_run_menu._on_character_selected(_get_user_arg("--hero="))
+		# --then=<ボタン名>: 続けて別のボタンを押す (例 --then=StartRunButton で実際の手順どおりにランを始める)
+		var then_button := get_tree().root.find_child(_get_user_arg("--then="), true, false) as BaseButton if _get_user_arg("--then=") != "" else null
+		if then_button:
+			await get_tree().create_timer(0.3).timeout
+			then_button.pressed.emit()
+			await get_tree().create_timer(2.5).timeout
+			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false)
+			if run_start_options:
+				print("BLESSING options=", run_start_options.find_children("*", "DialogueOption", true, false).map(func(o): return o.rich_text_label.get_parsed_text()))
 		return
 	if mode == "playthrough":
 		# --auto=playthrough [--seed=<数>] : タイトルからクリックだけで最後まで遊ぶ (scripts/dev/PlaythroughBot.gd)

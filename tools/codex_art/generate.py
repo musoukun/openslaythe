@@ -98,20 +98,41 @@ QUADRANTS = ["top-left", "top-right", "bottom-left", "bottom-right"]
 
 
 def can_grid(asset: dict) -> bool:
-    return needs_alpha_check(asset) and not asset.get("sheet") and not asset.get("refs")
+    if asset.get("sheet") or asset.get("refs"):
+        return False
+    return needs_alpha_check(asset) or is_card_art(asset)
+
+
+# カード絵 (正方形・不透明) も 2x2 でまとめて描ける。マスの間の暗い溝は、切り分けるときに内側で切り落とす
+def is_card_art(asset: dict) -> bool:
+    return asset.get("category") == "card_art" and not asset.get("transparent")
+
+
+CARD_GRID_INSET = 0.04
 
 
 def generate_grid(codex: str, style: str, batch: list) -> bool:
     raw_path = RAW_DIR / ("grid_" + batch[0]["id"] + ".png")
+    cards = is_card_art(batch[0])
     subjects = "\n".join(f"- {QUADRANTS[i]} quadrant: {a['prompt']}" for i, a in enumerate(batch))
+    if cards:
+        layout = ("Layout: a 2x2 sheet of four separate square card illustrations in one consistent style. Divide the "
+                  "canvas into four equal quadrants separated by thin flat dark-navy gutters. Each quadrant is its own "
+                  "complete full-bleed illustration with an opaque painted background filling the quadrant; keep every "
+                  "important shape at least 8 percent away from the quadrant edges and never continue a picture into "
+                  "another quadrant. Fill unused quadrants with flat dark navy.\n\n")
+        background = "No text, no letters, no numbers, no borders, no UI frame."
+    else:
+        layout = ("Layout: a 2x2 sheet of separate icons in one consistent style. Divide the canvas into four equal quadrants and "
+                  "draw exactly one subject centered in each quadrant, fully contained inside it with at least 12 percent empty "
+                  "margin from the quadrant edges, never touching or crossing into another quadrant. Leave unused quadrants empty.\n\n")
+        background = f"{TRANSPARENT_BG} No text, no letters, no numbers, no grid lines, no borders, no UI frame."
     prompt = (
         "$imagegen Generate exactly one square image and nothing else.\n"
         f"Art direction:\n{style}\n\n"
-        "Layout: a 2x2 sheet of separate icons in one consistent style. Divide the canvas into four equal quadrants and "
-        "draw exactly one subject centered in each quadrant, fully contained inside it with at least 12 percent empty "
-        "margin from the quadrant edges, never touching or crossing into another quadrant. Leave unused quadrants empty.\n\n"
+        f"{layout}"
         f"Subjects:\n{subjects}\n\n"
-        f"{TRANSPARENT_BG} No text, no letters, no numbers, no grid lines, no borders, no UI frame.\n"
+        f"{background}\n"
         f"Save the final PNG to this exact path: {raw_path.name} (in the current working directory). "
         "Do not create or modify any other file."
     )
@@ -119,11 +140,13 @@ def generate_grid(codex: str, style: str, batch: list) -> bool:
         return False
     sheet = Image.open(raw_path).convert("RGBA")
     hw, hh = sheet.width // 2, sheet.height // 2
+    inset = round(min(hw, hh) * CARD_GRID_INSET) if cards else 0
     for i, a in enumerate(batch):
         x, y = (i % 2) * hw, (i // 2) * hh
         mark = PngImagePlugin.PngInfo()
-        mark.add_text("grid", "1")  # 後処理で隣のマスのはみ出しを消す目印
-        sheet.crop((x, y, x + hw, y + hh)).save(RAW_DIR / f"{a['id']}.png", pnginfo=mark)
+        if not cards:
+            mark.add_text("grid", "1")  # 後処理で隣のマスのはみ出しを消す目印
+        sheet.crop((x + inset, y + inset, x + hw - inset, y + hh - inset)).save(RAW_DIR / f"{a['id']}.png", pnginfo=mark)
     raw_path.unlink()
     return True
 
@@ -438,7 +461,10 @@ def main() -> None:
         reuse = [a for a in todo if a.get("reuse_raw")]
         todo = [a for a in todo if a not in reuse]
         grid = [a for a in todo if args.grid and can_grid(a)]
-        jobs = [lambda b=grid[i:i + 4]: generate_grid(codex, style, b) for i in range(0, len(grid), 4)]
+        jobs = []
+        for kind in (True, False):  # カード絵と透過アイコンは別の 1 枚にまとめる
+            group = [a for a in grid if is_card_art(a) == kind]
+            jobs += [lambda b=group[i:i + 4]: generate_grid(codex, style, b) for i in range(0, len(group), 4)]
         jobs += [lambda a=a: make_raw(codex, style, a) for a in todo if a not in grid]
         print(f"generating {len(todo)} assets in {len(jobs)} Codex calls with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:
