@@ -2387,7 +2387,7 @@ func add_card_basics() -> void:
 	for i: int in len(colors):
 		# Basic attack card
 		var card_basic_attack: CardData = CardData.new("card_basic_attack_{0}".format([colors[i]]))
-		card_basic_attack.card_name = "Basic Attack"
+		card_basic_attack.card_name = "Slash"
 		card_basic_attack.card_color_id = "color_{0}".format([colors[i]])
 		card_basic_attack.card_description = "Attack for [damage] damage."
 		card_basic_attack.card_texture_path = "external/sprites/cards/{0}/card_basic_attack_{0}.png".format([colors[i]])
@@ -2405,7 +2405,7 @@ func add_card_basics() -> void:
 		
 		# Basic block card
 		var card_basic_block: CardData = CardData.new("card_basic_block_{0}".format([colors[i]]))
-		card_basic_block.card_name = "Basic Block"
+		card_basic_block.card_name = "Brace"
 		card_basic_block.card_color_id = "color_{0}".format([colors[i]])
 		card_basic_block.card_description = "Gain [block] block"
 		card_basic_block.card_texture_path = "external/sprites/cards/{0}/card_basic_block_{0}.png".format([colors[i]])
