@@ -28,28 +28,28 @@ static func register() -> Array[EventData]:
 
 ## 型1: HPで永続の力を買う
 static func _leaking_sprinkler() -> EventData:
-	return _event("event_sprinkler", "Leaking Sprinkler", [
-		_state("start", "A cracked reactor sprinkler hisses warm, glowing mist. The puddle below is sprouting.", "event_sprinkler", [
-			_option("[color=red]Lose 10 HP[/color]. [color=green]Obtain a random relic[/color].", [_lose_hp(10), _relic()], [_need_hp(11)], "Not enough HP"),
-			_option("[color=green]Obtain a random potion[/color].", [_potion(1)]),
+	return _event("event_sprinkler", "Sputtering Rune Fountain", [
+		_state("start", "A cracked stone fountain sputters glowing teal water. Something glints at the bottom, between the sparks.", "event_sprinkler", [
+			_option("Reach in. [color=red]Lose 10 HP[/color]. [color=green]Obtain a random relic[/color].", [_lose_hp(10), _relic()], [_need_hp(11)], "Not enough HP"),
+			_option("Fill a flask. [color=green]Obtain a random potion[/color].", [_potion(1)]),
 		]),
 	])
 
 
-## 型2: 呪い (放射性廃棄物) を背負って大金
+## 型2: 呪い (燃えさし) を背負って大金
 static func _radioactive_bloom() -> EventData:
-	return _event("event_bloom", "Radioactive Bloom", [
-		_state("start", "A gorgeous flower blooms from a leaking waste barrel. Its roots are tangled in coins.", "event_bloom", [
-			_option("Pick it. [color=green]Gain 250 Gold[/color]. [color=red]Add 2 Cinders to your deck[/color].", [_gold(250), _add_card(WASTE_CARD_ID, 2)]),
-			_option("Admire it. [color=green]Heal 10 HP[/color].", [_heal(10)]),
+	return _event("event_bloom", "Smoldering Hoard", [
+		_state("start", "A pile of coins still glows from a fire nobody remembers. The embers cling to everything.", "event_bloom", [
+			_option("Pocket it. [color=green]Gain 250 Gold[/color]. [color=red]Add 2 Cinders to your deck[/color].", [_gold(250), _add_card(WASTE_CARD_ID, 2)]),
+			_option("Warm your hands. [color=green]Heal 10 HP[/color].", [_heal(10)]),
 		]),
 	])
 
 
 ## 型3: お金の段階的な使い道
 static func _vending_machine() -> EventData:
-	return _event("event_vending", "Seed Vault Vending Machine", [
-		_state("start", "\"WELCOME, VALUED GARDENER.\" The machine rattles hopefully.", "event_vending", [
+	return _event("event_vending", "Golem Peddler", [
+		_state("start", "\"WELCOME, VALUED TRAVELER.\" An old golem rattles its coin slot hopefully.", "event_vending", [
 			_option("[color=red]Pay 40 Gold[/color]. [color=green]Obtain 2 random potions[/color].", [_gold(-40), _potion(2)], [_need_gold(40)], "Not enough Gold"),
 			_option("[color=red]Pay 120 Gold[/color]. [color=green]Obtain a random relic[/color].", [_gold(-120), _relic()], [_need_gold(120)], "Not enough Gold"),
 			_option("[color=red]Pay 220 Gold[/color]. [color=green]Obtain a random rare relic[/color].", [_gold(-220), _relic([ArtifactData.ARTIFACT_RARITIES.RARE])], [_need_gold(220)], "Not enough Gold"),
@@ -60,8 +60,8 @@ static func _vending_machine() -> EventData:
 
 ## 型4: もう1回だけ (欲張るほどコストが上がる)
 static func _compost_jackpot() -> EventData:
-	return _event("event_compost", "Compost Jackpot", [
-		_state("start", "A steaming compost heap glitters with coins. Something glows deep inside.", "event_compost", [
+	return _event("event_compost", "Ember Ash Heap", [
+		_state("start", "A heap of warm ash glitters with coins. Something glows deep inside.", "event_compost", [
 			_option("Dig. [color=red]Lose 4 HP[/color]. [color=green]Gain 30 Gold[/color].", [_lose_hp(4), _gold(30)], [_need_hp(5)], "Not enough HP", "dig_2"),
 			_leave(),
 		]),
@@ -78,8 +78,8 @@ static func _compost_jackpot() -> EventData:
 
 ## 型5: 自分から戦闘を選ぶ
 static func _scarecrow_bot() -> EventData:
-	return _event("event_scarecrow", "Scarecrow Training Bot", [
-		_state("start", "A patched-up training bot raises its broom arms. \"SPAR? REWARDS INCLUDED.\"", "event_scarecrow", [
+	return _event("event_scarecrow", "Sparring Golem", [
+		_state("start", "A patched-up practice golem raises its wooden-sword arms. \"SPAR? REWARDS INCLUDED.\"", "event_scarecrow", [
 			_option("[color=orange]Fight[/color] for combat rewards.", [{Scripts.ACTION_START_COMBAT: {"event_object_id": "event_act_1_easy_combat_2"}}]),
 			_leave(),
 		]),
@@ -88,11 +88,11 @@ static func _scarecrow_bot() -> EventData:
 
 ## 型6: 回復か強化か (今 ⇔ 長期)
 static func _greenhouse_spa() -> EventData:
-	return _event("event_spa", "Greenhouse Spa", [
-		_state("start", "A warm mint-green pool bubbles beside a little tool bench.", "event_spa", [
+	return _event("event_spa", "Forest Hot Spring", [
+		_state("start", "A steaming spring bubbles between mossy stones, beside an old whetstone bench.", "event_spa", [
 			_option("Soak. [color=green]Heal 30% of your Max HP[/color].", [{Scripts.ACTION_HEAL_PERCENT: {"target_override": BaseAction.TARGET_OVERRIDES.PLAYER, "percentage_heal_amount": 0.3}}]),
-			_option("Tend your gear. [color=green]Upgrade a card[/color].", [_pick_deck_card([{Scripts.ACTION_UPGRADE_CARDS: {}}], [{Scripts.VALIDATOR_CARD_UPGRADEABLE: {}}], "Choose a card to upgrade.")], [{Scripts.VALIDATOR_DECK_HAS_UPGRADEABLE_CARD: {}}], "No upgradable cards"),
-			_option("Water yourself. [color=green]Gain 6 Max HP[/color].", [_max_hp(6)]),
+			_option("Hone your gear. [color=green]Upgrade a card[/color].", [_pick_deck_card([{Scripts.ACTION_UPGRADE_CARDS: {}}], [{Scripts.VALIDATOR_CARD_UPGRADEABLE: {}}], "Choose a card to upgrade.")], [{Scripts.VALIDATOR_DECK_HAS_UPGRADEABLE_CARD: {}}], "No upgradable cards"),
+			_option("Drink deeply. [color=green]Gain 6 Max HP[/color].", [_max_hp(6)]),
 		]),
 	])
 
@@ -101,8 +101,8 @@ static func _greenhouse_spa() -> EventData:
 static func _pruning_barber() -> EventData:
 	var remove := [_pick_deck_card([{Scripts.ACTION_REMOVE_CARDS_FROM_DECK: {}}], [], "Choose {0} card(s) to remove. {1} cards selected")]
 	var has_removable := [{Scripts.VALIDATOR_DECK_HAS_REMOVABLE_CARD: {}}]
-	return _event("event_barber", "Pruning Barber", [
-		_state("start", "A dapper pruning robot snaps its scissor hands. \"A little off the top?\"", "event_barber", [
+	return _event("event_barber", "Golem Barber", [
+		_state("start", "A dapper bronze golem snaps its shear hands. \"A little off the top?\"", "event_barber", [
 			_option("[color=red]Pay 75 Gold[/color]. [color=green]Remove a card[/color].", [_gold(-75)] + remove, [_need_gold(75)] + has_removable, "Not enough Gold"),
 			_option("Free trim. [color=green]Remove a card[/color]. [color=red]Add 1 Cinder[/color].", remove + [_add_card(WASTE_CARD_ID, 1)], has_removable, "No removable cards"),
 			_leave(),
@@ -114,8 +114,8 @@ static func _pruning_barber() -> EventData:
 static func _mutation_pod() -> EventData:
 	var transform := {Scripts.ACTION_TRANSFORM_CARDS: {"transform_parent_card": false, "transform_rarities": [CardData.CARD_RARITIES.COMMON, CardData.CARD_RARITIES.UNCOMMON, CardData.CARD_RARITIES.RARE]}}
 	var has_removable := [{Scripts.VALIDATOR_DECK_HAS_REMOVABLE_CARD: {}}]
-	return _event("event_pod", "Mutation Pod", [
-		_state("start", "A seed swirls in bubbling cyan fluid. The pod door hisses open.", "event_pod", [
+	return _event("event_pod", "Alchemist's Crucible", [
+		_state("start", "A crucible of bubbling teal brew swirls on its own. Whatever goes in comes out different.", "event_pod", [
 			_option("[color=green]Transform a card[/color].", [_pick_deck_card([transform], [], "Choose a card to transform.")], has_removable, "No cards"),
 			_option("[color=red]Lose 5 HP[/color]. [color=green]Transform 2 cards[/color].", [_lose_hp(5), _pick_deck_card([transform], [], "Choose 2 cards to transform.", 2)], [_need_hp(6)] + has_removable, "Not enough HP"),
 			_leave(),
@@ -136,8 +136,8 @@ static func _fortune_sprout() -> EventData:
 			"waste": [_add_card(WASTE_CARD_ID, 1)],
 		},
 	}}
-	return _event("event_fortune", "Fortune Sprout", [
-		_state("start", "A sprout has grown through an old prize wheel. It wiggles at you invitingly.", "event_fortune", [
+	return _event("event_fortune", "Wheel-of-Fate Golem", [
+		_state("start", "A golem with a prize wheel for a belly creaks to life. It gestures at the handle invitingly.", "event_fortune", [
 			_option("[color=orange]Spin[/color]: Gold, a relic, a full heal... or something worse.", [spin], [_need_hp(11)], "Not enough HP"),
 			_leave(),
 		]),
@@ -146,10 +146,10 @@ static func _fortune_sprout() -> EventData:
 
 ## 型10: 最大HPを削って力
 static func _root_graft() -> EventData:
-	return _event("event_graft", "Root Graft", [
-		_state("start", "Ancient roots cradle a glowing crystal. The grafting tools are already sterilized.", "event_graft", [
-			_option("Graft. [color=red]Lose 8 Max HP[/color]. [color=green]Obtain a random rare relic[/color].", [_max_hp(-8), _relic([ArtifactData.ARTIFACT_RARITIES.RARE])], [_need_hp(9)], "Not enough HP"),
-			_option("Decline. [color=green]Gain 30 Gold[/color].", [_gold(30)]),
+	return _event("event_graft", "Blood Oath Stone", [
+		_state("start", "A rune stone hums on a mossy altar. Its carvings ask for a little of your blood.", "event_graft", [
+			_option("Swear the oath. [color=red]Lose 8 Max HP[/color]. [color=green]Obtain a random rare relic[/color].", [_max_hp(-8), _relic([ArtifactData.ARTIFACT_RARITIES.RARE])], [_need_hp(9)], "Not enough HP"),
+			_option("Take the offering coins. [color=green]Gain 30 Gold[/color].", [_gold(30)]),
 		]),
 	])
 

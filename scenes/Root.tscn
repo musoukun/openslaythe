@@ -249,7 +249,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 theme = ExtResource("2_bi5lp")
 theme_override_font_sizes/font_size = 72
-text = "Petal Fallout"
+text = "OpenSlayThe"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MainMenu" unique_id=1669219020]

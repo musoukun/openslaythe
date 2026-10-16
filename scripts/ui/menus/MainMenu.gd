@@ -9,6 +9,8 @@ extends BaseMenu
 
 func _ready():
 	super()
+	# ゲームタイトルは project.godot の application/config/name (ウィンドウ名と共通) だけで変える
+	$Label.text = ProjectSettings.get_setting("application/config/name")
 	continue_button.button_up.connect(_on_continue_button_up)
 	forfeit_run_button.button_up.connect(_on_forfeit_run_button_up)
 	exit_game_button.button_up.connect(_on_exit_game_button_up)

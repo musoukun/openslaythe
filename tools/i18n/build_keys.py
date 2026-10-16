@@ -15,7 +15,7 @@ PLACEHOLDERS = {
     "Fastest Run: HH:MM:SS", "HP: 100/100", "Money: 99999", "End Time: HH:MM:SS", "Floor: 999",
     "Run Seed", "Run Completion Date", "Wins: 0", "Losses: 0", "Current Win Streak: 0", "Highest Win Streak: 0",
     "Current Loss Streak: 0", "Highest Loss Streak: 0", "Difficulty 0", "Pick X cards", "Pick X Cards",
-    "Project Wiki and Tutorials", "Support the Creator", "Petal Fallout",
+    "Project Wiki and Tutorials", "Support the Creator", "OpenSlayThe",
 }
 
 # コード内で tr() している固定語

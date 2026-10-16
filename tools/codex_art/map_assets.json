@@ -120,8 +120,8 @@
    ],
    "transparent": true,
    "category": "map_icon",
-   "brief": "single starting point (the Ancient) at the bottom of the map",
-   "prompt": "A round emblem marking the single starting point of the journey: a small coiled dragon wrapped around a single upward flame inside a circular ring of thorny leaves, like an old wax-seal stamp. Original design, no letters. Bold, centered, front view."
+   "brief": "single starting point at the bottom of the map: the royal city seal (shared by every hero, so no dragon)",
+   "prompt": "A round wax-seal stamp marking the single starting point of the journey: inside a plain circular rim, a simple silhouette of a cliffside royal city with three slender towers and a crenellated wall above a small arched gate. No crest, no heraldic animal, no dragon, no flag symbols. Original design, no letters. Bold, centered, front view."
   }
  ]
 }

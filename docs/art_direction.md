@@ -1,4 +1,6 @@
-# Petal Fallout — アートディレクション
+# OpenSlayThe — アートディレクション（旧テーマ）
+
+> この文書は旧タイトル「Petal Fallout」（温室・原子炉）時代の方針で、いまの絵とは合っていない。現行の世界観・主人公・敵・共通と主人公専用の分け方は [character_design.md](character_design.md) を参照。
 
 ## タイトルと一言コンセプト
 

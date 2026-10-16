@@ -19,7 +19,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, PngImagePlugin
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
@@ -72,21 +72,73 @@ def build_prompt(style: str, asset: dict, raw_path: Path) -> str:
     )
 
 
-def generate_raw(codex: str, style: str, asset: dict) -> bool:
-    raw_path = RAW_DIR / f"{asset['id']}.png"
+def run_codex(codex: str, prompt: str, raw_path: Path, refs: list, label: str) -> bool:
     raw_path.unlink(missing_ok=True)  # 古い raw が残ると失敗しても成功と判定されるので消してから作る
-    prompt = build_prompt(style, asset, raw_path)
     proc = subprocess.run(
         [codex, "exec", "-C", str(RAW_DIR), "-s", "workspace-write",
          "--skip-git-repo-check", "--ephemeral",
-         *[arg for ref in asset.get("refs", []) for arg in ("-i", str(REPO / ref))], "-"],
+         *[arg for ref in refs for arg in ("-i", str(REPO / ref))], "-"],
         input=prompt, text=True, encoding="utf-8",
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=900,
     )
     ok = raw_path.exists()
     if not ok:
-        print(f"[NG] {asset['id']}\n{proc.stdout[-1500:]}")
+        print(f"[NG] {label}\n{proc.stdout[-1500:]}")
     return ok
+
+
+def generate_raw(codex: str, style: str, asset: dict) -> bool:
+    raw_path = RAW_DIR / f"{asset['id']}.png"
+    return run_codex(codex, build_prompt(style, asset, raw_path), raw_path, asset.get("refs", []), asset["id"])
+
+
+# --grid: 透過アイコンを 2x2 の 1 枚にまとめて描き、4 分割して各 raw にする (Codex の呼び出し回数を 1/4 にする)
+QUADRANTS = ["top-left", "top-right", "bottom-left", "bottom-right"]
+
+
+def can_grid(asset: dict) -> bool:
+    return needs_alpha_check(asset) and not asset.get("sheet") and not asset.get("refs")
+
+
+def generate_grid(codex: str, style: str, batch: list) -> bool:
+    raw_path = RAW_DIR / ("grid_" + batch[0]["id"] + ".png")
+    subjects = "\n".join(f"- {QUADRANTS[i]} quadrant: {a['prompt']}" for i, a in enumerate(batch))
+    prompt = (
+        "$imagegen Generate exactly one square image and nothing else.\n"
+        f"Art direction:\n{style}\n\n"
+        "Layout: a 2x2 sheet of separate icons in one consistent style. Divide the canvas into four equal quadrants and "
+        "draw exactly one subject centered in each quadrant, fully contained inside it with at least 12 percent empty "
+        "margin from the quadrant edges, never touching or crossing into another quadrant. Leave unused quadrants empty.\n\n"
+        f"Subjects:\n{subjects}\n\n"
+        f"{TRANSPARENT_BG} No text, no letters, no numbers, no grid lines, no borders, no UI frame.\n"
+        f"Save the final PNG to this exact path: {raw_path.name} (in the current working directory). "
+        "Do not create or modify any other file."
+    )
+    if not run_codex(codex, prompt, raw_path, [], "grid " + ",".join(a["id"] for a in batch)):
+        return False
+    sheet = Image.open(raw_path).convert("RGBA")
+    hw, hh = sheet.width // 2, sheet.height // 2
+    for i, a in enumerate(batch):
+        x, y = (i % 2) * hw, (i // 2) * hh
+        mark = PngImagePlugin.PngInfo()
+        mark.add_text("grid", "1")  # 後処理で隣のマスのはみ出しを消す目印
+        sheet.crop((x, y, x + hw, y + hh)).save(RAW_DIR / f"{a['id']}.png", pnginfo=mark)
+    raw_path.unlink()
+    return True
+
+
+def clean_quadrant(im: Image.Image) -> Image.Image:
+    """4 分割したマスから、隣のマスのはみ出し (マスの縁に接する小さい成分) を消す."""
+    step = 2
+    comps = components(im, step)
+    if not comps:
+        return im
+    w, h = im.width // step, im.height // step
+    biggest = max(len(c) for c in comps)
+    def touches_edge(pts):
+        return any(x in (0, w - 1) or y in (0, h - 1) for x, y in pts)
+    kept = [p for c in comps if len(c) == biggest or not touches_edge(c) for p in c]
+    return keep_points(im, kept, step)
 
 
 def alpha_ok(im: Image.Image) -> bool:
@@ -297,7 +349,9 @@ def post_process(asset: dict) -> None:
     out_path = REPO / asset["out"]
     out_path.parent.mkdir(parents=True, exist_ok=True)
     w, h = asset["size"]
-    im = Image.open(raw_path).convert("RGBA")
+    raw_im = Image.open(raw_path)
+    from_grid = raw_im.info.get("grid") == "1"
+    im = raw_im.convert("RGBA")
     if asset.get("chroma_key"):
         im = chroma_key(im, asset["chroma_key"])
     elif needs_alpha_check(asset) and not alpha_ok(im):
@@ -334,6 +388,8 @@ def post_process(asset: dict) -> None:
         return
     elif asset.get("transparent"):
         # 透明部分をトリムして、枠内に収まるよう縮小 → 中央(下揃え可)に配置
+        if from_grid:
+            im = clean_quadrant(im)
         im = trim(im)
         pad = asset.get("pad", 0.04)
         scale = min(w * (1 - pad * 2) / im.width, h * (1 - pad * 2) / im.height)
@@ -363,6 +419,7 @@ def main() -> None:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--post-only", action="store_true")
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--grid", action="store_true", help="透過アイコンを 2x2 で 4 個ずつまとめて描く (呼び出し回数 1/4)")
     ap.add_argument("--manifest", default=str(MANIFEST), help="asset manifest json")
     args = ap.parse_args()
 
@@ -376,9 +433,12 @@ def main() -> None:
     if not args.post_only:
         codex = find_codex()
         todo = [a for a in assets if args.force or not (RAW_DIR / f"{a['id']}.png").exists()]
-        print(f"generating {len(todo)} assets with {args.workers} workers")
+        grid = [a for a in todo if args.grid and can_grid(a)]
+        jobs = [lambda b=grid[i:i + 4]: generate_grid(codex, style, b) for i in range(0, len(grid), 4)]
+        jobs += [lambda a=a: make_raw(codex, style, a) for a in todo if a not in grid]
+        print(f"generating {len(todo)} assets in {len(jobs)} Codex calls with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:
-            list(ex.map(lambda a: make_raw(codex, style, a) and post_process(a), todo))
+            list(ex.map(lambda job: job(), jobs))
 
     for a in assets:
         if (RAW_DIR / f"{a['id']}.png").exists():

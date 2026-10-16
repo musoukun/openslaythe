@@ -1,0 +1,89 @@
+{
+ "style": "Create original high-fantasy game art with chunky hand-inked dark contours, flat gouache-like color masses and restrained dry-brush texture, matching a painted fantasy deckbuilder; adventurous with a light touch of humor. This art belongs to ONE playable hero, an original half-dragon warrior, and shows her power only through her motifs: copper-red dragon scales, curved black-iron claws with glowing ember-orange cracks, a crimson spade-tipped dragon tail, translucent ember-fire wings, dragon blood and dragon fire. Never draw her face or body. Palette: blackened iron #2A2426, copper-red #B5532E, crimson #8E1B23, ivory #EFE2C4, amber #F2A93B, ember #FF8A2A. Bold readable silhouettes, two-step cel shading and selective warm highlights; reserve soft emission for runes, magic and VFX. Do not imitate any existing game, franchise character, emblem or official artwork. Include no text, letters, numerals, labels, logos, emblems, watermarks or typographic symbols, and respect each asset's stated background and framing requirements.",
+ "assets": [
+  {
+   "id": "energy_green",
+   "out": "external/sprites/colors/green_energy_icon.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Energy (mana) orb icon for the green card color, shown in the card cost corner",
+   "category": "icon",
+   "prompt": "A round copper-red dragon-scale orb rimmed with glowing ember-orange cracks; broad warm amber center left uncluttered for a game-drawn cost. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_pollen",
+   "out": "external/sprites/status_effects/status_effect_pollen.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Pollen'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A crimson dragon-blood droplet wrapped in a dizzy swirl of ember-orange heat haze. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_critical",
+   "out": "external/sprites/status_effects/status_effect_critical.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Critical'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A crimson dragon-blood droplet boiling, two round amber bubbles bursting from its top. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_overheat",
+   "out": "external/sprites/status_effects/status_effect_overheat.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Overheat'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "One copper-red dragon scale glowing ember-orange from inside, two thick rising heat curls. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "status_effect_feedback_loop",
+   "out": "external/sprites/status_effects/status_effect_feedback_loop.png",
+   "size": [
+    96,
+    96
+   ],
+   "transparent": true,
+   "brief": "Status effect icon 'Feedback Loop'. Shown at 24px, must be bold and simple.",
+   "category": "icon",
+   "prompt": "A ring of ember fire chasing its own tail around one small copper-red dragon scale. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_boss_green",
+   "out": "external/sprites/artifacts/artifact_boss_green.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Green Boss': Test Green Boss Artifact.",
+   "category": "icon",
+   "prompt": "A ceremonial shield-sized copper-red dragon scale mounted upright on a blackened-iron stand, ember glow in its cracks. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "artifact_shop_green",
+   "out": "external/sprites/artifacts/artifact_shop_green.png",
+   "size": [
+    128,
+    128
+   ],
+   "transparent": true,
+   "brief": "Relic/artifact item icon 'Artifact Green Shop': Test Green Shop Artifact.",
+   "category": "icon",
+   "prompt": "A small curved black-iron dragon claw tip with ember-orange cracks inside a bronze circular tray. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  }
+ ]
+}

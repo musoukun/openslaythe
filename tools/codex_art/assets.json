@@ -1,5 +1,5 @@
 {
- "style": "Create original playful reactor-greenhouse game art with chunky hand-inked dark teal contours, flat gouache-like color masses and restrained dry-brush texture. Combine botanical shapes with improvised copper machinery and cream ceramics, using mint, lime, peach, coral and cyan accents over deep teal. Use bold readable silhouettes, two-step cel shading and selective warm ivory highlights; reserve soft emission for active energy and VFX. Keep the humor earnest and slightly ridiculous, with no imitation of existing game designs. Include no text, letters, numerals, labels, logos, watermarks or typographic symbols, and respect each asset's stated background and framing requirements.",
+ "style": "Create original high-fantasy game art with chunky hand-inked dark contours, flat gouache-like color masses and restrained dry-brush texture, matching a painted fantasy deckbuilder; adventurous with a light touch of humor. This art belongs to the SHARED WORLD that every playable hero visits, so it must never show or hint at any particular hero: no dragon scales, claws, tails, wings, horns or dragon fire, and no people. The world is an original realm of enchanted forest ruins overrun by ancient clockwork golems: weathered pale stone and colored sandstone, tarnished bronze and brass, gears and rivets, moss, ivy and small ferns, oak, leather, old parchment and ivory, and softly glowing teal rune light (abstract glowing lines, never letters). Palette: blackened iron #2A2426, weathered stone, tarnished bronze #8A6A3A, ivory #EFE2C4, amber gold #F2A93B, mossy greens and teal rune light #3FC9B5, with crimson, plum-purple or sky-blue accents only where the subject calls for them. Bold readable silhouettes, two-step cel shading and selective warm highlights; reserve soft emission for runes, magic and VFX. Do not imitate any existing game, franchise character, emblem or official artwork. Include no text, letters, numerals, labels, logos, emblems, watermarks or typographic symbols, and respect each asset's stated background and framing requirements.",
  "assets": [
   {
    "id": "frame_status",
@@ -128,18 +128,6 @@
    ]
   },
   {
-   "id": "energy_green",
-   "out": "external/sprites/colors/green_energy_icon.png",
-   "size": [
-    128,
-    128
-   ],
-   "transparent": true,
-   "brief": "Energy (mana) orb icon for the green card color, shown in the card cost corner",
-   "category": "icon",
-   "prompt": "A round lime seed battery with two thick mint cotyledons hugging its rim; cream central face left broad and uncluttered for a game-drawn cost. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
-  },
-  {
    "id": "energy_white",
    "out": "external/sprites/colors/white_energy_icon.png",
    "size": [
@@ -149,7 +137,7 @@
    "transparent": true,
    "brief": "Energy (mana) orb icon for the white card color, shown in the card cost corner",
    "category": "icon",
-   "prompt": "A round ivory ceramic seed battery with a single copper equatorial band; broad pale center left uncluttered for a game-drawn cost, distinct from the leafy green battery. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A round ivory stone orb with a single bronze equatorial band; broad pale center left uncluttered for a game-drawn cost. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "character_green",
@@ -186,7 +174,7 @@
    "transparent": false,
    "brief": "Card illustration for card 'Energy Next Turn' (SKILL): Gain [status_charge_amount] energy next turn.",
    "category": "card_art",
-   "prompt": "A sealed cream seed timer cradles a luminous lime seed beneath a dormant curled leaf; amber dawn crescent behind it, calm upright composition on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
+   "prompt": "A glowing amber energy crystal resting on a small ivory stone pedestal beneath a dormant stone arch, amber dawn light rising behind it, calm upright composition on deep dusk blue. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
   },
   {
    "id": "vfx_slash",
@@ -251,7 +239,7 @@
    "category": "vfx",
    "anchor": "center",
    "brief": "Single static petal texture for mix blending.",
-   "prompt": "One round peach flower petal with a small ivory base, dark teal contour and a single broad fold; tip points upward, opaque flat fill. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+   "prompt": "One small soft teardrop-shaped ivory light mote with a warm amber rim and a single broad fold; tip points upward, opaque flat fill. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
   },
   {
    "id": "vfx_halo",
@@ -316,7 +304,7 @@
    "category": "vfx",
    "anchor": "center",
    "brief": "Single static thorn texture for mix blending.",
-   "prompt": "One ivory triangular plant thorn on a tiny coral base, bold dark teal outline, tip pointing upward; solid readable silhouette. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+   "prompt": "One ivory triangular stone spike on a tiny bronze base, bold dark outline, tip pointing upward; solid readable silhouette. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
   },
   {
    "id": "vfx_spore",
@@ -329,7 +317,7 @@
    "category": "vfx",
    "anchor": "center",
    "brief": "Single static spore texture for mix blending.",
-   "prompt": "One opaque plum pollen clump shaped like three fused rounded lobes, peach rim light and dark teal contour; no face or detached particles. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
+   "prompt": "One opaque plum-purple acid blob shaped like three fused round bubbles, pale rim light and dark contour; no face or detached particles. One isolated static shape centered at (128,128), contained within the central 80 percent with fully transparent padding; no sprite sheet, sequence, scene, shadow, lettering or black background. Transparent RGBA background; preserve the stated pigment colors for mix blending."
   },
   {
    "id": "vfx_smoke",
@@ -354,7 +342,7 @@
    "transparent": true,
    "brief": "Enemy intent icon: enemy is attacking next turn. Must read instantly at 32px.",
    "category": "icon",
-   "prompt": "One coral copper-tipped trowel blade on an upward diagonal, broad triangular point. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+   "prompt": "One bronze sword blade on an upward diagonal, broad triangular point, crimson edge glint. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "intent_blocking",
@@ -366,7 +354,7 @@
    "transparent": true,
    "brief": "Enemy intent icon: enemy is blocking next turn. Must read instantly at 32px.",
    "category": "icon",
-   "prompt": "One cyan convex leaf shield with a single broad central rib. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+   "prompt": "One round bronze shield with a single broad central boss. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "intent_buffing",
@@ -378,7 +366,7 @@
    "transparent": true,
    "brief": "Enemy intent icon: enemy is buffing next turn. Must read instantly at 32px.",
    "category": "icon",
-   "prompt": "One lime sprout growing upward from an amber seed, tall open silhouette. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+   "prompt": "One glowing amber flame-shaped spark rising upward from a small bronze base, tall open silhouette. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "intent_debuffing",
@@ -390,7 +378,7 @@
    "transparent": true,
    "brief": "Enemy intent icon: enemy is debuffing next turn. Must read instantly at 32px.",
    "category": "icon",
-   "prompt": "One plum droplet biting into an ivory leaf edge, clear concave notch. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+   "prompt": "One plum-purple acid droplet biting into an ivory stone plate edge, clear concave notch. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "intent_summoning",
@@ -402,7 +390,7 @@
    "transparent": true,
    "brief": "Enemy intent icon: enemy is summoning next turn. Must read instantly at 32px.",
    "category": "icon",
-   "prompt": "One ivory robot head emerging from a coral split seed pod, two simple separated halves. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must read instantly at 32px; at most three large internal shapes and no fine texture."
+   "prompt": "One small round stone golem head with a teal rune eye emerging from a cracked bronze egg-shaped pod, two separated halves. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_deck",
@@ -414,7 +402,7 @@
    "transparent": true,
    "brief": "HUD icon: deck",
    "category": "icon",
-   "prompt": "Three neatly squared cream specimen cards bound by one copper strap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "Three neatly squared blank parchment cards bound by one leather strap with a bronze buckle. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_map",
@@ -426,7 +414,7 @@
    "transparent": true,
    "brief": "HUD icon: map",
    "category": "icon",
-   "prompt": "A folded mint greenhouse plan with a simple raised copper branching pipe, no drawn route markers. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A folded parchment map with a simple raised sepia branching path line, no route markers. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_pause",
@@ -438,7 +426,7 @@
    "transparent": true,
    "brief": "HUD icon: pause",
    "category": "icon",
-   "prompt": "Two separate upright ivory ceramic rods of equal height, sturdy dark outlines. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "Two separate upright ivory stone pillars of equal height, sturdy dark outlines. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_draw_pile",
@@ -450,7 +438,7 @@
    "transparent": true,
    "brief": "HUD icon: draw pile",
    "category": "icon",
-   "prompt": "A cream card stack held in an upright mint feed tray with the top card lifting upward. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A parchment card stack held in an upright bronze tray with the top card lifting upward. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_discard_pile",
@@ -462,7 +450,7 @@
    "transparent": true,
    "brief": "HUD icon: discard pile",
    "category": "icon",
-   "prompt": "A cream card sliding downward into a wide open copper catch tray. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A parchment card sliding downward into a wide open bronze catch tray. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_exhaust_pile",
@@ -474,7 +462,7 @@
    "transparent": true,
    "brief": "HUD icon: exhaust pile",
    "category": "icon",
-   "prompt": "A plum ash cup holding one crumbling cream card corner and two pale ash flecks. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A small blackened-iron brazier holding one crumbling parchment card corner and two pale ash flecks. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_block",
@@ -486,7 +474,7 @@
    "transparent": true,
    "brief": "HUD icon: block",
    "category": "icon",
-   "prompt": "One broad cyan leaf shield with a single mint midrib. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "One broad round bronze shield with a single raised central boss. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_gold",
@@ -498,7 +486,7 @@
    "transparent": true,
    "brief": "HUD icon: gold",
    "category": "icon",
-   "prompt": "Two overlapping plain amber coin discs with copper rims and blank faces. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "Two overlapping plain amber gold coin discs with bronze rims and blank faces. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_health",
@@ -510,7 +498,7 @@
    "transparent": true,
    "brief": "HUD icon: health",
    "category": "icon",
-   "prompt": "One peach heart-shaped fleshy leaf with a short mint stem. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "One crimson heart-shaped gem with a small ivory highlight. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_chest",
@@ -522,7 +510,7 @@
    "transparent": true,
    "brief": "Treasure chest (closed) shown in treasure room",
    "category": "icon",
-   "prompt": "A closed squat cream ceramic seed chest with chunky copper hinges, terracotta feet and a lime sprout-shaped latch; three-quarter view, entire object visible. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A closed squat ironbound oak treasure chest with chunky bronze hinges, a moss tuft on its lid and a teal rune-glow lock; three-quarter view, entire object visible. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "ui_shop",
@@ -534,7 +522,7 @@
    "transparent": true,
    "brief": "Shop merchant stall/shopkeeper shown to enter the shop",
    "category": "icon",
-   "prompt": "A friendly copper watering-can merchant robot stands behind a cream seed counter under a peach scalloped leaf awning, offering a single lime seed in a dish; compact three-quarter vignette with all feet visible. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A friendly old merchant golem of weathered sandstone with a teal rune eye stands behind a wooden counter under a striped canvas awning, offering a single glowing amber potion; compact three-quarter vignette with all feet visible. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_overshield",
@@ -546,7 +534,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Overshield'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "Two nested cyan hexagonal outlines with a small mint center; thick separated rims. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "Two nested thick bronze hexagonal rims around a small glowing teal rune core; thick separated rims. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_preserve_energy",
@@ -558,7 +546,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Preserve Energy'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A lime seed battery trapped inside a closed copper U-shaped clasp. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A glowing amber energy crystal locked inside a closed bronze U-shaped clasp. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_preserve_overshield",
@@ -570,7 +558,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Preserve Overshield'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A double cyan hexagonal shell secured by a bold ivory latch at its base. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A double bronze hexagonal rim secured by a bold ivory stone latch at its base. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_pointy",
@@ -582,19 +570,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Pointy'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "Three stout ivory thorns fanning outward from a coral curved stem. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
-  },
-  {
-   "id": "status_effect_pollen",
-   "out": "external/sprites/status_effects/status_effect_pollen.png",
-   "size": [
-    96,
-    96
-   ],
-   "transparent": true,
-   "brief": "Status effect icon 'Pollen'. Shown at 24px, must be bold and simple.",
-   "category": "icon",
-   "prompt": "Three amber pollen circles clustered above one peach petal. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "Three stout ivory stone spikes fanning outward from a curved bronze base. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_corrosion",
@@ -606,43 +582,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Corrosion'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A plum droplet dissolving the lower corner of a cream metal plate. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
-  },
-  {
-   "id": "status_effect_critical",
-   "out": "external/sprites/status_effects/status_effect_critical.png",
-   "size": [
-    96,
-    96
-   ],
-   "transparent": true,
-   "brief": "Status effect icon 'Critical'. Shown at 24px, must be bold and simple.",
-   "category": "icon",
-   "prompt": "A swollen amber seed inside a split coral circular cage, broad empty cracks. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
-  },
-  {
-   "id": "status_effect_overheat",
-   "out": "external/sprites/status_effects/status_effect_overheat.png",
-   "size": [
-    96,
-    96
-   ],
-   "transparent": true,
-   "brief": "Status effect icon 'Overheat'. Shown at 24px, must be bold and simple.",
-   "category": "icon",
-   "prompt": "A coral radiator cap with two thick rising ivory heat curls. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
-  },
-  {
-   "id": "status_effect_feedback_loop",
-   "out": "external/sprites/status_effects/status_effect_feedback_loop.png",
-   "size": [
-    96,
-    96
-   ],
-   "transparent": true,
-   "brief": "Status effect icon 'Feedback Loop'. Shown at 24px, must be bold and simple.",
-   "category": "icon",
-   "prompt": "A lime seed in the center of one thick copper loop with a bright coral junction. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A plum-purple acid droplet eating into the lower corner of a bronze plate, two small bubbles. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_bomb",
@@ -654,7 +594,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Bomb'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A round coral seed grenade with a short copper fuse and one ivory spark. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A round blackened-iron rune bomb with a short bronze fuse, one ivory spark and a single faint teal rune line. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_damage_increase",
@@ -666,7 +606,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Damage Increase'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "An upright coral trowel blade with an enlarged ivory tip and sturdy copper hilt. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "An upright bronze sword blade with an enlarged glowing amber tip and a sturdy leather-wrapped hilt. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_weaken",
@@ -678,7 +618,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Weaken'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A wilted coral trowel blade bent downward at its middle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A dull bronze sword blade bent and drooping downward at its middle. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_vulnerable",
@@ -690,7 +630,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Vulnerable'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "An ivory shell split by one wide plum zigzag crack. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A round ivory stone shield split by one wide crimson zigzag crack. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_block_on_turn_end",
@@ -702,7 +642,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Block On Turn End'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A cyan leaf shield beneath a thick closed amber crescent. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A round bronze shield beneath a thick closed amber crescent moon. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_energy_next_turn",
@@ -714,7 +654,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Energy Next Turn'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A lime seed battery beneath a thick open amber dawn arch. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A glowing amber energy crystal beneath a thick open amber dawn arch. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_increase_turn_draw",
@@ -726,7 +666,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Increase Draw'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "Two cream blank cards fanning upward from a lime sprout. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "Two blank parchment cards fanning upward from a small glowing teal rune spark. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_attached_card",
@@ -738,7 +678,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Attached Card'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "One cream blank card fastened by a large copper seed-shaped clip. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "One blank parchment card fastened by a large bronze clasp. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_negate_damage",
@@ -750,7 +690,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Negate Damage'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "An unbroken ivory domed shell deflecting a small coral wedge at its outer edge. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "An unbroken ivory stone dome deflecting a small crimson wedge at its outer edge. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_cap_damage",
@@ -762,7 +702,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Cap Damage'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A coral impact wedge flattened beneath a bold mint horizontal canopy. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A crimson impact wedge flattened beneath a bold bronze horizontal bar. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_temp_preserve_block",
@@ -774,7 +714,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Temp Preserve Block'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A cyan leaf shield enclosed by an open peach petal crescent with a visible gap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A round bronze shield enclosed by an open teal rune crescent with a visible gap. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_preserve_block",
@@ -786,7 +726,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Preserve Block'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A cyan leaf shield enclosed by a complete thick mint vine loop. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A round bronze shield enclosed by a complete thick teal rune ring. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_negate_debuff",
@@ -798,7 +738,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Negate Debuff'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "An ivory leaf umbrella shedding a plum droplet to one side. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "An ivory parasol-shaped stone ward shedding a plum-purple droplet to one side. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_rebound_card_plays",
@@ -810,7 +750,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Rebound Play'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "One cream blank card above a bold copper U-shaped spring, single card silhouette. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "One blank parchment card above a bold bronze U-shaped spring, single card silhouette. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_duplicate_card_plays",
@@ -822,7 +762,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Duplicate Play'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "Two offset cream blank cards with clearly separated corners. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "Two offset blank parchment cards with clearly separated corners. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_duplicate_attacks",
@@ -834,7 +774,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Duplicate Play'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "Two parallel coral trowel blades separated by a dark open gap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "Two parallel bronze sword blades separated by a dark open gap. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "status_effect_block_on_special_discard",
@@ -846,7 +786,7 @@
    "transparent": true,
    "brief": "Status effect icon 'Block on Special Discard'. Shown at 24px, must be bold and simple.",
    "category": "icon",
-   "prompt": "A plum capsule disappearing into a cyan shield-shaped catch tray. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals. Must remain distinct at 24px: minimum contour and negative gap 8px at native 96px; at most three large internal shapes and no fine texture."
+   "prompt": "A plum-purple glowing capsule disappearing into a bronze shield-shaped catch tray. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_add_money",
@@ -858,7 +798,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Add Money': Adds money when obtained",
    "category": "icon",
-   "prompt": "A copper seed purse bursting with three plain amber coin discs, lime drawstring. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A leather coin purse bursting with three plain amber gold coins, bronze drawstring clasp. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_negate_money_gain",
@@ -870,7 +810,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Negate Money Gain': Gain 1 energy per turn. You can no longer gain money",
    "category": "icon",
-   "prompt": "A sealed copper coin slot welded onto a bright lime hand-cranked seed dynamo. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A sealed bronze coin-slot plate bolted onto a glowing amber energy crystal set in a stone socket. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_heal_on_combat_ended",
@@ -882,7 +822,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Heal On Combat End': Grants 5 health when combat is over",
    "category": "icon",
-   "prompt": "A cream lunch tin opening around a peach restorative sprout, mint hinge. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A leather traveler's ration pouch opening around a warm bread loaf and one small crimson apple. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_full_heal",
@@ -894,7 +834,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Full Heal': Fully heals player when obtained",
    "category": "icon",
-   "prompt": "A plump peach heart-shaped irrigation reservoir enclosed in a cream ceramic cradle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A plump crimson heart-shaped crystal flask held in an ivory stone cradle. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_draw_on_kill",
@@ -906,7 +846,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Draw on Kill': Draws a card when an enemy is killed",
    "category": "icon",
-   "prompt": "A copper bolt collector gripping one blank cream specimen card with its little claw. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A small bronze golem hand gripping one blank parchment card. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_draw_on_combat_start",
@@ -918,7 +858,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Draw on Combat': Draws 2 extra cards on the first turn",
    "category": "icon",
-   "prompt": "A mint spring-loaded seed file with two blank cream cards popping from its top. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A leather scroll case with two blank parchment cards springing from its open top. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_energy_on_combat_start",
@@ -930,7 +870,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Energy On Combat Start': Gain 1 energy on the first turn",
    "category": "icon",
-   "prompt": "A squat lime seed starter with a large copper pull handle and ivory ceramic base. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A glowing amber energy crystal set in a bronze pull-lever starter on an ivory stone base. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_easy_mode",
@@ -942,7 +882,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Easy Mode': Sets enemy HP to 1",
    "category": "icon",
-   "prompt": "An absurdly soft peach rubber mallet with a tiny ivory robot-face relief, visibly toy-like. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "An absurdly soft plump pink pillow mallet with a tiny dazed golem-face relief, visibly toy-like. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_block_on_attacks",
@@ -954,7 +894,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Block on Attacks': Grants 5 block every 3 attacks",
    "category": "icon",
-   "prompt": "A copper ratchet trowel fitted with a broad cyan leaf-shaped knuckle guard. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A bronze gear-shaped knuckle guard fused to a broad round shield plate. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_retain_hand",
@@ -966,7 +906,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Retain Hand': Cards will be retained end of turn",
    "category": "icon",
-   "prompt": "A mint mitten-shaped specimen clamp holding a fan of blank cream cards. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A leather mitten-shaped card holder clamping a fan of blank parchment cards. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_preserve_energy",
@@ -978,7 +918,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Preserve Energy': Energy will be preserved between turns",
    "category": "icon",
-   "prompt": "A sealed ivory vacuum flask with a glowing lime seed visible through a round inset. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A sealed ivory stone jar with a glowing amber energy crystal visible through a round glass window. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_increase_attack_on_rest",
@@ -990,7 +930,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Increase Attack on Rest': Allows a permanent attack boost at rest sites",
    "category": "icon",
-   "prompt": "A copper garden-tool sharpening cradle lined with a peach cushion. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A grey whetstone on a small bronze stand throwing a few amber sparks. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_see_top_of_draw_pile",
@@ -1002,7 +942,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact See Draw Pile': See the top cards in your draw pile",
    "category": "icon",
-   "prompt": "A round copper magnifying lens hovering over the top blank cream card of a short stack. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A round bronze-rimmed magnifying lens hovering over the top blank parchment card of a short stack. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_top_deck_attack_card",
@@ -1014,7 +954,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Make Attack Card Innate': Select an attack card to make appear at the top of your deck.",
    "category": "icon",
-   "prompt": "A coral trowel-shaped bookmark clipped firmly over a short cream card stack. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A small bronze sword-shaped bookmark clipped firmly over a short parchment card stack. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_right_click_shuffle_deck",
@@ -1026,7 +966,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Reshuffle': Right click to shuffle discard into draw pile.",
    "category": "icon",
-   "prompt": "A copper hand-cranked seed tumbler with blank cream specimen cards visible through its mint round window. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A bronze hand-cranked tumbler drum with blank parchment cards visible through its round glass window. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_boss_red",
@@ -1038,7 +978,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Red Boss': Test Red Boss Artifact.",
    "category": "icon",
-   "prompt": "A ceremonial coral enamel pruning jaw mounted vertically on a cream ceramic root base, copper hinge. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A ceremonial crimson enamel war horn mounted upright on an ivory stone base, bronze bands. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_shop_red",
@@ -1050,7 +990,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Red Shop': Test Red Shop Artifact.",
    "category": "icon",
-   "prompt": "A small coral enamel folding pruner inside a copper circular retail tray, cream handle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A small crimson enamel whistle inside a bronze circular tray. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_boss_blue",
@@ -1062,7 +1002,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Blue Boss': Test Blue Boss Artifact.",
    "category": "icon",
-   "prompt": "A ceremonial cyan cooling impeller mounted vertically on a cream ceramic root base, copper axle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A ceremonial sky-blue crystal orb held upright by bronze prongs on an ivory stone base. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_shop_blue",
@@ -1074,31 +1014,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Blue Shop': Test Blue Shop Artifact.",
    "category": "icon",
-   "prompt": "A small cyan coolant tap inside a copper circular retail tray, cream valve. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
-  },
-  {
-   "id": "artifact_boss_green",
-   "out": "external/sprites/artifacts/artifact_boss_green.png",
-   "size": [
-    128,
-    128
-   ],
-   "transparent": true,
-   "brief": "Relic/artifact item icon 'Artifact Green Boss': Test Green Boss Artifact.",
-   "category": "icon",
-   "prompt": "A ceremonial lime seed turbine mounted vertically on a cream ceramic root base, copper spindle. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
-  },
-  {
-   "id": "artifact_shop_green",
-   "out": "external/sprites/artifacts/artifact_shop_green.png",
-   "size": [
-    128,
-    128
-   ],
-   "transparent": true,
-   "brief": "Relic/artifact item icon 'Artifact Green Shop': Test Green Shop Artifact.",
-   "category": "icon",
-   "prompt": "A small lime grafting clip inside a copper circular retail tray, cream jaws. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A small sky-blue glass vial inside a bronze circular tray. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_boss_orange",
@@ -1110,7 +1026,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Orange Boss': Test Orange Boss Artifact.",
    "category": "icon",
-   "prompt": "A ceremonial amber thermal bell mounted vertically on a cream ceramic root base, copper yoke. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A ceremonial amber bronze bell mounted upright on an ivory stone base, bronze yoke. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_shop_orange",
@@ -1122,7 +1038,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact Orange Shop': Test Orange Shop Artifact.",
    "category": "icon",
-   "prompt": "A small amber soldering bulb inside a copper circular retail tray, cream cap. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A small amber glass lantern inside a bronze circular tray. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_boss_white",
@@ -1134,7 +1050,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact White Boss': Test White Boss Artifact.",
    "category": "icon",
-   "prompt": "A ceremonial ivory germination crown mounted vertically on a cream ceramic root base, copper roots. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A ceremonial ivory feathered crown on an upright stone base. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "artifact_shop_white",
@@ -1146,7 +1062,7 @@
    "transparent": true,
    "brief": "Relic/artifact item icon 'Artifact White Shop': Test White Shop Artifact.",
    "category": "icon",
-   "prompt": "A small ivory ceramic seed scoop inside a copper circular retail tray, mint grip. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A small ivory feather quill inside a bronze circular tray. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "consumable_heal",
@@ -1158,7 +1074,7 @@
    "transparent": true,
    "brief": "Consumable potion/item icon 'Heal Item': Heals 20%",
    "category": "icon",
-   "prompt": "A peach pear-shaped sap ampoule with a cream stopper and a heart-shaped mint leaf inside. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A pear-shaped glass flask of glowing crimson healing tonic with a cork stopper and a little heart-shaped bubble inside. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "consumable_block",
@@ -1170,7 +1086,7 @@
    "transparent": true,
    "brief": "Consumable potion/item icon 'Block Item': Adds 10 block",
    "category": "icon",
-   "prompt": "A squat cyan hexagonal coolant ampoule with a cream stopper and broad leaf-shaped inner plate. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A squat hexagonal glass flask of steel-blue tonic with a cork stopper and a tiny round shield shape floating inside. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "consumable_damaging",
@@ -1182,7 +1098,7 @@
    "transparent": true,
    "brief": "Consumable potion/item icon 'Damage Item': Damages a target for 10",
    "category": "icon",
-   "prompt": "A long coral pointed seed ampoule with a copper cap and one ivory spark trapped inside. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A long pointed glass flask of amber firewater with a bronze cap and one bright spark trapped inside. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
   {
    "id": "consumable_multi_damaging",
@@ -1194,7 +1110,7 @@
    "transparent": true,
    "brief": "Consumable potion/item icon 'Multiple Damage Item': Damages all enemies for 10",
    "category": "icon",
-   "prompt": "A round amber cluster-seed ampoule with a copper cap and three separate coral internal lobes. Centered isolated icon on transparent background with 10 percent clear margin, bold dark teal outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+   "prompt": "A round glass flask of bubbling amber liquid with a bronze cap and three separate glowing lobes inside. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   }
  ]
 }

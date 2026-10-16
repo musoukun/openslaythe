@@ -1,6 +1,6 @@
-# Petal Fallout
+# OpenSlayThe
 
-> クビになった「熱核植物学者」が、暴走した園芸ロボットだらけの原子炉温室を駆け上がる、Slay the Spire 風デッキ構築ローグライク。
+> 古の森を呑み込んだ機械仕掛けのゴーレムたちを、デッキを組んで突破する Slay the Spire 風デッキ構築ローグライク。いまの主人公は半竜の戦士 Vera Emberscale。
 
 - エンジン: Godot 4.6 (GDScript)
 - 土台: [DesirePathGames/Slay-The-Robot](https://github.com/DesirePathGames/Slay-The-Robot)（MIT License）
