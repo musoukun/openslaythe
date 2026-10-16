@@ -1111,6 +1111,90 @@
    "brief": "Consumable potion/item icon 'Multiple Damage Item': Damages all enemies for 10",
    "category": "icon",
    "prompt": "A round glass flask of bubbling amber liquid with a bronze cap and three separate glowing lobes inside. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "rest_action_rest",
+   "out": "external/sprites/rest_actions/rest_action_rest.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": true,
+   "brief": "Rest site action icon 'Rest: heal 40% of max HP'",
+   "category": "icon",
+   "prompt": "A cozy rolled-out leather bedroll with a plump ivory pillow, a small crescent moon floating above it and a soft green healing glow rising from the blanket. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "rest_action_upgrade_card",
+   "out": "external/sprites/rest_actions/rest_action_upgrade_card.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": true,
+   "brief": "Rest site action icon 'Upgrade: upgrade 1 card'",
+   "category": "icon",
+   "prompt": "A heavy bronze smithing hammer raised over a small blackened-iron anvil, a burst of bright amber sparks flying up from the anvil face. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "rest_action_remove_cards",
+   "out": "external/sprites/rest_actions/rest_action_remove_cards.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": true,
+   "brief": "Rest site action icon 'Remove Cards: remove up to 2 cards'",
+   "category": "icon",
+   "prompt": "A blank ivory parchment card torn cleanly into two halves that drift apart, with a few small grey ash flakes falling from the torn edges. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "rest_action_add_random_consumable",
+   "out": "external/sprites/rest_actions/rest_action_add_random_consumable.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": true,
+   "brief": "Rest site action icon 'Random potion: gain a random potion'",
+   "category": "icon",
+   "prompt": "Three mismatched small glass potion bottles of crimson, teal and amber liquid tucked together in an open leather pouch, a little sparkle above them. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "rest_action_enchant_cards",
+   "out": "external/sprites/rest_actions/rest_action_enchant_cards.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": true,
+   "brief": "Rest site action icon 'Enchant: pay 25 gold to add a random enchant to a card'",
+   "category": "icon",
+   "prompt": "A blank ivory parchment card floating upright, wrapped in a swirling ribbon of glowing teal rune light, with one small bronze coin spinning beside it. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "rest_action_increase_attack_on_rest",
+   "out": "external/sprites/rest_actions/rest_action_increase_attack_on_rest.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": true,
+   "brief": "Rest site action icon 'Increase Damage: charge the rest-site attack relic'",
+   "category": "icon",
+   "prompt": "A short steel blade held against a spinning round grindstone wheel on a wooden frame, a fan of orange sparks spraying off the edge. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
+  },
+  {
+   "id": "rest_action_train_basics",
+   "out": "external/sprites/rest_actions/rest_action_train_basics.png",
+   "size": [
+    192,
+    192
+   ],
+   "transparent": true,
+   "brief": "Rest site action icon 'Train Basics: basic attack and block +3'",
+   "category": "icon",
+   "prompt": "A battered straw training dummy on a wooden post with a round wooden practice shield strapped to it and three bright fresh slash marks across its chest. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   }
  ]
 }

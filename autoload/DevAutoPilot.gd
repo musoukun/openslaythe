@@ -8,6 +8,7 @@ extends Node
 ## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
+## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
 ## 引数が無い場合は何もしない。
 
 const CHARACTER_ID := "character_green"
@@ -46,6 +47,9 @@ func _ready() -> void:
 		ActionGenerator.generate_visition_location(location.location_id)
 		if parts.size() > 2:
 			await _click_event_options(parts[2].split(","))
+		return
+	if mode.begins_with("rest"):
+		await _rest_site(mode.split(":"))
 		return
 	if mode.begins_with("blessing"):
 		await _blessing(mode.split(":"))
@@ -157,6 +161,24 @@ func _profile() -> void:
 			total += ms
 		print("PROFILE %s: avg %.1f ms, worst %.1f ms, cards %d" % [phase, total / 60.0, worst, get_tree().get_nodes_in_group("cards").size()])
 	get_tree().quit()
+
+
+## 休憩所。1階の部屋を休憩所にして訪れる。many なら登録済みの行動を全部並べ、番号があればそのタイルにホバーする
+func _rest_site(parts: PackedStringArray) -> void:
+	if parts.has("many"):
+		for rest_action_id: String in Global._id_to_rest_action_data.keys():
+			Global.player_data.enable_rest_action(rest_action_id)
+	var location: LocationData = Global.get_next_locations()[0]
+	location.location_type = LocationData.LOCATION_TYPES.REST_SITE
+	ActionGenerator.generate_visition_location(location.location_id)
+	var hover_index := parts[parts.size() - 1]
+	if not hover_index.is_valid_int():
+		return
+	await get_tree().create_timer(1.5).timeout
+	var buttons := get_tree().root.find_children("*", "RestActionButton", true, false)
+	print("REST actions=", buttons.map(func(b): return b.rest_action_object_id))
+	if int(hover_index) < buttons.size():
+		buttons[int(hover_index)].mouse_entered.emit()
 
 
 ## 祝福の画面 (RunStartOptions)。幕の指定があれば、その幕の開始として出し直す

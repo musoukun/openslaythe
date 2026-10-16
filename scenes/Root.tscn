@@ -161,14 +161,30 @@ _data = {
 &"start_turn": SubResource("Animation_beguj")
 }
 
-[sub_resource type="Resource" id="Resource_uxrgu"]
-script = ExtResource("26_08sam")
-friction = 10.0
-metadata/_custom_type_script = "uid://b3nvcsku8u75w"
+[sub_resource type="Gradient" id="Gradient_rest_shade"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(0.0392157, 0.0705882, 0.0705882, 0, 0.0392157, 0.0705882, 0.0705882, 0.35, 0.0392157, 0.0705882, 0.0705882, 0.6)
 
-[sub_resource type="Resource" id="Resource_p8axl"]
-script = ExtResource("26_08sam")
-metadata/_custom_type_script = "uid://b3nvcsku8u75w"
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rest_shade"]
+gradient = SubResource("Gradient_rest_shade")
+width = 256
+height = 4
+
+[sub_resource type="Gradient" id="Gradient_rest_glow"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0.247059, 0.788235, 0.709804, 0.55, 0.247059, 0.788235, 0.709804, 0.18, 0.247059, 0.788235, 0.709804, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rest_glow"]
+gradient = SubResource("Gradient_rest_glow")
+width = 256
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_rest_motes"]
+offsets = PackedFloat32Array(0, 0.2, 1)
+colors = PackedColorArray(0.6, 1, 0.85, 0, 0.6, 1, 0.85, 0.9, 0.6, 1, 0.85, 0)
 
 [sub_resource type="Resource" id="Resource_tn5yy"]
 script = ExtResource("26_08sam")
@@ -2301,7 +2317,7 @@ script = ExtResource("30_plfau")
 unique_name_in_owner = true
 process_mode = 1
 visible = false
-z_index = 10
+z_index = 5
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2310,64 +2326,173 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("14_k6wys")
 
-[node name="Background" type="ColorRect" parent="RunScreen/RestOverlay" unique_id=380902333]
+[node name="Fallback" type="ColorRect" parent="RunScreen/RestOverlay"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.203922, 0.188235, 0.215686, 0.635294)
+mouse_filter = 2
+color = Color(0.0784314, 0.105882, 0.12549, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="RunScreen/RestOverlay" unique_id=149519148]
+[node name="Background" type="TextureRect" parent="RunScreen/RestOverlay"]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -392.0
-offset_right = 408.0
-offset_top = -246.0
-offset_bottom = 258.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-follow_focus = true
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
-script = ExtResource("25_t3i5t")
-wheel_scroll_damper = SubResource("Resource_uxrgu")
-dragging_scroll_damper = SubResource("Resource_p8axl")
-follow_focus_margin = 200
-allow_horizontal_scroll = false
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="RunScreen/RestOverlay/ScrollContainer" unique_id=114196924]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="RestActionContainer" type="GridContainer" parent="RunScreen/RestOverlay/ScrollContainer/MarginContainer" unique_id=1862841550]
-layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 3
-
-[node name="ContinueButton" type="Button" parent="RunScreen/RestOverlay" unique_id=760028813]
+[node name="RightShade" type="TextureRect" parent="RunScreen/RestOverlay"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -72.0
-offset_right = 72.0
-offset_top = 274.0
-offset_bottom = 305.0
+anchor_left = 0.4
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_rest_shade")
+expand_mode = 1
+
+[node name="HeroAnchor" type="Control" parent="RunScreen/RestOverlay"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275
+anchor_top = 0.63
+anchor_right = 0.275
+anchor_bottom = 0.63
+mouse_filter = 2
+
+[node name="RuneGlow" type="TextureRect" parent="RunScreen/RestOverlay/HeroAnchor"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -230.0
+offset_top = -44.0
+offset_right = 230.0
+offset_bottom = 44.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_rest_glow")
+expand_mode = 1
+
+[node name="HealMotes" type="CPUParticles2D" parent="RunScreen/RestOverlay/HeroAnchor"]
+unique_name_in_owner = true
+position = Vector2(0, -10)
+amount = 24
+lifetime = 2.6
+preprocess = 2.6
+emission_shape = 3
+emission_rect_extents = Vector2(150, 18)
+direction = Vector2(0, -1)
+spread = 12.0
+gravity = Vector2(0, -14)
+initial_velocity_min = 18.0
+initial_velocity_max = 42.0
+scale_amount_min = 2.0
+scale_amount_max = 4.5
+color_ramp = SubResource("Gradient_rest_motes")
+
+[node name="Hero" type="TextureRect" parent="RunScreen/RestOverlay/HeroAnchor"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -195.0
+offset_top = -374.0
+offset_right = 195.0
+offset_bottom = 16.0
+pivot_offset = Vector2(195, 374)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Choices" type="VBoxContainer" parent="RunScreen/RestOverlay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.44
+anchor_top = 0.13
+anchor_right = 0.97
+anchor_bottom = 0.86
 grow_horizontal = 2
 grow_vertical = 2
-text = "Continue"
+mouse_filter = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Title" type="Label" parent="RunScreen/RestOverlay/Choices"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Choose an action."
+horizontal_alignment = 1
+
+[node name="RestActionContainer" type="HFlowContainer" parent="RunScreen/RestOverlay/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 14
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="RunScreen/RestOverlay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -78.0
+offset_right = -32.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "Move On"
+
+[node name="Tooltip" type="PanelContainer" parent="RunScreen/RestOverlay"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+mouse_filter = 2
+theme_type_variation = &"BackPanel"
+
+[node name="Lines" type="VBoxContainer" parent="RunScreen/RestOverlay/Tooltip"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TooltipName" type="Label" parent="RunScreen/RestOverlay/Tooltip/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.858824, 0.54902, 1)
+theme_override_font_sizes/font_size = 20
+text = "Rest"
+
+[node name="TooltipDescription" type="Label" parent="RunScreen/RestOverlay/Tooltip/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(296, 0)
+theme_override_font_sizes/font_size = 17
+text = "Heal 40% of your max HP."
+autowrap_mode = 3
+
+[node name="TooltipNote" type="Label" parent="RunScreen/RestOverlay/Tooltip/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(296, 0)
+theme_override_colors/font_color = Color(0.721569, 0.784314, 0.756863, 1)
+theme_override_font_sizes/font_size = 16
+text = "Once per visit."
+autowrap_mode = 3
 
 [node name="ShopOverlay" type="Control" parent="RunScreen" unique_id=1618705129]
 unique_name_in_owner = true
