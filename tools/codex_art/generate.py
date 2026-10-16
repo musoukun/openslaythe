@@ -14,6 +14,7 @@ import argparse
 import glob
 import json
 import os
+import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -65,7 +66,7 @@ def build_prompt(style: str, asset: dict, raw_path: Path) -> str:
         "$imagegen Generate exactly one image and nothing else.\n"
         f"Art direction:\n{style}\n\n"
         f"Subject:\n{asset['prompt']}\n\n"
-        f"{REF_RULE if asset.get('refs') else ''}"
+        f"{asset.get('ref_rule', REF_RULE) if asset.get('refs') else ''}"
         f"{bg} No text, no letters, no watermark, no UI frame.\n"
         f"Save the final PNG to this exact path: {raw_path.name} (in the current working directory). "
         "Do not create or modify any other file."
@@ -433,12 +434,21 @@ def main() -> None:
     if not args.post_only:
         codex = find_codex()
         todo = [a for a in assets if args.force or not (RAW_DIR / f"{a['id']}.png").exists()]
+        # reuse_raw: ほかのアセットの raw をコピーして使う (Codex を呼ばない)。元の raw ができてから処理する
+        reuse = [a for a in todo if a.get("reuse_raw")]
+        todo = [a for a in todo if a not in reuse]
         grid = [a for a in todo if args.grid and can_grid(a)]
         jobs = [lambda b=grid[i:i + 4]: generate_grid(codex, style, b) for i in range(0, len(grid), 4)]
         jobs += [lambda a=a: make_raw(codex, style, a) for a in todo if a not in grid]
         print(f"generating {len(todo)} assets in {len(jobs)} Codex calls with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:
             list(ex.map(lambda job: job(), jobs))
+        for a in reuse:
+            src = RAW_DIR / f"{a['reuse_raw']}.png"
+            if src.exists():
+                shutil.copyfile(src, RAW_DIR / f"{a['id']}.png")
+            else:
+                print(f"[NG] {a['id']}: reuse_raw {src.name} does not exist")
 
     for a in assets:
         if (RAW_DIR / f"{a['id']}.png").exists():
