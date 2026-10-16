@@ -149,7 +149,7 @@ func _setup_legend() -> void:
 	title.text = "Legend"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 22)
-	title.add_theme_color_override("font_color", LEGEND_TEXT)
+	_set_legend_text_style(title)
 	box.add_child(title)
 	for entry in LEGEND:
 		var row := HBoxContainer.new()
@@ -161,11 +161,17 @@ func _setup_legend() -> void:
 		row.add_child(icon)
 		var label := Label.new()
 		label.text = entry[1]
-		label.add_theme_color_override("font_color", LEGEND_TEXT)
 		label.add_theme_font_size_override("font_size", 16)
+		_set_legend_text_style(label)
 		row.add_child(label)
 		box.add_child(row)
 	add_child(panel)
+
+## 凡例は明るい板に濃い文字なので、共通テーマの暗い縁取りと影を外す
+func _set_legend_text_style(label: Label) -> void:
+	label.add_theme_color_override("font_color", LEGEND_TEXT)
+	label.add_theme_constant_override("outline_size", 0)
+	label.add_theme_color_override("font_shadow_color", Color.TRANSPARENT)
 
 func clear_locations() -> void:
 	for child in location_container.get_children():

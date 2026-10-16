@@ -3,6 +3,8 @@ extends Node
 ## 例: godot --path . --write-movie shots/x.png --fixed-fps 10 --quit-after 60 -- --auto=combat
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=combat : ラン開始して最初の戦闘に入る
+## --auto=new_run : タイトルから「新しいラン」画面を開く
+## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## 引数が無い場合は何もしない。
 
@@ -17,11 +19,14 @@ func _ready() -> void:
 		get_tree().quit()
 		return
 	await get_tree().create_timer(0.3).timeout
-	if mode == "settings":
-		var settings_button := get_tree().root.find_child("SettingsButton", true, false) as BaseButton
-		if settings_button:
-			settings_button.pressed.emit()
-			settings_button.button_up.emit()
+	var menu_aliases := {"settings": "menu:SettingsButton", "new_run": "menu:NewRunButton"}
+	mode = menu_aliases.get(mode, mode)
+	if mode.begins_with("menu:"):
+		var button_name := mode.trim_prefix("menu:")
+		var menu_button := get_tree().root.find_child(button_name, true, false) as BaseButton
+		if menu_button:
+			menu_button.pressed.emit()
+			menu_button.button_up.emit()
 		return
 	Global.start_run(CHARACTER_ID, 12345)
 	await get_tree().create_timer(0.5).timeout
