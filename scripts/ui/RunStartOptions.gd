@@ -5,10 +5,11 @@ extends Control
 
 var _option_type_to_option_ids: Dictionary = {}
 const COMPLETE_OPTION_COUNT: int = 3	# number of unique options to populate (weapons from BuildContent + artifact swap)
-## 選択肢の列 (1200x700 の画面で、主人公と祝福のキャラの間。下端から上へ伸びる)
-const OPTION_LEFT: float = 390.0
-const OPTION_RIGHT: float = 790.0
-const OPTION_BOTTOM: float = 690.0
+## 選択肢の列 (主人公と祝福のキャラの間。画面の下端・中央を基準にし、下端から上へ伸びる)
+## 1200x700 の画面では x=390〜790、下端 y=690。全画面で画面が広がっても中央の下に残る
+const OPTION_LEFT: float = -210.0
+const OPTION_RIGHT: float = 190.0
+const OPTION_BOTTOM: float = -10.0
 const FAREWELL_TIME: float = 0.9	# 受け取ったあと、キャラが消えるまでの間
 
 @onready var starting_option_container = $StartingOptionContainer
@@ -23,6 +24,12 @@ func _ready():
 	_giver = BlessingGiver.new()
 	add_child(_giver)
 	move_child(_giver, 0) # 選択肢より奥
+	# シーン側のアンカー (右下) に左右されないよう、ここでアンカーも決める
+	starting_option_container.anchor_left = 0.5
+	starting_option_container.anchor_right = 0.5
+	starting_option_container.anchor_top = 1.0
+	starting_option_container.anchor_bottom = 1.0
+	starting_option_container.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	starting_option_container.offset_left = OPTION_LEFT
 	starting_option_container.offset_right = OPTION_RIGHT
 	starting_option_container.offset_top = OPTION_BOTTOM
