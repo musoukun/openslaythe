@@ -445,5 +445,6 @@
  "[color=green]Remove a card[/color].": "[color=green]カードを1枚取り除く[/color]。",
  "[color=green]Draft a card[/color].": "[color=green]3枚から1枚選んで獲得[/color]。",
  "[color=red]Lose 8 Max HP[/color]. [color=green]Remove 2 cards[/color].": "[color=red]最大HPを8失う[/color]。[color=green]カードを2枚取り除く[/color]。",
- "[color=red]Add 1 Cinder to your deck[/color]. [color=green]Draft a rare card[/color].": "[color=red]燃えさしを1枚デッキに加える[/color]。[color=green]レアカードを3枚から1枚選んで獲得[/color]。"
+ "[color=red]Add 1 Cinder to your deck[/color]. [color=green]Draft a rare card[/color].": "[color=red]燃えさしを1枚デッキに加える[/color]。[color=green]レアカードを3枚から1枚選んで獲得[/color]。",
+ "Fullscreen (F11 / Alt+Enter)": "全画面表示（F11 / Alt+Enter）"
 }

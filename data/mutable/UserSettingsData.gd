@@ -11,6 +11,8 @@ class_name UserSettingsData
 
 ## Resolution
 @export var settings_window_size: Vector2 = Vector2(1200, 700)
+## 全画面で遊ぶか (DisplayMode が起動時に当てる)
+@export var settings_fullscreen: bool = false
 
 ## Volume
 @export var settings_audio_master_volume: float = 1.0

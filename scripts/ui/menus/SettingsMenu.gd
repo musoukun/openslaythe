@@ -10,10 +10,14 @@ extends BaseMenu
 
 @onready var mute_background_check_button: CheckButton = %MuteBackgroundCheckButton
 @onready var language_option_button: OptionButton = %LanguageOptionButton
+@onready var fullscreen_check_button: CheckButton = %FullscreenCheckButton
 
 func _ready():
 	super()
 	mute_background_check_button.toggled.connect(_on_mute_background_button_toggled)
+	fullscreen_check_button.toggled.connect(DisplayMode.set_fullscreen)
+	# F11 / Alt+Enter で切り替えたときも表示を合わせる
+	DisplayMode.fullscreen_changed.connect(fullscreen_check_button.set_pressed_no_signal)
 	
 	for language in Localization.LANGUAGES:
 		language_option_button.add_item(language[1])
@@ -48,6 +52,8 @@ func populate_menu() -> void:
 	mute_background_check_button.set_pressed_no_signal(Global.user_settings_data.settings_audio_mute_on_window_lose_focus)
 	# language
 	language_option_button.select(Localization.get_language_index())
+	# display
+	fullscreen_check_button.set_pressed_no_signal(DisplayMode.is_fullscreen())
 
 ## Save settings before going to the next menu
 func _navigate_to_next_menu(next_menu: BaseMenu) -> void:
