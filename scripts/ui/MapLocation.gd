@@ -66,5 +66,4 @@ func _tween_scale(target: Vector2) -> void:
 	create_tween().tween_property(self, "scale", target, 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 func _on_button_up():
-	location_data.location_visited = true
 	map_location_button_up.emit(self)

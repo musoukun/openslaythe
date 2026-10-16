@@ -23,6 +23,8 @@ func _ready():
 	_giver = BlessingGiver.new()
 	add_child(_giver)
 	move_child(_giver, 0) # 選択肢より奥
+	# 下の OPTION_* は画面左上からの位置 (BlessingGiver と同じ基準)。シーンの右下アンカーのままだと画面外に出る
+	starting_option_container.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	starting_option_container.offset_left = OPTION_LEFT
 	starting_option_container.offset_right = OPTION_RIGHT
 	starting_option_container.offset_top = OPTION_BOTTOM

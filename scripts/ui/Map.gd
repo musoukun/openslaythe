@@ -200,7 +200,8 @@ func _on_map_location_button_up(map_location: MapLocation):
 	if can_travel:
 		# must be adjacent to player location
 		if Global.get_next_locations().has(map_location.location_data):
-			# visit the location
+			# visit the location (行けない部屋を押しても訪問済みにしない)
+			map_location.location_data.location_visited = true
 			ActionGenerator.generate_visition_location(map_location.location_data.location_id)
 	
 func _on_map_location_selected(location_data: LocationData):
