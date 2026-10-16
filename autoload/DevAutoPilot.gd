@@ -12,6 +12,7 @@ extends Node
 ## --auto=shop_buy : 購入画面を開き、商品にカーソルを乗せる (指さしとツールチップの確認用)
 ## --auto=shop_remove : 購入画面からカード削除を押す
 ## --auto=shop_check : カード削除とカードの購入を実際に行い、お金とデッキの変化を出力する
+## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## 引数が無い場合は何もしない。
 
@@ -54,6 +55,9 @@ func _ready() -> void:
 		return
 	if mode.begins_with("shop"):
 		await _shop(mode)
+		return
+	if mode.begins_with("rest"):
+		await _rest_site(mode.split(":"))
 		return
 	if mode.begins_with("blessing"):
 		await _blessing(mode.split(":"))
@@ -168,6 +172,24 @@ func _profile() -> void:
 			total += ms
 		print("PROFILE %s: avg %.1f ms, worst %.1f ms, cards %d" % [phase, total / 60.0, worst, get_tree().get_nodes_in_group("cards").size()])
 	get_tree().quit()
+
+
+## 休憩所。1階の部屋を休憩所にして訪れる。many なら登録済みの行動を全部並べ、番号があればそのタイルにホバーする
+func _rest_site(parts: PackedStringArray) -> void:
+	if parts.has("many"):
+		for rest_action_id: String in Global._id_to_rest_action_data.keys():
+			Global.player_data.enable_rest_action(rest_action_id)
+	var location: LocationData = Global.get_next_locations()[0]
+	location.location_type = LocationData.LOCATION_TYPES.REST_SITE
+	ActionGenerator.generate_visition_location(location.location_id)
+	var hover_index := parts[parts.size() - 1]
+	if not hover_index.is_valid_int():
+		return
+	await get_tree().create_timer(1.5).timeout
+	var buttons := get_tree().root.find_children("*", "RestActionButton", true, false)
+	print("REST actions=", buttons.map(func(b): return b.rest_action_object_id))
+	if int(hover_index) < buttons.size():
+		buttons[int(hover_index)].mouse_entered.emit()
 
 
 ## 祝福の画面 (RunStartOptions)。幕の指定があれば、その幕の開始として出し直す

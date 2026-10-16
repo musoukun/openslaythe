@@ -447,6 +447,7 @@ func add_rest_actions() -> void:
 	# rest action
 	var rest_action_rest: RestActionData = RestActionData.new("rest_action_rest")
 	rest_action_rest.rest_action_name = "Rest"
+	rest_action_rest.rest_action_description = "Heal 40% of your max HP."
 	rest_action_rest.rest_action_stat_name = "REST_REST_COUNT"
 	rest_action_rest.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.EXCLUSIVE
 	rest_action_rest.rest_actions = [
@@ -463,7 +464,8 @@ func add_rest_actions() -> void:
 	# upgrade card rest action
 	# example of a cancelable rest action
 	var rest_action_upgrade_card: RestActionData = RestActionData.new("rest_action_upgrade_card")
-	rest_action_upgrade_card.rest_action_name = "Upgrade"
+	rest_action_upgrade_card.rest_action_name = "Smith"
+	rest_action_upgrade_card.rest_action_description = "Upgrade a card in your deck."
 	rest_action_upgrade_card.rest_action_stat_name = "REST_UPGRADE_CARDS_COUNT"
 	rest_action_upgrade_card.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.INCLUSIVE_REPEATABLE
 	rest_action_upgrade_card.rest_action_auto_end = false # allows canceling
@@ -503,6 +505,7 @@ func add_rest_actions() -> void:
 	# example of a cancelable rest action
 	var rest_action_remove_cards: RestActionData = RestActionData.new("rest_action_remove_cards")
 	rest_action_remove_cards.rest_action_name = "Remove Cards"
+	rest_action_remove_cards.rest_action_description = "Remove 1 or 2 cards from your deck."
 	rest_action_remove_cards.rest_action_stat_name = "REST_REMOVE_CARDS_COUNT"
 	rest_action_remove_cards.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.INCLUSIVE
 	rest_action_remove_cards.rest_action_auto_end = false # can be cancelled
@@ -545,7 +548,8 @@ func add_rest_actions() -> void:
 	# must have at least one card that can be decorated and enough money
 	# NOTE: To add more random enchants, you must update the random selection, the pick validator, and the rest action deck validator
 	var rest_action_enchant_cards: RestActionData = RestActionData.new("rest_action_enchant_cards")
-	rest_action_enchant_cards.rest_action_name = "Enchant Cards (25)"
+	rest_action_enchant_cards.rest_action_name = "Enchant"
+	rest_action_enchant_cards.rest_action_description = "Pay 25 gold to give a card in your deck a random enchant: Block 5 when played, or draw 2 cards when first drawn."
 	rest_action_enchant_cards.rest_action_stat_name = "REST_ENCHANT_CARDS_COUNT"
 	rest_action_enchant_cards.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.INCLUSIVE
 	rest_action_enchant_cards.rest_action_auto_end = false
@@ -618,7 +622,8 @@ func add_rest_actions() -> void:
 	
 	# add random consumable action
 	var rest_action_add_random_consumable: RestActionData = RestActionData.new("rest_action_add_random_consumable")
-	rest_action_add_random_consumable.rest_action_name = "Add Random\nConsumable"
+	rest_action_add_random_consumable.rest_action_name = "Brew Potion"
+	rest_action_add_random_consumable.rest_action_description = "Gain a random potion."
 	rest_action_add_random_consumable.rest_action_stat_name = "REST_GAIN_CONSUMABLE_COUNT"
 	rest_action_add_random_consumable.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.EXCLUSIVE
 	rest_action_add_random_consumable.rest_actions = [
@@ -631,6 +636,7 @@ func add_rest_actions() -> void:
 	# paired with corresponding artifact
 	var rest_action_increase_attack_on_rest: RestActionData = RestActionData.new("rest_action_increase_attack_on_rest")
 	rest_action_increase_attack_on_rest.rest_action_name = "Increase Damage"
+	rest_action_increase_attack_on_rest.rest_action_description = "Your attacks deal more damage in every combat from now on (up to 3 times)."
 	rest_action_increase_attack_on_rest.rest_action_stat_name = "REST_INCREASE_DAMAGE_COUNT"
 	rest_action_increase_attack_on_rest.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.EXCLUSIVE
 	rest_action_increase_attack_on_rest.rest_actions = [
@@ -2387,7 +2393,7 @@ func add_card_basics() -> void:
 	for i: int in len(colors):
 		# Basic attack card
 		var card_basic_attack: CardData = CardData.new("card_basic_attack_{0}".format([colors[i]]))
-		card_basic_attack.card_name = "Basic Attack"
+		card_basic_attack.card_name = "Slash"
 		card_basic_attack.card_color_id = "color_{0}".format([colors[i]])
 		card_basic_attack.card_description = "Attack for [damage] damage."
 		card_basic_attack.card_texture_path = "external/sprites/cards/{0}/card_basic_attack_{0}.png".format([colors[i]])
@@ -2405,7 +2411,7 @@ func add_card_basics() -> void:
 		
 		# Basic block card
 		var card_basic_block: CardData = CardData.new("card_basic_block_{0}".format([colors[i]]))
-		card_basic_block.card_name = "Basic Block"
+		card_basic_block.card_name = "Brace"
 		card_basic_block.card_color_id = "color_{0}".format([colors[i]])
 		card_basic_block.card_description = "Gain [block] block"
 		card_basic_block.card_texture_path = "external/sprites/cards/{0}/card_basic_block_{0}.png".format([colors[i]])

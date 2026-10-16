@@ -40,6 +40,11 @@ EXTRA = {
     "[color=grey]Only once per shop.[/color]": "shop tooltip",
     # レリック / ポーションのレアリティ (説明のツールチップ)
     "SHOP": "relic rarity", "BOSS": "relic rarity", "EVENT": "relic rarity", "LEGENDARY": "potion rarity",
+    # 休憩所のツールチップ (RestOverlay.gd)
+    "You can choose only one of: {0}": "rest site tooltip",
+    "Once per visit. Can be combined with other actions.": "rest site tooltip",
+    "Can be done any number of times.": "rest site tooltip",
+    "Not available right now.": "rest site tooltip",
 }
 
 keys = {}

@@ -54,6 +54,15 @@
       "category": "background",
       "brief": "ショップの場面: 遺跡の中の商人の天幕。左の敷物に主人公、右の緑の布に商人 (どちらも別の絵を上に重ねる)。上端は資源バーで隠れる。",
       "prompt": "Interior of a cozy wandering merchant's tent pitched among ancient white-stone ruins in an enchanted forest, seen from a slightly elevated side view like a theater stage. Patched canvas tent cloth in muted plum, ochre and faded red is strung between two broken mossy stone pillars at the back; through a wide opening in the back wall the misty forest ruins glow in teal and gold. The floor is packed earth with flagstones. On the LEFT half of the floor lies an empty round woven rug with a simple border pattern, centered around x=27% y=72%, completely clear of objects (a character will stand on it later). On the RIGHT half lies an empty flat green cloth mat around x=72% y=70% with a few blank parchment slips and small coin stacks scattered at its edges, its center left completely empty (a seated merchant will be placed there later). Fill the space around them with merchant clutter: wooden barrels and crates, stacked rolled rugs, shelves of glass jars and corked potion bottles, a glowing violet crystal ball on a little stand near the right edge, burlap coin sacks, a brass hanging lantern and a warm paper lantern hanging from the tent poles, a few lit candles, an old animal skull and some rusty weapons leaning on the left wall. Dark silhouetted props frame the bottom-left and bottom-right foreground. Warm amber lantern light inside, cool teal light from the opening behind. Keep the top 10 percent calm and dark (a resource bar covers it). No people, no creatures, no merchant, no characters and no dragons anywhere."
+    },
+    {
+      "id": "world_rest_site",
+      "out": "external/sprites/backgrounds/rest_site.png",
+      "size": [1200, 700],
+      "transparent": false,
+      "category": "background",
+      "brief": "休憩所の背景: LoL でリコールして戻る陣地のような、森の遺跡の聖域。左の台座に主人公が休む。右半分には行動のアイコンを重ねる。",
+      "prompt": "Side-view stage of a peaceful sanctuary hidden in the enchanted forest ruins, the adventurers' safe home base at twilight. On the LEFT half, a broad round raised platform of pale weathered stone (its top surface spans about x=130..560 at y=470..560) inlaid with a ring of softly glowing teal rune lines; the middle of the platform is EMPTY because a character will be placed standing there. Behind the platform, a small white-stone healing spring with a basin of glowing teal-green water, and a tall faceted amber-and-teal guardian crystal floating above a tarnished bronze clockwork pedestal with slowly turning gear rings, gentle light beams rising from it. Mossy broken arches, ivy, ferns and a few warm hanging lanterns frame the scene; deep blue-violet dusk sky and fireflies glimpsed through the canopy. The RIGHT half (x=640..1170, y=110..600) stays calm, dim and low contrast with only soft distant ruins and foliage, because game UI icons and tooltips will be drawn over it. Lower 12 percent is a simple dark mossy flagstone floor. Fixed 1200x700; no characters, creatures, people, foreground obstructions or baked shadows."
     }
   ]
 }

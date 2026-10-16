@@ -3,6 +3,9 @@ extends SerializableData
 class_name RestActionData
 
 @export var rest_action_name: String = ""
+## Shown in the tooltip when hovering the action at a rest site
+@export var rest_action_description: String = ""
+## Icon shown on the rest site tile. ArtOverrides fills it from external/sprites/rest_actions/<object_id>.png
 @export var rest_action_texture_path: String = ""
 @export var rest_actions: Array[Dictionary] = []
 @export var rest_action_validators: Array[Dictionary] = [] # validators required for the action to be clickable

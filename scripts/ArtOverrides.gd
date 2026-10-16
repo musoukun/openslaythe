@@ -6,6 +6,7 @@ class_name ArtOverrides
 ##   状態異常      external/sprites/status_effects/<object_id>.png
 ##   レリック      external/sprites/artifacts/<object_id>.png
 ##   消耗品        external/sprites/consumables/<object_id>.png
+##   休憩所の行動  external/sprites/rest_actions/<object_id>.png
 ##   Act 背景      external/sprites/backgrounds/<act_id>.png
 ##   キャラアイコン external/sprites/characters/<id>/<id>_icon.png
 ## 敵の表示名は res://sprites/enemy_names.json ({"enemies": {id: {name, description}}}) から上書きする。
@@ -27,6 +28,8 @@ static func apply() -> void:
 		_override(artifact, "artifact_texture_path", "external/sprites/artifacts/%s.png" % artifact.object_id)
 	for consumable: ConsumableData in Global._id_to_consumable_data.values():
 		_override(consumable, "consumable_texture_path", "external/sprites/consumables/%s.png" % consumable.object_id)
+	for rest_action: RestActionData in Global._id_to_rest_action_data.values():
+		_override(rest_action, "rest_action_texture_path", "external/sprites/rest_actions/%s.png" % rest_action.object_id)
 	for act: ActData in Global._id_to_act_data.values():
 		_override(act, "act_background_texture_path", "external/sprites/backgrounds/%s.png" % act.object_id)
 	for character: CharacterData in Global._id_to_character_data.values():
