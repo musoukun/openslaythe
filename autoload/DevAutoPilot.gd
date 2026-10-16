@@ -5,6 +5,7 @@ extends Node
 ## --auto=combat : ラン開始して最初の戦闘に入る
 ## --auto=new_run : タイトルから「新しいラン」画面を開く
 ## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
+## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## 引数が無い場合は何もしない。
 
@@ -92,11 +93,16 @@ func _ready() -> void:
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:
 				deck_button.button_up.emit()
-		"combat", "vfx", "profile", "hitstop":
+		"combat", "combat_hover", "vfx", "profile", "hitstop":
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
 					break
+			if mode == "combat_hover":
+				await get_tree().create_timer(2.0).timeout
+				var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
+				if hand_cards.size() > 2:
+					HandManager.hand._on_card_hovered(hand_cards[2])
 			if mode == "vfx":
 				await get_tree().create_timer(1.0).timeout
 				_preview_vfx()
