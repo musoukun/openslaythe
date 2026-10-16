@@ -72,6 +72,10 @@ func _ready() -> void:
 	match mode:
 		"map":
 			_print_map_stats()
+			# ラン開始の選択肢パネルがマップを覆うので閉じてから表示する
+			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false) as Control
+			if run_start_options:
+				run_start_options.visible = false
 			var map := get_tree().root.find_child("Map", true, false)
 			if map:
 				map.show_map()

@@ -1674,8 +1674,8 @@ func add_characters() -> void:
 	character_color = "green"
 	var character_green: CharacterData = CharacterData.new("character_{0}".format([character_color]))
 	character_green.character_player_id = "player_{0}".format([character_color])
-	character_green.character_name = "Vera Thornforge"
-	character_green.character_description = "A thermonuclear botanist fired for saving mutant sprouts, now a greenhouse warrior who carves through rogue gardening robots with a reactor-forged pruning greatsword."
+	character_green.character_name = "Vera Emberscale"
+	character_green.character_description = "A half-dragon warrior born in the cliffside kingdom. With dragon-scale claws and wings of ember fire, she tears through the rampaging clockwork golems that overran the ancient forest."
 	character_green.character_color_id = "color_{0}".format([character_color])
 	character_green.character_starting_health = 75
 	character_green.character_starting_card_draft_card_pack_ids = ["card_pack_{0}".format([character_color])]

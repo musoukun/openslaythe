@@ -294,30 +294,6 @@
    "prompt": "Tiny cyan washer-ring robot with a cream central eye, copper rim, little paddle arms and two stubby cream mechanical feet; round open silhouette. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only."
   },
   {
-   "id": "bg_act_1",
-   "out": "external/sprites/backgrounds/act_1.png",
-   "size": [
-    1200,
-    700
-   ],
-   "transparent": false,
-   "brief": "Combat background for Act 1. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
-   "category": "background",
-   "prompt": "Side-view abandoned intake greenhouse: chunky mossy pipes at the extreme sides, sagging cream glass ribs across the upper quarter, absurdly large seedlings in distant copper pots. Muted moss and teal with soft amber afternoon light; distant props remain quiet. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is simple dark teal flooring beneath cards. No HUD."
-  },
-  {
-   "id": "map_background",
-   "out": "sprites/ui/map_background.png",
-   "size": [
-    1200,
-    700
-   ],
-   "transparent": false,
-   "brief": "Map screen background: top-down overworld map the player travels through. Center area should be calm/low contrast so node icons stay readable.",
-   "category": "map",
-   "prompt": "Top-down view of one absurd agricultural power station: mossy intake gardens along the lower-left perimeter, peach copper compost plumbing at the sides, ivory reactor conservatory at the upper-right edge. Keep x=240..960 and y=70..630 a quiet flat dark teal field with only faint terrain shapes; no baked routes, nodes, lettering or markers."
-  },
-  {
    "id": "card_basic_attack_green",
    "out": "external/sprites/cards/green/card_basic_attack_green.png",
    "size": [
@@ -724,42 +700,6 @@
    "brief": "Card illustration for card 'Waste' (STATUS): At end of turn gain [status_charge_amount] Overheat and do [damage] damage to a random enemy. Exhaust",
    "category": "card_art",
    "prompt": "One dented plum waste capsule sprouts a sickly lime shoot and bulges with coral heat; a single sideways spark escapes its loose cap, isolated close-up on ink teal. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
-  },
-  {
-   "id": "bg_act_2",
-   "out": "external/sprites/backgrounds/act_2.png",
-   "size": [
-    1200,
-    700
-   ],
-   "transparent": false,
-   "brief": "Combat background for Act 2. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
-   "category": "background",
-   "prompt": "Side-view compost heat exchange hall: enormous peach copper elbows, plum sealed sludge vats and suspended seed conveyors confined to upper and side edges. Muted plum and rust with narrow coral furnace light; no active explosion. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is simple dark teal flooring beneath cards. No HUD."
-  },
-  {
-   "id": "bg_act_3",
-   "out": "external/sprites/backgrounds/act_3.png",
-   "size": [
-    1200,
-    700
-   ],
-   "transparent": false,
-   "brief": "Combat background for Act 3. Side view stage; player stands left-center, enemies right; lower 30% is covered by cards so keep it simple.",
-   "category": "background",
-   "prompt": "Side-view pristine reactor conservatory: ivory ceramic ribs curve around a small distant artificial sun high above a disciplined ring of huge pale leaves. Cold teal and ivory with sparse lime light; comic tiny watering spout at an upper edge, no central obstruction. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is simple dark teal flooring beneath cards. No HUD."
-  },
-  {
-   "id": "bg_title",
-   "out": "sprites/ui/title_background.png",
-   "size": [
-    1200,
-    700
-   ],
-   "transparent": false,
-   "brief": "Title screen key art. Left third is covered by menu buttons, top-center has the logo text (rendered by the game), so keep those areas quieter.",
-   "category": "background",
-   "prompt": "Title screen background with NO characters and NO people: a grand ruined reactor greenhouse interior at golden hour, huge glass dome ribs, a glowing lime reactor core in a copper flowerpot far in the background, giant leaves and vines framing the edges, gardening robots silhouettes lurking in the far shadows. Keep the right half slightly open and calm (a character will be composited there) and the left third darker for menu buttons. Painterly, same style as the other backgrounds."
   },
   {
    "id": "vfx_slash",

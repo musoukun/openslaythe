@@ -1,8 +1,8 @@
 {
- "style": "Hand-inked map illustration for a parchment adventure map of a reactor greenhouse. Flat single-color dark sepia ink (#3E3022) with slightly rough brush edges, like a stamp or woodcut printed on old paper. No other colors, no gradients, no glow, no text, no letters, no numbers. Transparent background unless stated otherwise. Original design, do not imitate existing games.",
+ "style": "Hand-inked map illustration for a parchment adventure map of an original high-fantasy realm. Flat single-color dark sepia ink (#3E3022) with slightly rough brush edges, like a stamp or woodcut printed on old paper. No other colors, no gradients, no glow, no text, no letters, no numbers. Transparent background unless stated otherwise. Original design, do not imitate existing games.",
  "assets": [
   {
-   "id": "map_parchment",
+   "id": "map_parchment_fantasy",
    "out": "sprites/map/parchment_tile.png",
    "size": [
     888,
@@ -13,7 +13,7 @@
    "seamless_y": true,
    "category": "map",
    "brief": "vertically tileable parchment strip",
-   "prompt": "A vertical strip of old yellow-olive parchment paper (#C9C08A to #B8AE78, subtle darker blotches and faint teal-green mould speckles), filling the full height edge to edge with NO top or bottom border so it can tile vertically. The LEFT and RIGHT edges are torn and irregular with a few dark ink splatters near the edges; outside the torn edges is fully transparent. Low contrast, calm, no drawings, no lines, no text. This is an exception to the single sepia color rule: use the parchment colors described."
+   "prompt": "A vertical strip of old warm tan parchment paper (#D8C49A to #C2A979, subtle darker age stains and foxing), filling the full height edge to edge with NO top or bottom border so it can tile vertically. Along the LEFT and RIGHT margins only, very faint faded sepia hand-drawn old-map sketches: tiny pine forests, rounded hills, a few small mountain peaks, a winding river fragment and one or two tiny tower ruins, drawn lightly like a cartographer's illustration and fading out toward the center. The central 60 percent stays almost blank, calm and low contrast (map nodes will be drawn there). The LEFT and RIGHT edges are torn and irregular with a few dark ink splatters near the edges; outside the torn edges is fully transparent. No text, no compass, no labels. This is an exception to the single sepia color rule: use the parchment colors described."
   },
   {
    "id": "mapicon_combat",
@@ -112,7 +112,7 @@
    "prompt": "A large ink illustration of the act boss 'Mother Pot': a massive egg-shaped nursery boiler robot with a glass greenhouse dome on top, pipe handles like hips, a belly hatch and little seedling robots peeking out, sitting on a cloud of billowing steam. Drawn in the single sepia ink with light hatching, like an illustration printed on a map. Front view, centered."
   },
   {
-   "id": "mapicon_starting",
+   "id": "mapicon_starting_dragon",
    "out": "sprites/map/location_starting.png",
    "size": [
     160,
@@ -121,7 +121,7 @@
    "transparent": true,
    "category": "map_icon",
    "brief": "single starting point (the Ancient) at the bottom of the map",
-   "prompt": "A round emblem marking the single starting point of the journey: an ancient spiral seed eye inside a circular ring of leaves and roots, like an old sacred seal. Bold, centered, front view."
+   "prompt": "A round emblem marking the single starting point of the journey: a small coiled dragon wrapped around a single upward flame inside a circular ring of thorny leaves, like an old wax-seal stamp. Original design, no letters. Bold, centered, front view."
   }
  ]
 }

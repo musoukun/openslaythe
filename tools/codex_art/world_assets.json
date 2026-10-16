@@ -1,0 +1,50 @@
+{
+  "style": "Create original high-fantasy game background art in a rich hand-painted gouache style with confident inked shapes, flat color masses, soft atmospheric depth and restrained dry-brush texture, matching a painted fantasy deckbuilder. The world is an ORIGINAL realm of enchanted forests, ancient white-stone ruins, a volcanic dragon mountain and a proud cliffside kingdom; grand, heroic and warm, with readable silhouettes and painterly light. Do not imitate any existing game, franchise map, city, region, emblem, banner design, logo or official artwork. Banners and flags are plain cloth with no symbols. Include no text, letters, numerals, labels, logos, crests, emblems, watermarks or UI, and respect each asset's stated composition requirements.",
+  "assets": [
+    {
+      "id": "world_act_1",
+      "out": "external/sprites/backgrounds/act_1.png",
+      "size": [1200, 700],
+      "transparent": false,
+      "category": "background",
+      "brief": "Act 1 戦闘背景: 魔法の森の遺跡。左に主人公、右に敵。下30%はカードで隠れるので単純に。",
+      "prompt": "Side-view stage inside an ancient enchanted forest: colossal mossy tree trunks at the extreme left and right edges, broken white-stone arches and a toppled column overgrown with vines in the middle distance, faint teal glowing rune lines carved into fallen stones, drifting golden pollen motes and soft god-rays from a high canopy. Deep greens and teal with warm gold afternoon light; distant elements stay quiet and hazy. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, creatures, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is a simple dark mossy flagstone floor beneath cards."
+    },
+    {
+      "id": "world_act_2",
+      "out": "external/sprites/backgrounds/act_2.png",
+      "size": [1200, 700],
+      "transparent": false,
+      "category": "background",
+      "brief": "Act 2 戦闘背景: 竜の峰の溶岩洞。",
+      "prompt": "Side-view stage inside a vast volcanic cavern beneath a dragon mountain: towering black basalt columns at the extreme sides, slow rivers of glowing lava along the far background, the enormous fossilized ribs and skull of an ancient dragon half buried in the distant rock wall, embers floating upward. Deep charcoal, rust and crimson with narrow orange lava light; no active eruption. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, creatures, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is a simple dark cracked basalt floor beneath cards."
+    },
+    {
+      "id": "world_act_3",
+      "out": "external/sprites/backgrounds/act_3.png",
+      "size": [1200, 700],
+      "transparent": false,
+      "category": "background",
+      "brief": "Act 3 戦闘背景: 白い城塞の王都（現在は未使用の章だが世界観をそろえる）。",
+      "prompt": "Side-view stage in the sunlit upper courtyard of a cliffside white-stone royal citadel: tall pale towers with blue slate roofs at the extreme sides, long plain blue and gold cloth banners with no symbols hanging from the walls, a pair of weathered stone dragon statues in the middle distance, snowy mountains and a far volcanic peak under a bright sky. Ivory, sky blue and gold with clean noon light. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, creatures, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is a simple worn pale flagstone floor beneath cards."
+    },
+    {
+      "id": "world_title",
+      "out": "sprites/ui/title_background.png",
+      "size": [1200, 700],
+      "transparent": false,
+      "category": "background",
+      "brief": "タイトル画面。左1/3はメニュー、上中央はロゴ、右半分に主人公バストを重ねる。",
+      "prompt": "Title screen key art with NO characters, NO people and NO creatures: an epic golden-hour panorama of an original fantasy realm. In the far distance a huge smoking volcanic dragon mountain glows orange at its crater; in the middle distance a white-stone kingdom with tall towers stands on a cliff above a misty valley and waterfalls; ancient enchanted forest trees with hanging moss and glowing motes frame the left and right edges. Keep the right half slightly open and calm (a character will be composited there), the top center calm for a logo rendered by the game, and the left third darker for menu buttons. Painterly, same style as the other backgrounds."
+    },
+    {
+      "id": "world_map_background",
+      "out": "sprites/ui/map_background.png",
+      "size": [1200, 700],
+      "transparent": false,
+      "category": "map",
+      "brief": "マップ画面の外側（羊皮紙の外、暗くして表示）。中央は羊皮紙で隠れる。",
+      "prompt": "Top-down painterly view of an original fantasy land seen from very high above at dusk: dark enchanted forests along the lower-left, a winding river, a volcanic dragon mountain with a glowing crater at the upper-left edge, a tiny white-stone castle on a cliff at the right edge, mountain ridges along the top. Muted deep green, slate blue and charcoal tones. Keep x=240..960 and y=70..630 quiet and low contrast with only faint terrain shapes; no baked routes, nodes, lettering, compass or markers."
+    }
+  ]
+}

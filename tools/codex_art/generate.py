@@ -36,14 +36,36 @@ def find_codex() -> str:
     return max(cands, key=os.path.getmtime)
 
 
+# refs (正本画像) を添付したときの役割分担: デザインは添付画像、ポーズは Subject の文
+REF_RULE = (
+    "Reference: attached image 1 is the canonical design of this character. Match it exactly for the face, hair, "
+    "horns, body proportions, armor, gauntlets, claws, tail, colors and rendering style. Follow the Subject text only "
+    "for pose, framing, frame count and effects; do not copy the reference's pose or canvas.\n\n"
+)
+
+
+TRANSPARENT_BG = ("Use the image tool's transparent background option: output a PNG with a real alpha channel where "
+                  "the background is fully transparent (alpha 0), not white, black, checkerboard, gradient or any "
+                  "colored backdrop or glow haze.")
+# 透過に失敗したときの描き直し用。後処理で chroma_key して抜く
+GREEN_BG = ("Paint the background as one perfectly flat solid pure green (#00FF00) fill edge to edge, with no "
+            "gradient, shadow or glow on it, and do not use that green anywhere on the subject; it will be "
+            "chroma-keyed out.")
+GREEN = "#00FF00"
+
+
 def build_prompt(style: str, asset: dict, raw_path: Path) -> str:
-    bg = ("The background MUST be fully transparent (alpha)."
-          if asset.get("transparent") else
-          "Fill the whole canvas edge to edge, no border, no transparency.")
+    if asset.get("greenscreen"):
+        bg = GREEN_BG
+    elif asset.get("transparent"):
+        bg = TRANSPARENT_BG
+    else:
+        bg = "Fill the whole canvas edge to edge, no border, no transparency."
     return (
         "$imagegen Generate exactly one image and nothing else.\n"
         f"Art direction:\n{style}\n\n"
         f"Subject:\n{asset['prompt']}\n\n"
+        f"{REF_RULE if asset.get('refs') else ''}"
         f"{bg} No text, no letters, no watermark, no UI frame.\n"
         f"Save the final PNG to this exact path: {raw_path.name} (in the current working directory). "
         "Do not create or modify any other file."
@@ -52,10 +74,12 @@ def build_prompt(style: str, asset: dict, raw_path: Path) -> str:
 
 def generate_raw(codex: str, style: str, asset: dict) -> bool:
     raw_path = RAW_DIR / f"{asset['id']}.png"
+    raw_path.unlink(missing_ok=True)  # 古い raw が残ると失敗しても成功と判定されるので消してから作る
     prompt = build_prompt(style, asset, raw_path)
     proc = subprocess.run(
         [codex, "exec", "-C", str(RAW_DIR), "-s", "workspace-write",
-         "--skip-git-repo-check", "--ephemeral", "-"],
+         "--skip-git-repo-check", "--ephemeral",
+         *[arg for ref in asset.get("refs", []) for arg in ("-i", str(REPO / ref))], "-"],
         input=prompt, text=True, encoding="utf-8",
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=900,
     )
@@ -63,6 +87,30 @@ def generate_raw(codex: str, style: str, asset: dict) -> bool:
     if not ok:
         print(f"[NG] {asset['id']}\n{proc.stdout[-1500:]}")
     return ok
+
+
+def alpha_ok(im: Image.Image) -> bool:
+    """透過アセットとして使えるか: 四隅がすべて透明で、全体の 9 割以上が不透明ではない."""
+    a = im.convert("RGBA").getchannel("A")
+    w, h = a.size
+    corners = [a.getpixel(p) for p in ((0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1))]
+    opaque = a.point(lambda v: 255 if v > 8 else 0).histogram()[255] / (w * h)
+    return max(corners) <= 8 and opaque < 0.9
+
+
+def needs_alpha_check(asset: dict) -> bool:
+    """四隅で透過を判定するアセットか. 端まで描く素材 (fit: stretch の羊皮紙など) と chroma_key 指定は除く."""
+    return bool(asset.get("transparent")) and asset.get("fit") != "stretch" and not asset.get("chroma_key")
+
+
+def make_raw(codex: str, style: str, asset: dict) -> bool:
+    """raw を作る (失敗したら 1 回だけ再試行)。透過のはずが背景つきで出たらグリーンバックで描き直す."""
+    if not (generate_raw(codex, style, asset) or generate_raw(codex, style, asset)):
+        return False
+    if needs_alpha_check(asset) and not alpha_ok(Image.open(RAW_DIR / f"{asset['id']}.png")):
+        print(f"[RETRY] {asset['id']}: background is not transparent, regenerating on green screen")
+        return generate_raw(codex, style, {**asset, "greenscreen": True})
+    return True
 
 
 def chroma_key(im: Image.Image, hex_color: str, tolerance: int = 90) -> Image.Image:
@@ -128,9 +176,8 @@ def place(im: Image.Image, w: int, h: int, scale: float, pad: float, anchor) -> 
     return canvas
 
 
-def clean_cell(f: Image.Image) -> Image.Image:
-    """セル内の連結成分を調べ、最大成分以外で「左端に接するもの (前コマのはみ出し)」と小さなゴミを消す."""
-    step = 2
+def components(f: Image.Image, step: int = 2) -> list:
+    """不透明部分 (alpha > 8) の連結成分を 1/step に縮小した座標の点リストで返す."""
     small = f.getchannel("A").resize((f.width // step, f.height // step), Image.NEAREST)
     w, h = small.size
     px = small.load()
@@ -139,46 +186,77 @@ def clean_cell(f: Image.Image) -> Image.Image:
     for y0 in range(h):
         for x0 in range(w):
             if px[x0, y0] > 8 and not label[y0][x0]:
-                cid = len(comps) + 1
-                stack, pts, touches_left, touches_right = [(x0, y0)], [], False, False
-                label[y0][x0] = cid
+                label[y0][x0] = len(comps) + 1
+                stack, pts = [(x0, y0)], []
                 while stack:
                     x, y = stack.pop()
                     pts.append((x, y))
-                    touches_left |= x == 0
-                    touches_right |= x == w - 1
                     for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
                         if 0 <= nx < w and 0 <= ny < h and not label[ny][nx] and px[nx, ny] > 8:
-                            label[ny][nx] = cid
+                            label[ny][nx] = len(comps) + 1
                             stack.append((nx, ny))
-                comps.append((pts, touches_left, touches_right))
+                comps.append(pts)
+    return comps
+
+
+def keep_points(f: Image.Image, pts: list, step: int) -> Image.Image:
+    """縮小座標の点 pts (とその周囲の縁) だけを残し、ほかを透明にした画像を返す."""
+    mask = Image.new("L", (f.width // step, f.height // step), 0)
+    mpx = mask.load()
+    for x, y in pts:
+        mpx[x, y] = 255
+    mask = mask.resize(f.size, Image.NEAREST).filter(ImageFilter.MaxFilter(2 * step + 1))
+    out = f.copy()
+    out.putalpha(Image.composite(f.getchannel("A"), mask, mask))
+    return out
+
+
+def clean_cell(f: Image.Image) -> Image.Image:
+    """セル内の連結成分を調べ、最大成分以外で「左端に接するもの (前コマのはみ出し)」と小さなゴミを消す."""
+    step = 2
+    comps = components(f, step)
     if not comps:
         return f
-    biggest = max(len(c[0]) for c in comps)
-    out = f.copy()
-    opx = out.load()
-    for pts, touches_left, touches_right in comps:
-        if len(pts) == biggest:
+    w = f.width // step
+    biggest = max(len(c) for c in comps)
+    kept = []
+    for pts in comps:
+        touches_left = any(x == 0 for x, _ in pts)
+        touches_right = any(x == w - 1 for x, _ in pts)
+        if len(pts) == biggest or not (touches_left or (touches_right and len(pts) < biggest * 0.15) or len(pts) < biggest * 0.01):
+            kept.extend(pts)
+    return keep_points(f, kept, step)
+
+
+def split_by_components(im: Image.Image, count: int) -> list:
+    """大きな連結成分がちょうど count 個あれば、それぞれを 1 コマとして切り出す (コマ境界をはみ出す翼や斬撃も欠けない).
+    小さな成分 (火の粉など) は中心が最も近いコマに入れ、最大の 1% 未満のゴミは捨てる。count 個でなければ None."""
+    step = 2
+    comps = components(im, step)
+    if not comps:
+        return None
+    biggest = max(len(c) for c in comps)
+    bodies = sorted((c for c in comps if len(c) >= biggest * 0.3), key=lambda c: min(x for x, _ in c))
+    if len(bodies) != count:
+        return None
+    centers = [sum(x for x, _ in c) / len(c) for c in bodies]
+    groups = [list(c) for c in bodies]
+    for c in comps:
+        if any(c is b for b in bodies) or len(c) < biggest * 0.01:
             continue
-        if touches_left or (touches_right and len(pts) < biggest * 0.15) or len(pts) < biggest * 0.01:
-            for x, y in pts:
-                for dx in range(step):
-                    for dy in range(step):
-                        X, Y = x * step + dx, y * step + dy
-                        if X < out.width and Y < out.height:
-                            r, g, b, _ = opx[X, Y]
-                            opx[X, Y] = (r, g, b, 0)
-    return out
+        cx = sum(x for x, _ in c) / len(c)
+        groups[min(range(count), key=lambda i: abs(centers[i] - cx))].extend(c)
+    return [keep_points(im, g, step) for g in groups]
 
 
 def split_sheet(im: Image.Image, count: int) -> list:
     """横一列 count コマのシートを分割。各コマは足元 (下25%) の中心で左右位置をそろえ、下端を共通にする."""
-    cell = im.width / count
-    alpha = im.getchannel("A").point(lambda a: 255 if a > 8 else 0)
+    cells = split_by_components(im, count)
+    if cells is None:
+        cell = im.width / count
+        cells = [clean_cell(im.crop((round(i * cell), 0, round((i + 1) * cell), im.height))) for i in range(count)]
     frames = []
-    for i in range(count):
-        box = (round(i * cell), 0, round((i + 1) * cell), im.height)
-        f = clean_cell(im.crop(box))
+    for f in cells:
         cell_alpha = f.getchannel("A").point(lambda a: 255 if a > 8 else 0)
         bbox = cell_alpha.getbbox()
         if not bbox:
@@ -222,6 +300,11 @@ def post_process(asset: dict) -> None:
     im = Image.open(raw_path).convert("RGBA")
     if asset.get("chroma_key"):
         im = chroma_key(im, asset["chroma_key"])
+    elif needs_alpha_check(asset) and not alpha_ok(im):
+        # グリーンバック (または単色背景) で出てきた raw は左上の色を抜く
+        r, g, b, _ = im.getpixel((0, 0))
+        im = chroma_key(im, f"#{r:02X}{g:02X}{b:02X}")
+        print(f"[KEY] {asset['id']}: keyed out background #{r:02X}{g:02X}{b:02X}")
 
     if asset.get("fit") == "stretch":
         # 透明部分をトリムして、枠いっぱいに引き伸ばす (カード枠などレイアウト位置が重要なもの)
@@ -240,6 +323,8 @@ def post_process(asset: dict) -> None:
         heights = sorted(body_height(f) for f in frames)
         median_h = heights[len(heights) // 2]
         scale = min(h * asset.get("body_ratio", 0.82) / median_h, min(w * (1 - pad * 2) / f.width for f in frames))
+        # keep_frames: 先頭 N コマだけ書き出す (コマ間の描き直しでガタつく待機は 1 コマ + 呼吸 Tween にする)
+        frames = frames[:asset.get("keep_frames", len(frames))]
         for i, f in enumerate(frames, 1):
             frame = place(f, w, h, scale, pad, asset.get("anchor"))
             if asset.get("pixel"):
@@ -293,7 +378,7 @@ def main() -> None:
         todo = [a for a in assets if args.force or not (RAW_DIR / f"{a['id']}.png").exists()]
         print(f"generating {len(todo)} assets with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:
-            list(ex.map(lambda a: (generate_raw(codex, style, a) or generate_raw(codex, style, a)) and post_process(a), todo))
+            list(ex.map(lambda a: make_raw(codex, style, a) and post_process(a), todo))
 
     for a in assets:
         if (RAW_DIR / f"{a['id']}.png").exists():

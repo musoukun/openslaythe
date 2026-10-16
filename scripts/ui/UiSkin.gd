@@ -72,14 +72,13 @@ static func add_backplate(control: Control, margin: float = 3.0) -> void:
 	control.move_child(plate, 0)
 
 
-## タイトル画面の右側に主人公のバストアップ (ドット絵) を置く
+## タイトル画面の右側に主人公のバストアップ (手描き) を置く
 static func _add_title_hero(title: Control) -> void:
 	var tex := load_if_exists(TITLE_HERO)
 	if tex == null:
 		return
 	var hero := TextureRect.new()
 	hero.texture = tex
-	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	hero.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	hero.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
 	hero.mouse_filter = Control.MOUSE_FILTER_IGNORE
