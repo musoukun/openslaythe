@@ -268,7 +268,7 @@ func _ready() -> void:
 					hp_before - enemy.get_combatant_health(), Global.player_data.player_block - block_before, Global.player_data.player_values.get(InterceptorComboChain.CHAIN_VALUE, 0)])
 			get_tree().quit()
 		"card_check":
-			# --auto=card_check [--hero=] : 新しいカードを決めた手順で出し、HP・エナジー・筋力・熱・マナ・手札・山札の変化を出力する
+			# --auto=card_check [--hero=] : 新しいカードを決めた手順で出し、HP・エナジー・攻撃力上昇・熱・マナ・手札・山札の変化を出力する
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)

@@ -43,7 +43,7 @@ godot --headless --path . -- --auto=mana_check --hero=character_blue
 
 ### 効果は Action と Interceptor
 - カードやレリックの効果は `scripts/actions/` の Action を `autoload/ActionGenerator.gd` で組み立て、`autoload/ActionHandler.gd` のキューで実行する。
-- 数値の補正は `scripts/action_interceptors/` の Interceptor で Action を書き換える。**加算（筋力・武器・タグ補正, priority 10000）→ コンボ倍率 (9600) → 弱体/脆弱の乗算 (9500/9000)** の順。新しい補正もこの順序に合わせて priority を決める。
+- 数値の補正は `scripts/action_interceptors/` の Interceptor で Action を書き換える。**加算（攻撃力上昇・武器・タグ補正, priority 10000）→ コンボ倍率 (9600) → 攻撃力低下/防御力低下の乗算 (9500/9000)** の順。新しい補正もこの順序に合わせて priority を決める。
 - 軸ごとの補正は「カードに `card_tags` を付け、Interceptor がタグを見て加算」する形（`BuildContent.gd` / `InterceptorTagScaling`）。主人公専用の効果もこの形で閉じ込める。
 - 使える条件は `scripts/validators/`、状態異常は `scripts/status_effects/`、レリックは `scripts/artifacts/`。
 

@@ -30,7 +30,7 @@ static func register() -> void:
 static func _register_interceptor() -> void:
 	# 武器が複数あっても登録は ID 単位で重複しないので、加算は1回だけ
 	var interceptor: ActionInterceptorData = ActionInterceptorData.new(INTERCEPTOR_ID)
-	interceptor.action_interceptor_priority = 10000 # 筋力と同じく、weaken / vulnerable の乗算より前
+	interceptor.action_interceptor_priority = 10000 # 攻撃力上昇と同じく、攻撃力低下 / 防御力低下の乗算より前
 	interceptor.action_interceptor_modifies_parent = true
 	interceptor.action_interceptor_script_path = Scripts.INTERCEPTOR_TAG_SCALING
 	interceptor.action_intercepted_action_paths = [Scripts.ACTION_ATTACK]

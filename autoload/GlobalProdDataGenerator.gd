@@ -907,7 +907,7 @@ func add_status_effects() -> void:
 	# increases attack damage by charge amount
 	# uses an interceptor
 	var status_effect_damage_increase: StatusEffectData = StatusEffectData.new("status_effect_damage_increase")
-	status_effect_damage_increase.status_effect_name = "Damage Increase"
+	status_effect_damage_increase.status_effect_name = "Attack Up"
 	status_effect_damage_increase.status_effect_texture_path = "external/sprites/status_effects/status_effect_green.png"
 	status_effect_damage_increase.status_effect_decay_rate = 0
 	status_effect_damage_increase.status_effect_type = StatusEffectData.STATUS_EFFECT_TYPES.BUFF
@@ -918,7 +918,7 @@ func add_status_effects() -> void:
 	# decreases damage done by attackers
 	# uses an interceptor
 	var status_effect_weaken: StatusEffectData = StatusEffectData.new("status_effect_weaken")
-	status_effect_weaken.status_effect_name = "Weaken"
+	status_effect_weaken.status_effect_name = "Attack Down"
 	status_effect_weaken.status_effect_texture_path = "external/sprites/status_effects/status_effect_green.png"
 	status_effect_weaken.status_effect_decay_rate = -1
 	status_effect_weaken.status_effect_type = StatusEffectData.STATUS_EFFECT_TYPES.DEBUFF
@@ -933,7 +933,7 @@ func add_status_effects() -> void:
 	# increases attack damage on attacked combatant
 	# uses an interceptor
 	var status_effect_vulnerable: StatusEffectData = StatusEffectData.new("status_effect_vulnerable")
-	status_effect_vulnerable.status_effect_name = "Vulnerable"
+	status_effect_vulnerable.status_effect_name = "Defense Down"
 	status_effect_vulnerable.status_effect_texture_path = "external/sprites/status_effects/status_effect_green.png"
 	status_effect_vulnerable.status_effect_decay_rate = -1
 	status_effect_vulnerable.status_effect_type = StatusEffectData.STATUS_EFFECT_TYPES.DEBUFF
@@ -2171,23 +2171,23 @@ func add_enemies() -> void:
 	}
 	]
 	enemy_4.add_intent_state([
-		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_vulnerable": 1})
+		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_defense_down": 1})
 		])
 	var enemy_4_status_charge_1: int = 2
 	var enemy_4_status_actions_1: Array[Dictionary] = [{Scripts.ACTION_APPLY_STATUS: {"status_effect_object_id": "status_effect_vulnerable", "status_charge_amount": enemy_4_status_charge_1, "target_override": BaseAction.TARGET_OVERRIDES.PLAYER}}]
 	var enemy_4_status_charge_2: int = 4
 	var enemy_4_status_actions_2: Array[Dictionary] = [{Scripts.ACTION_APPLY_STATUS: {"status_effect_object_id": "status_effect_vulnerable", "status_charge_amount": enemy_4_status_charge_2, "target_override": BaseAction.TARGET_OVERRIDES.PLAYER}}]
 	enemy_4.add_intent_state([
-		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STARTING, 8, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_1),
-		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STANDARD_ENEMIES_HARDER, 10, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_2),
+		EnemyIntentData.new("intent_attack_defense_down", DIFFICULTY_STARTING, 8, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_1),
+		EnemyIntentData.new("intent_attack_defense_down", DIFFICULTY_STANDARD_ENEMIES_HARDER, 10, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_2),
 	])
 	enemy_4.add_intent_state([
 		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STARTING, 4, 2, "", 0, "", {"intent_block": 1}),
 		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STANDARD_ENEMIES_HARDER, 5, 2, "", 0, "", {"intent_block": 1}),
 		])
 	enemy_4.add_intent_state([
-		EnemyIntentData.new("intent_block", DIFFICULTY_STARTING, 0, 0, "", 10, "", {"intent_attack_vulnerable": 1}),
-		EnemyIntentData.new("intent_block", DIFFICULTY_STANDARD_ENEMIES_HARDER, 0, 0, "", 12, "", {"intent_attack_vulnerable": 1}),
+		EnemyIntentData.new("intent_block", DIFFICULTY_STARTING, 0, 0, "", 10, "", {"intent_attack_defense_down": 1}),
+		EnemyIntentData.new("intent_block", DIFFICULTY_STANDARD_ENEMIES_HARDER, 0, 0, "", 12, "", {"intent_attack_defense_down": 1}),
 	])
 	
 	var _enemy_4_anim: AnimationData = enemy_4.add_standard_animations(
@@ -2632,7 +2632,7 @@ func add_cards_green() -> void:
 	card_clippers.card_name = "Twin Claws"
 	card_clippers.card_color_id = "color_{0}".format([color])
 	card_clippers.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_clippers.card_description = "Attack for [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Strength. On pickup, Gain [health_amount] HP."
+	card_clippers.card_description = "Attack for [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Attack Up. On pickup, Gain [health_amount] HP."
 	card_clippers.card_type = CardData.CARD_TYPES.ATTACK
 	card_clippers.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_clippers.card_keyword_object_ids = []
@@ -3160,7 +3160,7 @@ func add_cards_green() -> void:
 	card_photoelectric_synthesis.card_name = "Dragon Awakening"
 	card_photoelectric_synthesis.card_color_id = "color_{0}".format([color])
 	card_photoelectric_synthesis.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_photoelectric_synthesis.card_description = "Gain [status_charge_amount] strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed."
+	card_photoelectric_synthesis.card_description = "Gain [status_charge_amount] Attack Up. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed."
 	card_photoelectric_synthesis.card_type = CardData.CARD_TYPES.POWER
 	card_photoelectric_synthesis.card_rarity = CardData.CARD_RARITIES.RARE
 	card_photoelectric_synthesis.card_energy_cost = 0

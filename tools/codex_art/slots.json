@@ -875,7 +875,7 @@
    96
   ],
   "transparent": true,
-  "brief": "Status effect icon 'Damage Increase'. Shown at 24px, must be bold and simple.",
+  "brief": "Status effect icon 'Attack Up'. Shown at 24px, must be bold and simple.",
   "category": "icon"
  },
  {
@@ -886,7 +886,7 @@
    96
   ],
   "transparent": true,
-  "brief": "Status effect icon 'Weaken'. Shown at 24px, must be bold and simple.",
+  "brief": "Status effect icon 'Attack Down'. Shown at 24px, must be bold and simple.",
   "category": "icon"
  },
  {
@@ -897,7 +897,7 @@
    96
   ],
   "transparent": true,
-  "brief": "Status effect icon 'Vulnerable'. Shown at 24px, must be bold and simple.",
+  "brief": "Status effect icon 'Defense Down'. Shown at 24px, must be bold and simple.",
   "category": "icon"
  },
  {

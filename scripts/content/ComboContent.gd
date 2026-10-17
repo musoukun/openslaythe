@@ -15,7 +15,7 @@ const DESCRIPTION := "Within a turn, playing a card that costs at least as much 
 
 static func register() -> void:
 	var interceptor: ActionInterceptorData = ActionInterceptorData.new(INTERCEPTOR_ID)
-	interceptor.action_interceptor_priority = 9600 # 筋力・武器の加算 (10000) の後、弱体・脆弱 (9500 / 9000) の前に掛ける
+	interceptor.action_interceptor_priority = 9600 # 攻撃力上昇・武器の加算 (10000) の後、攻撃力低下・防御力低下 (9500 / 9000) の前に掛ける
 	interceptor.action_interceptor_modifies_parent = true
 	interceptor.action_interceptor_script_path = INTERCEPTOR_SCRIPT_PATH
 	interceptor.action_intercepted_action_paths = [Scripts.ACTION_ATTACK, Scripts.ACTION_BLOCK]

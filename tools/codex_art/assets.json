@@ -604,7 +604,7 @@
     96
    ],
    "transparent": true,
-   "brief": "Status effect icon 'Damage Increase'. Shown at 24px, must be bold and simple.",
+   "brief": "Status effect icon 'Attack Up'. Shown at 24px, must be bold and simple.",
    "category": "icon",
    "prompt": "An upright bronze sword blade with an enlarged glowing amber tip and a sturdy leather-wrapped hilt. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
@@ -616,7 +616,7 @@
     96
    ],
    "transparent": true,
-   "brief": "Status effect icon 'Weaken'. Shown at 24px, must be bold and simple.",
+   "brief": "Status effect icon 'Attack Down'. Shown at 24px, must be bold and simple.",
    "category": "icon",
    "prompt": "A dull bronze sword blade bent and drooping downward at its middle. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },
@@ -628,7 +628,7 @@
     96
    ],
    "transparent": true,
-   "brief": "Status effect icon 'Vulnerable'. Shown at 24px, must be bold and simple.",
+   "brief": "Status effect icon 'Defense Down'. Shown at 24px, must be bold and simple.",
    "category": "icon",
    "prompt": "A round ivory stone shield split by one wide crimson zigzag crack. Centered isolated icon on transparent background with 10 percent clear margin, bold blackened-iron outer contour, simple large internal shapes and no cast shadow; no lettering or numerals."
   },

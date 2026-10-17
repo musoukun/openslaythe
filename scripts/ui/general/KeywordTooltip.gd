@@ -5,7 +5,7 @@ extends PanelContainer
 const FONT_SIZE: int = 14
 const EMBEDDED_IMAGE_SIZE: int = 24
 
-## ステータス名の色 (強化は緑、弱体は赤、どちらでもないものは既定のオレンジ)
+## ステータス名の色 (バフは緑、デバフは赤、どちらでもないものは既定のオレンジ)
 const STATUS_NAME_COLORS: Dictionary = {
 	StatusEffectData.STATUS_EFFECT_TYPES.BUFF: "#8fe08f",
 	StatusEffectData.STATUS_EFFECT_TYPES.DEBUFF: "#ff8a7a",
