@@ -20,7 +20,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from PIL import Image, ImageFilter, PngImagePlugin
+from PIL import Image, ImageChops, ImageFilter, PngImagePlugin
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
@@ -325,9 +325,72 @@ def split_by_components(im: Image.Image, count: int) -> list:
     return [keep_points(im, g, step) for g in groups]
 
 
-def split_sheet(im: Image.Image, count: int) -> list:
+def find_seam(alpha: Image.Image, lo: int, hi: int, slope: int = 2) -> list:
+    """x が lo〜hi の範囲で、上から下まで不透明な所をなるべく通らない切れ目 (行ごとの x) を探す (シームカービングの要領)."""
+    w = hi - lo
+    px = alpha.load()
+    cost = [px[lo + x, 0] for x in range(w)]
+    back = []
+    for y in range(1, alpha.height):
+        prev = cost
+        cost, row = [], []
+        for x in range(w):
+            best = min(range(max(0, x - slope), min(w, x + slope + 1)), key=lambda i: prev[i])
+            cost.append(prev[best] + px[lo + x, y])
+            row.append(best)
+        back.append(row)
+    x = min(range(w), key=lambda i: cost[i])
+    seam = [x]
+    for row in reversed(back):
+        x = row[x]
+        seam.append(x)
+    return [lo + x for x in reversed(seam)]
+
+
+def split_by_seams(im: Image.Image, ranges: list) -> list:
+    """ranges (コマの境目を探す x の範囲 [lo, hi] のリスト) ごとに曲がった切れ目を探して分ける
+    (斬撃の炎と隣のコマの尻尾が触れていて、連結成分でも直線でも分けられないとき)."""
+    alpha = im.getchannel("A")
+    seams = [find_seam(alpha, lo, hi) for lo, hi in ranges]
+    cells = []
+    for i in range(len(seams) + 1):
+        mask = Image.new("L", im.size, 0)
+        mpx = mask.load()
+        for y in range(im.height):
+            left = seams[i - 1][y] if i > 0 else 0
+            right = seams[i][y] if i < len(seams) else im.width
+            for x in range(left, right):
+                mpx[x, y] = 255
+        cell = im.copy()
+        cell.putalpha(ImageChops.multiply(alpha, mask))
+        cell = drop_seam_scraps(cell, [seams[j] for j in (i - 1, i) if 0 <= j < len(seams)])
+        x0 = min(seams[i - 1]) if i > 0 else 0
+        x1 = max(seams[i]) if i < len(seams) else im.width
+        cells.append(cell.crop((x0, 0, x1, im.height)))
+    return cells
+
+
+def drop_seam_scraps(cell: Image.Image, seams: list, step: int = 2) -> Image.Image:
+    """切れ目に触れている小さな切れ端 (隣のコマのつま先など) を消す。本体と、切れ目から離れた火の粉は残す."""
+    comps = components(cell, step)
+    if not comps:
+        return cell
+    biggest = max(len(c) for c in comps)
+    near = set()
+    for seam in seams:
+        for y in range(0, len(seam), step):
+            for dx in range(-2, 3):
+                near.add((seam[y] // step + dx, y // step))
+    kept = []
+    for pts in comps:
+        if len(pts) == biggest or len(pts) >= biggest * 0.15 or not any(p in near for p in pts):
+            kept.extend(pts)
+    return keep_points(cell, kept, step)
+
+
+def split_sheet(im: Image.Image, count: int, seam_ranges: list = None) -> list:
     """横一列 count コマのシートを分割。各コマは足元 (下25%) の中心で左右位置をそろえ、下端を共通にする."""
-    cells = split_by_components(im, count)
+    cells = split_by_seams(im, seam_ranges) if seam_ranges else split_by_components(im, count)
     if cells is None:
         cell = im.width / count
         cells = [clean_cell(im.crop((round(i * cell), 0, round((i + 1) * cell), im.height))) for i in range(count)]
@@ -396,7 +459,7 @@ def post_process(asset: dict) -> None:
             im = seamless_y(im)
     elif asset.get("sheet"):
         # 横一列のスプライトシート -> コマごとに共通スケールで足元揃え -> <out>_1.png ...
-        frames = split_sheet(im, asset["sheet"])
+        frames = split_sheet(im, asset["sheet"], asset.get("seam_ranges"))
         pad = asset.get("pad", 0.04)
         heights = sorted(body_height(f) for f in frames)
         median_h = heights[len(heights) // 2]
@@ -406,15 +469,16 @@ def post_process(asset: dict) -> None:
         scale = min(h * asset.get("body_ratio", 0.82) / median_h, min(w * (1 - pad * 2) / f.width for f in frames))
         # keep_frames: 先頭 N コマだけ書き出す (コマ間の描き直しでガタつく待機は 1 コマ + 呼吸 Tween にする)
         frames = frames[:asset.get("keep_frames", len(frames))]
-        # write_frames: 書き出すコマの番号 (1 始まり)。ファイル名の番号はシート上の番号のまま
-        write_frames = asset.get("write_frames", range(1, len(frames) + 1))
-        for i, f in enumerate(frames, 1):
-            if i not in write_frames:
+        # frame_outs: コマごとの書き出し先 (リポジトリからの相対パス、"" は書き出さない)。無ければ <out>_1.png ...
+        frame_outs = asset.get("frame_outs") or [str(out_path.with_name(f"{out_path.stem}_{i}.png")) for i in range(1, len(frames) + 1)]
+        for f, frame_out in zip(frames, frame_outs):
+            if not frame_out:
                 continue
             frame = place(f, w, h, scale, pad, asset.get("anchor"))
             if asset.get("pixel"):
                 frame = pixelate(frame, asset["pixel"])
-            frame.save(out_path.with_name(f"{out_path.stem}_{i}.png"))
+            (REPO / frame_out).parent.mkdir(parents=True, exist_ok=True)
+            frame.save(REPO / frame_out)
         print(f"[OK] {asset['id']} -> {asset['out']} x{len(frames)} frames {w}x{h}")
         return
     elif asset.get("transparent"):

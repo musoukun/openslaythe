@@ -19,6 +19,7 @@ extends Node
 ## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る。--draft=first|attack|random|none でカード報酬の取り方。計測は CSVCOMBAT / CSVRUN の行。--combo で祝福「昇り竜の型」を選び、コストの小さい順に出す)
 ## --warp-mouse : 本物のカーソルも動かす (shop_buy の指さしを撮るとき用。使っている人のマウスを奪うので普段は付けない)
 ## --hp=<割合>[,<割合>...] : combat モードで、戦闘に入ってから主人公の HP を最大HPのこの割合 (%) にする。複数なら 2 秒ごとに順に変える (例 --hp=10 / --hp=5,100)
+## --pose=<attack|hurt|block>[,...] : combat モードで、主人公にそのアニメを 1.5 秒ごとに順に繰り返させる (--hp と組み合わせて竜化した絵を確認する)
 ## --hero=<character_id> : ラン開始系のモードで使う主人公 (省略時は character_green。例 --hero=character_blue)
 ## 引数が無い場合は何もしない。
 
@@ -173,6 +174,15 @@ func _ready() -> void:
 					wait = 2.0
 					player_data.set_health(maxi(1, roundi(player_data.player_health_max * float(percent) / 100.0)))
 					print("HP ", player_data.player_health, "/", player_data.player_health_max)
+			# --pose=<attack|hurt|block>[,...]: 主人公にそのアニメを 1.5 秒ごとに順に繰り返させる (竜化した絵の確認用)
+			if _get_user_arg("--pose=") != "":
+				var sprite: AnimatedSprite2D = Global.get_player().animated_sprite_2d
+				var poses := _get_user_arg("--pose=").split(",")
+				for i in 8:
+					await get_tree().create_timer(0.5).timeout
+					sprite.play("animation_" + poses[i % poses.size()])
+					print("POSE ", poses[i % poses.size()], " frame=", Engine.get_frames_drawn())
+					await get_tree().create_timer(1.0).timeout
 			if mode == "combat_hover":
 				await get_tree().create_timer(2.0).timeout
 				var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
