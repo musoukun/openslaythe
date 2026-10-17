@@ -11,6 +11,9 @@ const BUTTON_ICONS := {
 	"RunScreen/Combat/ExhaustPile": "res://sprites/ui/icon_exhaust_pile.png",
 	"RunScreen/Combat/Chest": "res://sprites/ui/chest.png",
 }
+## 「戻る」ボタン (文字の "<----" を矢印の絵に置き換える。候補は sprites/ui/back_arrow/ の a〜i)
+const BACK_ICON := "res://sprites/ui/back_arrow/back_arrow_d.png"
+const BACK_BUTTONS := ["RunScreen/Map/BackButton", "RunScreen/CardSelectionOverlay/BackButton"]
 const TITLE_BACKGROUND := "res://sprites/ui/title_background.png"
 ## タイトル/メニューの背景絵を暗い一色に沈めるシェーダー (LoL のロビー風。文字やキャラ絵を見やすくする)
 const LOBBY_BACKDROP_SHADER := "res://sprites/shaders/lobby_backdrop.gdshader"
@@ -37,6 +40,11 @@ static func apply(root: Node) -> void:
 		var control := root.get_node_or_null(node_path) as Control
 		if control:
 			add_backplate(control)
+	var back_icon := load_if_exists(BACK_ICON)
+	for node_path in BACK_BUTTONS:
+		var back := root.get_node_or_null(node_path) as Button
+		if back and back_icon:
+			_make_icon_button(back, back_icon, TranslationServer.translate("Back"))
 	# 戦闘背景画像の上に上部バーを半透明で重ねて HUD を読みやすくする
 	var top_bar := root.get_node_or_null("RunScreen/Combat/Background2") as ColorRect
 	var bg_button := root.get_node_or_null("RunScreen/Combat/BackgroundButton")
@@ -52,6 +60,18 @@ static func apply(root: Node) -> void:
 			bg.material.shader = load(LOBBY_BACKDROP_SHADER)
 		_add_title_hero(title)
 		_add_new_run_hero(title)
+
+
+## 文字のボタンを、枠なしで絵だけのボタンにする (意味はツールチップで出す)
+static func _make_icon_button(button: Button, icon: Texture2D, tooltip: String) -> void:
+	button.text = ""
+	button.icon = icon
+	button.expand_icon = true
+	button.flat = true
+	button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	button.tooltip_text = tooltip
+	button.focus_mode = Control.FOCUS_NONE
+	ShopScene.add_hover_grow(button)
 
 
 ## アイコンの背後に暗い丸台座を敷いて背景から浮かせる (何度呼んでも1枚だけ)
