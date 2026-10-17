@@ -21,7 +21,7 @@ git merge origin/main      # 衝突したら解消してから作業に入る
 
 - issue があるとき: `issue-26-dominion-build-types`（issue 番号＋題名を短い英語にしたもの）。PR の本文に `Closes #26` を書く。
 - issue がないとき: 作業内容がわかる短い英語（`feat/map-current-location`、`fix/shop-crash`、`docs/branch-naming`）。
-- アプリが `claude/...` のブランチを自動で作っていたら、作業を始める前（push する前）に付け直す。
+- アプリが自動で付けた名前（`work/clever-hertz-f924e2` のような接頭辞＋ランダムな名前）のままなら、作業を始める前（push する前）に付け直す。
 
 ```powershell
 git branch -m issue-26-dominion-build-types
