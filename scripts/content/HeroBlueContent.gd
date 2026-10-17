@@ -13,6 +13,7 @@ const STATUS_BLADE_EDGE := "status_effect_blade_edge"
 const STATUS_BLADE_TWIN := "status_effect_blade_twin"
 const STATUS_MANA_SPRING := "status_effect_mana_spring"
 const TAG_MANA_BLADE := "mana_blade"
+const TAG_BLADE_SUPPORT := "blade_support" # 蒼刃を強化するカード (「刃の呼び声」で山札から探せる)
 const MANA_MAX := 10
 
 const STATUS_ART := "external/sprites/status_effects/status_effect_blue.png"
@@ -195,14 +196,71 @@ static func register_cards() -> void:
 	# --- 蒼刃: マナを注いで固有技を強化する (戦闘の終わりまで残る) ---
 	var extend: CardData = _mana_card("card_blue_extend_blade", "Extend Blade", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.UNCOMMON, 2,
 		"Your Mana Blade deals [status_charge_amount] more damage this combat.", {"status_charge_amount": 6}, {"status_charge_amount": 3})
+	extend.card_tags = [TAG_BLADE_SUPPORT]
 	extend.card_play_actions = [_spend_mana(), _apply_to_player(STATUS_BLADE_EDGE)]
 	_register_skill(extend)
 
 	var twin: CardData = _mana_card("card_blue_twin_blade", "Twin Blade", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.RARE, 4,
 		"Your Mana Blade hits [status_charge_amount] more time this combat.", {"status_charge_amount": 1}, {"mana_cost": -1, "mana_spend": 1})
 	twin.card_energy_cost = 1
+	twin.card_tags = [TAG_BLADE_SUPPORT]
 	twin.card_play_actions = [_spend_mana(), _apply_to_player(STATUS_BLADE_TWIN)]
 	_register_skill(twin)
+
+	_register_more_cards()
+
+
+## 2 回目の追加: エネルギー 0・マナだけで使うカード、山札から探すカード、デッキを圧縮するカード
+static func _register_more_cards() -> void:
+	# --- エネルギー 0、マナだけで使う ---
+	var bolt: CardData = _mana_card("card_blue_azure_bolt", "Azure Bolt", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.COMMON, 1,
+		"Deal [damage] damage.", {"damage": 6, "number_of_attacks": 1}, {"damage": 3})
+	bolt.card_play_actions = [_spend_mana(), _attack()]
+	Global.register_rod(bolt)
+
+	var veil: CardData = _mana_card("card_blue_azure_veil", "Azure Veil", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.COMMON, 1,
+		"Gain [block] block.", {"block": 6}, {"block": 3})
+	veil.card_play_actions = [_spend_mana(), _block()]
+	_register_skill(veil)
+
+	var drop: CardData = _mana_card("card_blue_mana_drop", "Mana Drop", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.UNCOMMON, 2,
+		"Draw [draw_count] cards.", {"draw_count": 2}, {"draw_count": 1})
+	drop.card_play_actions = [_spend_mana(), _draw()]
+	_register_skill(drop)
+
+	var starfall: CardData = _mana_card("card_blue_starfall", "Starfall", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.RARE, 5,
+		"Deal [damage] damage to ALL enemies.", {"damage": 14, "number_of_attacks": 1}, {"damage": 5})
+	starfall.card_requires_target = false
+	starfall.card_play_actions = [_spend_mana(), _attack(BaseAction.TARGET_OVERRIDES.ALL_ENEMIES)]
+	Global.register_rod(starfall)
+
+	# --- 山札から探す ---
+	var minds_eye: CardData = _card("card_blue_minds_eye", "Mind's Eye", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.UNCOMMON, 1,
+		"Choose a card in your draw pile and put it into your hand. Exhaust.", {}, {})
+	minds_eye.card_play_destination = HandManager.EXHAUST_PILE
+	minds_eye.card_first_upgrade_property_changes = {"card_energy_cost": 0}
+	minds_eye.card_play_actions = [_pick_one(HandManager.DRAW_PILE, "Choose a card to put into your hand.", [{Scripts.ACTION_ADD_CARDS_TO_HAND: {}}])]
+	_register_skill(minds_eye)
+
+	var blade_call: CardData = _mana_card("card_blue_blade_call", "Call of the Blade", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.COMMON, 1,
+		"Put an Extend Blade or Twin Blade from your draw pile into your hand. Draw [draw_count] card.", {"draw_count": 1}, {"draw_count": 1})
+	blade_call.card_play_actions = [_spend_mana(),
+		_pick_one(HandManager.DRAW_PILE, "Choose a blade card to put into your hand.", [{Scripts.ACTION_ADD_CARDS_TO_HAND: {}}],
+			[{Scripts.VALIDATOR_CARD_TAG: {"card_tags": [TAG_BLADE_SUPPORT]}}]),
+		_draw()]
+	_register_skill(blade_call)
+
+	# --- デッキを圧縮する (廃棄して、残りのカードを何度も引けるようにする) ---
+	var clear_mind: CardData = _card("card_blue_clear_mind", "Clear Mind", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.COMMON, 1,
+		"Exhaust a card in your hand. Gain [mana_gain] Mana.", {"mana_gain": 2}, {"mana_gain": 1})
+	clear_mind.card_play_actions = [_pick_one(HandManager.HAND_PILE, "Choose a card to Exhaust.", [{Scripts.ACTION_EXHAUST_CARDS: {}}]), _gain_mana()]
+	_register_skill(clear_mind)
+
+	var stillness: CardData = _mana_card("card_blue_stillness", "Stillness", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.UNCOMMON, 1,
+		"Exhaust a card in your discard pile. Draw [draw_count] cards.", {"draw_count": 2}, {"draw_count": 1})
+	stillness.card_play_actions = [_spend_mana(),
+		_pick_one(HandManager.DISCARD_PILE, "Choose a card to Exhaust.", [{Scripts.ACTION_EXHAUST_CARDS: {}}]), _draw()]
+	_register_skill(stillness)
 
 
 static func _card(id: String, card_name: String, type: int, rarity: int, energy: int, description: String, values: Dictionary, upgrades: Dictionary) -> CardData:
@@ -238,6 +296,12 @@ static func _register_skill(card: CardData) -> void:
 
 static func _attack(target_override: int = BaseAction.TARGET_OVERRIDES.SELECTED_TARGETS) -> Dictionary:
 	return {Scripts.ACTION_ATTACK_GENERATOR: {"time_delay": 0.15, "target_override": target_override, "actions_on_lethal": []}}
+
+
+## 指定した山 (山札・手札・捨て札) からカードを 1 枚選んで action_data を行う。選べるカードが無ければ何もしない
+static func _pick_one(pile: String, pick_text: String, action_data: Array[Dictionary], validators: Array[Dictionary] = []) -> Dictionary:
+	return {Scripts.ACTION_PICK_CARDS: {"card_pick_type": pile, "min_card_amount": 1, "max_card_amount": 1,
+		"min_cards_are_required_for_action": true, "card_pick_text": pick_text, "action_data": action_data, "validator_data": validators}}
 
 
 static func _block() -> Dictionary:

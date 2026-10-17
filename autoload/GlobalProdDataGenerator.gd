@@ -34,6 +34,7 @@ func generate_production_data() -> void:
 	add_artifacts()
 	add_card_decorators()
 	add_cards()
+	HeroGreenContent.register_cards() # Vera の報酬カードを 3 つの軸に絞る (scripts/content/HeroGreenContent.gd)。BuildContent より前
 	BuildContent.register() # ビルド軸のタグ付けと武器 (scripts/content/BuildContent.gd)。カード登録の後に呼ぶ
 	ComboContent.register() # 祝福「昇り竜の型」(コストの小さい順に出すコンボ。scripts/content/ComboContent.gd)
 	HeroBlueContent.register_cards() # 2人目の主人公のカード (scripts/content/HeroBlueContent.gd)
