@@ -4,7 +4,7 @@
 extends Control
 
 var _option_type_to_option_ids: Dictionary = {}
-const COMPLETE_OPTION_COUNT: int = 3	# number of unique options to populate (weapons from BuildContent + artifact swap)
+const COMPLETE_OPTION_COUNT: int = 4	# number of unique options to populate (weapons from BuildContent + artifact swap + 昇り竜の型 from ComboContent)
 ## 選択肢の列 (主人公と祝福のキャラの間。画面の下端・中央を基準にし、下端から上へ伸びる)
 ## 1200x700 の画面では x=390〜790、下端 y=690。全画面で画面が広がっても中央の下に残る
 const OPTION_LEFT: float = -210.0

@@ -15,7 +15,7 @@ extends Node
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## --auto=click_test : 最初の戦闘で、手札の各カードのどこを押せば CardButton に届くかを数え、実際にクリックでカードを出す
-## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る)
+## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る。--draft=first|attack|random|none でカード報酬の取り方。計測は CSVCOMBAT / CSVRUN の行。--combo で祝福「昇り竜の型」を選び、コストの小さい順に出す)
 ## --warp-mouse : 本物のカーソルも動かす (shop_buy の指さしを撮るとき用。使っている人のマウスを奪うので普段は付けない)
 ## --hero=<character_id> : ラン開始系のモードで使う主人公 (省略時は character_green。例 --hero=character_blue)
 ## 引数が無い場合は何もしない。
@@ -71,6 +71,9 @@ func _ready() -> void:
 			bot.run_seed = int(_get_user_arg("--seed="))
 		bot.god_mode = OS.get_cmdline_user_args().has("--god")
 		bot.shots_dir = _get_user_arg("--shots=")
+		bot.combo_mode = OS.get_cmdline_user_args().has("--combo")
+		if _get_user_arg("--draft=") != "":
+			bot.draft_policy = _get_user_arg("--draft=")
 		await bot.run()
 		get_tree().quit()
 		return
@@ -190,6 +193,59 @@ func _ready() -> void:
 			await get_tree().create_timer(3.0).timeout
 			await _click_map()
 			await _click_test()
+		"combo_check":
+			# 昇り竜の型を持って戦闘に入り、決めた順にカードを出して、説明の数値 (プレビュー) と実際のダメージ・ブロック・チェーンを出力する
+			var player: Player = Global.get_player()
+			var add_request: CardPlayRequest = HandManager.create_card_play_request(null, player, false, false)
+			ActionHandler.add_actions(ActionGenerator.create_actions(player, add_request, [player], [{Scripts.ACTION_ADD_ARTIFACT: {"artifact_id": ComboContent.ARTIFACT_ID}}], null))
+			for location in Global.get_next_locations():
+				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+					ActionGenerator.generate_visition_location(location.location_id)
+					break
+			await get_tree().create_timer(3.0).timeout
+			var enemy: Enemy = Global.get_alive_enemies()[0]
+			for each_enemy: Enemy in Global.get_alive_enemies():
+				each_enemy.set_health(999, 999)
+			Global.player_data.player_energy = 99
+			# コスト 1 → 1 → 2 → 1 (下がるので数え直し) → 2
+			var order: Array[String] = ["card_basic_attack_green", "card_basic_attack_green", "card_wildflower", "card_basic_block_green", "card_wildflower"]
+			var cards: Array[CardData] = []
+			for card_id in order:
+				cards.append(Global.get_card_data_from_prototype(card_id))
+			HandManager.add_cards_to_hand(cards, 99)
+			await get_tree().create_timer(1.0).timeout
+			for card_data: CardData in cards:
+				var hand_card: Card = HandManager.hand.card_data_to_hand_card.get(card_data)
+				hand_card.update_card_display()
+				await get_tree().process_frame
+				var preview: String = RegEx.create_from_string("\\[[^\\]]*\\]").sub(hand_card.get_card_description(), "", true)
+				var hp_before: int = enemy.get_combatant_health()
+				var block_before: int = Global.player_data.player_block
+				var request: CardPlayRequest = HandManager.create_card_play_request(card_data, enemy if card_data.card_requires_target else null)
+				request.card_destination_pile = card_data.card_play_destination
+				request.card_destination_strategy = card_data.card_play_destination_strategy
+				HandManager.add_card_to_play_queue(request)
+				await get_tree().create_timer(1.5).timeout
+				if not is_instance_valid(enemy):
+					print("COMBO enemy gone after ", card_data.object_id, " alive=", Global.get_alive_enemies().map(func(e): return [e.enemy_data.object_id, e.get_combatant_health()]), " hp=", Global.player_data.player_health)
+					break
+				print("COMBO %s cost=%d preview=\"%s\" damage=%d block=+%d chain=%s" % [card_data.object_id, card_data.get_card_energy_cost(true, true), preview.replace("\n", " "),
+					hp_before - enemy.get_combatant_health(), Global.player_data.player_block - block_before, Global.player_data.player_values.get(InterceptorComboChain.CHAIN_VALUE, 0)])
+			get_tree().quit()
+		"card_stats":
+			# --auto=card_stats [--hero=] : 主人公の報酬カード (色・標準レア) の種別・レア度・コスト・数値・説明を出力する (バランス確認用)
+			var color_id: String = Global.get_player_character_data().character_color_id
+			var preview: Card = Scenes.CARD.instantiate()
+			add_child(preview)
+			var regex := RegEx.create_from_string("\\[[^\\]]*\\]")
+			for card_data: CardData in Global._id_to_card_data.values():
+				if card_data.card_color_id != color_id or not card_data.card_rarity in CardData.STANDARD_CARD_RARITIES or not card_data.card_appears_in_card_packs:
+					continue
+				preview.init(card_data, 0, false, false)
+				print("CARDSTAT|%s|%s|%s|%s|%d|%s|%s" % [card_data.object_id, tr(card_data.card_name), CardData.CARD_TYPES.keys()[card_data.card_type],
+					CardData.CARD_RARITIES.keys()[card_data.card_rarity], card_data.card_energy_cost, card_data.card_values,
+					regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
+			get_tree().quit()
 		"mana_check":
 			# 青の主人公 (--hero=character_blue) で戦闘に入り、マナの支払い・蒼刃の強化・蒼刃の戻り先を出力する
 			for location in Global.get_next_locations():

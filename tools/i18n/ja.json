@@ -508,5 +508,8 @@
  "Extend Blade": "刃を伸ばす",
  "Costs [mana_cost] Mana. Your Mana Blade deals [status_charge_amount] more damage this combat.": "マナ[mana_cost]で使う。この戦闘の間、蒼刃のダメージ+[status_charge_amount]。",
  "Twin Blade": "刃を重ねる",
- "Costs [mana_cost] Mana. Your Mana Blade hits [status_charge_amount] more time this combat.": "マナ[mana_cost]で使う。この戦闘の間、蒼刃の攻撃回数+[status_charge_amount]。"
+ "Costs [mana_cost] Mana. Your Mana Blade hits [status_charge_amount] more time this combat.": "マナ[mana_cost]で使う。この戦闘の間、蒼刃の攻撃回数+[status_charge_amount]。",
+ "Ascending Dragon Form": "昇り竜の型",
+ "Within a turn, playing a card that costs at least as much as the previous one continues the chain. The Nth card of a chain gets +50% damage and Block per link after the first. A cheaper card starts a new chain; the chain ends with your turn.": "同じターンに、前に出したカード以上のコストのカードを出すとチェーンが続く。チェーンの n 枚目はダメージとブロックが +50%×(n−1)。コストの小さいカードを出すと 1 から数え直し、ターンの終わりで途切れる。",
+ "[color=green]Learn Ascending Dragon Form[/color]: Play cards in rising cost order; each link of the chain adds +50% damage and Block.": "[color=green]昇り竜の型を覚える[/color]：コストの小さい順にカードを出すとチェーンがつながり、1つごとにダメージとブロックが+50%。"
 }

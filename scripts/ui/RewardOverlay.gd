@@ -28,7 +28,9 @@ func _ready():
 	
 	Signals.reward_grant_requested.connect(_on_reward_grant_requested)
 	Signals.reward_clear_requested.connect(_on_reward_clear_requested)
-	
+	# 報酬画面で倒れたとき (入手時に HP を失うカードなど) に閉じる。閉じないと死亡画面の「続ける」を覆ってしまう
+	Signals.player_killed.connect(_on_player_killed)
+
 	continue_button.button_up.connect(_on_continue_button_up)
 
 #region Reward Display
