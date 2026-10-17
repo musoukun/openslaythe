@@ -108,6 +108,7 @@ func populate_character_info(character_object_id: String) -> void:
 func _on_character_selected(character_object_id: String):
 	selected_character_object_id = character_object_id
 	populate_character_info(selected_character_object_id)
+	selected_difficulty_level = selected_difficulty_level # そのキャラが解禁したレベルまでに合わせ直す
 
 #endregion
 
@@ -126,12 +127,12 @@ func _on_seed_input_text_changed(new_text: String):
 #region Difficulty
 func set_selected_difficulty_level(value: int) -> void:
 	# set difficulty label
-	if selected_character_object_id != "":
-		var character_highest_difficulty_win: int = Global.profile_data.profile_character_id_to_highest_difficulty.get(selected_character_object_id, 0)
-		if ProfileData.ENABLE_ALL_DIFFICULTIES:
-			selected_difficulty_level = value
-		else:
-			selected_difficulty_level = min(selected_difficulty_level, character_highest_difficulty_win)
+	var max_level: int = len(Global.STANDARD_DIFFICULTY_RUN_MODIFIER_IDS) - 1
+	selected_difficulty_level = clamp(value, 0, max_level)
+	if selected_character_object_id != "" and not ProfileData.ENABLE_ALL_DIFFICULTIES:
+		# レベル 0 から始め、クリアするたびに次のレベルが 1 つ解禁される (クリアしたことが無ければ -1)
+		var character_highest_difficulty_win: int = Global.profile_data.profile_character_id_to_highest_difficulty.get(selected_character_object_id, -1)
+		selected_difficulty_level = min(selected_difficulty_level, character_highest_difficulty_win + 1)
 	
 	# update text label
 	var run_modifier_id: String = Global.STANDARD_DIFFICULTY_RUN_MODIFIER_IDS[selected_difficulty_level]

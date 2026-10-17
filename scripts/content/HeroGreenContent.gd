@@ -25,6 +25,17 @@ static func register_cards() -> void:
 		card_data.card_appears_in_card_packs = false
 	_rework_cards()
 	_add_cards()
+	_rework_starting_deck()
+
+
+## 初期デッキで序盤に使えない札 (0 ダメージの灼熱の吐息、エナジーを溜めるまで使えない竜の覚醒) を 1 枚ずつ、
+## 1 コストで使える熱のカードに替える (枚数は 19 のまま。2 枚とも替えるとかえって弱くなった)
+static func _rework_starting_deck() -> void:
+	var vera: CharacterData = Global.get_character_data("character_green")
+	var deck: Array[String] = vera.character_starting_card_object_ids
+	deck.erase("card_meltdown") # 2 枚のうち 1 枚
+	deck.erase("card_photoelectric_synthesis") # 2 枚のうち 1 枚
+	deck.append_array(["card_green_searing_claw", "card_green_heat_scales"])
 
 
 ## 外した軸に頼っていたカードを、残す軸に合わせて作り直す
