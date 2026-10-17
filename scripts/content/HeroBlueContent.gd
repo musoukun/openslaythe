@@ -56,19 +56,23 @@ static func register_character() -> void:
 
 static func _register_statuses() -> void:
 	var mana: StatusEffectData = _status(STATUS_MANA, "Mana")
+	mana.status_effect_description = "Carries over between turns (up to 10). Spend it on spells or on your Mana Blade."
 	mana.status_effect_charge_upper_bound = MANA_MAX
 	Global.register_rod(mana)
 
 	var edge: StatusEffectData = _status(STATUS_BLADE_EDGE, "Blade Edge")
+	edge.status_effect_description = "Mana Blade deals [charges] more damage."
 	edge.status_effect_interceptor_ids = ["interceptor_mana_blade_edge"]
 	Global.register_rod(edge)
 
 	var twin: StatusEffectData = _status(STATUS_BLADE_TWIN, "Blade Twin")
+	twin.status_effect_description = "Mana Blade hits [charges] more times."
 	twin.status_effect_interceptor_ids = ["interceptor_mana_blade_twin"]
 	Global.register_rod(twin)
 
 	# 毎ターンのはじめに、charges の数だけマナを得る
 	var spring: StatusEffectData = _status(STATUS_MANA_SPRING, "Mana Spring")
+	spring.status_effect_description = "At the start of your turn, gain [charges] Mana."
 	spring.status_effect_action_process_times = [StatusEffectData.STATUS_EFFECT_PROCESS_TIMES.POST_DRAW_PLAYER_START_TURN]
 	spring.status_effect_player_process_actions = [{Scripts.ACTION_APPLY_STATUS: {
 		"status_effect_object_id": STATUS_MANA,

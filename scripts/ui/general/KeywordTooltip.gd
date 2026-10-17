@@ -5,6 +5,12 @@ extends PanelContainer
 const FONT_SIZE: int = 14
 const EMBEDDED_IMAGE_SIZE: int = 24
 
+## ステータス名の色 (強化は緑、弱体は赤、どちらでもないものは既定のオレンジ)
+const STATUS_NAME_COLORS: Dictionary = {
+	StatusEffectData.STATUS_EFFECT_TYPES.BUFF: "#8fe08f",
+	StatusEffectData.STATUS_EFFECT_TYPES.DEBUFF: "#ff8a7a",
+}
+
 @onready var keyword_rich_text_label: RichLabelAutoSizer = $KeywordRichTextLabel
 
 func init(keyword_object_id: String) -> void:
@@ -13,10 +19,10 @@ func init(keyword_object_id: String) -> void:
 		DebugLogger.log_error("KeywordTooltip.init(): No keyword of id \"{0}\" found".format([keyword_object_id]))
 	else:
 		var keyword_bbcode: String = ""
-		
+
 		# keyword name
 		keyword_bbcode = tr(keyword_data.keyword_name)
-		
+
 		# prepend status image if it exists
 		var keyword_status_effect_id: String = keyword_data.keyword_status_effect_id
 		if keyword_status_effect_id != "":
@@ -26,13 +32,31 @@ func init(keyword_object_id: String) -> void:
 				DebugLogger.log_error("KeywordTooltip.init(): Invald keyword_status_effect_id of \"{0}\"".format([keyword_status_effect_id]))
 			else:
 				keyword_bbcode = "[img width={0}]{1}[/img] {2}".format([EMBEDDED_IMAGE_SIZE, status_effect_data.status_effect_texture_path, keyword_bbcode])
-		
-		# append keyword text
-		keyword_bbcode = "{0}\n{1}".format([keyword_bbcode, tr(keyword_data.keyword_text_bb_code)])
-		
-		# force the font to a certain size
-		keyword_bbcode = "[font_size={0}]{1}[/font_size]".format([FONT_SIZE, keyword_bbcode])
-		keyword_rich_text_label.set_bbcode(keyword_bbcode)
-	
-		# this must be called deferred to force the rich text to not get clipped
-		keyword_rich_text_label.set_deferred("fit_content", true)
+
+		_set_bbcode(keyword_bbcode, tr(keyword_data.keyword_text_bb_code))
+
+## キャラの上のステータスアイコン用: アイコンと色付きの名前、今の値を入れた説明
+func init_status(status_effect_script: BaseStatusEffect) -> void:
+	var status_effect_data: StatusEffectData = status_effect_script.status_effect_data
+	var title_bbcode: String = "[img width={0}]{1}[/img] [color={2}]{3}[/color]".format([
+		EMBEDDED_IMAGE_SIZE,
+		status_effect_data.get_status_effect_texture_path(status_effect_script.status_charges),
+		STATUS_NAME_COLORS.get(status_effect_data.status_effect_type, "orange"),
+		tr(status_effect_data.status_effect_name),
+	])
+	var description: String = tr(status_effect_data.status_effect_description)
+	description = description.replace("[charges]", str(status_effect_script.status_charges))
+	description = description.replace("[secondary]", str(status_effect_script.status_secondary_charges))
+	_set_bbcode(title_bbcode, description)
+
+func _set_bbcode(title_bbcode: String, body_bbcode: String) -> void:
+	var bbcode: String = title_bbcode
+	if body_bbcode != "":
+		bbcode = "{0}\n{1}".format([title_bbcode, body_bbcode])
+
+	# force the font to a certain size
+	bbcode = "[font_size={0}]{1}[/font_size]".format([FONT_SIZE, bbcode])
+	keyword_rich_text_label.set_bbcode(bbcode)
+
+	# this must be called deferred to force the rich text to not get clipped
+	keyword_rich_text_label.set_deferred("fit_content", true)

@@ -31,6 +31,9 @@ var offset_y: float = 0.0 # offset when following mouse
 const CARD_KEYWORD_PANEL_MARGIN_X: float = 6.0 # how far the tooltip should display away from Card
 const CARD_KEYWORD_RIGHT_SCREEN_SIZE_MARGIN: float = 200 # how much screen space must be left on the right side of a card to display the tooltips on the right side
 
+const STATUS_TOOLTIP_MARGIN: float = 8.0 # ステータスの説明とアイコンの列・画面端とのすき間
+var status_tooltip_anchor: Control = null # ステータスの説明を出している間、カーソルが乗っているアイコン
+
 func _ready() -> void:
 	HandManager.tooltip = self # store a reference globally for this tooltip. Godot freaks out about it otherwise
 	
@@ -121,6 +124,36 @@ func display_card_keywords(card: Card) -> void:
 	
 	keyword_container.populate_card_keywords(card.card_data)
 
+## キャラの上のステータスにカーソルを当てたとき: そのキャラのステータスの説明を縦に並べ、アイコンの列の横に出す
+## (位置は大きさが決まってから _process で合わせる)
+func display_status_tooltips(combatant: BaseCombatant, anchor: Control) -> void:
+	hide_tooltip()
+	visible = true
+	keyword_container.visible = true
+	status_tooltip_anchor = anchor
+
+	var status_effect_scripts: Array[BaseStatusEffect] = []
+	for status_effect: StatusEffect in combatant.status_container.get_children():
+		if not status_effect.is_queued_for_deletion():
+			status_effect_scripts.append(status_effect.status_effect_script)
+	keyword_container.populate_status_effects(status_effect_scripts)
+	_place_status_tooltips()
+
+func _place_status_tooltips() -> void:
+	keyword_container.reset_size()
+	var screen_size: Vector2 = get_viewport_rect().size
+	var anchor_rect: Rect2 = status_tooltip_anchor.get_parent_control().get_global_rect() # アイコンの列全体
+	var tooltip_size: Vector2 = keyword_container.size
+
+	# 右に収まれば右、だめなら左 (画面右側の敵は左に出る)
+	var x: float = anchor_rect.end.x + STATUS_TOOLTIP_MARGIN
+	if x + tooltip_size.x > screen_size.x - STATUS_TOOLTIP_MARGIN:
+		x = anchor_rect.position.x - tooltip_size.x - STATUS_TOOLTIP_MARGIN
+	# 上端をアイコンの列にそろえ、体の横に下へ並べる
+	var y: float = anchor_rect.position.y
+	y = clamp(y, STATUS_TOOLTIP_MARGIN, max(STATUS_TOOLTIP_MARGIN, screen_size.y - tooltip_size.y - STATUS_TOOLTIP_MARGIN))
+	keyword_container.global_position = Vector2(max(x, STATUS_TOOLTIP_MARGIN), y)
+
 func display_artifact_tooltip(artifact: BaseArtifact) -> void:
 	var artifact_description: String = artifact.get_artifact_description()
 	display_tooltip(artifact_description, true, false, false, 0.0, 0.0, null)
@@ -153,7 +186,8 @@ func hide_tooltip() -> void:
 	lock_y = false
 	offset_x = 0.0
 	offset_y = 0.0
-	
+	status_tooltip_anchor = null
+
 	keyword_container.clear_keywords()
 	visible = false
 	tooltip_label.visible = false
@@ -162,6 +196,11 @@ func hide_tooltip() -> void:
 	
 
 func _process(_delta: float) -> void:
+	if status_tooltip_anchor != null:
+		if is_instance_valid(status_tooltip_anchor) and status_tooltip_anchor.is_visible_in_tree():
+			_place_status_tooltips()
+		else:
+			hide_tooltip() # キャラが倒れた・ステータスが消えたなど
 	if follow_mouse:
 		if lock_x:
 			global_position.x = offset_x
