@@ -10,6 +10,8 @@ var can_travel: bool = false	# if clicking on a location brings you to the next 
 
 ## Adds a margin to the bottom of the map display
 const MAP_Y_MARGIN: float = 150
+## 現在地を画面の上から何割の高さに置くか
+const CURRENT_SCROLL_RATIO: float = 0.7
 ## Codex 生成のマップ背景 (外側は暗く落とし、中央に羊皮紙を敷く)
 const BACKGROUND_PATH := "res://sprites/ui/map_background.png"
 const BACKGROUND_DIM := Color(0.28, 0.33, 0.33)
@@ -42,8 +44,9 @@ func populate_locations(locations: Array[LocationData] = Global.get_all_act_loca
 	clear_locations()
 	
 	var next_locations: Array[LocationData] = Global.get_next_locations()
+	var player_location: LocationData = Global.get_player_location_data()
 	var max_y: float = 0.0 # the highest location position, used to determine container size
-	
+
 	var current_map_location: MapLocation = null
 
 	var parchment := _add_parchment()
@@ -61,15 +64,13 @@ func populate_locations(locations: Array[LocationData] = Global.get_all_act_loca
 		
 		max_y = max(max_y, location_data.location_position.y)
 		
-		# flash the locations the player can travel to
-		if can_travel:
-			if next_locations.has(location_data):
-				map_location.flash_location()
-				current_map_location = map_location
-		
-		#if location_data == Global.get_player_location_data():
-			#current_map_location = map_location
-	
+		# 現在地は常に印を付け、移動できるときは行き先を光らせる
+		if location_data == player_location:
+			map_location.mark_current()
+			current_map_location = map_location
+		elif can_travel and next_locations.has(location_data):
+			map_location.mark_reachable()
+
 	map_paths.set_segments(_build_path_segments(id_to_map_location))
 
 	# set the size of the container to make scrolling posible
@@ -80,13 +81,12 @@ func populate_locations(locations: Array[LocationData] = Global.get_all_act_loca
 	
 	# wait a frame to ensure container is properly resized
 	await Global.get_tree().process_frame
-	# set the scroll
+	# 現在地が画面の下寄りに来るようにスクロールする (上に行き先が見える)
 	if current_map_location != null:
-		current_map_location.grab_focus()
+		scroll_container.scroll_vertical = int(current_map_location.get_center().y - scroll_container.size.y * CURRENT_SCROLL_RATIO)
 	else:
-		# presumably the invisible starting location, set to bottom
-		scroll_container.scroll_vertical = max_y
-	
+		scroll_container.scroll_vertical = int(max_y)
+
 
 ## ロケーション間の接続を [from, to, visited] の配列にする
 func _build_path_segments(id_to_map_location: Dictionary) -> Array:
