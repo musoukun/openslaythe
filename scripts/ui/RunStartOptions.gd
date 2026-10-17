@@ -1,15 +1,18 @@
 # Displays run start options
 # 幕の開始地点で祝福のキャラ (BlessingContent) が祝福を出し、選ぶと演出つきで渡す (BlessingGiver)。
 # 1幕目だけ、開始武器 (BuildContent) とボスレリック交換も並べる。
+# 選択肢は LoL のルーン選択風に、暗い背景の上へ縦の柱 (BlessingColumn) を横一列に並べる。
 extends Control
 
 var _option_type_to_option_ids: Dictionary = {}
 const COMPLETE_OPTION_COUNT: int = 4	# number of unique options to populate (weapons from BuildContent + artifact swap + 昇り竜の型 from ComboContent)
-## 選択肢の列 (主人公と祝福のキャラの間。画面の下端・中央を基準にし、下端から上へ伸びる)
-## 1200x700 の画面では x=390〜790、下端 y=690。全画面で画面が広がっても中央の下に残る
-const OPTION_LEFT: float = -210.0
-const OPTION_RIGHT: float = 190.0
-const OPTION_BOTTOM: float = -10.0
+## 柱の列 (画面の下端・中央を基準に横一列。全画面で画面が広がっても中央の下に残る)
+const COLUMN_WIDTH: float = 230.0	# 柱1本の幅の上限 (柱が少ない幕では細く寄せる)
+const COLUMN_HEIGHT: float = 420.0
+const ROW_MAX_WIDTH: float = 1150.0
+const OPTION_BOTTOM: float = -12.0
+const BACKDROP_COLOR := Color(0.02, 0.03, 0.06, 0.95)	# 背景の絵を沈める暗い濃紺
+const BACKDROP_TOP: float = 64.0	# 上の HUD の帯は隠さない (受け取った祝福の光の玉が飛んでいく先)
 const FAREWELL_TIME: float = 0.9	# 受け取ったあと、キャラが消えるまでの間
 
 @onready var starting_option_container = $StartingOptionContainer
@@ -18,22 +21,29 @@ const FAREWELL_TIME: float = 0.9	# 受け取ったあと、キャラが消える
 var _giver: BlessingGiver
 var _giver_data: DialogueData
 var _is_choosing: bool = false
+var _backdrop: ColorRect
 
 func _ready():
 	_aggregate_run_start_options()
 	_giver = BlessingGiver.new()
 	add_child(_giver)
 	move_child(_giver, 0) # 選択肢より奥
+	_backdrop = ColorRect.new()
+	_backdrop.color = BACKDROP_COLOR
+	_backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_backdrop.offset_top = BACKDROP_TOP
+	add_child(_backdrop)
+	move_child(_backdrop, 0) # 一番奥
 	# シーン側のアンカー (右下) に左右されないよう、ここでアンカーも決める
 	starting_option_container.anchor_left = 0.5
 	starting_option_container.anchor_right = 0.5
 	starting_option_container.anchor_top = 1.0
 	starting_option_container.anchor_bottom = 1.0
-	starting_option_container.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	starting_option_container.offset_left = OPTION_LEFT
-	starting_option_container.offset_right = OPTION_RIGHT
-	starting_option_container.offset_top = OPTION_BOTTOM
+	starting_option_container.offset_top = OPTION_BOTTOM - COLUMN_HEIGHT
 	starting_option_container.offset_bottom = OPTION_BOTTOM
+	starting_option_container.grow_vertical = Control.GROW_DIRECTION_BEGIN # 説明が長くても下端は画面の中に残る
+	starting_option_container.add_theme_constant_override("separation", 0)
 	Signals.run_started.connect(_on_run_started)
 	Signals.player_killed.connect(_on_player_killed)
 	Signals.run_ended.connect(_on_run_ended)
@@ -52,6 +62,8 @@ func populate_run_start_options() -> void:
 	clear_run_start_options()
 	_is_choosing = false
 	visible = true
+	_backdrop.modulate.a = 0.0
+	create_tween().tween_property(_backdrop, "modulate:a", 1.0, 0.5)
 	
 	# 祝福のキャラを登場させる
 	_giver_data = BlessingContent.get_giver_for_act(Global.player_data.player_act)
@@ -61,9 +73,12 @@ func populate_run_start_options() -> void:
 	# 祝福 (小さな祝福 + 代償つきの大きな祝福)
 	var rng_run_start_options: RandomNumberGenerator = Global.player_data.get_player_rng("rng_run_start_options")
 	for option_data: DialogueOptionData in BlessingContent.pick_blessings(_giver_data, rng_run_start_options):
-		_add_option(tr(option_data.dialogue_option_bbcode), tr(option_data.dialogue_option_failed_validator_bbcode), option_data.dialogue_option_actions, option_data.dialogue_option_validators)
+		var parts: Array[Dictionary] = BlessingColumn.parts_of(option_data.dialogue_option_actions)
+		var summary: String = tr("Great blessing, at a cost") if parts.any(func(p): return p.cost) else tr("Small blessing")
+		_add_option(tr(option_data.dialogue_option_bbcode), tr(option_data.dialogue_option_failed_validator_bbcode), option_data.dialogue_option_actions, option_data.dialogue_option_validators, summary)
 	
 	if Global.player_data.player_act != 1:
+		_layout_columns()
 		return
 	# populate complete options (1幕目だけ: 開始武器とボスレリック交換)
 	var complete_option_ids: Array[String] = []
@@ -74,14 +89,25 @@ func populate_run_start_options() -> void:
 		var complete_option_id: String = complete_option_ids.pop_back()
 		var complete_run_start_option_data: RunStartOptionData = Global.get_run_start_option_data(complete_option_id)
 		var option_bbcode: String = tr(complete_run_start_option_data.run_start_option_bb_code)
-		_add_option(option_bbcode, option_bbcode, complete_run_start_option_data.run_start_option_actions, [])
+		_add_option(option_bbcode, option_bbcode, complete_run_start_option_data.run_start_option_actions, [], tr("Starting gear"))
+	_layout_columns()
 
-## create a dialogue button for the option
-func _add_option(option_bbcode: String, failed_bbcode: String, actions: Array[Dictionary], validators: Array[Dictionary]) -> void:
-	var run_start_option_button: DialogueOption = Scenes.DIALOGUE_OPTION.instantiate()
-	starting_option_container.add_child(run_start_option_button)
-	run_start_option_button.init("", option_bbcode, failed_bbcode, actions, validators)
-	run_start_option_button.dialogue_option_clicked.connect(_on_dialogue_option_clicked)
+## 選択肢の柱を1本足す
+func _add_option(option_bbcode: String, failed_bbcode: String, actions: Array[Dictionary], validators: Array[Dictionary], summary: String) -> void:
+	var column := BlessingColumn.new()
+	starting_option_container.add_child(column)
+	column.init("", option_bbcode, failed_bbcode, actions, validators)
+	column.setup(actions, summary)
+	column.dialogue_option_clicked.connect(_on_dialogue_option_clicked)
+
+## 柱の数に合わせて列の幅を決め、画面の中央に寄せて左から順に出す
+func _layout_columns() -> void:
+	var columns: Array[Node] = starting_option_container.get_children().filter(func(c): return not c.is_queued_for_deletion())
+	var row_width: float = min(columns.size() * COLUMN_WIDTH, ROW_MAX_WIDTH)
+	starting_option_container.offset_left = -row_width / 2.0
+	starting_option_container.offset_right = row_width / 2.0
+	for i in columns.size():
+		(columns[i] as BlessingColumn).appear(0.3 + i * 0.07)
 	
 func clear_run_start_options() -> void:
 	for child in starting_option_container.get_children():
@@ -92,11 +118,13 @@ func _on_dialogue_option_clicked(dialogue_option: DialogueOption):
 		return # 演出中の2回目のクリックは無視
 	_is_choosing = true
 	
-	# 選ばなかった選択肢を消す
-	for child: DialogueOption in starting_option_container.get_children():
+	# 選んだ柱は光ったまま、選ばなかった柱は暗く沈める
+	for child: BlessingColumn in starting_option_container.get_children():
 		child.option_enabled = false
-		if child != dialogue_option:
-			child.create_tween().tween_property(child, "modulate:a", 0.0, 0.25)
+		if child == dialogue_option:
+			child.select()
+		else:
+			child.dim()
 	
 	# キャラが光り、光の玉が受け取り先の HUD へ飛ぶ
 	var gift_state: DialogueStateData = BlessingContent.get_gift_state(_giver_data)
@@ -112,6 +140,7 @@ func _on_dialogue_option_clicked(dialogue_option: DialogueOption):
 		await ActionHandler.actions_ended
 	clear_run_start_options()
 	await get_tree().create_timer(FAREWELL_TIME).timeout
+	create_tween().tween_property(_backdrop, "modulate:a", 0.0, 0.4)
 	await _giver.hide_giver()
 	visible = false
 	
