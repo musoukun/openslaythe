@@ -1,0 +1,45 @@
+{
+ "style": "Create original high-fantasy game art with chunky hand-inked dark contours, flat gouache-like color masses and restrained dry-brush texture. Heroic dragon-blooded fantasy with blackened iron, copper-red scales, ivory horn and warm ember fire; bold readable silhouettes, two-step cel shading and selective warm highlights; reserve soft emission for active fire, glowing eyes and molten cracks. Faces are drawn in a Japanese anime style on painted bodies. This is an ORIGINAL character: do not imitate any existing game, champion, franchise character, skin, costume, emblem or official artwork. Include no text, letters, numerals, labels, logos or watermarks.",
+ "assets": [
+  {
+   "id": "vera_dragonform_concepts",
+   "out": "tools/codex_art/refs/vera_dragonform_concepts.png",
+   "size": [
+    2048,
+    768
+   ],
+   "category": "concept",
+   "brief": "Vera が HP が下がるほど凶暴になり竜に近づく 4 段階 (HP 100〜80% / 50% / 25% / 10%以下)。段階ごとに腰を落として前かがみになり、最後は四足寄りの構え。顔の可愛さは全段階で保つ",
+   "refs": [
+    "tools/codex_art/refs/hero_master.png"
+   ],
+   "ref_rule": "Reference: attached image 1 is the canonical design of this character at full health. Stage 1 must match it exactly (face, red braid, ivory horns, light warm brown skin, blackened-iron armor with bronze trim, scaled gauntlets with black claws, red loincloth, scaled legs, tail, colors and painted style). Every later stage is the SAME woman with the same armor, braid and palette, transformed step by step as the Subject text describes. Do not copy the reference's black background or canvas.\n\n",
+   "prompt": "A character design progression sheet showing FOUR stages of ONE original hero, Vera Emberscale, an adult half-dragon woman warrior whose dragon blood takes over as she is pushed closer to death. Arrange the four stages side by side in one horizontal row from LEFT (stage 1) to RIGHT (stage 4), evenly spaced with generous empty space between them so no wing, tail or claw touches a neighbour, each a full-body three-quarter view facing slightly RIGHT on the same ground line. POSTURE gets lower and more predatory each stage, moving from an upright fighter toward a near four-legged prowling beast: a feral brawler's crouch with hunched shoulders, bent knees and both clawed hands thrust forward with the talons spread like blades, ready to pounce. FACE RULE for every stage: she keeps the SAME cute anime face as the reference in all four stages: large expressive anime eyes with glossy highlights, a small simple nose, a soft V-shaped jawline, smooth face skin in the middle of the face and a small mouth. Never give her a snout, muzzle, beast jaw, wrinkled nose or monstrous face; her face must stay cute and appealing even at stage 4. Show the growing ferocity only through the eyes (narrower, glowing, slit pupils), sharper angled brows, small fangs, a cocky or fierce grin, and scales limited to the edges of her cheeks, temples and jaw. Each stage is visibly more dragon-like than the one before, but she always stays clearly recognizable as the same woman (same face, crimson braid, armor and colors):\n(1) LEFT, full health: exactly as the reference, standing in her usual guard with raised claws, confident playful smile, scales only on the forearm gauntlets, legs and tail.\n(2) CENTER-LEFT, half health: knees bent into a low fighting crouch, torso leaning forward, both clawed hands held out in front; a fierce smirk showing small fangs, eyes glowing amber; copper-red scales creep up her neck to the edges of her cheeks; horns slightly longer, claws longer; thin glowing ember cracks along the arm scales.\n(3) CENTER-RIGHT, quarter health: a deep predatory crouch with her back hunched forward, hips low, one clawed hand reaching down near the ground and the other drawn back to slash; a fierce grin with bared small fangs and burning orange slit eyes, face still cute; scales on her shoulders and upper arms; horns longer and curving forward; small spikes along her spine and a thicker tail raised behind her for balance; two small half-formed dragon wings of dark red membrane on her back; her braid lifting in hot wind; molten orange cracks glowing brighter.\n(4) RIGHT, near death: an almost four-legged prowling stance, body pitched far forward and low, BOTH clawed hands planted on or just above the ground like front paws with huge black talons, ready to lunge; a wild, fierce open-mouthed battle cry with small fangs, eyes blazing white-gold, yet the face is still her cute anime face (no snout); most of her body covered in copper-red dragon scales with glowing molten seams; long swept dragon horns with a small crest; large dragon wings with ember-lit membranes raised behind her; a long spiked tail lashing up; small flames licking along the edges of her wings, claws and tail. Still wearing her armor and braid: a dragon-woman, not a full beast.\nAll four share the same painted style, line weight, lighting and palette, and all show the face clearly. Keep it general-audience fantasy (no gore, nothing sexualized). Plain flat light-grey background, no scenery, no floor, no cast shadows, no frames, no dividers, no labels or numbers."
+  },
+  {
+   "id": "vera_rage_idle",
+   "out": "external/sprites/characters/character_green/hero_rage_idle.png",
+   "size": [
+    520,
+    300
+   ],
+   "transparent": true,
+   "anchor": "bottom",
+   "sheet": 4,
+   "scale_frame": 0,
+   "write_frames": [
+    2,
+    3,
+    4
+   ],
+   "category": "combatant",
+   "refs": [
+    "tools/codex_art/refs/hero_master.png",
+    "tools/codex_art/refs/vera_dragonform_concepts.png"
+   ],
+   "ref_rule": "References: attached image 1 is the canonical design of this character at full health; attached image 2 is the approved design sheet of her four transformation stages from left (stage 1) to right (stage 4). Match image 2 exactly for each stage's pose, horns, scales, wings, tail, claws, flames and face, and image 1 for her face, colors and painted style. Do not copy either reference's background or canvas.\n\n",
+   "brief": "竜化の段階 1〜4 の待機姿 (1 枚のシート)。1 は大きさ合わせの基準で、2〜4 を hero_rage_idle_2〜4.png に書き出す",
+   "prompt": "Battle idle sprites of Vera Emberscale, an original adult half-dragon woman warrior, at her FOUR transformation stages, exactly as in the attached stage design sheet: (1) full health, upright fighting guard with raised claws and a confident smile; (2) half health, low fighting crouch leaning forward with both clawed hands out, fierce smirk with small fangs; (3) quarter health, deep predatory crouch with hunched back, one claw reaching toward the ground, small dark-red wings, spikes along the spine, raised tail; (4) near death, almost four-legged prowling stance pitched low with both clawed hands planted near the ground like front paws, large ember-lit dragon wings raised, long spiked tail, small flames on wing edges, claws and tail. Her face stays the same cute anime face in every stage (no snout); ferocity shows only in glowing eyes, brows and small fangs. Layout: exactly 4 frames in a single horizontal row, equal-width cells, the SAME character at the SAME scale and the SAME ground line in every frame, full body including wing tips, tail tip and horns, facing RIGHT, clear empty gap between frames, nothing crosses a cell border, transparent background, no text, no grid lines, no motion trail outside the cell, no floor, no cast shadow."
+  }
+ ]
+}

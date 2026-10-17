@@ -400,10 +400,17 @@ def post_process(asset: dict) -> None:
         pad = asset.get("pad", 0.04)
         heights = sorted(body_height(f) for f in frames)
         median_h = heights[len(heights) // 2]
+        # scale_frame: このコマ (0 始まり) の高さで大きさを決める (かがんだコマが多いシートで、立ち姿の基準コマに合わせる)
+        if "scale_frame" in asset:
+            median_h = body_height(frames[asset["scale_frame"]])
         scale = min(h * asset.get("body_ratio", 0.82) / median_h, min(w * (1 - pad * 2) / f.width for f in frames))
         # keep_frames: 先頭 N コマだけ書き出す (コマ間の描き直しでガタつく待機は 1 コマ + 呼吸 Tween にする)
         frames = frames[:asset.get("keep_frames", len(frames))]
+        # write_frames: 書き出すコマの番号 (1 始まり)。ファイル名の番号はシート上の番号のまま
+        write_frames = asset.get("write_frames", range(1, len(frames) + 1))
         for i, f in enumerate(frames, 1):
+            if i not in write_frames:
+                continue
             frame = place(f, w, h, scale, pad, asset.get("anchor"))
             if asset.get("pixel"):
                 frame = pixelate(frame, asset["pixel"])

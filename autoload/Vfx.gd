@@ -82,7 +82,7 @@ func _ready() -> void:
 	Signals.player_health_changed.connect(_on_player_health_changed)
 	Signals.combat_started.connect(func(_id):
 		_last_player_health = _player_health()
-		VeraFlameAura.update(_get_player() as Player))
+		_update_vera_form())
 	Signals.player_turn_started.connect(_on_player_turn_started)
 	# 保険: 戦闘終了時は必ず通常速度に戻す
 	Signals.combat_ended.connect(func(): Engine.time_scale = 1.0)
@@ -275,8 +275,14 @@ func _on_player_health_changed() -> void:
 	if _last_player_health >= 0 and health > _last_player_health:
 		play_trigger("heal", _get_player())
 	_last_player_health = health
-	# Vera は HP が低いほど輪郭の炎が強まる
-	VeraFlameAura.update(_get_player() as Player)
+	_update_vera_form()
+
+
+## Vera は HP が低いほど輪郭の炎が強まり、待機絵が竜に近い姿になる
+func _update_vera_form() -> void:
+	var player := _get_player() as Player
+	VeraFlameAura.update(player)
+	VeraRageForm.update(player)
 
 
 ## BaseCombatant.add_status_effect_charges から呼ばれる
