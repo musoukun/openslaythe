@@ -21,6 +21,12 @@ const ENERGY_ICON_KEYWORD: String = "[energy_icon]"	# tells description to displ
 
 var tooltip_left_side: bool = false # if tooltip should display to the left of the card when hovered
 
+## どの画面でもカードをこの倍率で表示する。Pivot ごと拡大するので絵・文字・押せる範囲がそろって大きくなる
+const CARD_SCALE: float = 1.15
+## Card.tscn での大きさと Pivot の位置 (拡大前)
+const BASE_SIZE := Vector2(144, 184)
+const BASE_PIVOT_POSITION := Vector2(72, 90)
+
 @onready var card_button: Button = %CardButton
 
 @onready var pivot: Node2D = $Pivot # used to rotate/offset the card
@@ -48,6 +54,12 @@ signal card_selected(Card)
 signal card_right_clicked(Card)
 signal card_hovered(Card)
 signal card_unhovered(Card)
+
+func _ready() -> void:
+	# コンテナは scale を見ずに並べるので、最小サイズも同じ倍率にして間隔を空ける
+	custom_minimum_size = BASE_SIZE * CARD_SCALE
+	pivot.position = BASE_PIVOT_POSITION * CARD_SCALE
+	pivot.scale = Vector2.ONE * CARD_SCALE
 
 func init(_card_data: CardData, angular_offset: float, connect_combat_signals: bool = false, connect_ui_signals: bool = true):
 	card_data = _card_data
