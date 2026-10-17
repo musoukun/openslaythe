@@ -1133,8 +1133,41 @@ func add_status_effects() -> void:
 	status_effect_block_on_special_discard.status_effect_decay_rate = 0
 	status_effect_block_on_special_discard.status_effect_type = StatusEffectData.STATUS_EFFECT_TYPES.BUFF
 	status_effect_block_on_special_discard.status_effect_interceptor_ids = ["interceptor_duplicate_attacks"]
-	
+
 	Global.register_rod(status_effect_block_on_special_discard)
+
+	_add_status_effect_descriptions()
+
+## キャラの上のアイコンにカーソルを当てたときの説明 (StatusEffect.gd が [charges] / [secondary] を今の値に置き換える)
+func _add_status_effect_descriptions() -> void:
+	var descriptions: Dictionary[String, String] = {
+		"status_effect_overshield": "Absorbs up to [charges] damage that gets past Block. Decreases by 5 each turn.",
+		"status_effect_preserve_overshield": "Overshield no longer decreases each turn.",
+		"status_effect_pointy": "Whenever this is hit by an attack, deals [charges] damage to the attacker.",
+		"status_effect_pollen": "At the start of your turn, draw [secondary] cards and take [charges] damage that ignores Block.",
+		"status_effect_corrosion": "Each turn, takes [charges] damage that ignores Block, then decreases by 2.",
+		"status_effect_critical": "At the start of your turn, gain [charges] Blood Heat.",
+		"status_effect_overheat": "When this goes over 10, it bursts: deal 10 damage to all enemies and take 5 damage. Halves each turn.",
+		"status_effect_feedback_loop": "Whenever Blood Heat bursts, gain [charges] Energy.",
+		"status_effect_bomb": "Counts down each turn. When it runs out, it explodes for [secondary] damage.",
+		"status_effect_damage_increase": "Attacks deal [charges] more damage.",
+		"status_effect_weaken": "Attacks deal 25% less damage. Lasts [charges] turns.",
+		"status_effect_vulnerable": "Takes 50% more damage from attacks. Lasts [charges] turns.",
+		"status_effect_block_on_turn_end": "At the end of the turn, gain [charges] Block.",
+		"status_effect_energy_next_turn": "Next turn, gain [charges] Energy.",
+		"status_effect_increase_turn_draw": "Next turn, draw [charges] more cards.",
+		"status_effect_attached_card": "When this enemy dies, the attached card is added to your hand.",
+		"status_effect_negate_damage": "Prevents the next [charges] times damage gets past Block.",
+		"status_effect_cap_damage": "Damage that gets past Block is reduced to at most [secondary] per hit. Lasts [charges] turns.",
+		"status_effect_temp_preserve_block": "Block is not removed at the start of the turn. Lasts [charges] turns.",
+		"status_effect_preserve_block": "Block is not removed at the start of the turn.",
+		"status_effect_negate_debuff": "Negates the next [charges] debuffs.",
+		"status_effect_rebound_card_plays": "This turn, the next [charges] cards you play return to the top of your draw pile.",
+		"status_effect_duplicate_card_plays": "The first [charges] cards you play each turn are played twice.",
+		"status_effect_duplicate_attacks": "This turn, the next [charges] Attacks you play are played twice.",
+	}
+	for status_effect_object_id: String in descriptions:
+		Global.get_status_effect_data(status_effect_object_id).status_effect_description = descriptions[status_effect_object_id]
 
 #endregion
 

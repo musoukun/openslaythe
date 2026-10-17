@@ -47,6 +47,7 @@ const BASE_PIVOT_POSITION := Vector2(72, 90)
 @onready var card_glow: ColorRect = %CardGlow
 
 @onready var keyword_timer = $KeywordTimer
+var _is_leaving: bool = false	# 出したカードが中央に見えてから山へ飛ぶまでの間 (同じカードの再生で二重に飛ばさない)
 
 const KEYWORD_HOVER_DELAY: float = 0.5
 
@@ -357,8 +358,9 @@ func _on_card_added_to_draw(_card_data: CardData):
 
 func _on_card_play_started(card_play_request: CardPlayRequest):
 	if card_data == card_play_request.card_data:
-		HandManager.hand.create_card_trail_from_card(self, card_play_request.card_destination_pile, true)
-		queue_free()
+		if not _is_leaving:
+			_is_leaving = true
+			HandManager.hand.show_played_card(self, card_play_request.card_destination_pile)
 	else:
 		_attempt_hand_glow()
 

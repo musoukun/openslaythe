@@ -40,8 +40,8 @@ func reset_player() -> void:
 	animated_sprite_2d.play(AnimationData.ANIMATION_IDLE)
 	var sprite_height: float = fit_sprite_to_feet()
 	if sprite_height > 0.0:
-		# 被ダメ予告を頭上へ
-		incoming_damage.position.y = get_head_y(sprite_height) - 8.0
+		# 被ダメ予告を頭上のステータスの列のさらに上へ (絵は位置から下へ 32 はみ出す)
+		incoming_damage.position.y = status_container.offset_top - 36.0
 	
 	reset_block()
 	clear_all_status_effects()

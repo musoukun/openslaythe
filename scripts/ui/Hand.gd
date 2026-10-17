@@ -31,6 +31,7 @@ var current_card_pick_action: ActionBasePickCards = null	# an action currently r
 @onready var background_button: TextureButton = $%BackgroundButton
 @onready var select_target_label: Label = $%SelectTargetLabel
 var current_selected_card: Card = null	# used for cards with targeting
+var target_arrow: TargetArrow = null # 対象を選んでいる間、カードからカーソルへ伸びる矢印
 
 # Card Play Queue
 var hand_disabled: bool = false	# the player cannot play additional cards manually
@@ -77,9 +78,17 @@ const CARD_PICK_POSITIONS: Array = [
 ]
 const CARD_PICK_Y_OFFSET = -300 # Where picked cards in hand appear relative to the Hand container
 
+# 選んだカード (狙いを付けている間 / 出す瞬間) は StS2 のように主人公と敵の間へ移して大きく見せる
+const CARD_SELECTED_SCALE: float = 1.25 # Card.CARD_SCALE にさらに掛ける倍率
+const CARD_SELECTED_SCREEN_POS: Vector2 = Vector2(0.39, 0.54) # 画面の大きさに対するカード中心の位置
+const CARD_PLAY_SHOW_TIME: float = 0.12 # 狙わずに出すカードが中央に止まって見える時間
+
 
 func _ready():
 	HandManager.hand = self
+	
+	target_arrow = TargetArrow.new()
+	add_child(target_arrow)
 	
 	Signals.combat_started.connect(_on_combat_started)
 	Signals.combat_ended.connect(_on_combat_ended)
@@ -164,7 +173,12 @@ func tween_hand():
 				# final position
 				new_position = Vector2(card_x_offset, card_y_offset)
 
-			if hovered_index != -1:
+			if card == current_selected_card:
+				new_rot = 0
+				new_scale = CARD_SELECTED_SCALE
+				new_position = get_selected_card_position(card)
+				card.z_index = 60
+			elif hovered_index != -1:
 				if hand_index == hovered_index:
 					new_rot = 0
 					new_scale = CARD_HOVER_SCALE
@@ -200,6 +214,39 @@ func _get_hovered_hand_index() -> int:
 			return index
 		index += 1
 	return -1
+
+## 選んだカードを画面中央寄りに出すときの Pivot の位置 (Pivot はカードの中心)
+func get_selected_card_position(card: Card) -> Vector2:
+	return get_viewport_rect().size * CARD_SELECTED_SCREEN_POS - card.global_position
+
+## 選んだカードを切り替える。選んだカードは中央へ移り、敵や背景のクリックを邪魔しないようにマウスを素通しする
+func _set_selected_card(card: Card) -> void:
+	if card == current_selected_card:
+		return
+	if is_instance_valid(current_selected_card):
+		current_selected_card.card_button.mouse_filter = Control.MOUSE_FILTER_STOP
+	current_selected_card = card
+	if card != null:
+		card.card_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		if hovered_card == card:
+			hovered_card = null
+	tween_hand()
+
+## 出したカードを中央に見せてから行き先の山へ飛ばす (Card._on_card_play_started から呼ぶ)。
+## 狙いを付けていたカードはもう中央にあるので、そのまま飛ばす
+func show_played_card(card: Card, card_destination_pile: String) -> void:
+	card.card_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.z_index = 60
+	var target: Vector2 = get_selected_card_position(card)
+	if card.pivot.position.distance_to(target) > 1.0:
+		var tween: Tween = card.create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(card.pivot, "position", target, CARD_TWEEN_TIME)
+		tween.tween_property(card.pivot, "rotation_degrees", 0.0, CARD_TWEEN_TIME)
+		tween.tween_property(card.pivot, "scale", Vector2.ONE * CARD_SELECTED_SCALE * Card.CARD_SCALE, CARD_TWEEN_TIME)
+		tween.chain().tween_interval(CARD_PLAY_SHOW_TIME)
+		await tween.finished
+	create_card_trail_from_card(card, card_destination_pile, true)
+	card.queue_free()
 
 ## 拡大したカードの下端が画面下にそろう Pivot の y 位置
 func _get_hovered_card_y(card: Card) -> float:
@@ -237,7 +284,7 @@ func _on_card_selected(card: Card):
 		
 		# check if autoplaying card based on targeting type
 		if card.card_data.card_requires_target:
-			current_selected_card = card
+			_set_selected_card(card)
 			_prompt_target(card)
 		else:
 			# generate the card play request and enqueue it
@@ -246,15 +293,15 @@ func _on_card_selected(card: Card):
 			card_play_request.card_destination_pile = card_data.card_play_destination
 			card_play_request.card_destination_strategy = card_data.card_play_destination_strategy
 			
-			HandManager.add_card_to_play_queue(card_play_request, true, false)
-			current_selected_card = null
+			_set_selected_card(null)
 			_unprompt_target()
+			HandManager.add_card_to_play_queue(card_play_request, true, false)
 	else:
 		### picking
 		attempt_pick_card(card)
 		
 func _on_card_right_clicked(card: Card):
-	current_selected_card = null
+	_set_selected_card(null)
 	_unprompt_target()
 	if ActionHandler.actions_being_performed:
 		return # cannot right click while actions happening
@@ -267,7 +314,7 @@ func _on_card_right_clicked(card: Card):
 ### Targeting
 
 func _on_background_button_up():
-	current_selected_card = null
+	_set_selected_card(null)
 	_unprompt_target()
 
 func _on_enemy_clicked(enemy: Enemy):
@@ -281,17 +328,19 @@ func _on_enemy_clicked(enemy: Enemy):
 		card_play_request.card_destination_strategy = card_data.card_play_destination_strategy
 		
 		HandManager.add_card_to_play_queue(card_play_request, true, false)
-		current_selected_card = null
+		_set_selected_card(null)
 
 func _on_enemy_hovered(enemy: Enemy):
 	if current_selected_card != null:
 		current_selected_card.update_card_display(enemy)
 
-func _prompt_target(_card: Card):
+func _prompt_target(card: Card):
 	select_target_label.visible = true
+	target_arrow.show_from(card)
 
 func _unprompt_target():
 	select_target_label.visible = false
+	target_arrow.hide_arrow()
 
 func _perform_card_right_click_actions(card: Card) -> void:
 	# locks further card actions and performs a right click on a card
@@ -419,7 +468,7 @@ func clear_hand_cards() -> void:
 func disable_hand(_disabled: bool = true):
 	hand_disabled = _disabled
 	if hand_disabled:
-		current_selected_card = null
+		_set_selected_card(null)
 		_unprompt_target()
 
 #endregion

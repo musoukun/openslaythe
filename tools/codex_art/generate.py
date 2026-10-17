@@ -9,6 +9,7 @@ manifest (assets.json) の各アセットについて:
   python tools/codex_art/generate.py --only card_    # id 前方一致で絞り込み
   python tools/codex_art/generate.py --force         # raw を作り直す
   python tools/codex_art/generate.py --post-only     # raw から後処理だけやり直す
+  python tools/codex_art/generate.py --grid 5x6      # 透過アイコンを 30 個ずつ 1 枚にまとめて描く
 """
 import argparse
 import glob
@@ -101,8 +102,22 @@ def generate_raw(codex: str, style: str, asset: dict) -> bool:
     return run_codex(codex, build_prompt(style, asset, raw_path), raw_path, asset.get("refs", []), asset["id"])
 
 
-# --grid: 透過アイコンを 2x2 の 1 枚にまとめて描き、4 分割して各 raw にする (Codex の呼び出し回数を 1/4 にする)
-QUADRANTS = ["top-left", "top-right", "bottom-left", "bottom-right"]
+# --grid: 透過アイコンを cols x rows のマスの 1 枚にまとめて描き、マスごとに切り分けて各 raw にする
+# (例: 5x6 なら 30 個を Codex 1 回で描く)。カード絵は解像度が要るので常に 2x2。
+# per_call: 2 (キャラクターなど大事な絵) は横に 2 枚並べて描く
+CARD_GRID = (2, 2)
+PAIR_GRID = (2, 1)
+
+
+def parse_grid(text: str) -> tuple:
+    """'5x6' -> (5 列, 6 行)."""
+    try:
+        cols, rows = (int(v) for v in text.lower().split("x"))
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"--grid は 列x行 (例: 4x4, 5x6) で指定: {text}")
+    if cols < 1 or rows < 1:
+        raise argparse.ArgumentTypeError(f"--grid の列と行は 1 以上: {text}")
+    return cols, rows
 
 
 def can_grid(asset: dict) -> bool:
@@ -114,8 +129,8 @@ def can_grid(asset: dict) -> bool:
 
 
 def grid_key(asset: dict) -> tuple:
-    """1 枚にまとめて描けるものどうしの組 (カード絵か / 1 回に何枚か / 添付する正本画像)."""
-    return (is_card_art(asset), asset.get("per_call", 4), tuple(asset.get("refs", [])))
+    """1 枚にまとめて描けるものどうしの組 (カード絵か / 2 枚ずつか / 添付する正本画像)."""
+    return (is_card_art(asset), asset.get("per_call") == 2, tuple(asset.get("refs", [])))
 
 
 # カード絵 (正方形・不透明) も 2x2 でまとめて描ける。マスの間の暗い溝は、切り分けるときに内側で切り落とす
@@ -126,65 +141,66 @@ def is_card_art(asset: dict) -> bool:
 CARD_GRID_INSET = 0.04
 
 
-def generate_grid(codex: str, style: str, batch: list) -> bool:
-    raw_path = RAW_DIR / ("grid_" + batch[0]["id"] + ".png")
+def grid_prompt(style: str, batch: list, cols: int, rows: int, raw_name: str) -> str:
+    """batch の i 番目を左上から横に読んだ i 番目のマス (row r, column c) に描かせるプロンプト."""
     cards = is_card_art(batch[0])
-    refs = batch[0].get("refs", [])
-    # 2 枚ずつ (キャラクターなど大事な絵) は横に 2 枚並べて描き、左右に切り分ける
-    pair = batch[0].get("per_call") == 2
-    places = ["left half", "right half"] if pair else [f"{q} quadrant" for q in QUADRANTS]
-    subjects = "\n".join(f"- {places[i]}: {a['prompt']}" for i, a in enumerate(batch))
-    if pair and cards:
-        layout = ("Layout: a landscape sheet of exactly two separate square card illustrations side by side in one "
-                  "consistent style, split into equal left and right halves by a thin flat dark-navy vertical gutter. "
-                  "Each half is its own complete full-bleed illustration with an opaque painted background; compose "
-                  "each picture inside the centered square of its half, keep every important shape at least 10 percent "
-                  "away from that square's edges and never continue a picture into the other half.\n\n")
-        background = "No text, no letters, no numbers, no borders, no UI frame."
-    elif pair:
-        layout = ("Layout: a landscape sheet of exactly two separate subjects side by side in one consistent style. "
-                  "Draw one subject centered in the left half and one in the right half, each fully contained in its "
-                  "half with at least 10 percent empty margin, never touching or crossing into the other half.\n\n")
-        background = f"{TRANSPARENT_BG} No text, no letters, no numbers, no grid lines, no borders, no UI frame."
-    elif cards:
-        layout = ("Layout: a 2x2 sheet of four separate square card illustrations in one consistent style. Divide the "
-                  "canvas into four equal quadrants separated by thin flat dark-navy gutters. Each quadrant is its own "
-                  "complete full-bleed illustration with an opaque painted background filling the quadrant; keep every "
-                  "important shape at least 8 percent away from the quadrant edges and never continue a picture into "
-                  "another quadrant. Fill unused quadrants with flat dark navy.\n\n")
+    shape = "square" if cols == rows else ("landscape" if cols > rows else "portrait")
+    subjects = "\n".join(f"- row {i // cols + 1}, column {i % cols + 1}: {a['prompt']}" for i, a in enumerate(batch))
+    grid = (f"Divide the canvas into a grid of {cols} columns by {rows} rows ({cols * rows} equal cells), "
+            "counted left to right and top to bottom from row 1, column 1 at the top-left.")
+    if cards:
+        layout = (f"Layout: a sheet of separate square card illustrations in one consistent style. {grid} Separate the "
+                  "cells with thin flat dark-navy gutters. Each cell is its own complete full-bleed illustration with an "
+                  "opaque painted background filling the cell; keep every important shape at least 8 percent away from "
+                  "the cell edges and never continue a picture into another cell. Fill unused cells with flat dark navy.\n\n")
+        if cols != rows:  # 横長・縦長のマスでは、マスの中央の正方形に収める (後処理で正方形に切り抜く)
+            layout = layout.replace("the cell edges and", "the edges of the centered square of its cell and")
         background = "No text, no letters, no numbers, no borders, no UI frame."
     else:
-        layout = ("Layout: a 2x2 sheet of separate icons in one consistent style. Divide the canvas into four equal quadrants and "
-                  "draw exactly one subject centered in each quadrant, fully contained inside it with at least 12 percent empty "
-                  "margin from the quadrant edges, never touching or crossing into another quadrant. Leave unused quadrants empty.\n\n")
+        layout = (f"Layout: a sheet of separate icons in one consistent style. {grid} Draw exactly one subject centered "
+                  "in its listed cell, fully contained inside it with at least 12 percent empty margin from the cell "
+                  "edges, never touching or crossing into another cell. Leave unused cells empty.\n\n")
         background = f"{TRANSPARENT_BG} No text, no letters, no numbers, no grid lines, no borders, no UI frame."
-    prompt = (
-        f"$imagegen Generate exactly one {'landscape 3:2' if pair else 'square'} image and nothing else.\n"
+    return (
+        f"$imagegen Generate exactly one {shape} image and nothing else.\n"
         f"Art direction:\n{style}\n\n"
         f"{layout}"
         f"Subjects:\n{subjects}\n\n"
-        f"{batch[0].get('ref_rule', GRID_REF_RULE) if refs else ''}"
+        f"{batch[0].get('ref_rule', GRID_REF_RULE) if batch[0].get('refs') else ''}"
         f"{background}\n"
-        f"Save the final PNG to this exact path: {raw_path.name} (in the current working directory). "
+        f"Save the final PNG to this exact path: {raw_name} (in the current working directory). "
         "Do not create or modify any other file."
     )
-    if not run_codex(codex, prompt, raw_path, refs, "grid " + ",".join(a["id"] for a in batch)):
-        return False
-    sheet = Image.open(raw_path).convert("RGBA")
-    hw, hh = sheet.width // 2, (sheet.height if pair else sheet.height // 2)
-    inset = round(min(hw, hh) * CARD_GRID_INSET) if cards else 0
+
+
+def split_grid(sheet: Image.Image, batch: list, cols: int, rows: int) -> None:
+    """cols x rows のシートをマスごとに切り分けて batch の各 raw に保存する (左上から横に読む順)."""
+    cards = is_card_art(batch[0])
+    cw, ch = sheet.width / cols, sheet.height / rows
+    inset = round(min(cw, ch) * CARD_GRID_INSET) if cards else 0
     for i, a in enumerate(batch):
-        x, y = (i % 2) * hw, (0 if pair else (i // 2) * hh)
+        c, r = i % cols, i // cols
+        box = (round(c * cw) + inset, round(r * ch) + inset, round((c + 1) * cw) - inset, round((r + 1) * ch) - inset)
         mark = PngImagePlugin.PngInfo()
         if not cards:
             mark.add_text("grid", "1")  # 後処理で隣のマスのはみ出しを消す目印
-        sheet.crop((x + inset, y + inset, x + hw - inset, y + hh - inset)).save(RAW_DIR / f"{a['id']}.png", pnginfo=mark)
+        sheet.crop(box).save(RAW_DIR / f"{a['id']}.png", pnginfo=mark)
+
+
+def generate_grid(codex: str, style: str, batch: list, cols: int, rows: int) -> bool:
+    if not is_card_art(batch[0]):
+        rows = -(-len(batch) // cols)  # 最後の半端な束は空の行を描かせず、マスを大きくする
+    raw_path = RAW_DIR / ("grid_" + batch[0]["id"] + ".png")
+    prompt = grid_prompt(style, batch, cols, rows, raw_path.name)
+    if not run_codex(codex, prompt, raw_path, batch[0].get("refs", []), "grid " + ",".join(a["id"] for a in batch)):
+        return False
+    split_grid(Image.open(raw_path).convert("RGBA"), batch, cols, rows)
     raw_path.unlink()
     return True
 
 
-def clean_quadrant(im: Image.Image) -> Image.Image:
-    """4 分割したマスから、隣のマスのはみ出し (マスの縁に接する小さい成分) を消す."""
+def clean_grid_cell(im: Image.Image) -> Image.Image:
+    """grid から切り分けたマスから、隣のマスのはみ出し (マスの縁に接する小さい成分) を消す."""
     step = 2
     comps = components(im, step)
     if not comps:
@@ -408,6 +424,8 @@ def post_process(asset: dict) -> None:
     raw_im = Image.open(raw_path)
     from_grid = raw_im.info.get("grid") == "1"
     im = raw_im.convert("RGBA")
+    if from_grid:
+        im = clean_grid_cell(im)  # 隣のマスのはみ出しが四隅にかかると透過判定を誤るので、先に消す
     if asset.get("chroma_key"):
         im = chroma_key(im, asset["chroma_key"])
     elif needs_alpha_check(asset) and not alpha_ok(im):
@@ -445,7 +463,7 @@ def post_process(asset: dict) -> None:
     elif asset.get("transparent"):
         # 透明部分をトリムして、枠内に収まるよう縮小 → 中央(下揃え可)に配置
         if from_grid:
-            im = clean_quadrant(im)
+            im = clean_grid_cell(im)  # 背景をキーで抜いた後に残ったはみ出しも消す
         im = trim(im)
         pad = asset.get("pad", 0.04)
         scale = min(w * (1 - pad * 2) / im.width, h * (1 - pad * 2) / im.height)
@@ -475,7 +493,10 @@ def main() -> None:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--post-only", action="store_true")
     ap.add_argument("--workers", type=int, default=4)
-    ap.add_argument("--grid", action="store_true", help="透過アイコンとカード絵を 2x2 で 4 個ずつまとめて描く (呼び出し回数 1/4)。per_call: 2 のものは横に 2 枚ずつ")
+    ap.add_argument("--grid", nargs="?", const="2x2", default=None, type=parse_grid, metavar="COLSxROWS",
+                    help="透過アイコンを 列x行 のマスで 1 枚にまとめて描き、マスごとに分割する。"
+                         "値なしは 2x2 (4 個/回)、--grid 5x6 なら 30 個/回。カード絵 (category card_art) は常に 2x2。"
+                         "per_call: 2 のものは横に 2 枚ずつ。sheet / per_call: 1 / per_call のない refs つきは grid にしない")
     ap.add_argument("--manifest", default=str(MANIFEST), help="asset manifest json")
     args = ap.parse_args()
 
@@ -494,16 +515,18 @@ def main() -> None:
         todo = [a for a in todo if a not in reuse]
         grid = [a for a in todo if args.grid and can_grid(a)]
         jobs = []
-        # カード絵と透過アイコン、1 回の枚数、添付する正本画像が同じものどうしを 1 枚にまとめる
+        # カード絵と透過アイコン、2 枚ずつか、添付する正本画像が同じものどうしを 1 枚にまとめる
         for key in dict.fromkeys(grid_key(a) for a in grid):
+            cards, pair, _refs = key
             group = [a for a in grid if grid_key(a) == key]
-            n = key[1]
+            cols, rows = PAIR_GRID if pair else (CARD_GRID if cards else args.grid)
+            n = cols * rows
             for i in range(0, len(group), n):
                 batch = group[i:i + n]
-                if len(batch) == 1 and n == 2:  # 2 枚ずつの余り 1 枚は単独で描く
+                if len(batch) == 1 and pair:  # 2 枚ずつの余り 1 枚は単独で描く
                     jobs.append(lambda a=batch[0]: make_raw(codex, style, a))
                 else:
-                    jobs.append(lambda b=batch: generate_grid(codex, style, b))
+                    jobs.append(lambda b=batch, c=cols, r=rows: generate_grid(codex, style, b, c, r))
         jobs += [lambda a=a: make_raw(codex, style, a) for a in todo if a not in grid]
         print(f"generating {len(todo)} assets in {len(jobs)} Codex calls with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:
