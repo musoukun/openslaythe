@@ -97,7 +97,7 @@ static func _status(id: String, status_name: String) -> StatusEffectData:
 static func _register_interceptors() -> void:
 	# 蒼刃のダメージ (ActionAttack を書き換えるので、手札の数値プレビューにも出る)
 	var edge: ActionInterceptorData = ActionInterceptorData.new("interceptor_mana_blade_edge")
-	edge.action_interceptor_priority = 10000 # 筋力と同じく、weaken / vulnerable の乗算より前
+	edge.action_interceptor_priority = 10000 # 攻撃力上昇と同じく、攻撃力低下 / 防御力低下の乗算より前
 	edge.action_interceptor_modifies_parent = true
 	edge.action_interceptor_script_path = Scripts.INTERCEPTOR_MANA_BLADE_EDGE
 	edge.action_intercepted_action_paths = [Scripts.ACTION_ATTACK]

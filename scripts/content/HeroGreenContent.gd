@@ -1,12 +1,12 @@
 class_name HeroGreenContent
-## Vera (character_green) の報酬カードを 3 つの軸に絞る: 竜血の熱 / 筋力・多段 / わざと傷つく＋回復。
+## Vera (character_green) の報酬カードを 3 つの軸に絞る: 竜血の熱 / 攻撃力上昇・多段 / わざと傷つく＋回復。
 ## トゲトゲ・燃えさし・オーバーシールドの軸のカードは報酬に出さない (カードの定義は残す)。
 ## 元のカードは GlobalProdDataGenerator.add_cards() で作られ、ここで報酬から外す・作り直す・足す。
 ## GlobalProdDataGenerator から add_cards() の後、BuildContent.register() の前に register_cards() が呼ばれる。
 
 const COLOR := "green"
 const HEAT := "status_effect_overheat" # 竜血の熱。10 を超えた分ごとに、自分も含む全員へ 10 ダメージ
-const STRENGTH := "status_effect_damage_increase" # 筋力。1 回の攻撃ごとに上乗せ
+const STRENGTH := "status_effect_damage_increase" # 攻撃力上昇。1 回の攻撃ごとに上乗せ
 
 ## 報酬に出さなくなるカード (トゲトゲ・燃えさし・オーバーシールドの軸)
 const CARDS_OUT_OF_POOL: Array[String] = [
@@ -69,20 +69,20 @@ static func _add_cards() -> void:
 	searing_claw.card_play_actions = [_attack(), _gain_heat()]
 	Global.register_rod(searing_claw)
 
-	# --- 筋力・多段: 筋力を上げ、1 回ずつ上乗せされる多段攻撃で伸ばす ---
+	# --- 攻撃力上昇・多段: 攻撃力上昇を重ね、1 回ずつ上乗せされる多段攻撃で伸ばす ---
 	var frenzy: CardData = _card("card_green_frenzied_claws", "Frenzied Claws", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.COMMON, 1,
 		"Deal [damage] damage [number_of_attacks] times.", {"damage": 3, "number_of_attacks": 4}, {"damage": 1}, "card_lotus")
 	frenzy.card_play_actions = [_attack()]
 	Global.register_rod(frenzy)
 
 	var sharpen: CardData = _card("card_green_sharpen_claws", "Sharpen Claws", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.COMMON, 1,
-		"Gain [status_charge_amount] Strength.", {"status_charge_amount": 2}, {"status_charge_amount": 1}, "card_growth")
+		"Gain [status_charge_amount] Attack Up.", {"status_charge_amount": 2}, {"status_charge_amount": 1}, "card_growth")
 	sharpen.card_play_destination = HandManager.EXHAUST_PILE
 	sharpen.card_play_actions = [_gain_strength()]
 	_register_skill(sharpen)
 
 	var flurry: CardData = _card("card_green_claw_flurry", "Dragon Claw Flurry", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.UNCOMMON, 2,
-		"Deal [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Strength.", {"damage": 5, "number_of_attacks": 3, "status_charge_amount": 1}, {"damage": 2}, "card_datum")
+		"Deal [damage] damage [number_of_attacks] times. Gain [status_charge_amount] Attack Up.", {"damage": 5, "number_of_attacks": 3, "status_charge_amount": 1}, {"damage": 2}, "card_datum")
 	flurry.card_play_actions = [_attack(), _gain_strength()]
 	Global.register_rod(flurry)
 
