@@ -10,7 +10,6 @@ const BOSS_SIZE := Vector2(112, 112)
 const START_SIZE := Vector2(104, 104)
 
 var location_data: LocationData = null
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var map_label: Label = $MapLabel
 
 signal map_location_button_up(map_location: MapLocation)
@@ -59,8 +58,14 @@ func _resize_keep_center(new_size: Vector2) -> void:
 func get_center() -> Vector2:
 	return position + size / 2.0
 
-func flash_location() -> void:
-	animation_player.play("flash_map_location")
+## プレイヤーが今いる場所として目立たせる (訪問済みの灰色は戻す)
+func mark_current() -> void:
+	self_modulate = Color.WHITE
+	MapHighlight.attach(self, MapHighlight.Kind.CURRENT)
+
+## 次に移動できる場所として光らせる
+func mark_reachable() -> void:
+	MapHighlight.attach(self, MapHighlight.Kind.NEXT)
 
 func _tween_scale(target: Vector2) -> void:
 	create_tween().tween_property(self, "scale", target, 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
