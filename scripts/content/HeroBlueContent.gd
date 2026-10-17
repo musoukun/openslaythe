@@ -134,9 +134,9 @@ static func register_cards() -> void:
 	keyword.keyword_text_bb_code = "Carries over between turns (up to 10). Spend it on spells or on your Mana Blade."
 	Global.register_rod(keyword)
 
-	# 固有技「蒼刃」: 保留。使うと山札の一番上に戻り、次のターンにまた引ける (毎ターン1回振れる)
+	# 固有技「蒼刃」: スタンバイ。使うと山札の一番上に戻り、次のターンにまた引ける (毎ターン1回振れる)
 	var blade: CardData = _card("card_blue_mana_blade", "Mana Blade", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.BASIC, 1,
-		"Deal [damage] damage. Retain. Returns to the top of your draw pile.",
+		"Deal [damage] damage. Standby. Returns to the top of your draw pile.",
 		{"damage": 10, "number_of_attacks": 1}, {"damage": 3})
 	blade.card_appears_in_card_packs = false
 	blade.card_is_retained = true
