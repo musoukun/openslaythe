@@ -46,6 +46,14 @@ REF_RULE = (
 )
 
 
+# まとめ描きで正本画像を添付したとき: 主人公が出る絵はすべて添付画像のデザインにそろえる
+GRID_REF_RULE = (
+    "Reference: attached image 1 is the canonical design of the heroine. Wherever she appears in any panel, match it "
+    "exactly for the face, hair, horns, body proportions, armor, gauntlets, claws, tail, colors and rendering style. "
+    "Follow each panel's text only for pose, framing and effects; do not copy the reference's pose or canvas.\n\n"
+)
+
+
 TRANSPARENT_BG = ("Use the image tool's transparent background option: output a PNG with a real alpha channel where "
                   "the background is fully transparent (alpha 0), not white, black, checkerboard, gradient or any "
                   "colored backdrop or glow haze.")
@@ -95,8 +103,10 @@ def generate_raw(codex: str, style: str, asset: dict) -> bool:
 
 
 # --grid: 透過アイコンを cols x rows のマスの 1 枚にまとめて描き、マスごとに切り分けて各 raw にする
-# (例: 5x6 なら 30 個を Codex 1 回で描く)。カード絵は解像度が要るので常に 2x2
+# (例: 5x6 なら 30 個を Codex 1 回で描く)。カード絵は解像度が要るので常に 2x2。
+# per_call: 2 (キャラクターなど大事な絵) は横に 2 枚並べて描く
 CARD_GRID = (2, 2)
+PAIR_GRID = (2, 1)
 
 
 def parse_grid(text: str) -> tuple:
@@ -111,9 +121,16 @@ def parse_grid(text: str) -> tuple:
 
 
 def can_grid(asset: dict) -> bool:
-    if asset.get("sheet") or asset.get("refs"):
+    # refs (正本画像) つきは per_call を指定したときだけまとめる (同じ refs のものどうしで 1 枚に描く)
+    # per_call: 1 は 1 枚ずつ (ボスなど一番大事な絵)
+    if asset.get("sheet") or asset.get("per_call") == 1 or (asset.get("refs") and not asset.get("per_call")):
         return False
     return needs_alpha_check(asset) or is_card_art(asset)
+
+
+def grid_key(asset: dict) -> tuple:
+    """1 枚にまとめて描けるものどうしの組 (カード絵か / 2 枚ずつか / 添付する正本画像)."""
+    return (is_card_art(asset), asset.get("per_call") == 2, tuple(asset.get("refs", [])))
 
 
 # カード絵 (正方形・不透明) も 2x2 でまとめて描ける。マスの間の暗い溝は、切り分けるときに内側で切り落とす
@@ -136,6 +153,8 @@ def grid_prompt(style: str, batch: list, cols: int, rows: int, raw_name: str) ->
                   "cells with thin flat dark-navy gutters. Each cell is its own complete full-bleed illustration with an "
                   "opaque painted background filling the cell; keep every important shape at least 8 percent away from "
                   "the cell edges and never continue a picture into another cell. Fill unused cells with flat dark navy.\n\n")
+        if cols != rows:  # 横長・縦長のマスでは、マスの中央の正方形に収める (後処理で正方形に切り抜く)
+            layout = layout.replace("the cell edges and", "the edges of the centered square of its cell and")
         background = "No text, no letters, no numbers, no borders, no UI frame."
     else:
         layout = (f"Layout: a sheet of separate icons in one consistent style. {grid} Draw exactly one subject centered "
@@ -147,6 +166,7 @@ def grid_prompt(style: str, batch: list, cols: int, rows: int, raw_name: str) ->
         f"Art direction:\n{style}\n\n"
         f"{layout}"
         f"Subjects:\n{subjects}\n\n"
+        f"{batch[0].get('ref_rule', GRID_REF_RULE) if batch[0].get('refs') else ''}"
         f"{background}\n"
         f"Save the final PNG to this exact path: {raw_name} (in the current working directory). "
         "Do not create or modify any other file."
@@ -172,7 +192,7 @@ def generate_grid(codex: str, style: str, batch: list, cols: int, rows: int) -> 
         rows = -(-len(batch) // cols)  # 最後の半端な束は空の行を描かせず、マスを大きくする
     raw_path = RAW_DIR / ("grid_" + batch[0]["id"] + ".png")
     prompt = grid_prompt(style, batch, cols, rows, raw_path.name)
-    if not run_codex(codex, prompt, raw_path, [], "grid " + ",".join(a["id"] for a in batch)):
+    if not run_codex(codex, prompt, raw_path, batch[0].get("refs", []), "grid " + ",".join(a["id"] for a in batch)):
         return False
     split_grid(Image.open(raw_path).convert("RGBA"), batch, cols, rows)
     raw_path.unlink()
@@ -457,7 +477,7 @@ def post_process(asset: dict) -> None:
             im = im.crop((left, 0, left + nw, im.height))
         else:
             nh = round(im.width / target)
-            top = (im.height - nh) // 2
+            top = round((im.height - nh) * asset.get("crop_align", 0.5))  # crop_align: 0 で上端、0.5 で中央 (縦長の全身の絵は上寄りで顔を残す)
             im = im.crop((0, top, im.width, top + nh))
         im = im.resize((w, h), Image.LANCZOS)
 
@@ -476,7 +496,7 @@ def main() -> None:
     ap.add_argument("--grid", nargs="?", const="2x2", default=None, type=parse_grid, metavar="COLSxROWS",
                     help="透過アイコンを 列x行 のマスで 1 枚にまとめて描き、マスごとに分割する。"
                          "値なしは 2x2 (4 個/回)、--grid 5x6 なら 30 個/回。カード絵 (category card_art) は常に 2x2。"
-                         "refs や sheet を持つアセットは grid にしない")
+                         "per_call: 2 のものは横に 2 枚ずつ。sheet / per_call: 1 / per_call のない refs つきは grid にしない")
     ap.add_argument("--manifest", default=str(MANIFEST), help="asset manifest json")
     args = ap.parse_args()
 
@@ -495,12 +515,18 @@ def main() -> None:
         todo = [a for a in todo if a not in reuse]
         grid = [a for a in todo if args.grid and can_grid(a)]
         jobs = []
-        for cards in (True, False):  # カード絵と透過アイコンは別の 1 枚にまとめる
-            group = [a for a in grid if is_card_art(a) == cards]
-            cols, rows = CARD_GRID if cards else args.grid
+        # カード絵と透過アイコン、2 枚ずつか、添付する正本画像が同じものどうしを 1 枚にまとめる
+        for key in dict.fromkeys(grid_key(a) for a in grid):
+            cards, pair, _refs = key
+            group = [a for a in grid if grid_key(a) == key]
+            cols, rows = PAIR_GRID if pair else (CARD_GRID if cards else args.grid)
             n = cols * rows
-            jobs += [lambda b=group[i:i + n], c=cols, r=rows: generate_grid(codex, style, b, c, r)
-                     for i in range(0, len(group), n)]
+            for i in range(0, len(group), n):
+                batch = group[i:i + n]
+                if len(batch) == 1 and pair:  # 2 枚ずつの余り 1 枚は単独で描く
+                    jobs.append(lambda a=batch[0]: make_raw(codex, style, a))
+                else:
+                    jobs.append(lambda b=batch, c=cols, r=rows: generate_grid(codex, style, b, c, r))
         jobs += [lambda a=a: make_raw(codex, style, a) for a in todo if a not in grid]
         print(f"generating {len(todo)} assets in {len(jobs)} Codex calls with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:

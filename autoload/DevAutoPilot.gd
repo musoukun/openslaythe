@@ -24,6 +24,7 @@ extends Node
 ## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る。--draft=first|attack|random|none でカード報酬の取り方。計測は CSVCOMBAT / CSVRUN の行。--combo で祝福「昇り竜の型」を選び、コストの小さい順に出す)
 ## --warp-mouse : 本物のカーソルも動かす (shop_buy の指さしを撮るとき用。使っている人のマウスを奪うので普段は付けない)
 ## --hp=<割合>[,<割合>...] : combat モードで、戦闘に入ってから主人公の HP を最大HPのこの割合 (%) にする。複数なら 2 秒ごとに順に変える (例 --hp=10 / --hp=5,100)
+## --status=<id>[,<id>...] : combat モードで、戦闘に入ってから主人公に状態異常を付け、手札を隠す (status_effect_ は省略。例 --status=overheat,vulnerable)
 ## --hero=<character_id> : ラン開始系のモードで使う主人公 (省略時は character_green。例 --hero=character_blue)
 ## 引数が無い場合は何もしない。
 
@@ -187,6 +188,12 @@ func _ready() -> void:
 					wait = 2.0
 					player_data.set_health(maxi(1, roundi(player_data.player_health_max * float(percent) / 100.0)))
 					print("HP ", player_data.player_health, "/", player_data.player_health_max)
+			# --status=<id>[,<id>...]: 戦闘に入ってから主人公に状態異常を 3 ずつ付け、手札を隠す (status_effect_ は省略。アイコンの確認用)
+			if _get_user_arg("--status=") != "":
+				await get_tree().create_timer(1.0).timeout
+				for status_id in _get_user_arg("--status=").split(","):
+					Global.get_player().add_status_effect_charges("status_effect_" + status_id, 3)
+				HandManager.hand.visible = false # 主人公の足もとの状態異常の列が手札に隠れるので
 			if mode == "combat_hover":
 				await get_tree().create_timer(2.0).timeout
 				var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()

@@ -9,7 +9,7 @@ const ARTIFACT_ID := "artifact_ascending_dragon_form"
 const INTERCEPTOR_ID := "interceptor_combo_chain"
 const INTERCEPTOR_SCRIPT_PATH := "res://scripts/action_interceptors/InterceptorComboChain.gd"
 const ARTIFACT_SCRIPT_PATH := "res://scripts/artifacts/ArtifactComboChain.gd"
-const TEXTURE_PATH := "external/sprites/artifacts/artifact_boss_red.png" # 既存の絵を流用
+const TEXTURE_PATH := "external/sprites/artifacts/artifact_ascending_dragon_form.png"
 const DESCRIPTION := "Within a turn, playing a card that costs at least as much as the previous one continues the chain. Each link after the first adds +10% damage and Block. A cheaper card starts a new chain; the chain ends with your turn."
 
 
