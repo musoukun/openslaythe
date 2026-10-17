@@ -3,6 +3,7 @@ extends Node
 ## 例: godot --path . --write-movie shots/x.png --fixed-fps 10 --quit-after 60 -- --auto=combat
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=map_mid : 2階ぶん進んだ状態で移動待ちのマップを表示 (現在地と行き先の目印の確認用)
+## --auto=map_deck : マップを表示してマップ上のデッキボタンを押す (閉じるとマップに戻るかは map_deck:close)
 ## --auto=combat : ラン開始して最初の戦闘に入る
 ## --auto=new_run : タイトルから「新しいラン」画面を開く
 ## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
@@ -15,6 +16,7 @@ extends Node
 ## --auto=shop_remove : 購入画面からカード削除を押す
 ## --auto=shop_check : カード削除とカードの購入を実際に行い、お金とデッキの変化を出力する
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
+## --auto=rest:smith[:on][:pick] : 鍛冶でアップグレードの選択画面を出す。on で「強化後を見る」を入れ、pick で1枚選んで確定する
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## --auto=click_test : 最初の戦闘で、手札の各カードのどこを押せば CardButton に届くかを数え、実際にクリックでカードを出す
 ## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る。--draft=first|attack|random|none でカード報酬の取り方。計測は CSVCOMBAT / CSVRUN の行。--combo で祝福「昇り竜の型」を選び、コストの小さい順に出す)
@@ -140,7 +142,7 @@ func _ready() -> void:
 			print("WEAPON deck ", card_data.object_id, " tags=", card_data.card_tags, " damage ", card_data.card_values.get("damage", 0), " -> ", damage)
 		return
 	match mode:
-		"map", "map_top", "map_mid":
+		"map", "map_top", "map_mid", "map_deck", "map_deck:close":
 			_print_map_stats()
 			# ラン開始の選択肢パネルがマップを覆うので閉じてから表示する
 			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false) as Control
@@ -156,6 +158,15 @@ func _ready() -> void:
 				if mode == "map_top":
 					await get_tree().process_frame
 					map.scroll_container.scroll_vertical = 0
+				if mode.begins_with("map_deck"):
+					await get_tree().create_timer(0.5).timeout
+					map.find_child("MapDeckButton", true, false).button_up.emit()
+					var overlay := get_tree().root.find_child("CardSelectionOverlay", true, false) as Control
+					print("MAP_DECK overlay=", overlay.visible, " map=", map.visible, " cards=", overlay.find_children("*", "Card", true, false).size())
+					if mode == "map_deck:close":
+						await get_tree().create_timer(0.5).timeout
+						overlay.get_node("BackButton").button_up.emit()
+						print("MAP_DECK closed overlay=", overlay.visible, " map=", map.visible)
 		"deck":
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:
@@ -282,8 +293,20 @@ func _ready() -> void:
 					CardData.CARD_RARITIES.keys()[card_data.card_rarity], card_data.card_energy_cost, card_data.card_values,
 					regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
 			get_tree().quit()
+		"upgrade_check":
+			# --auto=upgrade_check : 全カードのアップグレード前後 (コスト・廃棄・数値・説明) を出力する
+			var preview: Card = Scenes.CARD.instantiate()
+			add_child(preview)
+			var regex := RegEx.create_from_string("\\[[^\\]]*\\]")
+			for card_data: CardData in Global._id_to_card_data.values():
+				var upgraded: CardData = card_data.get_upgraded_preview()
+				for c: CardData in [card_data, upgraded]:
+					preview.init(c, 0, false, false)
+					print("UPG|%s|%s|cost=%d|exhaust=%s|%s|%s|%s" % [c.object_id, c.get_card_name(), c.card_energy_cost, c.does_card_exhaust(),
+						CardData.CARD_TYPES.keys()[c.card_type], c.card_values, regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
+			get_tree().quit()
 		"juice":
-			# 演出の確認: 戦闘に入り、カードを連打してコンボの段階 (輝き・告知・揺れ・音) を上げる
+			# 演出の確認: 戦闘に入り、カードを連打してコンボ (揺れ・音) を重ねる
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
@@ -315,11 +338,7 @@ func _juice() -> void:
 		request.card_destination_pile = card.card_play_destination
 		HandManager.add_card_to_play_queue(request)
 		await get_tree().create_timer(0.45).timeout
-		print("JUICE combo=", Vfx.combo_count(), " tier=", CardShine.combo_tier(Vfx.combo_count()))
-	# 手札の1枚にカーソルを乗せて、拡大したカードの輝きを見せる
-	var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
-	if hand_cards.size() > 1:
-		HandManager.hand._on_card_hovered(hand_cards[1])
+		print("JUICE combo=", Vfx.combo_count())
 
 
 func _mana_check() -> void:
@@ -421,6 +440,29 @@ func _rest_site(parts: PackedStringArray) -> void:
 	var location: LocationData = Global.get_next_locations()[0]
 	location.location_type = LocationData.LOCATION_TYPES.REST_SITE
 	ActionGenerator.generate_visition_location(location.location_id)
+	if parts.has("smith"):
+		# --auto=rest:smith[:on][:pick] : 鍛冶を押してアップグレードの選択画面を出す
+		await get_tree().create_timer(1.5).timeout
+		for button: RestActionButton in get_tree().root.find_children("*", "RestActionButton", true, false):
+			if button.rest_action_object_id == "rest_action_upgrade_card":
+				button.button_up.emit()
+		await get_tree().create_timer(0.5).timeout
+		var overlay := get_tree().root.find_child("CardSelectionOverlay", true, false)
+		var toggle := overlay.find_child("UpgradeToggle", true, false) as CheckButton
+		print("SMITH toggle visible=", toggle.visible)
+		if parts.has("on"):
+			toggle.button_pressed = true
+			await get_tree().create_timer(0.3).timeout
+			var shown: Array = overlay.find_children("*", "Card", true, false).map(func(c): return c.card_data.get_card_name())
+			print("SMITH shown=", shown)
+		if parts.has("pick"):
+			var first: Card = overlay.find_children("*", "Card", true, false)[0]
+			first.card_selected.emit(first)
+			await get_tree().create_timer(0.3).timeout
+			overlay.get_node("ConfirmButton").button_up.emit()
+			await get_tree().create_timer(0.5).timeout
+			print("SMITH deck=", Global.player_data.player_deck.map(func(c): return c.get_card_name()))
+		return
 	var hover_index := parts[parts.size() - 1]
 	if not hover_index.is_valid_int():
 		return
@@ -644,6 +686,12 @@ func _preview_vfx() -> void:
 
 func _get_mode() -> String:
 	return _get_user_arg("--auto=")
+
+## テスト起動 (--auto=) のときのラン開始時の所持金。普通に遊ぶときは CharacterData.character_starting_money (90)
+const TEST_STARTING_MONEY := 999
+
+func is_active() -> bool:
+	return _get_mode() != ""
 
 func _get_user_arg(prefix: String) -> String:
 	for arg in OS.get_cmdline_user_args():

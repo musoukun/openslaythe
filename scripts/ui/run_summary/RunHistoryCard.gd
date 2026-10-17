@@ -10,14 +10,14 @@ const INVALID_CARD_TEXT: String = "Card Error"
 func init(card_id: String, card_level: int, card_count: int) -> void:
 	var card_data: CardData = Global.get_card_data(card_id)
 	if card_data == null:
-		rich_text_label.set_bbcode(INVALID_CARD_TEXT)
+		rich_text_label.set_bbcode(tr(INVALID_CARD_TEXT))
 		texture_rect.texture = FileLoader.MISSING_TEXTURE
 	
 	var card_bbcode: String = ""
 	if card_count > 1:
 		card_bbcode += "x{0} ".format([card_count])
 	
-	card_bbcode += card_data.card_name
+	card_bbcode += tr(card_data.card_name)
 	if card_level > 0:
 		card_bbcode += "+"
 		if card_level > 1:

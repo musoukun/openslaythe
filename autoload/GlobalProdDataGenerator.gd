@@ -2428,7 +2428,7 @@ func add_card_basics() -> void:
 		card_basic_attack.card_rarity = CardData.CARD_RARITIES.BASIC
 		card_basic_attack.card_keyword_object_ids = []
 		card_basic_attack.card_values = {"damage": 7, "number_of_attacks": 1}
-		card_basic_attack.card_upgrade_value_improvements = {"damage": 3, "number_of_attacks": 1}
+		card_basic_attack.card_upgrade_value_improvements = {"damage": 3}
 		card_basic_attack.card_play_actions = [{
 		Scripts.ACTION_ATTACK_GENERATOR: {"time_delay": 0.0, "actions_on_lethal": []},
 		Scripts.ACTION_PLAY_SOUND: {"audio_path": "external/audio/sounds/slash.wav"},
@@ -2510,7 +2510,7 @@ func add_cards_green() -> void:
 	card_bud.card_name = "Bristling Scales"
 	card_bud.card_color_id = "color_{0}".format([color])
 	card_bud.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_bud.card_description = "Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy. Exhaust."
+	card_bud.card_description = "Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy."
 	card_bud.card_type = CardData.CARD_TYPES.SKILL
 	card_bud.card_rarity = CardData.CARD_RARITIES.UNCOMMON
 	card_bud.card_requires_target = true
@@ -2547,7 +2547,6 @@ func add_cards_green() -> void:
 	card_cell_wall.card_rarity = CardData.CARD_RARITIES.BASIC
 	card_cell_wall.card_requires_target = false
 	card_cell_wall.card_values = {}
-	card_cell_wall.card_first_upgrade_property_changes = {"card_energy_cost": 0}
 	card_cell_wall.card_play_actions = [
 		{
 			Scripts.ACTION_BLOCK_TO_STATUS: 
@@ -2656,13 +2655,12 @@ func add_cards_green() -> void:
 	card_fertilize.card_name = "Blood Kindling"
 	card_fertilize.card_color_id = "color_{0}".format([color])
 	card_fertilize.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_fertilize.card_description = "Gain {0}{0}. Lose [self_damage] HP.".format([Card.ENERGY_ICON_KEYWORD])
+	card_fertilize.card_description = "Gain [energy_amount] Energy. Lose [self_damage] HP."
 	card_fertilize.card_type = CardData.CARD_TYPES.SKILL
 	card_fertilize.card_rarity = CardData.CARD_RARITIES.RARE
 	card_fertilize.card_requires_target = false
 	card_fertilize.card_values = {"self_damage": 6, "energy_amount": 2}
-	card_fertilize.card_upgrade_value_improvements = {"self_damage": 3, "energy_amount": 1}
-	card_fertilize.card_first_upgrade_property_changes = {"card_description": "Gain {0}{0}. Lose [self_damage] HP.".format([Card.ENERGY_ICON_KEYWORD])}
+	card_fertilize.card_upgrade_value_improvements = {"energy_amount": 1}
 	card_fertilize.card_play_actions = [
 		{
 			Scripts.ACTION_DIRECT_DAMAGE: {
@@ -2688,6 +2686,8 @@ func add_cards_green() -> void:
 	card_fruit.card_play_destination = HandManager.EXHAUST_PILE
 	card_fruit.card_values = {"small_max_health_amount": 1, "big_max_health_amount": 3}
 	card_fruit.card_upgrade_value_improvements = {"small_max_health_amount": 1, "big_max_health_amount": 1}
+	# 最大HPを増やすカードなので、廃棄を消さず (毎戦闘何度も増えてしまう) 数値を上げる
+	card_fruit.card_upgrade_type = CardData.UPGRADE_TYPES.VALUES
 	card_fruit.card_play_actions = [
 		{
 			Scripts.ACTION_RANDOM_SELECTION: 
@@ -2742,7 +2742,6 @@ func add_cards_green() -> void:
 	card_lotus.card_play_destination = HandManager.EXHAUST_PILE
 	card_lotus.card_values = {"status_effect_multiplier_amount": 2}
 	card_lotus.card_upgrade_value_improvements = {"status_effect_multiplier_amount": 1,}
-	card_lotus.card_first_upgrade_property_changes = {"card_description": "Triple Overshield charges."}
 	card_lotus.card_play_actions = [
 		{
 			Scripts.ACTION_MULTIPLY_STATUS: {
@@ -2811,7 +2810,7 @@ func add_cards_green() -> void:
 	card_petals.card_name = "Wing Shroud"
 	card_petals.card_color_id = "color_{0}".format([color])
 	card_petals.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_petals.card_description = "Gain [block] block. Keep block for [status_charge_amount] turns. Exhaust. On pickup, gain [health_amount] HP."
+	card_petals.card_description = "Gain [block] block. Keep block for [status_charge_amount] turns. On pickup, gain [health_amount] HP."
 	card_petals.card_type = CardData.CARD_TYPES.SKILL
 	card_petals.card_rarity = CardData.CARD_RARITIES.RARE
 	card_petals.card_requires_target = false
@@ -2909,24 +2908,7 @@ func add_cards_green() -> void:
 	card_symbiosis.card_energy_cost = 2
 	card_symbiosis.card_requires_target = false
 	card_symbiosis.card_values = {"status_charge_amount": 0}
-	card_symbiosis.card_upgrade_value_improvements = {"status_charge_amount": 20}
-	card_symbiosis.card_first_upgrade_property_changes = {
-		"card_description": "Overshield no longer decays. Gain [status_charge_amount] Overshield",
-		"card_play_actions": [
-			{
-			Scripts.ACTION_APPLY_STATUS: {
-			"status_effect_object_id": "status_effect_overshield",
-			"status_charge_amount": 20,
-			"target_override": BaseAction.TARGET_OVERRIDES.PLAYER}
-			},
-			{
-			Scripts.ACTION_APPLY_STATUS: {
-			"status_effect_object_id": "status_effect_preserve_overshield",
-			"status_charge_amount": 1,
-			"target_override": BaseAction.TARGET_OVERRIDES.PLAYER}
-			}
-		]
-		}
+	card_symbiosis.card_upgrade_value_improvements = {}
 	card_symbiosis.card_play_actions = [
 		{
 			Scripts.ACTION_APPLY_STATUS: {
@@ -2980,6 +2962,8 @@ func add_cards_green() -> void:
 	card_verdant.card_play_destination = HandManager.EXHAUST_PILE
 	card_verdant.card_values = {"status_charge_amount": 1, "status_secondary_charge_amount": 7}
 	card_verdant.card_upgrade_value_improvements = {"status_secondary_charge_amount": -2,}
+	# 使用不可で引いた時に廃棄されるカードなので、廃棄を消さず受けるダメージの上限を下げる
+	card_verdant.card_upgrade_type = CardData.UPGRADE_TYPES.VALUES
 	card_verdant.card_draw_actions = [
 		{
 			Scripts.ACTION_PICK_CARDS: {
@@ -3029,7 +3013,7 @@ func add_cards_green() -> void:
 	card_conclusion.card_name = "Banked Flame"
 	card_conclusion.card_color_id = "color_{0}".format([color])
 	card_conclusion.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_conclusion.card_description = "Retain. Do [damage]. Gain 4 damage for each unused energy at turn end. Exhaust"
+	card_conclusion.card_description = "Do [damage]. Gain 4 damage for each unused energy at turn end."
 	card_conclusion.card_type = CardData.CARD_TYPES.ATTACK
 	card_conclusion.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_conclusion.card_energy_cost = 3
@@ -3037,10 +3021,6 @@ func add_cards_green() -> void:
 	card_conclusion.card_is_retained = true
 	card_conclusion.card_play_destination = HandManager.EXHAUST_PILE
 	card_conclusion.card_values = {"damage": 18, "number_of_attacks": 1, "card_value_improvements":{"damage": 4}}
-	card_conclusion.card_first_upgrade_property_changes = {
-		"card_description": "Retain. Do [damage]. Gain 6 damage for each unused energy at turn end. Exhaust",
-		"card_value_improvements":{"damage": 6}
-		}
 	card_conclusion.card_play_actions = [
 		{
 			Scripts.ACTION_ATTACK_GENERATOR: {
@@ -3067,7 +3047,7 @@ func add_cards_green() -> void:
 	card_datum.card_name = "Mirror Scale"
 	card_datum.card_color_id = "color_{0}".format([color])
 	card_datum.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_datum.card_description = "Gain [block] Block. Duplicates on draw. Exhaust."
+	card_datum.card_description = "Gain [block] Block. Duplicates on draw."
 	card_datum.card_type = CardData.CARD_TYPES.SKILL
 	card_datum.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_datum.card_energy_cost = 3
@@ -3147,7 +3127,7 @@ func add_cards_green() -> void:
 	card_photoelectric_synthesis.card_name = "Dragon Awakening"
 	card_photoelectric_synthesis.card_color_id = "color_{0}".format([color])
 	card_photoelectric_synthesis.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_photoelectric_synthesis.card_description = "Gain 10 strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed."
+	card_photoelectric_synthesis.card_description = "Gain [status_charge_amount] strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed."
 	card_photoelectric_synthesis.card_type = CardData.CARD_TYPES.POWER
 	card_photoelectric_synthesis.card_rarity = CardData.CARD_RARITIES.RARE
 	card_photoelectric_synthesis.card_energy_cost = 0
@@ -3159,6 +3139,7 @@ func add_cards_green() -> void:
 		"status_effect_object_id": "status_effect_damage_increase",
 		"status_charge_amount": 10,
 		}
+	card_photoelectric_synthesis.card_upgrade_value_improvements = {"status_charge_amount": 1}
 	card_photoelectric_synthesis.card_play_actions = [
 		{
 			Scripts.ACTION_APPLY_STATUS: {
@@ -3424,7 +3405,7 @@ func add_cards_green() -> void:
 	card_waste.card_name = "Cinder"
 	card_waste.card_color_id = "color_{0}".format([color])
 	card_waste.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_waste.card_description = "At end of turn gain [status_charge_amount] Blood Heat and do [damage] damage to a random enemy. Exhaust"
+	card_waste.card_description = "At end of turn gain [status_charge_amount] Blood Heat and do [damage] damage to a random enemy."
 	card_waste.card_type = CardData.CARD_TYPES.STATUS
 	card_waste.card_rarity = CardData.CARD_RARITIES.GENERATED
 	card_waste.card_requires_target = false

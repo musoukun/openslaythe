@@ -16,11 +16,7 @@ const WASTE_CARD_ID := "card_waste"
 ## このダメージ以上は attack_heavy
 const HEAVY_DAMAGE := 15
 
-## カードの輝き (CardShine) を更新してほしいとき。手札の Card が聞く
-signal shine_changed
-
 var effects: Dictionary = {}
-var _announced_tier: int = 0	# このターンに告知したコンボの段階
 var triggers: Dictionary = {}
 
 var _layer: CanvasLayer
@@ -83,7 +79,6 @@ func _ready() -> void:
 	Signals.combat_started.connect(func(_id):
 		_last_player_health = _player_health()
 		VeraFlameAura.update(_get_player() as Player))
-	Signals.player_turn_started.connect(_on_player_turn_started)
 	# 保険: 戦闘終了時は必ず通常速度に戻す
 	Signals.combat_ended.connect(func(): Engine.time_scale = 1.0)
 	_load_sfx()
@@ -213,47 +208,6 @@ func _after_card_played() -> void:
 	if combo >= 2:
 		play_sfx("combo_bell", -6.0, pow(2.0, COMBO_SCALE_STEPS[mini(combo - 2, COMBO_SCALE_STEPS.size() - 1)] / 12.0), 0.0)
 		play_sfx("combo_chips", -12.0 + minf(combo, 8.0), 1.0 + 0.04 * combo)
-	var tier := CardShine.combo_tier(combo)
-	if tier > _announced_tier:
-		_announced_tier = tier
-		_show_tier_banner(tier)
-		play_sfx("fanfare_tier%d" % tier, -2.0, 1.0, 0.0)
-	shine_changed.emit()
-
-
-func _on_player_turn_started() -> void:
-	_announced_tier = 0
-	shine_changed.emit.call_deferred()
-
-
-## コンボの段階が上がったときの告知 (「SUPER RARE!」など)。段階が高いほど大きく揺れる
-func _show_tier_banner(tier: int) -> void:
-	add_trauma(0.12 * tier)
-	var label := Label.new()
-	label.text = CardShine.TIER_NAMES[tier]
-	var settings := LabelSettings.new()
-	settings.font_size = 34 + 6 * tier
-	settings.outline_size = 10
-	settings.outline_color = Color(0.04, 0.05, 0.12)
-	settings.font_color = CardShine.TIER_COLORS[tier]
-	settings.shadow_color = Color(CardShine.TIER_COLORS[tier], 0.6)
-	settings.shadow_size = 12
-	label.label_settings = settings
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var view := get_viewport().get_visible_rect().size
-	label.size = Vector2(view.x, settings.font_size * 1.6)
-	label.pivot_offset = label.size / 2.0
-	label.position = Vector2(0, view.y * 0.36)
-	label.scale = Vector2.ONE * 2.2
-	label.modulate.a = 0.0
-	_layer.add_child(label)
-	var tw := label.create_tween().set_ignore_time_scale(true)
-	tw.tween_property(label, "scale", Vector2.ONE, 0.16).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tw.parallel().tween_property(label, "modulate:a", 1.0, 0.1)
-	tw.tween_interval(0.45 + 0.08 * tier)
-	tw.tween_property(label, "modulate:a", 0.0, 0.3)
-	tw.parallel().tween_property(label, "position:y", label.position.y - 30, 0.3)
-	tw.tween_callback(label.queue_free)
 
 
 ## 引くたびの音。ターン開始にまとめて引いたときは、間を空けて鳴らしすぎないようにする
@@ -281,10 +235,8 @@ func _on_player_health_changed() -> void:
 
 ## BaseCombatant.add_status_effect_charges から呼ばれる
 func on_status_applied(combatant: BaseCombatant, status_effect_data: StatusEffectData, charge_amount: int) -> void:
-	if combatant is Player:
-		shine_changed.emit()	# 蒼刃の強化などで、カードの成長の段階が変わる
-		if status_effect_data.object_id == HeroBlueContent.STATUS_MANA and charge_amount > 0:
-			play_sfx("mana_gain", -10.0, 1.0 + 0.05 * combatant.get_status_charges(HeroBlueContent.STATUS_MANA))
+	if combatant is Player and status_effect_data.object_id == HeroBlueContent.STATUS_MANA and charge_amount > 0:
+		play_sfx("mana_gain", -10.0, 1.0 + 0.05 * combatant.get_status_charges(HeroBlueContent.STATUS_MANA))
 	if charge_amount <= 0:
 		return
 	if STATUS_TRIGGERS.has(status_effect_data.object_id):

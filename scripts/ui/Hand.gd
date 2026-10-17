@@ -51,7 +51,7 @@ const HAND_CARD_ROTATION_CURVE_MULTIPLIER: float = 6.0 # multiplies the curve sa
 @export var hand_card_y_offset_curve: Curve = preload("res://misc/curves/hand_y_curve.tres")
 const HAND_CARD_Y_OFFSET_CURVE_MULTIPLIER: float = -20.0 # multiplies the curve sampling
 
-const CARD_WIDTH: float = 144.0 # how big the Card asset is. NOTE: Update this if you update Card's size at all
+const CARD_WIDTH: float = Card.BASE_SIZE.x * Card.CARD_SCALE # 表示されるカードの幅 (Card.CARD_SCALE で拡大済み)
 const CARD_SEPERATION_WIDTH: float = CARD_WIDTH * .85 # how far apart each card should be from one another. Generally between .5 to 1X the card width
 
 const MIDDLE_OFFSET: float = CARD_WIDTH / 2
@@ -60,7 +60,7 @@ var middle: float = (size[0] / 2) - MIDDLE_OFFSET # calculate middle X position 
 # ホバー中のカードは StS のように拡大してまっすぐにし、下端を画面下にそろえて前に出す。両隣は左右へ押しのける
 const CARD_HOVER_SCALE: float = 1.6
 const CARD_HOVER_PUSH: float = 50.0 # 両隣のカードを押しのける距離
-const CARD_VISUAL_BOTTOM: float = 94.0 # Pivot から CardVisual の下端までの距離 (Card.tscn)
+const CARD_VISUAL_BOTTOM: float = 94.0 # Pivot から CardVisual の下端までの距離 (Card.tscn、拡大前)
 var hovered_card: Card = null
 
 const CARD_PICK_POSITIONS: Array = [
@@ -186,7 +186,7 @@ func tween_hand():
 		var tween_2: Tween = create_tween()
 		tween_2.tween_property(card.pivot, "rotation_degrees", new_rot, CARD_TWEEN_TIME)
 		var tween_3: Tween = create_tween()
-		tween_3.tween_property(card.pivot, "scale", Vector2.ONE * new_scale, CARD_TWEEN_TIME)
+		tween_3.tween_property(card.pivot, "scale", Vector2.ONE * new_scale * Card.CARD_SCALE, CARD_TWEEN_TIME)
 
 ## ホバー中のカードが、選択済み (pick) を除いた手札の列で何番目かを返す。無ければ -1
 func _get_hovered_hand_index() -> int:
@@ -203,7 +203,7 @@ func _get_hovered_hand_index() -> int:
 
 ## 拡大したカードの下端が画面下にそろう Pivot の y 位置
 func _get_hovered_card_y(card: Card) -> float:
-	return get_viewport_rect().size.y - card.global_position.y - CARD_VISUAL_BOTTOM * CARD_HOVER_SCALE
+	return get_viewport_rect().size.y - card.global_position.y - CARD_VISUAL_BOTTOM * CARD_HOVER_SCALE * Card.CARD_SCALE
 
 
 func _on_card_hovered(card: Card):
