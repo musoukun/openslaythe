@@ -232,6 +232,26 @@ func _ready() -> void:
 				print("COMBO %s cost=%d preview=\"%s\" damage=%d block=+%d chain=%s" % [card_data.object_id, card_data.get_card_energy_cost(true, true), preview.replace("\n", " "),
 					hp_before - enemy.get_combatant_health(), Global.player_data.player_block - block_before, Global.player_data.player_values.get(InterceptorComboChain.CHAIN_VALUE, 0)])
 			get_tree().quit()
+		"card_check":
+			# --auto=card_check [--hero=] : 新しいカードを決めた手順で出し、HP・エナジー・筋力・熱・マナ・手札・山札の変化を出力する
+			for location in Global.get_next_locations():
+				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+					ActionGenerator.generate_visition_location(location.location_id)
+					break
+			await get_tree().create_timer(3.0).timeout
+			for each_enemy: Enemy in Global.get_alive_enemies():
+				each_enemy.set_health(999, 999)
+			Global.player_data.player_energy = 99
+			var steps: Array = [["card_particle_accelerator"], ["card_green_blood_pact"], ["card_green_sharpen_claws"], ["card_green_frenzied_claws"],
+				["card_reap"], ["card_green_cauterize"], ["card_green_heat_scales"]]
+			if Global.player_data.player_character_object_id == "character_blue":
+				Global.get_player().add_status_effect_charges(HeroBlueContent.STATUS_MANA, 10)
+				# [出すカード, 先に山札へ入れるカード]
+				steps = [["card_blue_blade_call", "card_blue_extend_blade"], ["card_blue_minds_eye", "card_blue_starfall"],
+					["card_blue_azure_bolt"], ["card_blue_azure_veil"], ["card_blue_mana_drop"], ["card_blue_clear_mind"], ["card_blue_stillness"]]
+			for step: Array in steps:
+				await _card_check_step(step)
+			get_tree().quit()
 		"card_stats":
 			# --auto=card_stats [--hero=] : 主人公の報酬カード (色・標準レア) の種別・レア度・コスト・数値・説明を出力する (バランス確認用)
 			var color_id: String = Global.get_player_character_data().character_color_id
@@ -298,6 +318,32 @@ func _mana_check() -> void:
 	var request: CardPlayRequest = HandManager.create_card_play_request(blade, enemy, true, true)
 	var preview: BaseAction = ActionGenerator.create_actions(player, request, targets, [{Scripts.ACTION_ATTACK: {}}], null)[0]
 	print("MANA blade damage per hit after Extend Blade: ", preview._intercept_action(targets, true)[0].get_shadowed_action_values("damage", 0), " (expected 14)")
+
+
+## card_check の 1 手: 山札を空にして (2 つ目があれば山札に入れて) カードを手札に加えて出し、前後の状態を出力する
+func _card_check_step(step: Array) -> void:
+	var player: Player = Global.get_player()
+	var enemy: Enemy = Global.get_alive_enemies()[0]
+	HandManager.player_draw.clear()
+	if step.size() > 1:
+		HandManager.player_draw.append(Global.get_card_data_from_prototype(step[1]))
+	# 手札は出すカードと、捨てる対象にする斬撃 1 枚だけにする
+	HandManager.discard_hand()
+	await get_tree().create_timer(0.5).timeout
+	var card_data: CardData = Global.get_card_data_from_prototype(step[0])
+	HandManager.add_cards_to_hand([card_data, Global.get_card_data_from_prototype("card_basic_attack_" + Global.get_player_character_data().character_color_id.trim_prefix("color_"))] as Array[CardData], 99)
+	await get_tree().create_timer(0.5).timeout
+	var summary := func() -> String:
+		return "hp=%d energy=%d strength=%d heat=%d mana=%d hand=%s draw=%s exhaust=%d enemy_hp=%d" % [Global.player_data.player_health, Global.player_data.player_energy,
+			player.get_status_charges("status_effect_damage_increase"), player.get_status_charges("status_effect_overheat"), player.get_status_charges("status_effect_mana"),
+			HandManager.player_hand.map(func(c): return c.object_id), HandManager.player_draw.map(func(c): return c.object_id), HandManager.player_exhaust.size(), enemy.get_combatant_health()]
+	var before: String = summary.call()
+	var request: CardPlayRequest = HandManager.create_card_play_request(card_data, enemy if card_data.card_requires_target else null)
+	request.card_destination_pile = card_data.card_play_destination
+	request.card_destination_strategy = card_data.card_play_destination_strategy
+	HandManager.add_card_to_play_queue(request)
+	await get_tree().create_timer(2.0).timeout
+	print("CARDCHECK %s\n   before %s\n   after  %s" % [card_data.object_id, before, summary.call()])
 
 
 ## 性能計測: 何もしない時 / デッキ一覧を開いた直後 のフレーム時間
