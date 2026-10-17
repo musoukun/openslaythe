@@ -15,7 +15,7 @@ extends Node
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## --auto=click_test : 最初の戦闘で、手札の各カードのどこを押せば CardButton に届くかを数え、実際にクリックでカードを出す
-## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る)
+## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る。--draft=first|attack|random|none でカード報酬の取り方。計測は CSVCOMBAT / CSVRUN の行)
 ## --warp-mouse : 本物のカーソルも動かす (shop_buy の指さしを撮るとき用。使っている人のマウスを奪うので普段は付けない)
 ## --hero=<character_id> : ラン開始系のモードで使う主人公 (省略時は character_green。例 --hero=character_blue)
 ## 引数が無い場合は何もしない。
@@ -71,6 +71,8 @@ func _ready() -> void:
 			bot.run_seed = int(_get_user_arg("--seed="))
 		bot.god_mode = OS.get_cmdline_user_args().has("--god")
 		bot.shots_dir = _get_user_arg("--shots=")
+		if _get_user_arg("--draft=") != "":
+			bot.draft_policy = _get_user_arg("--draft=")
 		await bot.run()
 		get_tree().quit()
 		return

@@ -8,6 +8,9 @@ class_name PlaythroughBot
 const TICK := 0.25 # 1手ごとの待ち (ゲーム内時間)
 const STUCK_SECONDS := 40.0 # 同じ状態がこれだけ続いたら詰まりとみなす
 const GIVE_UP_SECONDS := 120.0
+const RUN_TIME_LIMIT := 6000.0 # ゲーム内時間でこれを超えたら打ち切る (状態が行き来する無限ループの保険)
+const HEAT_STATUS := "status_effect_overheat" # 竜血の熱。10 を超えた分ごとに、自分も含む全員へ 10 ダメージ (ブロックで防げる)
+const HEAT_OVERFLOW_DAMAGE := 10
 
 var hero_id: String = "character_green"
 var run_seed: int = 12345
@@ -25,6 +28,17 @@ var _shop_step: int = 0
 var _rest_done: bool = false
 var _blocked_seen: Dictionary = {}
 var _clock: float = 0.0
+## カード報酬の取り方 (--draft=): first = 先頭 / attack = アタック優先 / random = ランダム / none = 取らない (ショップでも買わない)
+var draft_policy: String = "first"
+
+## 計測 (難易度の確認用)。戦闘ごとに CSVCOMBAT、ランの終わりに CSVRUN の行を出す
+var _m_combat: Dictionary = {}
+var _m_combats: Array = []
+var _m_deck_by_act: Dictionary = {}
+var _m_last_block: int = 0
+var _rng := RandomNumberGenerator.new()
+var _clicked_rewards: Dictionary = {}
+
 ## 撮影先 (--shots=<フォルダ>)。ウィンドウがあるときだけ撮る (headless では絵が描かれない)
 var shots_dir: String = ""
 var _shots_taken: Dictionary = {}
@@ -34,8 +48,8 @@ func run() -> void:
 	_root = get_tree().root
 	Signals.player_turn_started.connect(_on_player_turn_started)
 	Signals.map_location_selected.connect(_on_location_selected)
-	var map := _find("Map") as Control
-	map.visibility_changed.connect(func(): if map.visible: _log("MAP shown by %s" % [get_stack().slice(1, 6).map(func(f): return "%s:%d" % [f.source.get_file(), f.line])]))
+	_rng.seed = run_seed
+	_connect_metrics()
 	await _start_run_from_title()
 	while true:
 		await _wait(TICK)
@@ -43,10 +57,12 @@ func run() -> void:
 		if state == "victory" or state == "defeat":
 			await _shot(state)
 			_log("RESULT %s act=%d floor=%s %s" % [state, Global.player_data.player_act, _floor(), _summary()])
+			_print_run_csv(state)
 			return
 		_watch_stuck(state)
-		if _clock - _same_since > GIVE_UP_SECONDS:
+		if _clock - _same_since > GIVE_UP_SECONDS or _clock > RUN_TIME_LIMIT:
 			_log("RESULT stuck state=%s act=%d floor=%s %s" % [state, Global.player_data.player_act, _floor(), _summary()])
+			_print_run_csv("stuck")
 			return
 		await _act(state)
 
@@ -111,11 +127,13 @@ func _act(state: String) -> void:
 			await _card_selection()
 		"card_draft":
 			var cards := _cards_in(_find("CardDraftSelectionOverlay").card_container)
-			if cards.is_empty():
+			var pick: Card = _choose_draft(cards)
+			if pick == null:
+				_log("DRAFT skip (%s) from %s" % [draft_policy, cards.map(func(c): return c.card_data.object_id)])
 				await click(_find("CardDraftSelectionOverlay").skip_button, "draft skip")
 			else:
-				_log("DRAFT pick %s from %s" % [cards[0].card_data.object_id, cards.map(func(c): return c.card_data.object_id)])
-				await click(cards[0].card_button, "draft card")
+				_log("DRAFT pick %s (%s) from %s" % [pick.card_data.object_id, draft_policy, cards.map(func(c): return c.card_data.object_id)])
+				await click(pick.card_button, "draft card")
 		"hand_pick":
 			await _hand_pick()
 		"blessing":
@@ -126,10 +144,13 @@ func _act(state: String) -> void:
 			await _click_first_option(_find("DialogueOverlay"), "event")
 		"reward":
 			var overlay := _find("RewardOverlay")
-			var buttons: Array = overlay.reward_container.get_children().filter(func(b): return b is BaseButton and b.visible and not b.is_queued_for_deletion())
+			# 一度押した報酬は押さない (カード報酬を飛ばしてもボタンは残るので、押し直すと同じ選択が繰り返される)
+			var buttons: Array = overlay.reward_container.get_children().filter(func(b): return b is BaseButton and b.visible \
+					and not b.is_queued_for_deletion() and not _clicked_rewards.has(b.get_instance_id()))
 			if buttons.is_empty():
 				await click(overlay.continue_button, "reward continue")
 			else:
+				_clicked_rewards[buttons[0].get_instance_id()] = true
 				await click(buttons[0], "reward " + buttons[0].name)
 		"chest":
 			await click(_find("Combat").chest, "chest")
@@ -172,13 +193,20 @@ func _hand_pick() -> void:
 	await click(hand.confirm_pick_button, "hand pick confirm")
 
 
+## 選べる選択肢の先頭を押す。祝福では、カードに関わる選択肢 (カードを得る・強化・削除) を避ける
+## (「カードを取る / 取らない」の比較で、祝福からカードが入らないようにするため。どちらの条件でも同じ規則)
 func _click_first_option(overlay: Node, label: String) -> void:
-	for option: DialogueOption in overlay.find_children("*", "DialogueOption", true, false):
-		if option.is_visible_in_tree() and option.option_enabled:
-			_log("%s option: %s rect=%s" % [label.to_upper(), option.rich_text_label.get_parsed_text().strip_edges().replace("\n", " "), option.get_global_rect()])
-			await click(option, label + " option")
-			await _wait(1.0)
-			return
+	var options: Array = overlay.find_children("*", "DialogueOption", true, false).filter(func(o): return o.is_visible_in_tree() and o.option_enabled)
+	if label == "blessing":
+		var without_cards: Array = options.filter(func(o): return not "カード" in o.rich_text_label.get_parsed_text())
+		if not without_cards.is_empty():
+			options = without_cards
+	if options.is_empty():
+		return
+	var option: DialogueOption = options[0]
+	_log("%s option: %s" % [label.to_upper(), option.rich_text_label.get_parsed_text().strip_edges().replace("\n", " ")])
+	await click(option, label + " option")
+	await _wait(1.0)
 
 
 ## ショップ: 商人を押してカウンターを開き、買えるカードを1枚買って戻り、「次へ」で出る
@@ -192,7 +220,8 @@ func _shop() -> void:
 		1:
 			_shop_step = 2
 			for item: Control in overlay.get_shop_items():
-				if item.get("card") is Card and int(item.price_label.text) <= Global.player_data.player_money:
+				if draft_policy != "none" and item.get("card") is Card and int(item.price_label.text) <= Global.player_data.player_money \
+						and (draft_policy != "attack" or item.card.card_data.card_type == CardData.CARD_TYPES.ATTACK):
 					var money := Global.player_data.player_money
 					await click(item.card.card_button, "shop buy card")
 					await _wait(1.0)
@@ -290,7 +319,7 @@ func _combat() -> void:
 	var need_block := incoming - player.get_block()
 	var playable: Array[Card] = []
 	for card: Card in hand.get_player_hand_cards():
-		if not _failed_cards.has(card.card_data) and card.can_play_card(null, false):
+		if not _failed_cards.has(card.card_data) and card.can_play_card(null, false) and _heat_is_safe(card.card_data, player):
 			playable.append(card)
 	if playable.is_empty():
 		await click(combat.end_turn_button, "end turn")
@@ -316,6 +345,33 @@ func _combat() -> void:
 		await _shot("card_click")
 
 
+## 竜血の熱を自分に足すカードは、あふれて自分が受けるダメージをブロックで受けきれるときだけ出す
+func _heat_is_safe(card_data: CardData, player: Player) -> bool:
+	var gain := 0
+	for action: Dictionary in card_data.card_play_actions:
+		var values: Dictionary = action.get(Scripts.ACTION_APPLY_STATUS, {})
+		if values.get("status_effect_object_id", "") == HEAT_STATUS and values.get("target_override", -1) == BaseAction.TARGET_OVERRIDES.PLAYER:
+			gain += int(values.get("status_charge_amount", card_data.card_values.get("status_charge_amount", 0)))
+	if gain <= 0:
+		return true
+	var overflows: int = (player.get_status_charges(HEAT_STATUS) + gain) / (HEAT_OVERFLOW_DAMAGE + 1)
+	return overflows * HEAT_OVERFLOW_DAMAGE <= player.get_block()
+
+
+## カード報酬から1枚選ぶ。null なら取らない
+func _choose_draft(cards: Array) -> Card:
+	if cards.is_empty() or draft_policy == "none":
+		return null
+	match draft_policy:
+		"attack":
+			for card: Card in cards:
+				if card.card_data.card_type == CardData.CARD_TYPES.ATTACK:
+					return card
+		"random":
+			return cards[_rng.randi_range(0, cards.size() - 1)]
+	return cards[0]
+
+
 func _card_priority(card_data: CardData, need_block: int) -> int:
 	var blocks: bool = card_data.card_values.get("block", 0) > 0
 	if need_block > 0 and blocks:
@@ -326,6 +382,89 @@ func _card_priority(card_data: CardData, need_block: int) -> int:
 		CardData.CARD_TYPES.ATTACK:
 			return 2
 	return 1
+#endregion
+
+
+#region 計測
+
+func _connect_metrics() -> void:
+	Signals.combat_started.connect(_on_metric_combat_started)
+	Signals.player_turn_started.connect(func():
+		if not _m_combat.is_empty():
+			_m_combat.turns += 1
+		_m_last_block = Global.player_data.player_block)
+	Signals.card_deck_shuffled.connect(func(is_reshuffle: bool):
+		# 戦闘で初めて山札を引き切って捨て札を混ぜ直したとき = 山札を一巡したターン数
+		if is_reshuffle and not _m_combat.is_empty() and _m_combat.cycle < 0:
+			_m_combat.cycle = _m_combat.turns)
+	Signals.combatant_damaged.connect(func(combatant, _unblocked: int, capped: int, _overkill: int):
+		if _m_combat.is_empty():
+			return
+		if combatant is Player:
+			_m_combat.dmg_taken += capped
+			_m_last_block = Global.player_data.player_block
+		else:
+			_m_combat.dmg_dealt += capped)
+	Signals.combatant_block_added.connect(func(combatant):
+		if combatant is Player and not _m_combat.is_empty():
+			_m_combat.block += max(0, Global.player_data.player_block - _m_last_block)
+			_m_last_block = Global.player_data.player_block)
+	Signals.combatant_blocked.connect(func(combatant, _amount): _on_metric_block_spent(combatant))
+	Signals.combatant_block_broken.connect(_on_metric_block_spent)
+	Signals.combat_ended.connect(func(): _finish_combat("win"))
+	Signals.player_killed.connect(func(_player): _finish_combat("lose"))
+
+
+func _on_metric_combat_started(_event_id: String) -> void:
+	var location := Global.get_player_location_data()
+	_m_combat = {"act": Global.player_data.player_act, "floor": location.location_floor if location else -1,
+		"type": LocationData.LOCATION_TYPES.keys()[location.location_type] if location else "?",
+		"hp_before": Global.player_data.player_health, "turns": 0, "dmg_taken": 0, "dmg_dealt": 0, "block": 0,
+		"cycle": -1, "deck": Global.player_data.player_deck.size()}
+	_m_last_block = 0
+	if _m_combat.type == "BOSS":
+		_m_deck_by_act[_m_combat.act] = Global.player_data.player_deck.size()
+
+
+func _on_metric_block_spent(combatant) -> void:
+	if combatant is Player:
+		_m_last_block = Global.player_data.player_block
+
+
+func _finish_combat(result: String) -> void:
+	if _m_combat.is_empty():
+		return
+	var c := _m_combat
+	_m_combat = {}
+	c.result = result
+	c.hp_after = Global.player_data.player_health
+	c.hp_max = Global.player_data.player_health_max
+	_m_combats.append(c)
+	var turns: int = max(1, c.turns)
+	print("CSVCOMBAT,%d,%s,%d,%d,%s,%s,%d,%d,%d,%d,%d,%d,%d,%.2f,%.2f,%s,%d" % [run_seed, draft_policy, c.act, c.floor, c.type, result, c.turns,
+		c.hp_before, c.dmg_taken, c.hp_after, c.hp_max, c.dmg_dealt, c.block, float(c.dmg_dealt) / turns, float(c.block) / turns,
+		str(c.cycle) if c.cycle >= 0 else "", c.deck])
+
+
+func _print_run_csv(result: String) -> void:
+	var turns := 0
+	var dealt := 0
+	var block := 0
+	var cycles: Array = []
+	for c: Dictionary in _m_combats:
+		turns += c.turns
+		dealt += c.dmg_dealt
+		block += c.block
+		if c.cycle >= 0:
+			cycles.append(c.cycle)
+	var avg_cycle: String = ""
+	if not cycles.is_empty():
+		avg_cycle = "%.2f" % (cycles.reduce(func(a, b): return a + b, 0) / float(cycles.size()))
+	var location := Global.get_player_location_data()
+	print("CSVRUN,%d,%s,%s,%d,%d,%d,%d,%d,%s,%s,%s,%d,%d,%.2f,%.2f,%s,%d" % [run_seed, draft_policy, result, Global.player_data.player_act,
+		location.location_floor if location else -1, Global.player_data.player_health, Global.player_data.player_health_max,
+		_m_combats.size(), str(_m_deck_by_act.get(1, "")), str(_m_deck_by_act.get(2, "")), str(_m_deck_by_act.get(3, "")),
+		Global.player_data.player_deck.size(), turns, float(dealt) / max(1, turns), float(block) / max(1, turns), avg_cycle, cycles.size()])
 #endregion
 
 
