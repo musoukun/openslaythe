@@ -207,8 +207,9 @@ func _ready() -> void:
 			for each_enemy: Enemy in Global.get_alive_enemies():
 				each_enemy.set_health(999, 999)
 			Global.player_data.player_energy = 99
-			# コスト 1 → 1 → 2 → 1 (下がるので数え直し) → 2
-			var order: Array[String] = ["card_basic_attack_green", "card_basic_attack_green", "card_wildflower", "card_basic_block_green", "card_wildflower"]
+			# コスト 1 を 6 枚 (倍率は 4 枚目で止まる) → 2 → 1 (下がるので数え直し)
+			var order: Array[String] = ["card_basic_attack_green", "card_basic_attack_green", "card_basic_attack_green", "card_basic_attack_green",
+				"card_basic_attack_green", "card_basic_block_green", "card_wildflower", "card_basic_block_green"]
 			var cards: Array[CardData] = []
 			for card_id in order:
 				cards.append(Global.get_card_data_from_prototype(card_id))
