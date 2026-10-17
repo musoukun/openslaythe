@@ -272,7 +272,7 @@ func _ready() -> void:
 					regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
 			get_tree().quit()
 		"juice":
-			# 演出の確認: 戦闘に入り、カードを連打してコンボの段階 (輝き・告知・揺れ・音) を上げる
+			# 演出の確認: 戦闘に入り、カードを連打してコンボ (揺れ・音) を重ねる
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
@@ -304,11 +304,7 @@ func _juice() -> void:
 		request.card_destination_pile = card.card_play_destination
 		HandManager.add_card_to_play_queue(request)
 		await get_tree().create_timer(0.45).timeout
-		print("JUICE combo=", Vfx.combo_count(), " tier=", CardShine.combo_tier(Vfx.combo_count()))
-	# 手札の1枚にカーソルを乗せて、拡大したカードの輝きを見せる
-	var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
-	if hand_cards.size() > 1:
-		HandManager.hand._on_card_hovered(hand_cards[1])
+		print("JUICE combo=", Vfx.combo_count())
 
 
 func _mana_check() -> void:
