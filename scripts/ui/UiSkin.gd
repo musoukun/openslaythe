@@ -12,6 +12,8 @@ const BUTTON_ICONS := {
 	"RunScreen/Combat/Chest": "res://sprites/ui/chest.png",
 }
 const TITLE_BACKGROUND := "res://sprites/ui/title_background.png"
+## タイトル/メニューの背景絵を暗い一色に沈めるシェーダー (LoL のロビー風。文字やキャラ絵を見やすくする)
+const LOBBY_BACKDROP_SHADER := "res://sprites/shaders/lobby_backdrop.gdshader"
 const TITLE_HERO := "res://sprites/ui/hero_bust.png"
 const NEW_RUN_HERO := "res://sprites/ui/hero_standing.png"
 const NEW_RUN_HERO_NODE := "NewRunHero"
@@ -44,7 +46,10 @@ static func apply(root: Node) -> void:
 		top_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var title := root.get_node_or_null("TitleScreen")
 	if title:
-		add_background(title, TITLE_BACKGROUND, ["Background"])
+		var bg := add_background(title, TITLE_BACKGROUND, ["Background"])
+		if bg:
+			bg.material = ShaderMaterial.new()
+			bg.material.shader = load(LOBBY_BACKDROP_SHADER)
 		_add_title_hero(title)
 		_add_new_run_hero(title)
 

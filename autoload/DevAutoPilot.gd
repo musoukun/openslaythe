@@ -9,6 +9,7 @@ extends Node
 ## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
+## --auto=blessing_hover:<選択肢番号>[:<幕>] : 祝福画面で、番号の柱にカーソルを乗せた状態にする (光り方の確認用)
 ## --auto=shop : 1階の部屋をショップにして訪れ、商人の場面を出す
 ## --auto=shop_buy : 購入画面を開き、商品にカーソルを乗せる (指さしとツールチップの確認用)
 ## --auto=shop_remove : 購入画面からカード削除を押す
@@ -440,6 +441,9 @@ func _blessing(parts: PackedStringArray) -> void:
 	var options := run_start_options.find_children("*", "DialogueOption", true, false)
 	print("BLESSING act=", Global.player_data.player_act, " options=", options.map(func(o): return o.rich_text_label.get_parsed_text()))
 	if parts.size() < 2 or parts[1] == "":
+		return
+	if parts[0] == "blessing_hover":
+		options[int(parts[1])].mouse_entered.emit()
 		return
 	print("BLESSING before: ", _player_summary())
 	var option: DialogueOption = options[int(parts[1])]
