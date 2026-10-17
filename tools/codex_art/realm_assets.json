@@ -69,7 +69,7 @@
     384
    ],
    "transparent": false,
-   "brief": "Card illustration for card 'Wildfire Orb' (ATTACK): Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone.",
+   "brief": "Card illustration for card 'Wildfire Orb' (ATTACK): Do [damage] to all enemies. Phantom. On exhaust, do 10 damage to everyone.",
    "category": "card_art",
    "prompt": "A crackling translucent orb of wild ember fire bursts above small mossy golem silhouettes, throwing a circular wave of flame toward every edge, including toward a clawed gauntlet in the foreground; amber stress cracks in the orb. Square full-bleed illustration with opaque background; one dominant subject occupies the central 75 percent, readable at 96px, no frame or UI."
   },

@@ -256,9 +256,9 @@ func get_card_description() -> String:
 	if not card_is_playable:
 		modified_card_description = "[color=orange]" + tr("Unplayable") + "[/color]\n" + modified_card_description
 	if card_is_retained:
-		modified_card_description = "[color=orange]" + tr("Retain") + "[/color]\n" + modified_card_description
+		modified_card_description = "[color=orange]" + tr("Standby") + "[/color]\n" + modified_card_description
 	if is_card_ethereal():
-		modified_card_description = "[color=orange]" + tr("Ethereal") + "[/color]\n" + modified_card_description
+		modified_card_description = "[color=orange]" + tr("Phantom") + "[/color]\n" + modified_card_description
 	if does_card_exhaust():
 		modified_card_description = modified_card_description + "\n[color=orange]" + tr("Exhaust") + "[/color]"
 	if does_card_banish():
