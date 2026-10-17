@@ -243,6 +243,11 @@ func set_card_energy_cost_until_combat(energy_cost: int) -> void:
 ## Gets the card description, including built in card related keywords
 func get_card_description() -> String:
 	var modified_card_description: String = tr(card_description)
+	# エンチャント (デコレータ) の前後の文は本文と別々に訳して足す (説明そのものは書き換えない)
+	for card_decorator_id: String in card_decorators:
+		var card_decorator_data: CardDecoratorData = Global.get_card_decorator_data(card_decorator_id)
+		if card_decorator_data != null:
+			modified_card_description = tr(card_decorator_data.card_decorator_pre_description) + modified_card_description + tr(card_decorator_data.card_decorator_post_description)
 	
 	if card_first_shuffle_priority > 0:
 		modified_card_description = "[color=orange]" + tr("Top Deck") + "[/color]\n" + modified_card_description
@@ -457,9 +462,8 @@ func add_card_decorator(card_decorator_id: String, decorator_script_values: Dict
 		improve_card_values(card_decorator_data.card_decorator_value_improvements)
 		update_card_values(card_decorator_data.card_decorator_value_changes)
 		
-		# mutate card description
-		card_description = tr(card_decorator_data.card_decorator_pre_description) + card_description +  tr(card_decorator_data.card_decorator_post_description)
-		
+		# card description: 前後の文は get_card_description() が表示のたびに訳して足す
+
 		# mutate card actions, wrapping them before and after
 		card_play_actions = card_decorator_data.card_decorator_post_play_actions + card_play_actions + card_decorator_data.card_decorator_pre_play_actions
 		card_discard_actions = card_decorator_data.card_decorator_post_discard_actions + card_discard_actions + card_decorator_data.card_decorator_pre_discard_actions

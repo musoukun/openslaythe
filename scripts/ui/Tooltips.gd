@@ -79,7 +79,7 @@ func display_tooltip(tooltip_bbcode: String,
 	hide_tooltip()
 	visible = true
 	
-	tooltip_label.parse_bbcode(tooltip_bbcode)
+	tooltip_label.parse_bbcode(tr(tooltip_bbcode)) # 上の固定ツールチップは英語のキーのまま渡すのでここで訳す
 	tooltip_label.visible = true
 	panel_container.visible = true
 	

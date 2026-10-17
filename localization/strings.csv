@@ -99,6 +99,7 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Boiling Blood","沸き立つ血"
 "Bomb","爆弾"
 "Boss","ボス"
+"Bosses","ボス"
 "Bosses are tough","ボスの前に、力尽きた。"
 "Bottom Deck","山札の一番下"
 "Brace","身構え"
@@ -110,8 +111,10 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Call of the Blade","刃の呼び声"
 "Can be done any number of times.","何回でもできる。"
 "Cap Damage","ダメージ上限"
+"Card Error","カードエラー"
 "Card Reward","カード報酬"
 "Cards","カード"
+"Cards Played","使ったカード"
 "Cards will be retained end of turn","ターン終了時、手札を保留する"
 "Carries over between turns (up to 10). Spend it on spells or on your Mana Blade.","ターンをまたいで持ち越せる（最大10）。呪文の支払いや、蒼刃の強化に使う。"
 "Cauterize","傷口を焼く"
@@ -168,11 +171,14 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Courtly Shears","礼儀正しい大鋏"
 "Current Loss Streak: {0}","現在の連敗数：{0}"
 "Current Win Streak: {0}","現在の連勝数：{0}"
+"Current run stats not found","このランの記録が見つからない"
 "Custom 1","カスタム1"
 "Custom 2","カスタム2"
 "Custom Modifiers","カスタムモディファイア"
+"Damage Done","与えたダメージ"
 "Damage Increase","ダメージ増加"
 "Damage Item","ダメージのポーション"
+"Damage Taken","受けたダメージ"
 "Damages a target for 10","対象に10ダメージを与える"
 "Damages all enemies for 10","敵全体に10ダメージを与える"
 "Deal [damage] damage [number_of_attacks] times.","[damage]ダメージを[number_of_attacks]回与える。"
@@ -207,7 +213,9 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Do [damage] to all enemies [number_of_attacks] times. Not affected by Pointy","敵全体に[damage]ダメージを[number_of_attacks]回与える。トゲトゲの影響を受けない。"
 "Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone.","敵全体に[damage]ダメージを与える。エセリアル。廃棄時、全員に10ダメージ。"
 "Do [damage]. Gain 4 damage for each unused energy at turn end.","[damage]ダメージを与える。ターン終了時、未使用エナジー1につきダメージ+4。"
+"Do {0} x {1} Damage","{0}ダメージ×{1}回"
 "Double Overshield charges.","オーバーシールドを2倍にする。"
+"Draft all card colors","すべての色のカードが報酬に出る"
 "Dragon Awakening","竜の覚醒"
 "Dragon Claw Flurry","竜爪の連撃"
 "Dragon Egg","竜の卵"
@@ -279,6 +287,8 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Gain [status_charge_amount] strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed.","筋力を[status_charge_amount]得る。エナジーを5吸収するまで使用できない。現在[card_absorbed_energy]吸収。"
 "Gain [status_charge_amount]. Deal damage equal to Overshield.","オーバーシールドを[status_charge_amount]得る。オーバーシールドと同じ値のダメージを与える。"
 "Gain a random potion.","ランダムなポーションを1つ得る。"
+"Gain {0} Block","ブロックを{0}得る"
+"Gain {0}[img width={1}]{2}[/img]","{0}[img width={1}]{2}[/img]を得る"
 "Gather Mana","マナ集め"
 "Grants 5 block every 3 attacks","アタック3回ごとにブロックを5得る"
 "Grants 5 health when combat is over","戦闘終了時、HPを5回復する"
@@ -302,6 +312,7 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Increase Damage","ダメージ強化"
 "Increase Draw","ドロー増加"
 "Inferno","業火"
+"Inflict {0}[img width={1}]{2}[/img]","{0}[img width={1}]{2}[/img]を付与する"
 "Initial","初動"
 "Intents","行動予告"
 "Invalid Character","無効なキャラクター"
@@ -324,8 +335,10 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Millring","石臼っ子"
 "Mind's Eye","心眼"
 "Miniboss","エリート"
+"Minibosses","エリート"
 "Mirror Scale","写し鱗"
 "Money %s","お金 %s"
+"Money Gained","得たお金"
 "Money:","お金："
 "Money: {0}","お金：{0}"
 "Move On","先へ進む"
@@ -338,6 +351,7 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "New Game","ニューゲーム"
 "New Run","新しいラン"
 "Next Run","次のラン"
+"Next: ","次: "
 "No Runs Found","ランの記録がありません"
 "No longer Exhausts","廃棄されなくなる"
 "Not Enough Energy!","エナジーが足りない！"
@@ -367,8 +381,10 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Preserve Overshield","オーバーシールド維持"
 "Prevents Damage","ダメージを防ぐ"
 "Previous Run","前のラン"
+"Prismatic","プリズム"
 "Proceed","次へ"
 "Profile Stats","プロフィール統計"
+"Project Wiki and Tutorials","プロジェクトWikiとチュートリアル"
 "Purple","紫"
 "Quickcast","詠唱加速"
 "RARE","レア"
@@ -383,6 +399,7 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Remove 1 or 2 cards from your deck.","デッキからカードを1〜2枚取り除く。"
 "Remove Cards","カードを削除"
 "Rest","休憩"
+"Rest Site","休憩所"
 "Rest site","休憩所"
 "Resume","再開"
 "Retain","保留"
@@ -419,11 +436,15 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Sold Out","売り切れ"
 "Spined Guard","棘の構え"
 "Standard Event Death Message","標準のイベント死亡メッセージ"
+"Standard Fights","通常戦闘"
 "Starfall","星降る蒼"
 "Start Run","ラン開始"
+"Starting","スタート"
 "Stillness","静寂"
 "Stoke the Heart","竜心をくべる"
 "Summon","召喚"
+"Summon: ","召喚: "
+"Support the Creator","作者を応援する"
 "Swallow the Fire","炎を呑む"
 "Swear the oath. [color=red]Lose 8 Max HP[/color]. [color=green]Obtain a random rare relic[/color].","誓いを立てる。[color=red]最大HPを8失う[/color]。[color=green]ランダムなレアレリックを得る[/color]。"
 "Tail Lash","尾の薙ぎ払い"
@@ -451,6 +472,8 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "The spirit bows its head. Its light lingers on you.","精霊は頭を垂れた。その光が、あなたの体にしばらく残った。"
 "Throw","投げる"
 "Tidy Shardling","潔癖シャードリング"
+"Times Rested","休憩した回数"
+"Times Upgraded","アップグレードした回数"
 "Top Deck","山札の一番上"
 "Topiary Warden","刈り込みの番人"
 "Total Play Time: %02d:%02d:%02d","総プレイ時間：%02d:%02d:%02d"
@@ -460,6 +483,7 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "Twin Blade","刃を重ねる"
 "Twin Claws","双爪"
 "Type","種類"
+"U R WINNER","勝利！"
 "UNCOMMON","アンコモン"
 "Unbreakable Hide","不壊の鱗"
 "Unknown","不明"
@@ -526,6 +550,7 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "[color=green]Replace Starting Artifact With Boss Artifact[/color]","[color=green]初期レリックをボスレリックと交換[/color]"
 "[color=green]Transform a card[/color].","[color=green]カードを1枚変化させる[/color]。"
 "[color=green]Upgrade a card[/color].","[color=green]カードを1枚強化する[/color]。"
+"[color=green]Victory[/color]","[color=green]勝利[/color]"
 "[color=grey]Leave.[/color]","[color=grey]立ち去る。[/color]"
 "[color=grey]Only once per shop.[/color]","[color=grey]1つの店で1回だけ。[/color]"
 "[color=grey][Locked]: Insufficient Health[/color]","[color=grey][ロック中]：HPが足りない[/color]"
@@ -538,7 +563,37 @@ Exhaust","[damage]ダメージを与え、ブロックされなかったダメ�
 "[color=orange]Card Removal[/color]
 Remove a card from your deck.","[color=orange]カード削除[/color]
 デッキからカードを1枚取り除く。"
+"[color=orange]Deck[/color]
+List of all cards currently owned. Saved between combats","[color=orange]デッキ[/color]
+持っているカードの一覧。戦闘が終わっても残る"
+"[color=orange]Discard Pile[/color]
+These cards will be reshuffled back","[color=orange]捨て札[/color]
+山札が尽きると混ぜて山札に戻るカード"
+"[color=orange]Draw Pile[/color]
+These cards will be drawn","[color=orange]山札[/color]
+これから引くカード"
+"[color=orange]End Turn[/color]
+Ends your turn","[color=orange]ターン終了[/color]
+自分のターンを終える"
+"[color=orange]Energy[/color]
+Used to play cards","[color=orange]エナジー[/color]
+カードを使うのに必要"
+"[color=orange]Exhaust Pile[/color]
+These cards have been removed from play","[color=orange]廃棄札[/color]
+この戦闘から取り除かれたカード"
 "[color=orange]Fight[/color] for combat rewards.","[color=orange]戦う[/color]。勝てば戦闘報酬。"
+"[color=orange]Health[/color]
+When this reaches zero, you lose","[color=orange]HP[/color]
+0になると負け"
+"[color=orange]Map[/color]
+Opens map for this act","[color=orange]マップ[/color]
+この幕のマップを開く"
+"[color=orange]Money[/color]
+How much money you have","[color=orange]所持金[/color]
+いま持っているお金"
+"[color=orange]Pause[/color]
+Stops Game","[color=orange]ポーズ[/color]
+ゲームを一時停止する"
 "[color=orange]Spin[/color]: Gold, a relic, a full heal... or something worse.","[color=orange]回す[/color]: ゴールド、レリック、全回復……それとも？"
 "[color=red]Add 1 Cinder to your deck[/color]. [color=green]Draft a rare card[/color].","[color=red]燃えさしを1枚デッキに加える[/color]。[color=green]レアカードを3枚から1枚選んで獲得[/color]。"
 "[color=red]Current run stats not found[/color]","[color=red]現在のランの統計が見つかりません[/color]"
