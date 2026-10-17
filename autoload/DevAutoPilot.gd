@@ -2,6 +2,7 @@ extends Node
 ## 開発用: 画面キャプチャ検証のため、起動引数で自動的にランを進める。
 ## 例: godot --path . --write-movie shots/x.png --fixed-fps 10 --quit-after 60 -- --auto=combat
 ## --auto=map    : ラン開始してマップを表示
+## --auto=map_mid : 2階ぶん進んだ状態で移動待ちのマップを表示 (現在地と行き先の目印の確認用)
 ## --auto=combat : ラン開始して最初の戦闘に入る
 ## --auto=new_run : タイトルから「新しいラン」画面を開く
 ## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
@@ -137,7 +138,7 @@ func _ready() -> void:
 			print("WEAPON deck ", card_data.object_id, " tags=", card_data.card_tags, " damage ", card_data.card_values.get("damage", 0), " -> ", damage)
 		return
 	match mode:
-		"map", "map_top":
+		"map", "map_top", "map_mid":
 			_print_map_stats()
 			# ラン開始の選択肢パネルがマップを覆うので閉じてから表示する
 			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false) as Control
@@ -145,6 +146,9 @@ func _ready() -> void:
 				run_start_options.visible = false
 			var map := get_tree().root.find_child("Map", true, false)
 			if map:
+				if mode == "map_mid":
+					_walk_up_floors(2)
+					map.can_travel = true
 				map.show_map()
 				# map_top: ボス紋章のある上端までスクロールして見せる
 				if mode == "map_top":
@@ -547,6 +551,13 @@ func _player_summary() -> String:
 	var p := Global.player_data
 	return "hp=%d/%d gold=%d deck=%d relics=%d potions=%s waste=%d" % [p.player_health, p.player_health_max, p.player_money, p.player_deck.size(), p.player_artifact_uid_to_artifact_data.size(), p.player_consumable_slot_to_consumable_object_id.values(), p.player_deck.filter(func(c): return c.object_id == "card_waste").size()]
 
+
+## 最初の行き先をたどって floors 階ぶん進める (訪問済みにする)
+func _walk_up_floors(floors: int) -> void:
+	for i in floors:
+		var next: LocationData = Global.get_next_locations()[0]
+		next.location_visited = true
+		Global.player_data.player_location_id = next.location_id
 
 ## マップの部屋の種類ごとの数と階数を出力 (生成ルール確認用)
 func _print_map_stats() -> void:
