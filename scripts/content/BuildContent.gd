@@ -23,8 +23,8 @@ static func register() -> void:
 	_register_interceptor()
 	_register_axis(TAG_PHYSICAL, "Physical", PHYSICAL_CARD_IDS)
 	_register_axis(TAG_REACTOR, "Dragonfire", REACTOR_CARD_IDS)
-	_register_weapon("artifact_weapon_pruning_blade", "Honed Claws", "Physical", TAG_PHYSICAL, 2, "artifact_increase_attack_on_rest")
-	_register_weapon("artifact_weapon_reactor_gauntlet", "Dragonfire Gauntlet", "Dragonfire", TAG_REACTOR, 5, "artifact_boss_green")
+	_register_weapon("artifact_weapon_pruning_blade", "Honed Claws", "Physical", TAG_PHYSICAL, 2, "artifact_weapon_pruning_blade")
+	_register_weapon("artifact_weapon_reactor_gauntlet", "Dragonfire Gauntlet", "Dragonfire", TAG_REACTOR, 5, "artifact_weapon_reactor_gauntlet")
 
 
 static func _register_interceptor() -> void:

@@ -45,6 +45,14 @@ REF_RULE = (
 )
 
 
+# まとめ描きで正本画像を添付したとき: 主人公が出る絵はすべて添付画像のデザインにそろえる
+GRID_REF_RULE = (
+    "Reference: attached image 1 is the canonical design of the heroine. Wherever she appears in any panel, match it "
+    "exactly for the face, hair, horns, body proportions, armor, gauntlets, claws, tail, colors and rendering style. "
+    "Follow each panel's text only for pose, framing and effects; do not copy the reference's pose or canvas.\n\n"
+)
+
+
 TRANSPARENT_BG = ("Use the image tool's transparent background option: output a PNG with a real alpha channel where "
                   "the background is fully transparent (alpha 0), not white, black, checkerboard, gradient or any "
                   "colored backdrop or glow haze.")
@@ -98,9 +106,16 @@ QUADRANTS = ["top-left", "top-right", "bottom-left", "bottom-right"]
 
 
 def can_grid(asset: dict) -> bool:
-    if asset.get("sheet") or asset.get("refs"):
+    # refs (正本画像) つきは per_call を指定したときだけまとめる (同じ refs のものどうしで 1 枚に描く)
+    # per_call: 1 は 1 枚ずつ (ボスなど一番大事な絵)
+    if asset.get("sheet") or asset.get("per_call") == 1 or (asset.get("refs") and not asset.get("per_call")):
         return False
     return needs_alpha_check(asset) or is_card_art(asset)
+
+
+def grid_key(asset: dict) -> tuple:
+    """1 枚にまとめて描けるものどうしの組 (カード絵か / 1 回に何枚か / 添付する正本画像)."""
+    return (is_card_art(asset), asset.get("per_call", 4), tuple(asset.get("refs", [])))
 
 
 # カード絵 (正方形・不透明) も 2x2 でまとめて描ける。マスの間の暗い溝は、切り分けるときに内側で切り落とす
@@ -114,8 +129,24 @@ CARD_GRID_INSET = 0.04
 def generate_grid(codex: str, style: str, batch: list) -> bool:
     raw_path = RAW_DIR / ("grid_" + batch[0]["id"] + ".png")
     cards = is_card_art(batch[0])
-    subjects = "\n".join(f"- {QUADRANTS[i]} quadrant: {a['prompt']}" for i, a in enumerate(batch))
-    if cards:
+    refs = batch[0].get("refs", [])
+    # 2 枚ずつ (キャラクターなど大事な絵) は横に 2 枚並べて描き、左右に切り分ける
+    pair = batch[0].get("per_call") == 2
+    places = ["left half", "right half"] if pair else [f"{q} quadrant" for q in QUADRANTS]
+    subjects = "\n".join(f"- {places[i]}: {a['prompt']}" for i, a in enumerate(batch))
+    if pair and cards:
+        layout = ("Layout: a landscape sheet of exactly two separate square card illustrations side by side in one "
+                  "consistent style, split into equal left and right halves by a thin flat dark-navy vertical gutter. "
+                  "Each half is its own complete full-bleed illustration with an opaque painted background; compose "
+                  "each picture inside the centered square of its half, keep every important shape at least 10 percent "
+                  "away from that square's edges and never continue a picture into the other half.\n\n")
+        background = "No text, no letters, no numbers, no borders, no UI frame."
+    elif pair:
+        layout = ("Layout: a landscape sheet of exactly two separate subjects side by side in one consistent style. "
+                  "Draw one subject centered in the left half and one in the right half, each fully contained in its "
+                  "half with at least 10 percent empty margin, never touching or crossing into the other half.\n\n")
+        background = f"{TRANSPARENT_BG} No text, no letters, no numbers, no grid lines, no borders, no UI frame."
+    elif cards:
         layout = ("Layout: a 2x2 sheet of four separate square card illustrations in one consistent style. Divide the "
                   "canvas into four equal quadrants separated by thin flat dark-navy gutters. Each quadrant is its own "
                   "complete full-bleed illustration with an opaque painted background filling the quadrant; keep every "
@@ -128,21 +159,22 @@ def generate_grid(codex: str, style: str, batch: list) -> bool:
                   "margin from the quadrant edges, never touching or crossing into another quadrant. Leave unused quadrants empty.\n\n")
         background = f"{TRANSPARENT_BG} No text, no letters, no numbers, no grid lines, no borders, no UI frame."
     prompt = (
-        "$imagegen Generate exactly one square image and nothing else.\n"
+        f"$imagegen Generate exactly one {'landscape 3:2' if pair else 'square'} image and nothing else.\n"
         f"Art direction:\n{style}\n\n"
         f"{layout}"
         f"Subjects:\n{subjects}\n\n"
+        f"{batch[0].get('ref_rule', GRID_REF_RULE) if refs else ''}"
         f"{background}\n"
         f"Save the final PNG to this exact path: {raw_path.name} (in the current working directory). "
         "Do not create or modify any other file."
     )
-    if not run_codex(codex, prompt, raw_path, [], "grid " + ",".join(a["id"] for a in batch)):
+    if not run_codex(codex, prompt, raw_path, refs, "grid " + ",".join(a["id"] for a in batch)):
         return False
     sheet = Image.open(raw_path).convert("RGBA")
-    hw, hh = sheet.width // 2, sheet.height // 2
+    hw, hh = sheet.width // 2, (sheet.height if pair else sheet.height // 2)
     inset = round(min(hw, hh) * CARD_GRID_INSET) if cards else 0
     for i, a in enumerate(batch):
-        x, y = (i % 2) * hw, (i // 2) * hh
+        x, y = (i % 2) * hw, (0 if pair else (i // 2) * hh)
         mark = PngImagePlugin.PngInfo()
         if not cards:
             mark.add_text("grid", "1")  # 後処理で隣のマスのはみ出しを消す目印
@@ -427,7 +459,7 @@ def post_process(asset: dict) -> None:
             im = im.crop((left, 0, left + nw, im.height))
         else:
             nh = round(im.width / target)
-            top = (im.height - nh) // 2
+            top = round((im.height - nh) * asset.get("crop_align", 0.5))  # crop_align: 0 で上端、0.5 で中央 (縦長の全身の絵は上寄りで顔を残す)
             im = im.crop((0, top, im.width, top + nh))
         im = im.resize((w, h), Image.LANCZOS)
 
@@ -443,7 +475,7 @@ def main() -> None:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--post-only", action="store_true")
     ap.add_argument("--workers", type=int, default=4)
-    ap.add_argument("--grid", action="store_true", help="透過アイコンを 2x2 で 4 個ずつまとめて描く (呼び出し回数 1/4)")
+    ap.add_argument("--grid", action="store_true", help="透過アイコンとカード絵を 2x2 で 4 個ずつまとめて描く (呼び出し回数 1/4)。per_call: 2 のものは横に 2 枚ずつ")
     ap.add_argument("--manifest", default=str(MANIFEST), help="asset manifest json")
     args = ap.parse_args()
 
@@ -462,9 +494,16 @@ def main() -> None:
         todo = [a for a in todo if a not in reuse]
         grid = [a for a in todo if args.grid and can_grid(a)]
         jobs = []
-        for kind in (True, False):  # カード絵と透過アイコンは別の 1 枚にまとめる
-            group = [a for a in grid if is_card_art(a) == kind]
-            jobs += [lambda b=group[i:i + 4]: generate_grid(codex, style, b) for i in range(0, len(group), 4)]
+        # カード絵と透過アイコン、1 回の枚数、添付する正本画像が同じものどうしを 1 枚にまとめる
+        for key in dict.fromkeys(grid_key(a) for a in grid):
+            group = [a for a in grid if grid_key(a) == key]
+            n = key[1]
+            for i in range(0, len(group), n):
+                batch = group[i:i + n]
+                if len(batch) == 1 and n == 2:  # 2 枚ずつの余り 1 枚は単独で描く
+                    jobs.append(lambda a=batch[0]: make_raw(codex, style, a))
+                else:
+                    jobs.append(lambda b=batch: generate_grid(codex, style, b))
         jobs += [lambda a=a: make_raw(codex, style, a) for a in todo if a not in grid]
         print(f"generating {len(todo)} assets in {len(jobs)} Codex calls with {args.workers} workers")
         with ThreadPoolExecutor(args.workers) as ex:

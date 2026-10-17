@@ -1,0 +1,60 @@
+{
+  "style": "Simplified, chunky stylized fantasy game art with about 30 percent less detail than a typical painted fantasy asset: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading and one soft highlight, very little texture. No filigree, no tiny rivets, no engraved patterns, no gem encrustations, no pedestals, stands or display bases, no ornate frames. Light deformation is welcome (exaggerate the one key part, simplify the rest); cute but not childish. Saturated but harmonious colors. Do not imitate any existing game, character, franchise or official artwork. Include no text, letters, numerals, logos or symbols. These icons belong to the half-dragon warrior heroine and may use her motifs: copper-red dragon scales, black-iron dragon claws with ember-orange cracks, crimson dragon blood and ember fire. Palette: blackened iron #2A2426, copper-red #B5532E, crimson #8E1B23, ivory #EFE2C4, ember #FF8A2A.",
+  "assets": [
+    {
+      "id": "artifact_boss_green",
+      "out": "external/sprites/artifacts/artifact_boss_green.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A smoldering black ember stone shaped like a heart, glowing orange cracks, small flame wisps on top. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_shop_green",
+      "out": "external/sprites/artifacts/artifact_shop_green.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A single big copper-red dragon scale hanging on a leather cord necklace. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_weapon_reactor_gauntlet",
+      "out": "external/sprites/artifacts/artifact_weapon_reactor_gauntlet.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "One copper-red scaled gauntlet ending in four curved black-iron claws, wrapped in licking orange flames. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_weapon_pruning_blade",
+      "out": "external/sprites/artifacts/artifact_weapon_pruning_blade.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "Four curved black-iron dragon claws laid fanned out on a flat grey whetstone, a bright sharpening glint. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_ascending_dragon_form",
+      "out": "external/sprites/artifacts/artifact_ascending_dragon_form.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A crimson silk ribbon spiraling upward like a rising staircase, ending in a small ember flame at the top. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    }
+  ]
+}
