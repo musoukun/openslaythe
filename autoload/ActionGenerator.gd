@@ -2,6 +2,9 @@
 ## Provides wrappers for common actions used across by the UI and framework.
 extends Node
 
+## 次の幕に入ったときに回復する割合 (1.0 = 全回復)
+const ACT_START_HEAL_PERCENT: float = 1.0
+
 ## General use factory method for creating actions.
 ## Creates and initializes actions from a script path and values.
 ## Action data is [{"script_path": {values}}].
@@ -110,6 +113,8 @@ func generate_next_act() -> void:
 		var next_act_id: String = act_next_act_ids[0]
 		# generate the next act
 		generate_act(next_act_id, act_number + 1)
+		# StS と同じく、次の幕に入ったら HP を回復する
+		Global.player_data.heal_percentage(ACT_START_HEAL_PERCENT)
 		Signals.act_started.emit()
 	else:
 		DebugLogger.log_error("ActionGenerator.generate_next_act(): No next acts defined in act \"{0}\"".format([act_data.object_id]))

@@ -2025,8 +2025,8 @@ func add_enemies() -> void:
 	# enemy that negates the first damage instance against it
 	var enemy_1: EnemyData = EnemyData.new("enemy_1")
 	enemy_1.enemy_name = "Red Enemy"
-	enemy_1.add_health_bounds(17, 20)
-	enemy_1.add_health_bounds(25, 30, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
+	enemy_1.add_health_bounds(24, 28)
+	enemy_1.add_health_bounds(35, 42, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
 	enemy_1.enemy_initial_status_effects = {"status_effect_negate_damage": 1}
 	enemy_1.enemy_texture_path = "external/sprites/enemies/enemy_red_small.png"
 	# initial dummy state used to map initial attack pattern weights on starting combat
@@ -2052,8 +2052,8 @@ func add_enemies() -> void:
 	# enemy that negates the first debuff against it
 	var enemy_2: EnemyData = EnemyData.new("enemy_2")
 	enemy_2.enemy_name = "Blue Enemy"
-	enemy_2.add_health_bounds(5, 7)
-	enemy_2.add_health_bounds(8, 12, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
+	enemy_2.add_health_bounds(7, 10)
+	enemy_2.add_health_bounds(11, 17, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
 	enemy_2.enemy_initial_status_effects = {"status_effect_negate_debuff": 1}
 	enemy_2.enemy_texture_path = "external/sprites/enemies/enemy_blue_small.png"
 	enemy_2.add_intent_state([
@@ -2076,8 +2076,8 @@ func add_enemies() -> void:
 	
 	# enemy that applies poison to everyone on death
 	var enemy_3: EnemyData = EnemyData.new("enemy_3")
-	enemy_3.add_health_bounds(15, 25)
-	enemy_3.add_health_bounds(25, 35, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
+	enemy_3.add_health_bounds(21, 35)
+	enemy_3.add_health_bounds(35, 49, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
 	enemy_3.enemy_name = "Green Enemy"
 	enemy_3.enemy_texture_path = "external/sprites/enemies/enemy_green_small.png"
 	enemy_3.enemy_actions_on_death = [
@@ -2105,8 +2105,8 @@ func add_enemies() -> void:
 	
 	# enemy that applies vulnerable to player
 	var enemy_4: EnemyData = EnemyData.new("enemy_4")
-	enemy_4.add_health_bounds(37, 43)
-	enemy_4.add_health_bounds(47, 53, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
+	enemy_4.add_health_bounds(52, 60)
+	enemy_4.add_health_bounds(66, 74, DIFFICULTY_STANDARD_ENEMIES_HARDER) # gets more health on later difficulty
 	enemy_4.enemy_name = "Big Attack Enemy"
 	enemy_4.enemy_texture_path = "external/sprites/enemies/enemy_purple_medium.png"
 	enemy_4.enemy_actions_on_death = [
@@ -2141,8 +2141,8 @@ func add_enemies() -> void:
 	Global.register_rod(enemy_4)
 	
 	var enemy_act_1_miniboss_1: EnemyData = EnemyData.new("enemy_act_1_miniboss_1")
-	enemy_act_1_miniboss_1.add_health_bounds(100,100)
-	enemy_act_1_miniboss_1.add_health_bounds(120,120, DIFFICULTY_MINIBOSS_ENEMIES_HARDER) # gets more health on later difficulty
+	enemy_act_1_miniboss_1.add_health_bounds(85,85)
+	enemy_act_1_miniboss_1.add_health_bounds(100,100, DIFFICULTY_MINIBOSS_ENEMIES_HARDER) # gets more health on later difficulty
 	enemy_act_1_miniboss_1.enemy_type = EnemyData.ENEMY_TYPES.MINIBOSS
 	enemy_act_1_miniboss_1.enemy_name = "Act 1 Miniboss"
 	enemy_act_1_miniboss_1.enemy_texture_path = "external/sprites/enemies/enemy_green_medium.png"
@@ -2150,12 +2150,12 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1})
 	])
 	enemy_act_1_miniboss_1.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 18, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 22, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 9, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 12, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_act_1_miniboss_1.add_intent_state([
-		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 8, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_2", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 10, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 5, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_2", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 7, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	
 	var _enemy_act_1_miniboss_1_anim: AnimationData = enemy_act_1_miniboss_1.add_standard_animations(
@@ -2174,12 +2174,12 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1})
 		])
 	enemy_act_1_miniboss_2.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 8, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 10, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 7, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_act_1_miniboss_2.add_intent_state([
-		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 4, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_2", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 5, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 3, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_2", DIFFICULTY_MINIBOSS_ENEMIES_HARDER, 4, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	
 	var _enemy_act_1_miniboss_2_anim: AnimationData = enemy_act_1_miniboss_2.add_standard_animations(
@@ -2476,7 +2476,7 @@ func add_cards_green() -> void:
 	card_blossom.card_rarity = CardData.CARD_RARITIES.UNCOMMON
 	card_blossom.card_requires_target = false
 	card_blossom.card_play_destination = HandManager.EXHAUST_PILE
-	card_blossom.card_values = {"health_amount": 3}
+	card_blossom.card_values = {"health_amount": 6}
 	card_blossom.card_upgrade_value_improvements = {"health_amount": 2}
 	card_blossom.card_play_actions = [{Scripts.ACTION_ADD_HEALTH: {"target_override": BaseAction.TARGET_OVERRIDES.PARENT}}]
 	
@@ -2581,7 +2581,7 @@ func add_cards_green() -> void:
 	card_clippers.card_type = CardData.CARD_TYPES.ATTACK
 	card_clippers.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_clippers.card_keyword_object_ids = []
-	card_clippers.card_values = {"damage": 5, "number_of_attacks": 2, "health_amount": -5, "status_effect_object_id": "status_effect_damage_increase", "status_charge_amount": 2}
+	card_clippers.card_values = {"damage": 6, "number_of_attacks": 2, "health_amount": -5, "status_effect_object_id": "status_effect_damage_increase", "status_charge_amount": 2}
 	card_clippers.card_upgrade_value_improvements = {"damage": 2}
 	card_clippers.card_play_actions = [
 	{
@@ -2637,7 +2637,7 @@ func add_cards_green() -> void:
 	card_fertilize.card_type = CardData.CARD_TYPES.SKILL
 	card_fertilize.card_rarity = CardData.CARD_RARITIES.RARE
 	card_fertilize.card_requires_target = false
-	card_fertilize.card_values = {"self_damage": 12, "energy_amount": 2}
+	card_fertilize.card_values = {"self_damage": 6, "energy_amount": 2}
 	card_fertilize.card_upgrade_value_improvements = {"self_damage": 3, "energy_amount": 1}
 	card_fertilize.card_first_upgrade_property_changes = {"card_description": "Gain {0}{0}. Lose [self_damage] HP.".format([Card.ENERGY_ICON_KEYWORD])}
 	card_fertilize.card_play_actions = [
@@ -2691,7 +2691,7 @@ func add_cards_green() -> void:
 	card_growth.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_growth.card_requires_target = false
 	card_growth.card_play_destination = HandManager.EXHAUST_PILE
-	card_growth.card_values = {"status_charge_amount": 5, "draw_count": 1}
+	card_growth.card_values = {"status_charge_amount": 8, "draw_count": 1}
 	card_growth.card_upgrade_value_improvements = {"status_charge_amount": 3,}
 	card_growth.card_play_actions = [
 		{
@@ -2741,7 +2741,7 @@ func add_cards_green() -> void:
 	card_moss.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_moss.card_energy_cost = 2
 	card_moss.card_requires_target = true
-	card_moss.card_values = {"status_charge_amount": 8}
+	card_moss.card_values = {"status_charge_amount": 11}
 	card_moss.card_upgrade_value_improvements = {"status_charge_amount": 4,}
 	card_moss.card_play_actions = [
 		{
@@ -2769,7 +2769,7 @@ func add_cards_green() -> void:
 	card_pollen.card_description = "Take [status_charge_amount] damage at the start of your turn and draw [status_secondary_charge_amount] cards"
 	card_pollen.card_type = CardData.CARD_TYPES.POWER
 	card_pollen.card_rarity = CardData.CARD_RARITIES.RARE
-	card_pollen.card_energy_cost = 3
+	card_pollen.card_energy_cost = 2
 	card_pollen.card_requires_target = false
 	card_pollen.card_values = {"status_charge_amount": 5, "status_secondary_charge_amount": 2}
 	card_pollen.card_upgrade_value_improvements = {"status_secondary_charge_amount": 1}
@@ -2795,7 +2795,7 @@ func add_cards_green() -> void:
 	card_petals.card_play_destination = HandManager.EXHAUST_PILE
 	card_petals.card_energy_cost = 3
 	card_petals.card_keyword_object_ids = []
-	card_petals.card_values = {"block": 20, "status_charge_amount": 2,  "health_amount": -10}
+	card_petals.card_values = {"block": 28, "status_charge_amount": 2,  "health_amount": -10}
 	card_petals.card_upgrade_value_improvements = {"block": 5, "status_charge_amount": 1}
 	card_petals.card_play_actions = [
 	{
@@ -2827,7 +2827,7 @@ func add_cards_green() -> void:
 	card_reap.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_reap.card_energy_cost = 2
 	card_reap.card_requires_target = true
-	card_reap.card_values = {"damage": 10}
+	card_reap.card_values = {"damage": 15}
 	card_reap.card_upgrade_value_improvements = {"damage": 4,}
 	card_reap.card_play_actions = [
 		{
@@ -2883,7 +2883,7 @@ func add_cards_green() -> void:
 	card_symbiosis.card_description = "Overshield no longer decays"
 	card_symbiosis.card_type = CardData.CARD_TYPES.POWER
 	card_symbiosis.card_rarity = CardData.CARD_RARITIES.RARE
-	card_symbiosis.card_energy_cost = 3
+	card_symbiosis.card_energy_cost = 2
 	card_symbiosis.card_requires_target = false
 	card_symbiosis.card_values = {"status_charge_amount": 0}
 	card_symbiosis.card_upgrade_value_improvements = {"status_charge_amount": 20}
@@ -2925,7 +2925,7 @@ func add_cards_green() -> void:
 	card_thorns.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_thorns.card_energy_cost = 1
 	card_thorns.card_requires_target = false
-	card_thorns.card_values = {"block": 5, "status_charge_amount": 1}
+	card_thorns.card_values = {"block": 8, "status_charge_amount": 1}
 	card_thorns.card_upgrade_value_improvements = {"block": 3, "status_charge_amount": 1}
 	card_thorns.card_play_actions = [
 		{
@@ -3013,7 +3013,7 @@ func add_cards_green() -> void:
 	card_conclusion.card_requires_target = true
 	card_conclusion.card_is_retained = true
 	card_conclusion.card_play_destination = HandManager.EXHAUST_PILE
-	card_conclusion.card_values = {"damage": 12, "number_of_attacks": 1, "card_value_improvements":{"damage": 4}}
+	card_conclusion.card_values = {"damage": 18, "number_of_attacks": 1, "card_value_improvements":{"damage": 4}}
 	card_conclusion.card_first_upgrade_property_changes = {
 		"card_description": "Retain. Do [damage]. Gain 6 damage for each unused energy at turn end. Exhaust",
 		"card_value_improvements":{"damage": 6}
@@ -3051,7 +3051,7 @@ func add_cards_green() -> void:
 	card_datum.card_requires_target = false
 	card_datum.card_is_retained = false
 	card_datum.card_play_destination = HandManager.EXHAUST_PILE
-	card_datum.card_values = {"block": 6, "modified_energy_cost": card_datum.card_energy_cost, "card_value_improvements":{"modified_energy_cost": -1}}
+	card_datum.card_values = {"block": 10, "modified_energy_cost": card_datum.card_energy_cost, "card_value_improvements":{"modified_energy_cost": -1}}
 	card_datum.card_play_actions = [
 		{
 			Scripts.ACTION_BLOCK: {
@@ -3178,7 +3178,7 @@ func add_cards_green() -> void:
 	card_big_boom.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_big_boom.card_requires_target = false
 	card_big_boom.card_energy_cost = 2
-	card_big_boom.card_values = {"damage": 12, "status_charge_amount": 5, "time_delay": 0.2,}
+	card_big_boom.card_values = {"damage": 16, "status_charge_amount": 5, "time_delay": 0.2,}
 	card_big_boom.card_upgrade_value_improvements = {"damage": 14,}
 	card_big_boom.card_play_actions = [
 		{
