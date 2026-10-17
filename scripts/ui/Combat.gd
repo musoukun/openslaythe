@@ -25,11 +25,14 @@ extends Control
 @onready var chest = $Chest
 
 @onready var background_button: TextureButton = %BackgroundButton
+# 戦闘背景の細部を少し落としてキャラと敵を浮き出させる (ショップのテントには掛けない)
+var _backdrop_material := ShaderMaterial.new()
 
 @onready var end_turn_button: Button = $EndTurnButton
 var end_turn_object: CombatEndTurn = null
 
 func _ready():
+	_backdrop_material.shader = load("res://sprites/shaders/combat_backdrop.gdshader")
 	Signals.player_money_changed.connect(_on_player_money_changed)
 	Signals.player_health_changed.connect(_on_player_health_changed)
 	
@@ -131,7 +134,9 @@ func _update_background() -> void:
 	# the shop's tent is laid under the top bar here, with the merchant drawn by ShopScene on top
 	if location_data.location_type == LocationData.LOCATION_TYPES.SHOP:
 		background_button.texture_normal = load(ShopScene.BACKGROUND_PATH)
+		background_button.material = null
 		return
+	background_button.material = _backdrop_material
 
 	if background_texture_path != "":
 		background_button.texture_normal = FileLoader.load_texture(background_texture_path)
