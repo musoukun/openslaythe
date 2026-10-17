@@ -45,8 +45,8 @@ static func apply(root: Node) -> void:
 	var title := root.get_node_or_null("TitleScreen")
 	if title:
 		add_background(title, TITLE_BACKGROUND, ["Background"])
-		var bust := _add_title_hero(title)
-		_add_new_run_hero(title, bust)
+		_add_title_hero(title)
+		_add_new_run_hero(title)
 
 
 ## アイコンの背後に暗い丸台座を敷いて背景から浮かせる (何度呼んでも1枚だけ)
@@ -77,10 +77,11 @@ static func add_backplate(control: Control, margin: float = 3.0) -> void:
 ## タイトル画面の右側に主人公のバストアップ (手描き) を置く。
 ## 絵は胸の下で切れているので、切れ目が常に画面の下端に来るよう右下に固定する
 ## (固定座標だと縦に広い画面で切れ目が画面の途中に浮き、胴体が消えて見える)。
-static func _add_title_hero(title: Control) -> TextureRect:
+## 出すのはメインメニューが見えているときだけ。図鑑や設定などでは一覧の後ろに透けて読みにくいので隠す。
+static func _add_title_hero(title: Control) -> void:
 	var tex := load_if_exists(TITLE_HERO)
 	if tex == null:
-		return null
+		return
 	const SIZE := 580.0
 	# 画像の下にある透明な余白の分だけ画面の外へ下げる
 	var used := tex.get_image().get_used_rect()
@@ -97,12 +98,14 @@ static func _add_title_hero(title: Control) -> TextureRect:
 	hero.offset_bottom = bottom_padding
 	title.add_child(hero)
 	title.move_child(hero, 1)	# 背景のすぐ上、メニューの下
-	return hero
+	var main_menu := title.get_node_or_null("MainMenu") as Control
+	if main_menu:
+		hero.visible = main_menu.visible
+		main_menu.visibility_changed.connect(func() -> void: hero.visible = main_menu.visible)
 
 
 ## 新しいラン画面の中央 (左の説明パネルと右のボタン列のあいだ) に全身の立ち絵を置く。
-## パネルを絵に重ねないよう、この画面ではタイトル用のバストアップを隠す。
-static func _add_new_run_hero(title: Control, bust: TextureRect) -> void:
+static func _add_new_run_hero(title: Control) -> void:
 	var menu := title.get_node_or_null("NewRunMenu") as Control
 	var tex := load_if_exists(NEW_RUN_HERO)
 	if menu == null or tex == null:
@@ -122,8 +125,6 @@ static func _add_new_run_hero(title: Control, bust: TextureRect) -> void:
 	hero.offset_bottom = -4.0
 	menu.add_child(hero)
 	menu.move_child(hero, 0)	# パネルやボタンより奥
-	if bust:
-		menu.visibility_changed.connect(func() -> void: bust.visible = not menu.visible)
 
 
 ## キャラごとの全身の立ち絵。sprites/ui/hero_standing_<色>.png があればそれ、無ければ最初の主人公の絵
