@@ -151,7 +151,7 @@ func add_artifacts() -> void:
 	
 	var artifact_retain_hand: ArtifactData = ArtifactData.new("artifact_retain_hand")
 	artifact_retain_hand.artifact_name = "Artifact Retain Hand"
-	artifact_retain_hand.artifact_description = "Cards will be retained end of turn"
+	artifact_retain_hand.artifact_description = "Cards stay on Standby at end of turn"
 	artifact_retain_hand.artifact_rarity = ArtifactData.ARTIFACT_RARITIES.BOSS
 	artifact_retain_hand.artifact_script_path = "res://scripts/artifacts/ArtifactRetainHand.gd"
 	
@@ -1681,7 +1681,7 @@ func add_keywords() -> void:
 	Global.register_rod(keyword_bottom_deck)
 		
 	var keyword_retain: KeywordData = KeywordData.new("keyword_retain")
-	keyword_retain.keyword_name = "Retain"
+	keyword_retain.keyword_name = "Standby"
 	keyword_retain.keyword_text_bb_code = "Not discarded at end of turn"
 	Global.register_rod(keyword_retain)
 	
@@ -1701,7 +1701,7 @@ func add_keywords() -> void:
 	Global.register_rod(keyword_discard)
 	
 	var keyword_ethereal: KeywordData = KeywordData.new("keyword_ethereal")
-	keyword_ethereal.keyword_name = "Ethereal"
+	keyword_ethereal.keyword_name = "Phantom"
 	keyword_ethereal.keyword_text_bb_code = "Exhausts if in hand end of turn"
 	keyword_ethereal.keyword_child_keyword_object_ids = ["keyword_exhaust"]
 	Global.register_rod(keyword_ethereal)
@@ -2583,7 +2583,7 @@ func add_cards_green() -> void:
 	card_chloroplast.card_name = "Wildfire Orb"
 	card_chloroplast.card_color_id = "color_{0}".format([color])
 	card_chloroplast.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_chloroplast.card_description = "Do [damage] to all enemies. Ethereal. On exhaust, do 10 damage to everyone."
+	card_chloroplast.card_description = "Do [damage] to all enemies. Phantom. On exhaust, do 10 damage to everyone."
 	card_chloroplast.card_type = CardData.CARD_TYPES.ATTACK
 	card_chloroplast.card_rarity = CardData.CARD_RARITIES.UNCOMMON
 	card_chloroplast.card_energy_cost = 3

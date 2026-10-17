@@ -26,7 +26,7 @@ EXTRA = {
     "STATUS": "card type", "CURSE": "card type",
     # カードのキーワードタグ
     "Top Deck": "card keyword", "Bottom Deck": "card keyword", "Unplayable": "card keyword",
-    "Retain": "card keyword", "Ethereal": "card keyword", "Exhaust": "card keyword", "Banish": "card keyword",
+    "Standby": "card keyword", "Phantom": "card keyword", "Exhaust": "card keyword", "Banish": "card keyword",
     "Blocked": "combat popup",
     # マップのロケーション名
     "Combat": "map location", "Miniboss": "map location", "Boss": "map location", "Event": "map location",
