@@ -91,6 +91,11 @@ godot --headless --path . -- --auto=mana_check --hero=character_blue
 ### 調査資料
 | 資料 | 内容 |
 |---|---|
+| `reports/デッキ構築の法則とこのゲームへの取り入れ方.md` | STS2・Dominion・LoL から抜き出した 10 の法則と、このゲームに入れる要素・試す順番（**設計判断の正本**） |
+| `reports/初期デッキとデッキ構築の設計.md` | STS2 の初期デッキ（全キャラ 10〜12 枚）の事実と、いまの Vera 19 枚の問題点 |
+| `docs/dominion_builds.md` | Dominion の代表的な 8 戦略（Big Money・礼拝堂・村鍛冶・ビッグブリッジ・宮廷など）と廃棄・連続使用の仕組み |
+| `docs/lol_runes_and_builds.md` | LoL のルーン・育つルーン・キャラ固有の成長・オフメタ（AP ルシアン、サポート リー・シン） |
+| `docs/sts2_enemy_design_and_reviews.md` | STS2 のカード使用を縛る・罰する敵の一覧と、レビュー・掲示板の不満、Mega Crit の公式発言 |
 | `reports/ビルド多様性 デッキ構築設計.md` | 二本のスケール軸でビルドを割る設計の結論（出典つき） |
 | `research_notes/ビルド多様性 デッキ構築設計/` | StS2 の難易度と「壊れる自由」、LoL のアイテム設計、デッキ構築の型、装備スケーリング、現状コードの調査 |
 | `reports/AIゲームアセット制作の最新手法.md` | Codex / 画像AI でアセットを作る手法のまとめ |
