@@ -107,8 +107,6 @@ var player_block: int = 0 # in combat block. Not saved.
 @export var player_available_rest_action_object_ids: Array[String] = [
 	"rest_action_rest",
 	"rest_action_upgrade_card",
-	"rest_action_remove_cards",
-	"rest_action_add_random_consumable",
 	]
 
 #region Card Rewards
