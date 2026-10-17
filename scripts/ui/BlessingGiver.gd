@@ -3,9 +3,10 @@
 extends Control
 class_name BlessingGiver
 
-## 1200x700 の画面での配置
-const SPRITE_RECT := Rect2(790, 70, 340, 390)	# 足元を床 (y=460) に合わせる
-const SPEECH_RECT := Rect2(390, 84, 390, 0)	# 高さは文の長さで伸びる
+## 1200x700 の画面での配置。下半分は祝福の柱の列 (RunStartOptions) なので、上の帯に収める
+const SPRITE_RECT := Rect2(955, 62, 210, 200)	# 右上。足元を柱の列の上端 (y≈268) に合わせる
+const SPEECH_RECT := Rect2(40, 92, 880, 0)	# 高さは文の長さで伸びる
+const GLOW_SIZE := Vector2(340, 340)
 const RUNE_COLOR := Color(0.25, 0.79, 0.71)	# 共通の世界のルーンの青緑 #3FC9B5
 const GOLD_COLOR := Color(0.95, 0.66, 0.23)
 const TYPE_SPEED := 45.0	# 1秒あたりの文字数
@@ -21,7 +22,7 @@ var _bob_tween: Tween
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_anchors_preset(Control.PRESET_FULL_RECT)
-	_glow = _make_glow(Vector2(520, 520), Color(RUNE_COLOR, 0.55))
+	_glow = _make_glow(GLOW_SIZE, Color(RUNE_COLOR, 0.55))
 	_glow.position = SPRITE_RECT.get_center() - _glow.size / 2.0
 	add_child(_glow)
 
