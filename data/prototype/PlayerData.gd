@@ -109,7 +109,6 @@ var player_block: int = 0 # in combat block. Not saved.
 	"rest_action_upgrade_card",
 	"rest_action_remove_cards",
 	"rest_action_add_random_consumable",
-	"rest_action_enchant_cards"
 	]
 
 #region Card Rewards
