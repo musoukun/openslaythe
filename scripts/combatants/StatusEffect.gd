@@ -7,6 +7,18 @@ var status_effect_script: BaseStatusEffect
 @onready var status_charge_label: Label = $StatusChargeLabel
 @onready var status_secondary_charge_label = $StatusSecondaryChargeLabel
 
+func _ready() -> void:
+	# カーソルを当てると、このキャラのステータスの説明を並べて出す (Tooltips.display_status_tooltips)
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
+func _on_mouse_entered() -> void:
+	HandManager.tooltip.display_status_tooltips(status_effect_script.parent_combatant, self)
+
+func _on_mouse_exited() -> void:
+	HandManager.tooltip.hide_tooltip()
+
 func update_status_charge_display() -> void:
 	visible = status_effect_script.status_effect_data.status_effect_is_visible
 	
@@ -23,8 +35,6 @@ func update_status_charge_display() -> void:
 	else:
 		status_secondary_charge_label.text = str(status_effect_script.status_secondary_charges)
 	
-	
-	tooltip_text = tr(status_effect_script.status_effect_data.status_effect_name)
 	
 	# texture
 	var status_effect_texture_path: String = status_effect_data.get_status_effect_texture_path(status_effect_script.status_charges)
