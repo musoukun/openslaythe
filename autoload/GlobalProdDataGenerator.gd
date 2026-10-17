@@ -2522,22 +2522,8 @@ func add_cards_green() -> void:
 	
 	#region Health and Self Damage
 	
-	# Blossom
-	var card_blossom: CardData = CardData.new("card_blossom")
-	card_blossom.card_name = "Rekindle"
-	card_blossom.card_color_id = "color_{0}".format([color])
-	card_blossom.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_blossom.card_description = "Gain [health_amount] HP"
-	card_blossom.card_type = CardData.CARD_TYPES.SKILL
-	card_blossom.card_rarity = CardData.CARD_RARITIES.UNCOMMON
-	card_blossom.card_requires_target = false
-	card_blossom.card_play_destination = HandManager.EXHAUST_PILE
-	card_blossom.card_values = {"health_amount": 6}
-	card_blossom.card_upgrade_value_improvements = {"health_amount": 2}
-	card_blossom.card_play_actions = [{Scripts.ACTION_ADD_HEALTH: {"target_override": BaseAction.TARGET_OVERRIDES.PARENT}}]
-	
-	Global.register_rod(card_blossom)
-	
+	# Blossom (再燃) は「傷口を焼く」の完全な下位互換 (同コスト・同回復・同廃棄で熱がないだけ) なので削除した
+
 	# Bud
 	var card_bud: CardData = CardData.new("card_bud")
 	card_bud.card_name = "Bristling Scales"

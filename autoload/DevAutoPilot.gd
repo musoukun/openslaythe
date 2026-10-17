@@ -290,7 +290,7 @@ func _ready() -> void:
 				Global.get_player().add_status_effect_charges(HeroBlueContent.STATUS_MANA, 10)
 				# [出すカード, 先に山札へ入れるカード]
 				steps = [["card_blue_blade_call", "card_blue_extend_blade"], ["card_blue_minds_eye", "card_blue_starfall"],
-					["card_blue_azure_bolt"], ["card_blue_azure_veil"], ["card_blue_mana_drop"], ["card_blue_clear_mind"], ["card_blue_stillness"]]
+					["card_blue_azure_veil"], ["card_blue_clear_mind"], ["card_blue_stillness"]]
 			for step: Array in steps:
 				await _card_check_step(step)
 			get_tree().quit()

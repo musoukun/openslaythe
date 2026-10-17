@@ -217,20 +217,11 @@ static func register_cards() -> void:
 ## 2 回目の追加: エネルギー 0・マナだけで使うカード、山札から探すカード、デッキを圧縮するカード
 static func _register_more_cards() -> void:
 	# --- エネルギー 0、マナだけで使う ---
-	var bolt: CardData = _mana_card("card_blue_azure_bolt", "Azure Bolt", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.COMMON, 1,
-		"Deal [damage] damage.", {"damage": 6, "number_of_attacks": 1}, {"damage": 3})
-	bolt.card_play_actions = [_spend_mana(), _attack()]
-	Global.register_rod(bolt)
-
+	# 「蒼の矢」(初期札の蒼閃と同じ中身) と「魔力の雫」(静寂の下位互換: マナが多く要り、廃棄もない) は削除した
 	var veil: CardData = _mana_card("card_blue_azure_veil", "Azure Veil", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.COMMON, 1,
 		"Gain [block] block.", {"block": 6}, {"block": 3})
 	veil.card_play_actions = [_spend_mana(), _block()]
 	_register_skill(veil)
-
-	var drop: CardData = _mana_card("card_blue_mana_drop", "Mana Drop", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.UNCOMMON, 2,
-		"Draw [draw_count] cards.", {"draw_count": 2}, {"draw_count": 1})
-	drop.card_play_actions = [_spend_mana(), _draw()]
-	_register_skill(drop)
 
 	var starfall: CardData = _mana_card("card_blue_starfall", "Starfall", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.RARE, 5,
 		"Deal [damage] damage to ALL enemies.", {"damage": 14, "number_of_attacks": 1}, {"damage": 5})
