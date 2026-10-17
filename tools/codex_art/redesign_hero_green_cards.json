@@ -1,0 +1,645 @@
+{
+  "style": "Simplified, chunky stylized fantasy game art with about 30 percent less detail than a typical painted fantasy asset: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading and one soft highlight, very little texture. No filigree, no tiny rivets, no engraved patterns, no gem encrustations, no pedestals, stands or display bases, no ornate frames. Light deformation is welcome (exaggerate the one key part, simplify the rest); cute but not childish. Saturated but harmonious colors. Do not imitate any existing game, character, franchise or official artwork. Include no text, letters, numerals, logos or symbols. Card illustrations for the half-dragon warrior heroine (the attached reference). Each card is a small dynamic scene that makes the card's name easy to remember: show her full figure or three-quarter figure performing the action, with her face drawn as in the reference (anime-style, amber dragon eyes, mischievous grin). Enemies are chunky moss-covered stone-and-bronze golems with teal rune eyes. Each card uses its own dominant background color so the cards look clearly different from each other.",
+  "assets": [
+    {
+      "id": "card_basic_attack_green",
+      "out": "external/sprites/cards/green/card_basic_attack_green.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Slash': Square card illustration, full bleed, opaque background. A clear small scene: she lunges forward with a big diagonal claw swipe, three orange claw streaks across a stone golem. Simple background made of two or three big shapes, dominant background color: dusk orange. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_basic_block_green",
+      "out": "external/sprites/cards/green/card_basic_block_green.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Brace': Square card illustration, full bleed, opaque background. A clear small scene: she crouches behind crossed scaled gauntlets as a golem fist slams into them, sparks flying. Simple background made of two or three big shapes, dominant background color: steel blue. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_blossom",
+      "out": "external/sprites/cards/green/card_blossom.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Rekindle': Square card illustration, full bleed, opaque background. A clear small scene: she kneels with eyes closed, cupping a small warm flame to her chest, a soft healing glow around her. Simple background made of two or three big shapes, dominant background color: warm amber. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_bud",
+      "out": "external/sprites/cards/green/card_bud.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Bristling Scales': Square card illustration, full bleed, opaque background. A clear small scene: the scales on her arms and tail bristle up like spikes, a golem pulls back its pricked hand. Simple background made of two or three big shapes, dominant background color: crimson. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_cell_wall",
+      "out": "external/sprites/cards/green/card_cell_wall.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Harden Scales': Square card illustration, full bleed, opaque background. A clear small scene: she flexes as her forearm scales turn glossy and rock-hard, a golem's bronze spear snapping against them. Simple background made of two or three big shapes, dominant background color: slate grey. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_chloroplast",
+      "out": "external/sprites/cards/green/card_chloroplast.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Wildfire Orb': Square card illustration, full bleed, opaque background. A clear small scene: she holds a big swirling orb of fire above her head, about to hurl it. Simple background made of two or three big shapes, dominant background color: night violet. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_clippers",
+      "out": "external/sprites/cards/green/card_clippers.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Twin Claws': Square card illustration, full bleed, opaque background. A clear small scene: she spins with both claw hands slashing in an X, two crossing orange streaks. Simple background made of two or three big shapes, dominant background color: teal. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_differentiation",
+      "out": "external/sprites/cards/green/card_differentiation.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Reckless Rend': Square card illustration, full bleed, opaque background. A clear small scene: she tears through a golem's chest plate while flying stone shards cut her own arm. Simple background made of two or three big shapes, dominant background color: blood red. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_fertilize",
+      "out": "external/sprites/cards/green/card_fertilize.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Blood Kindling': Square card illustration, full bleed, opaque background. A clear small scene: a drop of her blood falls from her bitten thumb and bursts into flame, two ember orbs rising. Simple background made of two or three big shapes, dominant background color: black and crimson. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_fruit",
+      "out": "external/sprites/cards/green/card_fruit.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Dragon Egg': Square card illustration, full bleed, opaque background. A clear small scene: she hugs a big copper-red speckled egg glowing from inside, grinning in surprise. Simple background made of two or three big shapes, dominant background color: moss green. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_growth",
+      "out": "external/sprites/cards/green/card_growth.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Shed Skin': Square card illustration, full bleed, opaque background. A clear small scene: she steps out of a translucent peeled shell of old scales like a snake's shed, shining fresh. Simple background made of two or three big shapes, dominant background color: pale jade. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_lotus",
+      "out": "external/sprites/cards/green/card_lotus.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Layered Scales': Square card illustration, full bleed, opaque background. A clear small scene: rings of floating translucent red scales stack around her like layered armor plates. Simple background made of two or three big shapes, dominant background color: deep teal. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_moss",
+      "out": "external/sprites/cards/green/card_moss.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Scale Bash': Square card illustration, full bleed, opaque background. A clear small scene: she shoulder-charges a golem with her armored shoulder, the golem cracking in half. Simple background made of two or three big shapes, dominant background color: ochre. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_pollen",
+      "out": "external/sprites/cards/green/card_pollen.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Fever Dream': Square card illustration, full bleed, opaque background. A clear small scene: she sways dizzy and sweating inside a swirl of ember spirals and floating eyes, cards drifting out of the haze. Simple background made of two or three big shapes, dominant background color: sickly purple-green. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_petals",
+      "out": "external/sprites/cards/green/card_petals.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Wing Shroud': Square card illustration, full bleed, opaque background. A clear small scene: she wraps herself in her translucent ember-fire wings like a cocoon, stone arrows bouncing off. Simple background made of two or three big shapes, dominant background color: indigo night. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_reap",
+      "out": "external/sprites/cards/green/card_reap.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Devour': Square card illustration, full bleed, opaque background. A clear small scene: she rips a glowing teal rune core out of a golem, its light flowing into her. Simple background made of two or three big shapes, dominant background color: dark green. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_wildflower",
+      "out": "external/sprites/cards/green/card_wildflower.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Wrath Claw': Square card illustration, full bleed, opaque background. A clear small scene: bruised and furious with a cut on her cheek, she counter-slashes with blazing claws. Simple background made of two or three big shapes, dominant background color: hot red-orange. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_symbiosis",
+      "out": "external/sprites/cards/green/card_symbiosis.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Dragonhide': Square card illustration, full bleed, opaque background. A clear small scene: she stands proud, her whole body covered in a gleaming living armor of copper scales, a golem's hammer bouncing off. Simple background made of two or three big shapes, dominant background color: bronze. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_thorns",
+      "out": "external/sprites/cards/green/card_thorns.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Spined Guard': Square card illustration, full bleed, opaque background. A clear small scene: she crouches behind her spiked shoulder guards with her spiked tail curled around her, a golem pricking its fist. Simple background made of two or three big shapes, dominant background color: dark olive. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_verdant",
+      "out": "external/sprites/cards/green/card_verdant.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Unbreakable Hide': Square card illustration, full bleed, opaque background. A clear small scene: a huge golem hammer slams onto her raised forearm and the hammer cracks instead. Simple background made of two or three big shapes, dominant background color: stone grey with an orange impact flash. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_vines",
+      "out": "external/sprites/cards/green/card_vines.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Tail Lash': Square card illustration, full bleed, opaque background. A clear small scene: she spins and her long crimson tail sweeps three small golems off their feet. Simple background made of two or three big shapes, dominant background color: sunset orange. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_conclusion",
+      "out": "external/sprites/cards/green/card_conclusion.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Banked Flame': Square card illustration, full bleed, opaque background. A clear small scene: she shelters a small but intense flame inside a little clay brazier, saving it for later. Simple background made of two or three big shapes, dominant background color: dim brown. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_datum",
+      "out": "external/sprites/cards/green/card_datum.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Mirror Scale': Square card illustration, full bleed, opaque background. A clear small scene: she holds up one big polished red scale that reflects her own face, a ghostly copy of the scale beside it. Simple background made of two or three big shapes, dominant background color: silver-blue. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_photoelectric_synthesis",
+      "out": "external/sprites/cards/green/card_photoelectric_synthesis.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Dragon Awakening': Square card illustration, full bleed, opaque background. A clear small scene: she roars with fire wings fully spread and blazing eyes, a giant dragon shape of flame rising behind her. Simple background made of two or three big shapes, dominant background color: blazing gold. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_big_boom",
+      "out": "external/sprites/cards/green/card_big_boom.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Inferno': Square card illustration, full bleed, opaque background. A clear small scene: she slams both fists into the ground and a ring of fire explodes outward through the golems. Simple background made of two or three big shapes, dominant background color: red-orange. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_containment",
+      "out": "external/sprites/cards/green/card_containment.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Swallow the Fire': Square card illustration, full bleed, opaque background. A clear small scene: she gulps a stream of fire into her mouth, cheeks glowing, embers falling into her hands. Simple background made of two or three big shapes, dominant background color: dark teal. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_critical",
+      "out": "external/sprites/cards/green/card_critical.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Boiling Blood': Square card illustration, full bleed, opaque background. A clear small scene: steam rises from her body, her veins glow orange, she grits her teeth. Simple background made of two or three big shapes, dominant background color: deep maroon. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_feedback_loop",
+      "out": "external/sprites/cards/green/card_feedback_loop.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Fire Feeds Fire': Square card illustration, full bleed, opaque background. A clear small scene: two flames chase each other in a loop around her, one feeding the other. Simple background made of two or three big shapes, dominant background color: dark violet. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_fusion_cannon",
+      "out": "external/sprites/cards/green/card_fusion_cannon.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Cinder Volley': Square card illustration, full bleed, opaque background. A clear small scene: she flings a barrage of glowing cinder chunks from both hands at a line of golems. Simple background made of two or three big shapes, dominant background color: ash grey. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_meltdown",
+      "out": "external/sprites/cards/green/card_meltdown.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Searing Breath': Square card illustration, full bleed, opaque background. A clear small scene: she breathes a cone of fire at a golem, its stone face glowing red. Simple background made of two or three big shapes, dominant background color: night blue. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_particle_accelerator",
+      "out": "external/sprites/cards/green/card_particle_accelerator.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Stoke the Heart': Square card illustration, full bleed, opaque background. A clear small scene: she punches her own chest and a burst of flame flares out of her heart. Simple background made of two or three big shapes, dominant background color: crimson. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_unstable",
+      "out": "external/sprites/cards/green/card_unstable.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Flare Up': Square card illustration, full bleed, opaque background. A clear small scene: her whole body suddenly erupts in flame, hair flying, cards flipping up into the air around her. Simple background made of two or three big shapes, dominant background color: yellow-orange. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_waste",
+      "out": "external/sprites/cards/green/card_waste.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Cinder': Square card illustration, full bleed, opaque background. A clear small scene: close-up of her open clawed palm holding a smoldering lump of black cinder with orange cracks and smoke. Simple background made of two or three big shapes, dominant background color: ashen grey. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_green_heat_scales",
+      "out": "external/sprites/cards/green/card_green_heat_scales.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Heatproof Scales': Square card illustration, full bleed, opaque background. A clear small scene: she stands calmly knee-deep in a lava pool, unharmed, her scales glowing hot. Simple background made of two or three big shapes, dominant background color: lava orange and black. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_green_searing_claw",
+      "out": "external/sprites/cards/green/card_green_searing_claw.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Searing Claw': Square card illustration, full bleed, opaque background. A clear small scene: her single claw slash leaves a molten glowing cut across a golem's stone body. Simple background made of two or three big shapes, dominant background color: dark teal. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_green_frenzied_claws",
+      "out": "external/sprites/cards/green/card_green_frenzied_claws.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Frenzied Claws': Square card illustration, full bleed, opaque background. A clear small scene: she is a blur of many flurrying claw arms, motion lines everywhere. Simple background made of two or three big shapes, dominant background color: magenta-red. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_green_sharpen_claws",
+      "out": "external/sprites/cards/green/card_green_sharpen_claws.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Sharpen Claws': Square card illustration, full bleed, opaque background. A clear small scene: she sits on a rock sharpening her claws on a whetstone, sparks flying, focused smirk. Simple background made of two or three big shapes, dominant background color: twilight moss green. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_green_claw_flurry",
+      "out": "external/sprites/cards/green/card_green_claw_flurry.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Dragon Claw Flurry': Square card illustration, full bleed, opaque background. A clear small scene: she leaps above a golem and rains down many claw streaks. Simple background made of two or three big shapes, dominant background color: purple sky. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_green_blood_pact",
+      "out": "external/sprites/cards/green/card_green_blood_pact.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Blood Pact': Square card illustration, full bleed, opaque background. A clear small scene: she presses her bleeding palm on an ancient rune stone, the stone glows and cards fan out of the light. Simple background made of two or three big shapes, dominant background color: dark crimson and teal. One focal point, readable at 96px."
+    },
+    {
+      "id": "card_green_cauterize",
+      "out": "external/sprites/cards/green/card_green_cauterize.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "per_call": 2,
+      "crop_align": 0.1,
+      "refs": [
+        "tools/codex_art/refs/hero_master.png"
+      ],
+      "prompt": "Card 'Cauterize': Square card illustration, full bleed, opaque background. A clear small scene: she presses a flaming claw to a cut on her arm, wincing, steam hissing. Simple background made of two or three big shapes, dominant background color: dim amber. One focal point, readable at 96px."
+    }
+  ]
+}

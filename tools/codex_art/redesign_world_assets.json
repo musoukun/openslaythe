@@ -1,0 +1,474 @@
+{
+  "style": "Simplified, chunky stylized fantasy game art with about 30 percent less detail than a typical painted fantasy asset: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading and one soft highlight, very little texture. No filigree, no tiny rivets, no engraved patterns, no gem encrustations, no pedestals, stands or display bases, no ornate frames. Light deformation is welcome (exaggerate the one key part, simplify the rest); cute but not childish. Saturated but harmonious colors. Do not imitate any existing game, character, franchise or official artwork. Include no text, letters, numerals, logos or symbols. This art belongs to the SHARED WORLD that every playable hero visits, so it must never show or hint at any hero: no dragon scales, claws, tails, wings, horns or dragon fire, and no people. The world is an original realm of enchanted forest ruins with moss-covered pale stone, tarnished bronze, clockwork stone golems and teal rune light.",
+  "assets": [
+    {
+      "id": "artifact_add_money",
+      "out": "external/sprites/artifacts/artifact_add_money.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A tipped-over round clay jar spilling a few chunky gold coins. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_negate_money_gain",
+      "out": "external/sprites/artifacts/artifact_negate_money_gain.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A squat iron piggy bank wrapped in one thick chain with a big padlock, a small yellow spark leaking from its coin slot. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_heal_on_combat_ended",
+      "out": "external/sprites/artifacts/artifact_heal_on_combat_ended.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A shiny red apple with one green leaf and a small bite taken out. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_full_heal",
+      "out": "external/sprites/artifacts/artifact_full_heal.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A steaming wooden bowl of soup with a wooden spoon sticking out, warm orange broth. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_draw_on_kill",
+      "out": "external/sprites/artifacts/artifact_draw_on_kill.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A curved hunting knife with a single blank playing card pinned on its tip. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_draw_on_combat_start",
+      "out": "external/sprites/artifacts/artifact_draw_on_combat_start.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A proud rooster-shaped weathervane on a short iron arrow, bright red comb. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_energy_on_combat_start",
+      "out": "external/sprites/artifacts/artifact_energy_on_combat_start.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A fat ceramic mug of hot tea with big curls of steam, sky-blue glaze. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_easy_mode",
+      "out": "external/sprites/artifacts/artifact_easy_mode.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A fluffy pink feather duster with a short wooden handle. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_block_on_attacks",
+      "out": "external/sprites/artifacts/artifact_block_on_attacks.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A round wooden buckler shield with three deep notches cut into its rim and an iron boss. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_retain_hand",
+      "out": "external/sprites/artifacts/artifact_retain_hand.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A plump jar of golden honey with a wooden honey dipper, honey dripping down the side. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_preserve_energy",
+      "out": "external/sprites/artifacts/artifact_preserve_energy.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A corked glass mason jar holding three glowing yellow fireflies. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_increase_attack_on_rest",
+      "out": "external/sprites/artifacts/artifact_increase_attack_on_rest.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A crude training dumbbell made of two round grey stones lashed to a wooden stick. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_see_top_of_draw_pile",
+      "out": "external/sprites/artifacts/artifact_see_top_of_draw_pile.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A single round brass monocle on a short curling chain, a bright glint on the lens. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_top_deck_attack_card",
+      "out": "external/sprites/artifacts/artifact_top_deck_attack_card.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A jack-in-the-box: a small wooden box with a red boxing glove springing out on a coiled spring. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_right_click_shuffle_deck",
+      "out": "external/sprites/artifacts/artifact_right_click_shuffle_deck.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A whirling wooden spinning top with red and white stripes, motion swoosh around it. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_boss_red",
+      "out": "external/sprites/artifacts/artifact_boss_red.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A crimson war drum with two crossed drumsticks resting on top. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_shop_red",
+      "out": "external/sprites/artifacts/artifact_shop_red.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A single glossy red chili pepper with a curled green stem. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_boss_blue",
+      "out": "external/sprites/artifacts/artifact_boss_blue.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A round cobalt-blue teapot with a tall curved spout and a little knob lid. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_shop_blue",
+      "out": "external/sprites/artifacts/artifact_shop_blue.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A blue paper lantern, round and ribbed, with a warm glow inside. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_boss_orange",
+      "out": "external/sprites/artifacts/artifact_boss_orange.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A carved orange pumpkin lantern with a cheeky grin and candle light inside. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_shop_orange",
+      "out": "external/sprites/artifacts/artifact_shop_orange.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A plump orange mushroom with big white spots and a thick stem. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_boss_white",
+      "out": "external/sprites/artifacts/artifact_boss_white.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A white porcelain theater mask with a calm closed-eye smile and a thin crack. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "artifact_shop_white",
+      "out": "external/sprites/artifacts/artifact_shop_white.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A white origami paper crane with sharp folded wings. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "consumable_heal",
+      "out": "external/sprites/consumables/consumable_heal.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A round-bellied red potion flask with a heart-shaped cork stopper. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "consumable_block",
+      "out": "external/sprites/consumables/consumable_block.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A short wide teal potion bottle shaped like a little shield, with an iron screw cap. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "consumable_damaging",
+      "out": "external/sprites/consumables/consumable_damaging.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A black round bomb-shaped potion flask with a short lit fuse spitting sparks. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "consumable_multi_damaging",
+      "out": "external/sprites/consumables/consumable_multi_damaging.png",
+      "size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A purple triangular potion flask with three sparks bursting out of its open neck. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "enemy_1",
+      "out": "external/sprites/enemies/enemy_1.png",
+      "size": [
+        160,
+        160
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Squat round golem of weathered red sandstone hiding under an oversized tarnished-bronze bell-shaped helmet that covers most of its body, moss and one tiny fern on the helm's crown, a single glowing teal rune eye slit peeking out under the rim, a short rusty bronze trident, two stubby stone feet. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_2",
+      "out": "external/sprites/enemies/enemy_2.png",
+      "size": [
+        160,
+        160
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Small fussy golem of polished pale-blue crystal and white stone wearing a huge pleated ivory stone ruff collar like a fancy bonnet, a little bronze spout nose, an indignant glowing teal eye slit and two narrow paddle feet; prim upright posture, spotless with no moss at all. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_3",
+      "out": "external/sprites/enemies/enemy_3.png",
+      "size": [
+        160,
+        160
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Pear-shaped golem of mossy green clay with a swollen cracked glass belly vessel full of bubbling plum-purple swamp acid, a loose bronze stopper on top, an anxious round glowing teal eye, a drip of acid on its chin and two splayed stone feet. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_4",
+      "out": "external/sprites/enemies/enemy_4.png",
+      "size": [
+        200,
+        200
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Broad heavy golem of dark plum-gray basalt with two enormous tarnished-bronze vise-jaw forearms, a glowing teal rune core in its chest plate, a small ivory stone head with a narrow eye slit, squat pillar legs, moss in its cracks and a sealed glass jar of purple swamp acid strapped to its back. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_minion_1",
+      "out": "external/sprites/enemies/enemy_minion_1.png",
+      "size": [
+        160,
+        160
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Tiny round red-clay golem with a pointed bronze snout, one ivory stone eye with a glowing teal pupil, a sprig of moss on its head and comically oversized terracotta stone boots; compact eager forward lean. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_minion_2",
+      "out": "external/sprites/enemies/enemy_minion_2.png",
+      "size": [
+        160,
+        160
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Tiny blue-gray millstone golem shaped like a round stone ring with one big cream eye in its center hole, a bronze rim, little paddle stone arms and two stubby cream stone feet; round open silhouette. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_act_1_miniboss_1",
+      "out": "external/sprites/enemies/enemy_act_1_miniboss_1.png",
+      "size": [
+        220,
+        220
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Imposing boxy golem whose body is a perfectly trimmed rectangular hedge block over a white stone frame, two oversized bronze garden-shear blades forming its arms, a cream stone rectangular head with a disapproving narrow glowing teal eye slit and heavy terracotta stone stomping feet; prim and rigid, no paperwork or lettering. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_act_1_miniboss_2",
+      "out": "external/sprites/enemies/enemy_act_1_miniboss_2.png",
+      "size": [
+        220,
+        220
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Tall slender golem of ivory stone and polished bronze shaped like a court dancer, an ivory ruffled stone collar, two long bronze scissor-blade arms, a tiny tilted head with one glowing teal eye and two curled pointed feet, performing a theatrical forward bow with one blade arm extended. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 2
+    },
+    {
+      "id": "enemy_act_1_boss_1",
+      "out": "external/sprites/enemies/enemy_act_1_boss_1.png",
+      "size": [
+        300,
+        300
+      ],
+      "transparent": true,
+      "category": "combatant",
+      "anchor": "bottom",
+      "prompt": "Chunky simplified version with big shapes and little surface detail. Massive egg-shaped golem built like a giant stone-and-bronze cauldron, a cracked glass dome on top with moss and glowing teal runes inside, bronze handle loops like proud hips, a broad arched belly hatch glowing with warm rune light, little mossy ledges on its shoulders and two huge terracotta stone feet; a stern little glowing eye slit looks left, hatch empty for independent minion spawning. Three-quarter profile facing LEFT, eye and working tool directed left. Transparent background, complete full body including all feet and tools; bottom anchored with soles at 94 percent canvas height, 6 percent clear margin, no ground plane and no cast or contact shadow; keep internal cel shading only.",
+      "per_call": 1
+    },
+    {
+      "id": "world_act_1",
+      "out": "external/sprites/backgrounds/act_1.png",
+      "size": [
+        1200,
+        700
+      ],
+      "transparent": false,
+      "category": "background",
+      "prompt": "Painted as a simplified stage: fewer, larger shapes, flat color planes with soft gradients, no small leaves, pebbles or tiny props, quiet low-detail background. Side-view stage inside an ancient enchanted forest: colossal mossy tree trunks at the extreme left and right edges, broken white-stone arches and a toppled column overgrown with vines in the middle distance, faint teal glowing rune lines carved into fallen stones, drifting golden pollen motes and soft god-rays from a high canopy. Deep greens and teal with warm gold afternoon light; distant elements stay quiet and hazy. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, creatures, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is a simple dark mossy flagstone floor beneath cards."
+    },
+    {
+      "id": "world_act_2",
+      "out": "external/sprites/backgrounds/act_2.png",
+      "size": [
+        1200,
+        700
+      ],
+      "transparent": false,
+      "category": "background",
+      "prompt": "Painted as a simplified stage: fewer, larger shapes, flat color planes with soft gradients, no small leaves, pebbles or tiny props, quiet low-detail background. Side-view stage inside a vast volcanic cavern beneath a dragon mountain: towering black basalt columns at the extreme sides, slow rivers of glowing lava along the far background, the enormous fossilized ribs and skull of an ancient dragon half buried in the distant rock wall, embers floating upward. Deep charcoal, rust and crimson with narrow orange lava light; no active eruption. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, creatures, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is a simple dark cracked basalt floor beneath cards."
+    },
+    {
+      "id": "world_act_3",
+      "out": "external/sprites/backgrounds/act_3.png",
+      "size": [
+        1200,
+        700
+      ],
+      "transparent": false,
+      "category": "background",
+      "prompt": "Painted as a simplified stage: fewer, larger shapes, flat color planes with soft gradients, no small leaves, pebbles or tiny props, quiet low-detail background. Side-view stage in the sunlit upper courtyard of a cliffside white-stone royal citadel: tall pale towers with blue slate roofs at the extreme sides, long plain blue and gold cloth banners with no symbols hanging from the walls, a pair of weathered stone dragon statues in the middle distance, snowy mountains and a far volcanic peak under a bright sky. Ivory, sky blue and gold with clean noon light. Fixed 1200x700 side-view stage, empty combatant zones x=140..480 and x=650..1100, y=220..490; no characters, creatures, foreground obstructions or baked shadows. Keep those zones low contrast; lower 30 percent (y=490..700) is a simple worn pale flagstone floor beneath cards."
+    },
+    {
+      "id": "world_rest_site",
+      "out": "external/sprites/backgrounds/rest_site.png",
+      "size": [
+        1200,
+        700
+      ],
+      "transparent": false,
+      "category": "background",
+      "prompt": "Painted as a simplified stage: fewer, larger shapes, flat color planes with soft gradients, no small leaves, pebbles or tiny props, quiet low-detail background. Side-view stage of a peaceful sanctuary hidden in the enchanted forest ruins, the adventurers' safe home base at twilight. On the LEFT half, a broad round raised platform of pale weathered stone (its top surface spans about x=130..560 at y=470..560) inlaid with a ring of softly glowing teal rune lines; the middle of the platform is EMPTY because a character will be placed standing there. Behind the platform, a small white-stone healing spring with a basin of glowing teal-green water, and a tall faceted amber-and-teal guardian crystal floating above a tarnished bronze clockwork pedestal with slowly turning gear rings, gentle light beams rising from it. Mossy broken arches, ivy, ferns and a few warm hanging lanterns frame the scene; deep blue-violet dusk sky and fireflies glimpsed through the canopy. The RIGHT half (x=640..1170, y=110..600) stays calm, dim and low contrast with only soft distant ruins and foliage, because game UI icons and tooltips will be drawn over it. Lower 12 percent is a simple dark mossy flagstone floor. Fixed 1200x700; no characters, creatures, people, foreground obstructions or baked shadows."
+    },
+    {
+      "id": "card_energy_next_turn",
+      "out": "external/sprites/cards/white/card_energy_next_turn.png",
+      "size": [
+        384,
+        384
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "Square card illustration, full bleed, opaque background. A tall hourglass filled with glowing yellow light-sand standing on a mossy stone, sunrise behind the forest ruins. No people."
+    }
+  ]
+}

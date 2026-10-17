@@ -21,16 +21,16 @@ const SERIF_FONTS: PackedStringArray = ["Yu Mincho", "YuMincho", "Noto Serif JP"
 ## 系統: 名前・色・アイコン。祝福の中身 (アクション) から選ぶ
 const ICON_DIR := "external/sprites/"
 const PATHS := {
-	"life": {"name": "Vitality", "color": Color(0.42, 0.88, 0.55), "icon": "artifacts/artifact_full_heal.png"},
+	"life": {"name": "Vitality", "color": Color(0.42, 0.88, 0.55), "icon": "consumables/consumable_heal.png"},
 	"gold": {"name": "Fortune", "color": Color(1.0, 0.78, 0.32), "icon": "artifacts/artifact_add_money.png"},
-	"relic": {"name": "Relic", "color": Color(0.72, 0.52, 1.0), "icon": "artifacts/artifact_boss_blue.png"},
+	"relic": {"name": "Relic", "color": Color(0.72, 0.52, 1.0), "icon": "res://sprites/ui/chest.png"},
 	"potion": {"name": "Elixir", "color": Color(0.35, 0.78, 1.0), "icon": "rest_actions/rest_action_add_random_consumable.png"},
 	"upgrade": {"name": "Forge", "color": Color(1.0, 0.55, 0.28), "icon": "rest_actions/rest_action_upgrade_card.png"},
 	"remove": {"name": "Purge", "color": Color(0.75, 0.88, 1.0), "icon": "rest_actions/rest_action_remove_cards.png"},
 	"transform": {"name": "Change", "color": Color(1.0, 0.45, 0.82), "icon": "rest_actions/rest_action_enchant_cards.png"},
-	"draft": {"name": "Insight", "color": Color(0.3, 0.92, 0.82), "icon": "artifacts/artifact_draw_on_kill.png"},
-	"card": {"name": "Card", "color": Color(0.7, 0.7, 0.7), "icon": "artifacts/artifact_top_deck_attack_card.png"},
-	"swap": {"name": "Exchange", "color": Color(0.72, 0.52, 1.0), "icon": "artifacts/artifact_boss_white.png"},
+	"draft": {"name": "Insight", "color": Color(0.3, 0.92, 0.82), "icon": "artifacts/artifact_see_top_of_draw_pile.png"},
+	"card": {"name": "Card", "color": Color(0.7, 0.7, 0.7), "icon": "cards/green/card_waste.png"},
+	"swap": {"name": "Exchange", "color": Color(0.72, 0.52, 1.0), "icon": "res://sprites/ui/chest.png"},
 	"equip": {"name": "", "color": Color(1.0, 0.36, 0.32), "icon": ""},	# 名前とアイコンは装備のレリックから
 }
 
@@ -144,13 +144,13 @@ func setup(actions: Array[Dictionary], summary: String) -> void:
 	var path: Dictionary = PATHS[main.path]
 	_color = path.color
 	_name_label.text = tr(main.get("name", path.name))
-	_icon.texture = FileLoader.load_texture(main.get("icon", ICON_DIR + path.icon))
+	_icon.texture = _load_icon(main.get("icon", path.icon))
 	_glow_material.set_shader_parameter("glow_color", _color)
 	_ring_material.set_shader_parameter("ring_color", _color)
 	for part: Dictionary in parts:
 		var small := _make_icon(SMALL_ICON_SIZE)
 		small.custom_minimum_size = Vector2(SMALL_ICON_SIZE, SMALL_ICON_SIZE)
-		small.texture = FileLoader.load_texture(part.get("icon", ICON_DIR + PATHS[part.path].icon))
+		small.texture = _load_icon(part.get("icon", PATHS[part.path].icon))
 		if part.cost:
 			(small.material as ShaderMaterial).set_shader_parameter("tint", COST_TINT)
 		_small_icons.add_child(small)
@@ -278,3 +278,10 @@ func _serif_font() -> Font:
 	font.font_weight = 600
 	font.fallbacks = [get_theme_default_font()]
 	return font
+
+
+## アイコンを読む: res:// はゲーム内の素材、external/ から始まるものはそのまま、ほかは external/sprites/ の下
+func _load_icon(path: String) -> Texture2D:
+	if path.begins_with("res://"):
+		return load(path)
+	return FileLoader.load_texture(path if path.begins_with("external/") else ICON_DIR + path)
