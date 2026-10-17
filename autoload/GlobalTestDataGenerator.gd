@@ -1924,7 +1924,7 @@ func add_test_run_modifiers() -> void:
 	### Automatic Modifiers
 	
 	# this allows for auto revive consumables to work each run
-	var run_modifier_consumable_auto_revive: RunModifierData = RunModifierData.new("run_modifier_draft_all_colors")
+	var run_modifier_consumable_auto_revive: RunModifierData = RunModifierData.new("run_modifier_consumable_auto_revive")
 	run_modifier_consumable_auto_revive.run_modifier_name = "Auto Revive"
 	run_modifier_consumable_auto_revive.run_modifier_description = "Uses auto revive consumables"
 	run_modifier_consumable_auto_revive.run_modifier_is_automatic = true # registered regardless of difficulty
