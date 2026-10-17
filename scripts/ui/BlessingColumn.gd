@@ -224,7 +224,7 @@ static func parts_of(actions: Array[Dictionary]) -> Array[Dictionary]:
 				Scripts.ACTION_SWAP_BOSS_ARTIFACT:
 					part = {"path": "swap", "cost": false}
 				Scripts.ACTION_CREATE_CARDS:
-					part = {"path": "card", "cost": true}	# 呪いのようなカードを足される
+					part = {"path": "card", "cost": values.get("shown_as_cost", true)}	# 既定は呪いのようなカードを足される扱い
 				Scripts.ACTION_ADD_ARTIFACT:
 					var artifact: ArtifactData = Global.get_artifact_data(values.get("artifact_id", ""))
 					part = {"path": "equip", "cost": false}

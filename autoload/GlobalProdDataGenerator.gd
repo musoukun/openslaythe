@@ -470,7 +470,9 @@ func add_rest_actions() -> void:
 	rest_action_upgrade_card.rest_action_name = "Smith"
 	rest_action_upgrade_card.rest_action_description = "Upgrade a card in your deck."
 	rest_action_upgrade_card.rest_action_stat_name = "REST_UPGRADE_CARDS_COUNT"
-	rest_action_upgrade_card.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.INCLUSIVE_REPEATABLE
+	# 回復と両方できる (STS の「休むか強化か」の二択にはしない) が、強化は 1 回だけ。何回でもだと強化の判断が消える
+	# (reports/デッキ構築の法則とこのゲームへの取り入れ方.md の法則1・7)
+	rest_action_upgrade_card.rest_action_cost_type = RestActionData.REST_ACTION_COST_TYPES.INCLUSIVE
 	rest_action_upgrade_card.rest_action_auto_end = false # allows canceling
 	rest_action_upgrade_card.rest_actions = [
 	{

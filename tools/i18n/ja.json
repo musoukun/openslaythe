@@ -377,8 +377,6 @@
  "Dragonfire Gauntlet": "竜炎の籠手",
  "Deals bonus damage with a Dragonfire weapon": "竜炎の武器でダメージが上がる",
  "Dragonfire attacks deal +5 damage per hit.": "竜炎アタックのダメージが1ヒットごとに+5。",
- "[color=green]Equip Honed Claws[/color]: Physical attacks deal +2 damage per hit.": "[color=green]研ぎ澄ました爪を装備[/color]：物理アタックのダメージが1ヒットごとに+2。",
- "[color=green]Equip Dragonfire Gauntlet[/color]: Dragonfire attacks deal +5 damage per hit.": "[color=green]竜炎の籠手を装備[/color]：竜炎アタックのダメージが1ヒットごとに+5。",
  "Gain [energy_icon] whenever your Blood Heat boils over.": "竜血の熱があふれるたび[energy_icon]を得る。",
  "Do [damage] damage for each Cinder in your exhaust pile. Add 1 Cinder to your hand.": "廃棄札の燃えさし1枚につき[damage]ダメージを与える。燃えさし1枚を手札に加える。",
  "Do [damage] damage to all enemies. Gain [status_charge_amount] Blood Heat.": "敵全体に[damage]ダメージを与える。竜血の熱を[status_charge_amount]得る。",
@@ -621,5 +619,13 @@
  "When this enemy dies, the attached card is added to your hand.": "この敵を倒すと、付いているカードが手札に加わる。",
  "When this goes over 10, it bursts: deal 10 damage to all enemies and take 5 damage. Halves each turn.": "10を超えるとあふれ、敵全体に10ダメージ、自分に5ダメージ。毎ターン半分になる。",
  "Whenever Blood Heat bursts, gain [charges] Energy.": "竜血の熱があふれるたび、エナジーを[charges]得る。",
- "Whenever this is hit by an attack, deals [charges] damage to the attacker.": "アタックを受けるたび、攻撃してきた相手に[charges]ダメージを与える。"
+ "Whenever this is hit by an attack, deals [charges] damage to the attacker.": "アタックを受けるたび、攻撃してきた相手に[charges]ダメージを与える。",
+ "Claw Swipe": "爪撃",
+ "Twin Rake": "二連掻き",
+ "Ember Breath": "残り火の息",
+ "Rising Step": "踏み込み",
+ "Deal [damage] damage. Gain [block] block.": "[damage]ダメージを与える。ブロックを[block]得る。",
+ "[color=green]Equip Honed Claws[/color]: Physical attacks deal +2 damage per hit. Start with 2 Twin Rake.": "[color=green]研ぎ澄ました爪を装備[/color]：物理アタックのダメージが1ヒットごとに+2。二連掻きを2枚持って始める。",
+ "[color=green]Equip Dragonfire Gauntlet[/color]: Dragonfire attacks deal +5 damage per hit. Start with 2 Ember Breath.": "[color=green]竜炎の籠手を装備[/color]：竜炎アタックのダメージが1ヒットごとに+5。残り火の息を2枚持って始める。",
+ "[color=green]Learn Ascending Dragon Form[/color]: Play cards in rising cost order; each link of the chain adds +10% damage and Block. Start with 2 Rising Step.": "[color=green]昇り竜の型を覚える[/color]：コストの小さい順にカードを出すとチェーンがつながり、1つごとにダメージとブロックが+10%。踏み込みを2枚持って始める。"
 }

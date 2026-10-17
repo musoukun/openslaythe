@@ -238,10 +238,12 @@ static func _potion(count: int) -> Dictionary:
 
 ## カードを生成してデッキに加える。2つのアクションの組なので配列で返す (_option で平坦化される)。
 ## 並び順はフレームワークの例 (GlobalTestDataGenerator の Quest Card) に合わせている。
-static func _add_card(card_id: String, count: int) -> Array:
+## shown_as_cost: 選択肢の柱でカードのアイコンを代償の色 (赤) にするか (呪いを足すなら true、もらえるカードなら false)。
+## ラン開始のキーストーン (BuildContent / ComboContent) からも使う
+static func _add_card(card_id: String, count: int, shown_as_cost: bool = true) -> Array:
 	return [
 		{Scripts.ACTION_ADD_CARDS_TO_DECK: {"custom_key_names": {"picked_cards": "generated_cards"}}},
-		{Scripts.ACTION_CREATE_CARDS: {"created_card_object_id": card_id, "number_of_cards": count}},
+		{Scripts.ACTION_CREATE_CARDS: {"created_card_object_id": card_id, "number_of_cards": count, "shown_as_cost": shown_as_cost}},
 	]
 
 ## デッキからカードを選んで actions を適用する

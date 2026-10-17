@@ -12,10 +12,12 @@ const INTERCEPTOR_ID := "interceptor_tag_scaling"
 const PHYSICAL_CARD_IDS: Array[String] = [
 	"card_basic_attack_green", "card_clippers", "card_reap", "card_wildflower", "card_vines",
 	"card_green_searing_claw", "card_green_frenzied_claws", "card_green_claw_flurry",
+	"card_green_twin_rake", # 研ぎ澄ました爪の専用カード (HeroGreenContent.KEYSTONE_CARD_PHYSICAL)
 ]
 ## 竜炎の攻撃 (タグ ID は reactor のまま)。枚数は少ないが1発の上乗せが大きい
 const REACTOR_CARD_IDS: Array[String] = [
 	"card_meltdown", "card_big_boom", "card_fusion_cannon", "card_chloroplast", "card_conclusion",
+	"card_green_ember_breath", # 竜炎の籠手の専用カード (HeroGreenContent.KEYSTONE_CARD_REACTOR)
 ]
 
 
@@ -23,8 +25,8 @@ static func register() -> void:
 	_register_interceptor()
 	_register_axis(TAG_PHYSICAL, "Physical", PHYSICAL_CARD_IDS)
 	_register_axis(TAG_REACTOR, "Dragonfire", REACTOR_CARD_IDS)
-	_register_weapon("artifact_weapon_pruning_blade", "Honed Claws", "Physical", TAG_PHYSICAL, 2, "artifact_weapon_pruning_blade")
-	_register_weapon("artifact_weapon_reactor_gauntlet", "Dragonfire Gauntlet", "Dragonfire", TAG_REACTOR, 5, "artifact_weapon_reactor_gauntlet")
+	_register_weapon("artifact_weapon_pruning_blade", "Honed Claws", "Physical", TAG_PHYSICAL, 2, "artifact_weapon_pruning_blade", HeroGreenContent.KEYSTONE_CARD_PHYSICAL)
+	_register_weapon("artifact_weapon_reactor_gauntlet", "Dragonfire Gauntlet", "Dragonfire", TAG_REACTOR, 5, "artifact_weapon_reactor_gauntlet", HeroGreenContent.KEYSTONE_CARD_REACTOR)
 
 
 static func _register_interceptor() -> void:
@@ -53,8 +55,8 @@ static func _register_axis(tag: String, axis_name: String, card_ids: Array[Strin
 		card_data.card_keyword_object_ids.append(keyword.object_id)
 
 
-## 武器レリックと、それをラン開始時に選ぶ選択肢を作る
-static func _register_weapon(artifact_id: String, weapon_name: String, axis_name: String, tag: String, damage_bonus: int, texture_name: String) -> void:
+## 武器レリックと、それをラン開始時に選ぶ選択肢を作る。選ぶと武器の専用カード (starter_card_id) が初期デッキに 2 枚加わる
+static func _register_weapon(artifact_id: String, weapon_name: String, axis_name: String, tag: String, damage_bonus: int, texture_name: String, starter_card_id: String) -> void:
 	var value_name: String = InterceptorTagScaling.TAG_DAMAGE_VALUE_PREFIX + tag
 	var description: String = "%s attacks deal +%d damage per hit." % [axis_name, damage_bonus]
 
@@ -70,9 +72,11 @@ static func _register_weapon(artifact_id: String, weapon_name: String, axis_name
 	Global.register_rod(weapon)
 
 	var option: RunStartOptionData = RunStartOptionData.new("run_start_option_" + artifact_id)
-	option.run_start_option_bb_code = "[color=green]Equip %s[/color]: %s" % [weapon_name, description]
+	var starter_card_name: String = Global.get_card_data(starter_card_id).card_name
+	option.run_start_option_bb_code = "[color=green]Equip %s[/color]: %s Start with %d %s." % [weapon_name, description, HeroGreenContent.KEYSTONE_CARD_COUNT, starter_card_name]
 	option.run_start_option_type = RunStartOptionData.RUN_START_OPTION_TYPES.COMPLETE
 	option.run_start_option_actions = [{Scripts.ACTION_ADD_ARTIFACT: {"artifact_id": artifact_id}}]
+	option.run_start_option_actions.append_array(HeroGreenContent.keystone_card_actions(starter_card_id))
 	option.run_start_option_character_ids = ["character_green"] # 爪と竜炎は Vera 専用の武器
 	Global.register_rod(option)
 

@@ -15,6 +15,13 @@ const CARDS_OUT_OF_POOL: Array[String] = [
 	"card_growth", "card_moss", "card_lotus", "card_symbiosis", "card_datum", # オーバーシールド・鱗
 ]
 
+## キーストーン (ラン開始時に選ぶ武器・型) で初期デッキに加わる専用カード。仕組みを見せるだけの弱さで、報酬には出ない。
+## 足すのは BuildContent (武器) と ComboContent (昇り竜の型) の選択肢
+const KEYSTONE_CARD_PHYSICAL := "card_green_twin_rake" # 研ぎ澄ました爪
+const KEYSTONE_CARD_REACTOR := "card_green_ember_breath" # 竜炎の籠手
+const KEYSTONE_CARD_COMBO := "card_green_rising_step" # 昇り竜の型
+const KEYSTONE_CARD_COUNT := 2
+
 
 static func register_cards() -> void:
 	for card_id: String in CARDS_OUT_OF_POOL:
@@ -25,17 +32,59 @@ static func register_cards() -> void:
 		card_data.card_appears_in_card_packs = false
 	_rework_cards()
 	_add_cards()
+	_add_keystone_cards()
+	_rename_basics()
 	_rework_starting_deck()
 
 
-## 初期デッキで序盤に使えない札 (0 ダメージの灼熱の吐息、エナジーを溜めるまで使えない竜の覚醒) を 1 枚ずつ、
-## 1 コストで使える熱のカードに替える (枚数は 19 のまま。2 枚とも替えるとかえって弱くなった)
+## キーストーンで選んだ専用カードを初期デッキに足すアクション (選択肢の柱では「もらえるカード」として出す)
+static func keystone_card_actions(card_id: String) -> Array[Dictionary]:
+	var actions: Array[Dictionary] = []
+	actions.assign(EventContent._add_card(card_id, KEYSTONE_CARD_COUNT, false))
+	return actions
+
+
+## 初期デッキは基本カード 8 枚だけ。残りの 2 枚はキーストーンで決まる (方向だけ渡し、完成品は渡さない)。
+## 元の初期カード (逆鱗の爪・竜心をくべる・沸き立つ血 など) は報酬に出るので、引いたときの当たりになる。
+## 設計の理由: reports/デッキ構築の法則とこのゲームへの取り入れ方.md の法則9
 static func _rework_starting_deck() -> void:
 	var vera: CharacterData = Global.get_character_data("character_green")
-	var deck: Array[String] = vera.character_starting_card_object_ids
-	deck.erase("card_meltdown") # 2 枚のうち 1 枚
-	deck.erase("card_photoelectric_synthesis") # 2 枚のうち 1 枚
-	deck.append_array(["card_green_searing_claw", "card_green_heat_scales"])
+	vera.character_starting_card_object_ids.assign([
+		"card_basic_attack_green", "card_basic_attack_green", "card_basic_attack_green", "card_basic_attack_green",
+		"card_basic_block_green", "card_basic_block_green", "card_basic_block_green", "card_basic_block_green",
+	])
+
+
+## 基本カードを Vera の名前にする (Strike / Defend に寄せない。攻撃は爪、防御はブロック)
+static func _rename_basics() -> void:
+	Global.get_card_data("card_basic_attack_green").card_name = "Claw Swipe"
+	Global.get_card_data("card_basic_block_green").card_name = "Block"
+
+
+## キーストーンの専用カード。それぞれの軸の仕組みを 1 回見せるだけの数値にする (払い出しは報酬から)
+static func _add_keystone_cards() -> void:
+	# 研ぎ澄ました爪: 多段。武器の「1 ヒットごと +2」が 2 回乗るのを見せる
+	var rake: CardData = _card(KEYSTONE_CARD_PHYSICAL, "Twin Rake", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.BASIC, 1,
+		"Deal [damage] damage [number_of_attacks] times.", {"damage": 4, "number_of_attacks": 2}, {"damage": 2}, "card_thorns")
+	rake.card_play_actions = [_attack()]
+	_register_keystone_card(rake)
+
+	# 竜炎の籠手: 一撃＋竜血の熱。籠手の「1 ヒットごと +5」と、熱が溜まる様子を見せる
+	var breath: CardData = _card(KEYSTONE_CARD_REACTOR, "Ember Breath", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.BASIC, 1,
+		"Deal [damage] damage. Gain [status_charge_amount] Blood Heat.", {"damage": 5, "number_of_attacks": 1, "status_charge_amount": 5}, {"damage": 3}, "card_fusion_cannon")
+	breath.card_play_actions = [_attack(), _gain_heat()]
+	_register_keystone_card(breath)
+
+	# 昇り竜の型: 0 コストでチェーンの 1 枚目になる
+	var step: CardData = _card(KEYSTONE_CARD_COMBO, "Rising Step", CardData.CARD_TYPES.ATTACK, CardData.CARD_RARITIES.BASIC, 0,
+		"Deal [damage] damage. Gain [block] block.", {"damage": 3, "number_of_attacks": 1, "block": 3}, {"damage": 2, "block": 2}, "card_blossom")
+	step.card_play_actions = [_attack(), _block()]
+	_register_keystone_card(step)
+
+
+static func _register_keystone_card(card: CardData) -> void:
+	card.card_appears_in_card_packs = false
+	Global.register_rod(card)
 
 
 ## 外した軸に頼っていたカードを、残す軸に合わせて作り直す
