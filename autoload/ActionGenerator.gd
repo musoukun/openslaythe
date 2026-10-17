@@ -335,7 +335,7 @@ func generate_location_music_action() -> void:
 			return
 		else:
 			if event_data.event_music_file_path != "":
-				ActionGenerator.generate_music_action(act_data.event_music_file_path)
+				ActionGenerator.generate_music_action(event_data.event_music_file_path)
 				return
 	# otherwise use location type
 	match location_data.location_type:
@@ -347,7 +347,7 @@ func generate_location_music_action() -> void:
 			if act_data.act_music_ambient_file_path != "":
 				ActionGenerator.generate_music_action(act_data.act_music_ambient_file_path)
 			else:
-				ActionGenerator.generate_music_action(FileLoader.MUSIC_DEFAULT_AMBIENT_AUDIO_PATH)
+				ActionGenerator.generate_music_action(FileLoader.MUSIC_DEFAULT_EVENT_AUDIO_PATH)
 		LocationData.LOCATION_TYPES.SHOP:
 			ActionGenerator.generate_music_action(FileLoader.MUSIC_SHOP_AUDIO_PATH)
 		LocationData.LOCATION_TYPES.COMBAT:

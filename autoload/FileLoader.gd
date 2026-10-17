@@ -48,17 +48,21 @@ var _read_only_object_to_source_file_path: Dictionary[SerializableData, Array] =
 
 #region Music Paths
 const NO_MUSIC: String = "NO_MUSIC" # This can be used to explicitly specify stopping music to ActionPlayMusic.
-const MUSIC_TITLE_SCREEN_AUDIO_PATH: String = ""
+# 曲は場面の名前で置いてあるので、同じ名前の .ogg を上書きすれば差し替わる (出どころは sounds/music/CREDITS.md)
+const MUSIC_TITLE_SCREEN_AUDIO_PATH: String = "res://sounds/music/lobby.ogg"
+const MUSIC_MAP_AUDIO_PATH: String = "res://sounds/music/map.ogg" # 次の部屋を選んでいる間
 # Location musics. These are used as final fallbacks when more specific cases are not provided.
 # NOTE: See EventData and ActData for overriding these on a case by case basis.
 # NOTE: See ActionGenerator.generate_location_music()
 # NOTE: use an empty string or NO_MUSIC to play no music.
-const MUSIC_SHOP_AUDIO_PATH: String = NO_MUSIC
-const MUSIC_REST_SITE_AUDIO_PATH: String = NO_MUSIC
-const MUSIC_DEFAULT_AMBIENT_AUDIO_PATH: String = NO_MUSIC # non combat (starting/events/chests) music.
-const MUSIC_DEFAULT_COMBAT_AUDIO_PATH: String = NO_MUSIC # standard combat music
-const MUSIC_DEFAULT_MINIBOSS_AUDIO_PATH: String = NO_MUSIC
-const MUSIC_DEFAULT_BOSS_AUDIO_PATH: String = NO_MUSIC
+# 店と休憩所は専用の曲がまだないので、マップの曲を流し続ける (同じ曲なら途切れない)
+const MUSIC_SHOP_AUDIO_PATH: String = MUSIC_MAP_AUDIO_PATH
+const MUSIC_REST_SITE_AUDIO_PATH: String = MUSIC_MAP_AUDIO_PATH
+const MUSIC_DEFAULT_AMBIENT_AUDIO_PATH: String = MUSIC_MAP_AUDIO_PATH # non combat (starting/chests) music.
+const MUSIC_DEFAULT_EVENT_AUDIO_PATH: String = "res://sounds/music/event.ogg"
+const MUSIC_DEFAULT_COMBAT_AUDIO_PATH: String = "res://sounds/music/combat.ogg" # standard combat music
+const MUSIC_DEFAULT_MINIBOSS_AUDIO_PATH: String = "res://sounds/music/elite.ogg"
+const MUSIC_DEFAULT_BOSS_AUDIO_PATH: String = "res://sounds/music/boss.ogg"
 #endregion
 
 func _ready():
@@ -95,12 +99,19 @@ func get_files_in_directory(partial_dir_path: String):
 ## Can specify if the audio is meant to loop or not, for .OGG and .MP3 files only.
 func load_audio(audio_partial_path, is_absolute: bool = false, audio_loops: bool = false) -> AudioStream:
 	var full_path: String = audio_partial_path
-	if not is_absolute:
+	if not is_absolute and not audio_partial_path.begins_with("res://"):
 		full_path = _get_modified_filepath(audio_partial_path)
-	
+
 	if self._cached_audio.has(full_path):
 		return self._cached_audio[full_path]
 	else:
+		# ゲームに同梱した音 (res://) は取り込み済みのリソースとして読む。書き出し後は元の .ogg が残らないため
+		if full_path.begins_with("res://") and ResourceLoader.exists(full_path):
+			var imported: AudioStream = load(full_path)
+			if "loop" in imported:
+				imported.loop = audio_loops
+			self._cached_audio[full_path] = imported
+			return imported
 		if FileAccess.file_exists(full_path):
 			var audio: AudioStream = null
 			if full_path.ends_with(".wav"):

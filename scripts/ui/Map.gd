@@ -222,6 +222,9 @@ func clear_locations() -> void:
 func show_map():
 	populate_locations()
 	visible = true
+	# 次の部屋を選ぶときだけマップの曲にする (戦闘中にマップを覗いても曲は変えない)
+	if can_travel:
+		ActionGenerator.generate_music_action(FileLoader.MUSIC_MAP_AUDIO_PATH)
 
 func hide_map():
 	visible = false

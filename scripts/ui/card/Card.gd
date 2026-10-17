@@ -17,6 +17,14 @@ const CARD_SUFFICIENT_ENERGY_LABEL_COLOR: Color = Color.WHITE
 ## to play the card.
 const CARD_INSUFFICIENT_ENERGY_LABEL_COLOR: Color = Color.FIREBRICK
 const CARD_TEXT_IMAGE_SIZE: int = 16	# images in card descriptions will be set to this size
+## 種類の帯の枠の色でレア度を見せる (帯が狭いので文字は種類だけにする)
+const CARD_RARITY_BORDER_COLORS: Dictionary[int, Color] = {
+	CardData.CARD_RARITIES.BASIC: Color("#8a8580"),
+	CardData.CARD_RARITIES.COMMON: Color("#f7f0db"),
+	CardData.CARD_RARITIES.UNCOMMON: Color("#6ec6ff"),
+	CardData.CARD_RARITIES.RARE: Color("#ffc94a"),
+	CardData.CARD_RARITIES.GENERATED: Color("#8a8580"),
+}
 const ENERGY_ICON_KEYWORD: String = "[energy_icon]"	# tells description to display an energy icon in place
 
 var tooltip_left_side: bool = false # if tooltip should display to the left of the card when hovered
@@ -57,6 +65,8 @@ signal card_hovered(Card)
 signal card_unhovered(Card)
 
 func _ready() -> void:
+	# ホバー拡大しても文字がにじまないよう、カードの文字はすべて MSDF フォントで描く
+	card_visual.theme = CardFont.get_theme()
 	# コンテナは scale を見ずに並べるので、最小サイズも同じ倍率にして間隔を空ける
 	custom_minimum_size = BASE_SIZE * CARD_SCALE
 	pivot.position = BASE_PIVOT_POSITION * CARD_SCALE
@@ -114,7 +124,9 @@ func update_card_display(selected_enemy: Enemy = null) -> void:
 	# updates the card's display
 	card_name.set_bbcode("[center]" + card_data.get_card_name() + "[/center]")
 	card_description.set_bbcode(get_card_description(selected_enemy))
-	card_type.text = tr(CardData.CARD_RARITIES.keys()[card_data.card_rarity]) + " " + tr(CardData.CARD_TYPES.keys()[card_data.card_type])
+	card_type.text = tr(CardData.CARD_TYPES.keys()[card_data.card_type])
+	var type_style: StyleBoxFlat = card_type.get_theme_stylebox("normal")
+	type_style.border_color = CARD_RARITY_BORDER_COLORS.get(card_data.card_rarity, Color.WHITE)
 	
 	# update energy
 	_update_energy_display(selected_enemy)
