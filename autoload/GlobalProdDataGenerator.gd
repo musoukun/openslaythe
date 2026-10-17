@@ -825,12 +825,20 @@ func add_status_effects() -> void:
 				"custom_signal_value": 1,
 			}
 		},
+		# 敵全体に 10、自分には 5 (自分の分を半分にして、熱のビルドで自滅しにくくする)
 		{
 			Scripts.ACTION_DIRECT_DAMAGE: {
 				"damage": 10,
 				"bypass_block": false,
 				"time_delay": 0.5,
-				"target_override": BaseAction.TARGET_OVERRIDES.ALL_COMBATANTS,
+				"target_override": BaseAction.TARGET_OVERRIDES.ALL_ENEMIES,
+			}
+		},
+		{
+			Scripts.ACTION_DIRECT_DAMAGE: {
+				"damage": 5,
+				"bypass_block": false,
+				"target_override": BaseAction.TARGET_OVERRIDES.PLAYER,
 			}
 		}
 	]
@@ -1707,7 +1715,7 @@ func add_characters() -> void:
 	character_green.character_name = "Vera Emberscale"
 	character_green.character_description = "A half-dragon warrior born in the cliffside kingdom. With dragon-scale claws and wings of ember fire, she tears through the rampaging clockwork golems that overran the ancient forest."
 	character_green.character_color_id = "color_{0}".format([character_color])
-	character_green.character_starting_health = 75
+	character_green.character_starting_health = 80
 	character_green.character_starting_card_draft_card_pack_ids = ["card_pack_{0}".format([character_color])]
 	character_green.character_starting_artifact_ids = ["artifact_draw_on_combat_start"]
 	character_green.character_starting_artifact_pack_ids = ["artifact_pack_white", "artifact_pack_{0}".format([character_color])]
@@ -2205,7 +2213,7 @@ func add_enemies() -> void:
 	
 	# boss that summons minions
 	var enemy_act_1_boss_1: EnemyData = EnemyData.new("enemy_act_1_boss_1")
-	enemy_act_1_boss_1.add_health_bounds(200, 200)
+	enemy_act_1_boss_1.add_health_bounds(160, 160)
 	enemy_act_1_boss_1.add_health_bounds(250, 250, DIFFICULTY_BOSS_ENEMIES_HARDER)
 	enemy_act_1_boss_1.enemy_type = EnemyData.ENEMY_TYPES.BOSS
 	enemy_act_1_boss_1.enemy_name = "Act 1 Boss"
@@ -2222,7 +2230,7 @@ func add_enemies() -> void:
 		EnemyIntentData.new("intent_summon", DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack": 1}, enemy_act_1_boss_1_summon_actions)
 		])
 	enemy_act_1_boss_1.add_intent_state([
-		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 3, 2, "", 7, "", {"intent_attack": 1}),
+		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 3, 2, "", 4, "", {"intent_attack": 1}),
 		EnemyIntentData.new("intent_attack", DIFFICULTY_BOSS_ENEMIES_HARDER, 5, 2, "", 7, "", {"intent_attack": 1}),
 	])
 	
@@ -2243,7 +2251,7 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack": 1})
 	])
 	enemy_minion_1.add_intent_state([
-		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack": 1}),
+		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack": 1}),
 		EnemyIntentData.new("intent_attack", DIFFICULTY_BOSS_ENEMIES_HARDER, 8, 1, "", 5, "", {"intent_attack": 1}),
 		])
 	

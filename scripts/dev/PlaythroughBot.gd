@@ -10,7 +10,7 @@ const STUCK_SECONDS := 40.0 # 同じ状態がこれだけ続いたら詰まり�
 const GIVE_UP_SECONDS := 120.0
 const RUN_TIME_LIMIT := 6000.0 # ゲーム内時間でこれを超えたら打ち切る (状態が行き来する無限ループの保険)
 const HEAT_STATUS := "status_effect_overheat" # 竜血の熱。10 を超えた分ごとに、自分も含む全員へ 10 ダメージ (ブロックで防げる)
-const HEAT_OVERFLOW_DAMAGE := 10
+const HEAT_OVERFLOW_DAMAGE := 5 # あふれたとき自分が受ける分 (敵には 10)
 
 var hero_id: String = "character_green"
 var run_seed: int = 12345
