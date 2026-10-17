@@ -32,8 +32,24 @@ static func register() -> void:
 	artifact.artifact_counter_max = 99
 	Global.register_rod(artifact)
 
-	var option: RunStartOptionData = RunStartOptionData.new("run_start_option_" + ARTIFACT_ID)
-	option.run_start_option_bb_code = "[color=green]Learn Ascending Dragon Form[/color]: Play cards in rising cost order; each link of the chain adds +10% damage and Block."
+	# Vera は型の専用カード (0 コストでチェーンの 1 枚目になる) を初期デッキに 2 枚もらう。他の主人公は型だけ
+	var description: String = "Play cards in rising cost order; each link of the chain adds +10% damage and Block."
+	var step_name: String = Global.get_card_data(HeroGreenContent.KEYSTONE_CARD_COMBO).card_name
+	var vera_option: RunStartOptionData = _option("run_start_option_" + ARTIFACT_ID,
+		"[color=green]Learn Ascending Dragon Form[/color]: %s Start with %d %s." % [description, HeroGreenContent.KEYSTONE_CARD_COUNT, step_name])
+	vera_option.run_start_option_actions.append_array(HeroGreenContent.keystone_card_actions(HeroGreenContent.KEYSTONE_CARD_COMBO))
+	vera_option.run_start_option_character_ids = ["character_green"]
+	Global.register_rod(vera_option)
+
+	var other_option: RunStartOptionData = _option("run_start_option_" + ARTIFACT_ID + "_no_cards",
+		"[color=green]Learn Ascending Dragon Form[/color]: %s" % description)
+	other_option.run_start_option_character_ids = ["character_blue"]
+	Global.register_rod(other_option)
+
+
+static func _option(option_id: String, bb_code: String) -> RunStartOptionData:
+	var option: RunStartOptionData = RunStartOptionData.new(option_id)
+	option.run_start_option_bb_code = bb_code
 	option.run_start_option_type = RunStartOptionData.RUN_START_OPTION_TYPES.COMPLETE
 	option.run_start_option_actions = [{Scripts.ACTION_ADD_ARTIFACT: {"artifact_id": ARTIFACT_ID}}]
-	Global.register_rod(option)
+	return option
