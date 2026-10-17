@@ -41,7 +41,8 @@ godot --headless --path . -- --auto=mana_check --hero=character_blue
 
 - `--auto=<mode>` の一覧と引数は `autoload/DevAutoPilot.gd` 冒頭のコメントが正本（shop / rest / death / blessing / click_test / weapon など、画面ごとの確認モードがある）。新しい画面を作ったら、ここに確認用モードを足すのが流儀。
 - 通しプレイ (`scripts/dev/PlaythroughBot.gd`) は `PLAY ...` / `STUCK` / `BLOCKED` / `RESULT` と、計測用の `CSVCOMBAT` / `CSVRUN` を出す。`--god`（毎ターン全回復）`--draft=first|attack|random|none` `--combo` `--hero=` `--shots=<フォルダ>`。
-- **ボットは 1 条件 5 ラン程度（シード 101〜105）まで。** 大量のランはユーザーが嫌う。勝率比較などで増やすなら先に聞く。
+- **通しプレイ（ボット）はむやみに回さない。回す前に、本当に必要かをユーザーに確認する。** 文言・見た目・データの小さな修正や、1画面だけの変更は、`--quit-after` の起動確認か、その画面の `--auto=<mode>` / `shot.ps1` で足りる。頼まれていない運用テストを勝手に流さない。
+- **回すときも 1 条件 5 ラン程度（シード 101〜105）まで。** 大量のランはユーザーが嫌う。勝率比較などで増やすなら先に聞く。
 - 翻訳: `tools/i18n/ja.json`（英語 → 日本語）を編集して `python tools/i18n/build_csv.py` で `localization/strings.csv` を作る。ゲーム内文字列は英語で書き、日本語は ja.json に足す。
 
 ## アーキテクチャ

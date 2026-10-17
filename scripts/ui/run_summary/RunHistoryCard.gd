@@ -12,7 +12,8 @@ func init(card_id: String, card_level: int, card_count: int) -> void:
 	if card_data == null:
 		rich_text_label.set_bbcode(tr(INVALID_CARD_TEXT))
 		texture_rect.texture = FileLoader.MISSING_TEXTURE
-	
+		return # 削除したカードが過去のランの履歴に残っていても落ちないようにする
+
 	var card_bbcode: String = ""
 	if card_count > 1:
 		card_bbcode += "x{0} ".format([card_count])
