@@ -3,6 +3,7 @@ extends Node
 ## 例: godot --path . --write-movie shots/x.png --fixed-fps 10 --quit-after 60 -- --auto=combat
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=map_mid : 2階ぶん進んだ状態で移動待ちのマップを表示 (現在地と行き先の目印の確認用)
+## --auto=map_deck : マップを表示してマップ上のデッキボタンを押す (閉じるとマップに戻るかは map_deck:close)
 ## --auto=combat : ラン開始して最初の戦闘に入る
 ## --auto=new_run : タイトルから「新しいラン」画面を開く
 ## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
@@ -138,7 +139,7 @@ func _ready() -> void:
 			print("WEAPON deck ", card_data.object_id, " tags=", card_data.card_tags, " damage ", card_data.card_values.get("damage", 0), " -> ", damage)
 		return
 	match mode:
-		"map", "map_top", "map_mid":
+		"map", "map_top", "map_mid", "map_deck", "map_deck:close":
 			_print_map_stats()
 			# ラン開始の選択肢パネルがマップを覆うので閉じてから表示する
 			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false) as Control
@@ -154,6 +155,15 @@ func _ready() -> void:
 				if mode == "map_top":
 					await get_tree().process_frame
 					map.scroll_container.scroll_vertical = 0
+				if mode.begins_with("map_deck"):
+					await get_tree().create_timer(0.5).timeout
+					map.find_child("MapDeckButton", true, false).button_up.emit()
+					var overlay := get_tree().root.find_child("CardSelectionOverlay", true, false) as Control
+					print("MAP_DECK overlay=", overlay.visible, " map=", map.visible, " cards=", overlay.find_children("*", "Card", true, false).size())
+					if mode == "map_deck:close":
+						await get_tree().create_timer(0.5).timeout
+						overlay.get_node("BackButton").button_up.emit()
+						print("MAP_DECK closed overlay=", overlay.visible, " map=", map.visible)
 		"deck":
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:

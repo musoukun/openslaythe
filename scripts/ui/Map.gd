@@ -5,6 +5,7 @@ extends Control
 @onready var back_button: Button = $BackButton
 
 @onready var map_button = %MapButton
+@onready var card_selection_overlay = %CardSelectionOverlay
 
 var can_travel: bool = false	# if clicking on a location brings you to the next location
 
@@ -22,10 +23,18 @@ const ICON_PATH := "res://sprites/map/location_%s.png"
 ## 凡例: [アイコン名, 表示名]
 const LEGEND_TEXT := Color(0.18, 0.2, 0.22)
 const LEGEND := [["event", "Unknown"], ["shop", "Merchant"], ["treasure", "Treasure"], ["rest_site", "Rest"], ["combat", "Enemy"], ["miniboss", "Elite"]]
+## マップ上のデッキボタン (戦闘画面の上部バーにある DeckButton と同じ位置・絵)
+const DECK_ICON_PATH := "res://sprites/ui/icon_deck.png"
+const DECK_BUTTON_RECT := Rect2(128, 8, 50, 50)
+
+## デッキ一覧を見ている間はマップを隠し、閉じたらマップに戻す
+var _reopen_after_deck: bool = false
 
 func _ready():
 	_setup_background()
 	_setup_legend()
+	_setup_deck_button()
+	card_selection_overlay.visibility_changed.connect(_on_card_selection_overlay_visibility_changed)
 	map_button.button_up.connect(_on_map_button_up)
 	back_button.button_up.connect(_on_back_button_up)
 	
@@ -174,6 +183,31 @@ func _setup_legend() -> void:
 		row.add_child(label)
 		box.add_child(row)
 	add_child(panel)
+
+## マップを見ながらでもデッキを確認できるボタン。
+## マップは上部バーより手前 (z 100) に描かれて HUD のデッキボタンを覆うので、マップ側にも同じボタンを置く
+func _setup_deck_button() -> void:
+	var button := TextureButton.new()
+	button.name = "MapDeckButton"
+	button.texture_normal = UiSkin.load_if_exists(DECK_ICON_PATH)
+	button.ignore_texture_size = true
+	button.stretch_mode = TextureButton.STRETCH_SCALE
+	button.position = DECK_BUTTON_RECT.position
+	button.size = DECK_BUTTON_RECT.size
+	button.tooltip_text = "Deck"
+	UiSkin.add_backplate(button)
+	button.button_up.connect(_on_deck_button_up)
+	add_child(button)
+
+func _on_deck_button_up() -> void:
+	_reopen_after_deck = true
+	hide_map()
+	card_selection_overlay.view_deck()
+
+func _on_card_selection_overlay_visibility_changed() -> void:
+	if _reopen_after_deck and not card_selection_overlay.visible:
+		_reopen_after_deck = false
+		show_map()
 
 ## 凡例は明るい板に濃い文字なので、共通テーマの暗い縁取りと影を外す
 func _set_legend_text_style(label: Label) -> void:
