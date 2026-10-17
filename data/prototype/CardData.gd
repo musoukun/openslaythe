@@ -168,6 +168,8 @@ enum UPGRADE_TYPES {AUTO, COST, REMOVE_EXHAUST, VALUES, NONE}
 @export var card_upgrade_type: int = UPGRADE_TYPES.AUTO
 ## 数値アップグレードで上がる割合
 const UPGRADE_VALUE_RATE: float = 0.15
+## カード本文のキーワード（廃棄・保留など）の色。クリーム色の説明欄の上で 5.4:1（WCAG 4.5:1 以上）
+const KEYWORD_COLOR: String = "#9E3D00"
 ## get_upgraded_preview() で作った見本かどうか (保存されない)
 var _is_upgrade_preview: bool = false
 
@@ -250,21 +252,24 @@ func get_card_description() -> String:
 			modified_card_description = tr(card_decorator_data.card_decorator_pre_description) + modified_card_description + tr(card_decorator_data.card_decorator_post_description)
 	
 	if card_first_shuffle_priority > 0:
-		modified_card_description = "[color=orange]" + tr("Top Deck") + "[/color]\n" + modified_card_description
+		modified_card_description = _keyword_bbcode("Top Deck") + "\n" + modified_card_description
 	if card_first_shuffle_priority < 0:
-		modified_card_description = "[color=orange]" + tr("Bottom Deck") + "[/color]\n" + modified_card_description
+		modified_card_description = _keyword_bbcode("Bottom Deck") + "\n" + modified_card_description
 	if not card_is_playable:
-		modified_card_description = "[color=orange]" + tr("Unplayable") + "[/color]\n" + modified_card_description
+		modified_card_description = _keyword_bbcode("Unplayable") + "\n" + modified_card_description
 	if card_is_retained:
-		modified_card_description = "[color=orange]" + tr("Standby") + "[/color]\n" + modified_card_description
+		modified_card_description = _keyword_bbcode("Standby") + "\n" + modified_card_description
 	if is_card_ethereal():
-		modified_card_description = "[color=orange]" + tr("Phantom") + "[/color]\n" + modified_card_description
+		modified_card_description = _keyword_bbcode("Phantom") + "\n" + modified_card_description
 	if does_card_exhaust():
-		modified_card_description = modified_card_description + "\n[color=orange]" + tr("Exhaust") + "[/color]"
+		modified_card_description = modified_card_description + "\n" + _keyword_bbcode("Exhaust")
 	if does_card_banish():
-		modified_card_description = modified_card_description + "\n[color=orange]" + tr("Banish") + "[/color]"
-	
+		modified_card_description = modified_card_description + "\n" + _keyword_bbcode("Banish")
+
 	return modified_card_description
+
+func _keyword_bbcode(keyword: String) -> String:
+	return "[color={0}]{1}[/color]".format([KEYWORD_COLOR, tr(keyword)])
 
 ## Generates an ActionCardPlay, intercepts it, then returns the intercepted results in dictionary form.
 ## This cuts down on a lot of messy code used in getting intercepted values used for playing a card

@@ -17,6 +17,9 @@ const CARD_SUFFICIENT_ENERGY_LABEL_COLOR: Color = Color.WHITE
 ## to play the card.
 const CARD_INSUFFICIENT_ENERGY_LABEL_COLOR: Color = Color.FIREBRICK
 const CARD_TEXT_IMAGE_SIZE: int = 16	# images in card descriptions will be set to this size
+# 補正後の数値の色。クリーム色の説明欄で読めるよう濃くする（どちらも約 6.3:1）
+const VALUE_WORSE_COLOR: String = "#A31515"
+const VALUE_BETTER_COLOR: String = "#1B5E20"
 ## 種類の帯の枠の色でレア度を見せる (帯が狭いので文字は種類だけにする)
 const CARD_RARITY_BORDER_COLORS: Dictionary[int, Color] = {
 	CardData.CARD_RARITIES.BASIC: Color("#8a8580"),
@@ -245,9 +248,9 @@ func get_card_description(selected_target: BaseCombatant = null) -> String:
 					
 					# compare the intercepted valus to the card's values
 					if intercepted_value < card_value:
-						value_substring = "[color=red]" + str(intercepted_value) + "[/color]" # worse: red
+						value_substring = "[color=" + VALUE_WORSE_COLOR + "]" + str(intercepted_value) + "[/color]" # worse: red
 					if intercepted_value > card_value:
-						value_substring = "[color=green]" + str(intercepted_value) + "[/color]" # better: green
+						value_substring = "[color=" + VALUE_BETTER_COLOR + "]" + str(intercepted_value) + "[/color]" # better: green
 				
 				modified_description_bb_code = modified_description_bb_code.replace("["+key_name+"]", value_substring)
 			
