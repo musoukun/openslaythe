@@ -207,8 +207,9 @@ func _ready() -> void:
 			for each_enemy: Enemy in Global.get_alive_enemies():
 				each_enemy.set_health(999, 999)
 			Global.player_data.player_energy = 99
-			# コスト 1 → 1 → 2 → 1 (下がるので数え直し) → 2
-			var order: Array[String] = ["card_basic_attack_green", "card_basic_attack_green", "card_wildflower", "card_basic_block_green", "card_wildflower"]
+			# コスト 1 を 6 枚 (倍率は 4 枚目で止まる) → 2 → 1 (下がるので数え直し)
+			var order: Array[String] = ["card_basic_attack_green", "card_basic_attack_green", "card_basic_attack_green", "card_basic_attack_green",
+				"card_basic_attack_green", "card_basic_block_green", "card_wildflower", "card_basic_block_green"]
 			var cards: Array[CardData] = []
 			for card_id in order:
 				cards.append(Global.get_card_data_from_prototype(card_id))
@@ -266,6 +267,14 @@ func _ready() -> void:
 					CardData.CARD_RARITIES.keys()[card_data.card_rarity], card_data.card_energy_cost, card_data.card_values,
 					regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
 			get_tree().quit()
+		"juice":
+			# 演出の確認: 戦闘に入り、カードを連打してコンボの段階 (輝き・告知・揺れ・音) を上げる
+			for location in Global.get_next_locations():
+				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+					ActionGenerator.generate_visition_location(location.location_id)
+					break
+			await get_tree().create_timer(2.5).timeout
+			await _juice()
 		"mana_check":
 			# 青の主人公 (--hero=character_blue) で戦闘に入り、マナの支払い・蒼刃の強化・蒼刃の戻り先を出力する
 			for location in Global.get_next_locations():
@@ -275,6 +284,27 @@ func _ready() -> void:
 			await get_tree().create_timer(3.0).timeout
 			await _mana_check()
 			get_tree().quit()
+
+
+func _juice() -> void:
+	print("JUICE sfx ", Vfx._sfx.keys().map(func(k): return "%s x%d" % [k, Vfx._sfx[k].size()]))
+	var player: Player = Global.get_player()
+	Global.player_data.player_energy = 99
+	player.add_status_effect_charges("status_effect_mana", 10)
+	var enemy: BaseCombatant = Global.get_alive_enemies()[0]
+	for i in 9:
+		var card: CardData = Global.get_card_data_from_prototype("card_blue_mana_shards" if i % 2 else "card_basic_block_blue")
+		HandManager.add_cards_to_hand([card] as Array[CardData], 99)
+		await get_tree().create_timer(0.15).timeout
+		var request := HandManager.create_card_play_request(card, enemy if card.card_requires_target else null)
+		request.card_destination_pile = card.card_play_destination
+		HandManager.add_card_to_play_queue(request)
+		await get_tree().create_timer(0.45).timeout
+		print("JUICE combo=", Vfx.combo_count(), " tier=", CardShine.combo_tier(Vfx.combo_count()))
+	# 手札の1枚にカーソルを乗せて、拡大したカードの輝きを見せる
+	var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
+	if hand_cards.size() > 1:
+		HandManager.hand._on_card_hovered(hand_cards[1])
 
 
 func _mana_check() -> void:

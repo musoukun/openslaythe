@@ -1,5 +1,6 @@
 # 昇り竜の型 (ComboContent): 同じターンに、前に出したカード以上のコストのカードを出すとチェーンが続く。
-# チェーンの n 枚目は、そのカードのダメージとブロックが +50%×(n-1)。コストが下がると 1 から数え直す。
+# チェーンの n 枚目は、そのカードのダメージとブロックが +10%×(n-1) (端数は切り捨て)。上限は無い。
+# コストが下がると 1 から数え直す。
 # チェーンの状態は ArtifactComboChain がカードを出し始めたとき (card_play_started) に進め、
 # そのカードが何枚目だったかをここに覚えておく (攻撃が後から遅れて解決されても、出した時点の倍率を使うため)。
 extends BaseActionInterceptor
@@ -7,7 +8,7 @@ class_name InterceptorComboChain
 
 const CHAIN_VALUE: String = "combo_chain" # PlayerData.player_values: 今のチェーンの長さ
 const LAST_COST_VALUE: String = "combo_last_cost" # 直前に出したカードのコスト
-const BONUS_PER_LINK: float = 0.5
+const BONUS_PER_LINK: float = 0.1
 const SCALED_VALUES: Array[String] = ["damage", "block"]
 
 ## 出したカード (CardPlayRequest の instance id) → 何枚目だったか。ターンの始めと終わりに消す
@@ -23,8 +24,9 @@ static func get_next_link(card_data: CardData) -> int:
 	return 1
 
 
-static func get_multiplier(link: int) -> float:
-	return 1.0 + BONUS_PER_LINK * (link - 1)
+## チェーンの link 枚目で、値 value に足す量 (端数は切り捨て)
+static func get_bonus(value: int, link: int) -> int:
+	return floori(value * BONUS_PER_LINK * (link - 1))
 
 
 ## カードを出し始めたときに呼ぶ。チェーンを進め、そのカードの枚目を覚える
@@ -54,10 +56,9 @@ func process_action_interception(action_interceptor_processor: ActionInterceptor
 	var link: int = _request_links.get(card_play_request.get_instance_id(), get_next_link(card_play_request.card_data))
 	if link <= 1:
 		return ACTION_ACCEPTENCES.CONTINUE
-	var multiplier: float = get_multiplier(link)
 	for value_name: String in SCALED_VALUES:
 		var value: int = action_interceptor_processor.get_shadowed_action_values(value_name, 0)
 		if value > 0:
-			action_interceptor_processor.set_shadowed_action_values(value_name, int(floor(value * multiplier)))
+			action_interceptor_processor.set_shadowed_action_values(value_name, value + get_bonus(value, link))
 
 	return ACTION_ACCEPTENCES.CONTINUE
