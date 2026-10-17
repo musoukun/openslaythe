@@ -17,6 +17,16 @@ git merge origin/main      # 衝突したら解消してから作業に入る
 
 **コミットと PR は気軽にしてよい。** 区切りのいいところで確認を取らずにコミットし、push して PR を作ってかまわない（main への直接 push とマージはしない）。
 
+**ブランチ名は issue 番号か題名で付ける。** `claude/` で始まる名前や、`claude/clever-hertz-f924e2` のような何の作業かわからない自動の名前は使わない。
+
+- issue があるとき: `issue-26-dominion-build-types`（issue 番号＋題名を短い英語にしたもの）。PR の本文に `Closes #26` を書く。
+- issue がないとき: 作業内容がわかる短い英語（`feat/map-current-location`、`fix/shop-crash`、`docs/branch-naming`）。
+- アプリが `claude/...` のブランチを自動で作っていたら、作業を始める前（push する前）に付け直す。
+
+```powershell
+git branch -m issue-26-dominion-build-types
+```
+
 ## よく使うコマンド（PowerShell）
 
 `godot` は PATH にある（WinGet）。ビルドやリントの手順はない。テストはゲームを起動して自動操作する方式。
