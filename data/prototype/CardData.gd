@@ -158,10 +158,18 @@ const CARD_MAX_DECORATOR_SLOTS: int = 1
 @export var card_first_upgrade_value_changes: Dictionary[String, Variant] = {
 	
 }
-## Applies improve_card_values() each upgrade.
+## 数値アップグレードで上げる card_values のキー。値の符号は良くなる向き (+ なら増やす、- なら減らす)。
+## 数値の大きさは使わず、各キーを約 UPGRADE_VALUE_RATE (最低1) だけ動かす。
 @export var card_upgrade_value_improvements: Dictionary[String, int] = {
 	
 }
+## アップグレードの種類。AUTO なら resolve_upgrade_type() が決める
+enum UPGRADE_TYPES {AUTO, COST, REMOVE_EXHAUST, VALUES, NONE}
+@export var card_upgrade_type: int = UPGRADE_TYPES.AUTO
+## 数値アップグレードで上がる割合
+const UPGRADE_VALUE_RATE: float = 0.15
+## get_upgraded_preview() で作った見本かどうか (保存されない)
+var _is_upgrade_preview: bool = false
 
 # Deck Flags
 ## If the card cannot be removed from the permanent deck. Does nothing by itself, this should
@@ -335,11 +343,57 @@ func clamp_card_values(card_value_bounds: Dictionary[String, Array]) -> void:
 	Signals.card_properties_changed.emit(self)
 #endregion
 
-## Upgrades a card, overwriting properities and improving any card values.
+## アップグレードの種類を決める。指定が無ければ
+## 使うと廃棄されるカード → 廃棄を消す / 上げる数値があるカード → 数値+15% / それ以外 → コスト-1 (0コストなら強化なし)
+func resolve_upgrade_type() -> int:
+	if card_upgrade_type != UPGRADE_TYPES.AUTO:
+		return card_upgrade_type
+	if does_card_exhaust():
+		return UPGRADE_TYPES.REMOVE_EXHAUST
+	if not card_upgrade_value_improvements.is_empty():
+		return UPGRADE_TYPES.VALUES
+	if card_energy_cost > 0 and not card_energy_cost_is_variable:
+		return UPGRADE_TYPES.COST
+	return UPGRADE_TYPES.NONE
+
+## アップグレードで変わる内容を表示用の短い文にする (強化前後の比較用)
+func get_upgrade_summary() -> String:
+	match resolve_upgrade_type():
+		UPGRADE_TYPES.COST:
+			return tr("Cost -1")
+		UPGRADE_TYPES.REMOVE_EXHAUST:
+			return tr("No longer Exhausts")
+		UPGRADE_TYPES.VALUES:
+			return tr("Numbers +15%")
+	return ""
+
+## card_upgrade_value_improvements の各キーを、符号の向きに約15% (最低1) 動かす
+func _improve_upgrade_values() -> void:
+	for key_name: String in card_upgrade_value_improvements:
+		if not card_values.get(key_name) is int:
+			continue
+		var value: int = card_values[key_name]
+		var step: int = max(1, roundi(abs(value) * UPGRADE_VALUE_RATE))
+		card_values[key_name] = value + step * signi(card_upgrade_value_improvements[key_name])
+	Signals.card_properties_changed.emit(self)
+
+## 強化後の見た目を確かめるための複製 (統計の「アップグレード回数」には数えない)
+func get_upgraded_preview() -> CardData:
+	var preview: CardData = duplicate(true)
+	preview._is_upgrade_preview = true
+	preview.upgrade_card()
+	return preview
+
+func can_upgrade() -> bool:
+	return card_upgrade_amount < card_upgrade_amount_max and resolve_upgrade_type() != UPGRADE_TYPES.NONE
+
+## Upgrades a card: コスト-1 / 廃棄を消す / 数値+15% のどれか1つ (resolve_upgrade_type)。
+## card_first_upgrade_* は mod 用に残しているが、本編のカードでは使わない。
 func upgrade_card(upgrade_count: int = 1, bypass_upgrade_max = false) -> void:
 	for _i in upgrade_count:
 		# check if upgrade possible
 		if (card_upgrade_amount < card_upgrade_amount_max) or bypass_upgrade_max:
+			var upgrade_type := resolve_upgrade_type()
 			# perform first upgrade mutations
 			if card_upgrade_amount == 0:
 				# overwrite card_values on first upgrade
@@ -347,11 +401,18 @@ func upgrade_card(upgrade_count: int = 1, bypass_upgrade_max = false) -> void:
 				# overwrite CardData's own properties on the first upgrade
 				set_card_properties(card_first_upgrade_property_changes)
 			
-			# improve card values each upgrade
-			improve_card_values(card_upgrade_value_improvements)
+			match upgrade_type:
+				UPGRADE_TYPES.COST:
+					set_card_energy_cost(card_energy_cost - 1)
+				UPGRADE_TYPES.REMOVE_EXHAUST:
+					card_play_destination = HandManager.DISCARD_PILE
+					Signals.card_properties_changed.emit(self)
+				UPGRADE_TYPES.VALUES:
+					_improve_upgrade_values()
 			card_upgrade_amount += 1
 			
-			Signals.card_upgraded.emit(self)
+			if not _is_upgrade_preview:
+				Signals.card_upgraded.emit(self)
 
 func transform_card(new_card_object_id: String) -> void:
 	# transforms a card, overwriting the values of a card with that of a new card prototype id's values

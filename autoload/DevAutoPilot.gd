@@ -15,6 +15,7 @@ extends Node
 ## --auto=shop_remove : 購入画面からカード削除を押す
 ## --auto=shop_check : カード削除とカードの購入を実際に行い、お金とデッキの変化を出力する
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
+## --auto=rest:smith[:on][:pick] : 鍛冶でアップグレードの選択画面を出す。on で「強化後を見る」を入れ、pick で1枚選んで確定する
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## --auto=click_test : 最初の戦闘で、手札の各カードのどこを押せば CardButton に届くかを数え、実際にクリックでカードを出す
 ## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る。--draft=first|attack|random|none でカード報酬の取り方。計測は CSVCOMBAT / CSVRUN の行。--combo で祝福「昇り竜の型」を選び、コストの小さい順に出す)
@@ -281,6 +282,18 @@ func _ready() -> void:
 					CardData.CARD_RARITIES.keys()[card_data.card_rarity], card_data.card_energy_cost, card_data.card_values,
 					regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
 			get_tree().quit()
+		"upgrade_check":
+			# --auto=upgrade_check : 全カードのアップグレード前後 (コスト・廃棄・数値・説明) を出力する
+			var preview: Card = Scenes.CARD.instantiate()
+			add_child(preview)
+			var regex := RegEx.create_from_string("\\[[^\\]]*\\]")
+			for card_data: CardData in Global._id_to_card_data.values():
+				var upgraded: CardData = card_data.get_upgraded_preview()
+				for c: CardData in [card_data, upgraded]:
+					preview.init(c, 0, false, false)
+					print("UPG|%s|%s|cost=%d|exhaust=%s|%s|%s|%s" % [c.object_id, c.get_card_name(), c.card_energy_cost, c.does_card_exhaust(),
+						CardData.CARD_TYPES.keys()[c.card_type], c.card_values, regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
+			get_tree().quit()
 		"juice":
 			# 演出の確認: 戦闘に入り、カードを連打してコンボ (揺れ・音) を重ねる
 			for location in Global.get_next_locations():
@@ -416,6 +429,29 @@ func _rest_site(parts: PackedStringArray) -> void:
 	var location: LocationData = Global.get_next_locations()[0]
 	location.location_type = LocationData.LOCATION_TYPES.REST_SITE
 	ActionGenerator.generate_visition_location(location.location_id)
+	if parts.has("smith"):
+		# --auto=rest:smith[:on][:pick] : 鍛冶を押してアップグレードの選択画面を出す
+		await get_tree().create_timer(1.5).timeout
+		for button: RestActionButton in get_tree().root.find_children("*", "RestActionButton", true, false):
+			if button.rest_action_object_id == "rest_action_upgrade_card":
+				button.button_up.emit()
+		await get_tree().create_timer(0.5).timeout
+		var overlay := get_tree().root.find_child("CardSelectionOverlay", true, false)
+		var toggle := overlay.find_child("UpgradeToggle", true, false) as CheckButton
+		print("SMITH toggle visible=", toggle.visible)
+		if parts.has("on"):
+			toggle.button_pressed = true
+			await get_tree().create_timer(0.3).timeout
+			var shown: Array = overlay.find_children("*", "Card", true, false).map(func(c): return c.card_data.get_card_name())
+			print("SMITH shown=", shown)
+		if parts.has("pick"):
+			var first: Card = overlay.find_children("*", "Card", true, false)[0]
+			first.card_selected.emit(first)
+			await get_tree().create_timer(0.3).timeout
+			overlay.get_node("ConfirmButton").button_up.emit()
+			await get_tree().create_timer(0.5).timeout
+			print("SMITH deck=", Global.player_data.player_deck.map(func(c): return c.get_card_name()))
+		return
 	var hover_index := parts[parts.size() - 1]
 	if not hover_index.is_valid_int():
 		return

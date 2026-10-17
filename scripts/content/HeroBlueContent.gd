@@ -236,9 +236,8 @@ static func _register_more_cards() -> void:
 
 	# --- 山札から探す ---
 	var minds_eye: CardData = _card("card_blue_minds_eye", "Mind's Eye", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.UNCOMMON, 1,
-		"Choose a card in your draw pile and put it into your hand. Exhaust.", {}, {})
+		"Choose a card in your draw pile and put it into your hand.", {}, {})
 	minds_eye.card_play_destination = HandManager.EXHAUST_PILE
-	minds_eye.card_first_upgrade_property_changes = {"card_energy_cost": 0}
 	minds_eye.card_play_actions = [_pick_one(HandManager.DRAW_PILE, "Choose a card to put into your hand.", [{Scripts.ACTION_ADD_CARDS_TO_HAND: {}}])]
 	_register_skill(minds_eye)
 
