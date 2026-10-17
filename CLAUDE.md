@@ -92,7 +92,8 @@ godot --headless --path . -- --auto=mana_check --hero=character_blue
 ### 調査資料
 | 資料 | 内容 |
 |---|---|
-| `reports/デッキ構築の法則とこのゲームへの取り入れ方.md` | STS2・Dominion・LoL から抜き出した 10 の法則と、このゲームに入れる要素・試す順番（**設計判断の正本**） |
+| `reports/デッキ構築の法則とこのゲームへの取り入れ方.md` | STS2・Dominion・LoL・遊戯王から抜き出した 12 の法則、最優先の「フロントロードを強いない」、入れる要素・試す順番・議論で決まったこと（**設計判断の正本**） |
+| `docs/yugioh_deck_research.md` | 遊戯王の4デッキ（メタビート・ライトロード・閃刀姫・ヌメロン）の仕組みと強さの源 |
 | `reports/初期デッキとデッキ構築の設計.md` | STS2 の初期デッキ（全キャラ 10〜12 枚）の事実と、いまの Vera 19 枚の問題点 |
 | `docs/dominion_builds.md` | Dominion の代表的な 8 戦略（Big Money・礼拝堂・村鍛冶・ビッグブリッジ・宮廷など）と廃棄・連続使用の仕組み |
 | `docs/lol_runes_and_builds.md` | LoL のルーン・育つルーン・キャラ固有の成長・オフメタ（AP ルシアン、サポート リー・シン） |
