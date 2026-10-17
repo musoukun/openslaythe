@@ -114,7 +114,7 @@ func generate_next_act() -> void:
 		# generate the next act
 		generate_act(next_act_id, act_number + 1)
 		# StS と同じく、次の幕に入ったら HP を回復する
-		Global.player_data.heal_percentage(ACT_START_HEAL_PERCENT)
+		Global.player_data.heal_percentage(ACT_START_HEAL_PERCENT * DifficultyContent.get_heal_rate())
 		Signals.act_started.emit()
 	else:
 		DebugLogger.log_error("ActionGenerator.generate_next_act(): No next acts defined in act \"{0}\"".format([act_data.object_id]))

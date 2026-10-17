@@ -1862,6 +1862,8 @@ func add_run_modifiers() -> void:
 	
 	Global.register_rod(run_modifier_consumable_auto_revive)
 	
+	DifficultyContent.register() # レベル 1〜5 の中身 (ボスの火力・HP、回復量)。scripts/content/DifficultyContent.gd
+	
 #endregion
 
 #region Run Start Options
@@ -2041,9 +2043,10 @@ func add_custom_signals() -> void:
 #region Enemies
 func add_enemies() -> void:
 	const DIFFICULTY_STARTING: int = 0
-	const DIFFICULTY_STANDARD_ENEMIES_HARDER: int = 1
-	const DIFFICULTY_MINIBOSS_ENEMIES_HARDER: int = 2
-	const DIFFICULTY_BOSS_ENEMIES_HARDER: int = 3
+	# 難易度で敵の数値を切り替える仕組みは使わない (届かないレベルにしておく)。レベルの中身は DifficultyContent
+	const DIFFICULTY_STANDARD_ENEMIES_HARDER: int = 99
+	const DIFFICULTY_MINIBOSS_ENEMIES_HARDER: int = 99
+	const DIFFICULTY_BOSS_ENEMIES_HARDER: int = 99
 	
 	# enemy that negates the first damage instance against it
 	var enemy_1: EnemyData = EnemyData.new("enemy_1")

@@ -544,5 +544,10 @@
  "Cauterize": "傷口を焼く",
  "Heal [health_amount] HP. Gain [status_charge_amount] Blood Heat. Exhaust.": "HPを[health_amount]回復する。竜血の熱を[status_charge_amount]得る。廃棄。",
  "Deal [damage] damage [number_of_attacks] times.": "[damage]ダメージを[number_of_attacks]回与える。",
- "Gain [energy_amount] Energy. Lose [self_damage] HP. Exhaust.": "エナジーを[energy_amount]得る。HPを[self_damage]失う。廃棄。"
+ "Gain [energy_amount] Energy. Lose [self_damage] HP. Exhaust.": "エナジーを[energy_amount]得る。HPを[self_damage]失う。廃棄。",
+ "Difficulty 1: Boss HP +10%, damage +2%, healing 95%": "難易度1：ボスHP+10%・火力+2%・回復95%",
+ "Difficulty 2: Boss HP +20%, damage +4%, healing 90%": "難易度2：ボスHP+20%・火力+4%・回復90%",
+ "Difficulty 3: Boss HP +30%, damage +8%, healing 85%": "難易度3：ボスHP+30%・火力+8%・回復85%",
+ "Difficulty 4: Boss HP +40%, damage +10%, healing 80%": "難易度4：ボスHP+40%・火力+10%・回復80%",
+ "Difficulty 5: Boss HP +60%, damage +16%, healing 75%": "難易度5：ボスHP+60%・火力+16%・回復75%"
 }

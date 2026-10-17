@@ -216,6 +216,7 @@ func _on_combat_started(event_id: String):
 		current_event = Global.get_event_data(event_id)
 	
 	enemy_container.populate_enemies_from_event(current_event)
+	DifficultyContent.apply_boss_health(Global.get_alive_enemies()) # 難易度でボス戦の敵の HP を増やす
 	start_turn_animation()
 	
 	Global.player_data.player_energy = Global.player_data.player_energy_max
