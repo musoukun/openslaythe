@@ -137,7 +137,7 @@ func add_health(health_amount: int, health_amount_max: int = 0) -> void:
 func set_health(health_amount: int, health_amount_max: int = enemy_data.enemy_health_max) -> void:
 	var is_damaged: bool = health_amount < enemy_data.enemy_health
 	
-	enemy_data.enemy_health_max = max(1, enemy_data.enemy_health_max)
+	enemy_data.enemy_health_max = max(1, health_amount_max)
 	enemy_data.enemy_health = clamp(0, health_amount, enemy_data.enemy_health_max)
 	
 	update_health_bar(is_damaged)
