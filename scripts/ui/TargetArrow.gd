@@ -10,7 +10,7 @@ const SEGMENT_SIZE_END: float = 17.0 # 先端近くの節の大きさ
 const FLOW_SPEED: float = 48.0 # 節が先端へ流れる速さ (px/秒)
 const HEAD_LENGTH: float = 48.0
 const HEAD_HALF_WIDTH: float = 30.0
-const MIN_ARC_HEIGHT: float = 60.0 # カーソルが低いときでも、カードから一度上へ持ち上げる高さ
+const ARC_HEIGHT_RATIO: float = 0.3 # 弧の膨らみ (根元から先端までの距離に対する割合)
 
 const COLOR_IDLE: Color = Color(0.93, 0.89, 0.8)
 const COLOR_ON_TARGET: Color = Color(0.92, 0.14, 0.1)
@@ -55,8 +55,8 @@ func _draw() -> void:
 	var card_rect: Rect2 = card.card_visual.get_global_rect()
 	var start: Vector2 = Vector2(card_rect.get_center().x, card_rect.position.y)
 	var end: Vector2 = _mouse_position
-	# カードから上へ持ち上げてから、カーソルへ曲がる
-	var control: Vector2 = Vector2(lerp(start.x, end.x, 0.1), min(end.y, start.y - MIN_ARC_HEIGHT))
+	# 根元と先端の中間を上へ持ち上げた、山なりの弧
+	var control: Vector2 = Vector2((start.x + end.x) / 2.0, min(start.y, end.y) - start.distance_to(end) * ARC_HEIGHT_RATIO)
 	var color: Color = COLOR_ON_TARGET if _is_over_enemy(end) else COLOR_IDLE
 
 	var points: PackedVector2Array = []
