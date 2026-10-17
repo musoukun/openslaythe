@@ -31,6 +31,7 @@ var current_card_pick_action: ActionBasePickCards = null	# an action currently r
 @onready var background_button: TextureButton = $%BackgroundButton
 @onready var select_target_label: Label = $%SelectTargetLabel
 var current_selected_card: Card = null	# used for cards with targeting
+var target_arrow: TargetArrow = null # 対象を選んでいる間、カードからカーソルへ伸びる矢印
 
 # Card Play Queue
 var hand_disabled: bool = false	# the player cannot play additional cards manually
@@ -85,6 +86,9 @@ const CARD_PLAY_SHOW_TIME: float = 0.12 # 狙わずに出すカードが中央�
 
 func _ready():
 	HandManager.hand = self
+	
+	target_arrow = TargetArrow.new()
+	add_child(target_arrow)
 	
 	Signals.combat_started.connect(_on_combat_started)
 	Signals.combat_ended.connect(_on_combat_ended)
@@ -330,11 +334,13 @@ func _on_enemy_hovered(enemy: Enemy):
 	if current_selected_card != null:
 		current_selected_card.update_card_display(enemy)
 
-func _prompt_target(_card: Card):
+func _prompt_target(card: Card):
 	select_target_label.visible = true
+	target_arrow.show_from(card)
 
 func _unprompt_target():
 	select_target_label.visible = false
+	target_arrow.hide_arrow()
 
 func _perform_card_right_click_actions(card: Card) -> void:
 	# locks further card actions and performs a right click on a card

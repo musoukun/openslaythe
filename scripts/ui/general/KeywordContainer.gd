@@ -42,6 +42,16 @@ func populate_keywords(keyword_object_ids: Array[String]) -> void:
 		add_child(keyword_tooltip)
 		keyword_tooltip.init(keyword_object_id)
 
+## キャラの上のステータスを、それぞれの説明パネルにして縦に並べる (見えないステータスは出さない)
+func populate_status_effects(status_effect_scripts: Array[BaseStatusEffect]) -> void:
+	clear_keywords()
+	for status_effect_script in status_effect_scripts:
+		if not status_effect_script.status_effect_data.status_effect_is_visible:
+			continue
+		var keyword_tooltip = Scenes.KEYWORD_TOOLTIP.instantiate()
+		add_child(keyword_tooltip)
+		keyword_tooltip.init_status(status_effect_script)
+
 func _get_all_recursive_child_keywords(keyword_object_ids: Array[String]) -> Array[String]:
 	# searches (BFS) all child keywords and returns the full list
 	# this is typically a shallow search but ensures all keywords are properly listed 

@@ -70,8 +70,23 @@ func fit_sprite_to_feet() -> float:
 	selection_button.offset_bottom = SPRITE_FEET_Y
 	# ダメージ数字は頭上に出す
 	fade_container.position.y = get_head_y(size.y) + 24.0
+	_place_status_row(get_head_y(size.y))
 	_start_breathing()
 	return size.y
+
+## 頭上に並べるステータスの1行ぶんの高さ (アイコンの大きさ) と幅 (6個ぶん)。インテント・被ダメ予告はこの列のさらに上に出す
+const STATUS_ROW_HEIGHT := 24.0
+const STATUS_ROW_WIDTH := 168.0
+
+## ステータスのアイコンを頭のすぐ上に、体の中心にそろえて並べる (足元だと手札に隠れてカーソルが届かない)
+## 7個以上で2行目になるときは上へ伸ばす
+func _place_status_row(head_y: float) -> void:
+	var center_x: float = animated_sprite_2d.position.x
+	status_container.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	status_container.offset_left = center_x - STATUS_ROW_WIDTH / 2.0
+	status_container.offset_right = center_x + STATUS_ROW_WIDTH / 2.0
+	status_container.offset_bottom = head_y - 4.0
+	status_container.offset_top = status_container.offset_bottom - STATUS_ROW_HEIGHT
 
 ## Visible 座標系でのスプライト頭頂の y
 func get_head_y(sprite_height: float) -> float:

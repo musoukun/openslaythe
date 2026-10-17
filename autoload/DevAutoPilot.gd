@@ -8,6 +8,8 @@ extends Node
 ## --auto=new_run : タイトルから「新しいラン」画面を開く
 ## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
 ## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
+## --auto=combat_status[_player] : 最初の戦闘で主人公と敵にステータスを付け、敵 (_player なら主人公) のステータスにカーソルを乗せる (説明の確認用)
+## --auto=combat_arrow : 最初の戦闘で対象が要るカードを選び、カーソルを敵へ動かす (対象選択の矢印の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
 ## --auto=blessing_hover:<選択肢番号>[:<幕>] : 祝福画面で、番号の柱にカーソルを乗せた状態にする (光り方の確認用)
@@ -171,7 +173,7 @@ func _ready() -> void:
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:
 				deck_button.button_up.emit()
-		"combat", "combat_hover", "vfx", "profile", "hitstop":
+		"combat", "combat_hover", "combat_status", "combat_status_player", "combat_arrow", "vfx", "profile", "hitstop":
 			for location in Global.get_next_locations():
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
@@ -190,6 +192,12 @@ func _ready() -> void:
 				var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
 				if hand_cards.size() > 2:
 					HandManager.hand._on_card_hovered(hand_cards[2])
+			if mode.begins_with("combat_status"):
+				await get_tree().create_timer(2.0).timeout
+				_hover_status_icons(mode == "combat_status_player")
+			if mode == "combat_arrow":
+				await get_tree().create_timer(2.0).timeout
+				_show_target_arrow()
 			if mode == "vfx":
 				await get_tree().create_timer(1.0).timeout
 				_preview_vfx()
@@ -612,6 +620,36 @@ func _move_mouse(position: Vector2) -> void:
 	motion.position = position
 	motion.global_position = position
 	get_viewport().push_input(motion)
+
+
+## 主人公と敵にステータスを付け、敵 (on_player なら主人公) の最初のステータスにカーソルを乗せる (説明の出方の確認用)
+func _hover_status_icons(on_player: bool) -> void:
+	var player: BaseCombatant = Global.get_player()
+	var enemy := get_tree().get_first_node_in_group("enemies") as BaseCombatant
+	for status_id in ["status_effect_damage_increase", "status_effect_weaken", "status_effect_block_on_turn_end"]:
+		player.add_status_effect_charges(status_id, 3)
+	for status_id in ["status_effect_vulnerable", "status_effect_damage_increase", "status_effect_pointy", "status_effect_corrosion"]:
+		enemy.add_status_effect_charges(status_id, 2)
+	await get_tree().create_timer(0.5).timeout
+	var target: BaseCombatant = player if on_player else enemy
+	var icon := target.status_container.get_child(0) as Control
+	_move_mouse(icon.get_global_rect().get_center())
+	await get_tree().process_frame
+	print("STATUS hover ", icon.get_global_rect(), " tooltips=", HandManager.tooltip.keyword_container.get_child_count())
+
+
+## 対象が要るカードを選び、カーソルを手札の上から敵へ動かして矢印の伸び縮みを見る (対象選択の矢印の確認用)
+func _show_target_arrow() -> void:
+	var enemy := get_tree().get_first_node_in_group("enemies") as BaseCombatant
+	for card: Card in HandManager.hand.get_player_hand_cards():
+		if card.card_data.card_requires_target:
+			HandManager.hand._on_card_selected(card)
+			break
+	var end := enemy.selection_button.get_global_rect().get_center()
+	var start := Vector2(get_viewport().get_visible_rect().size.x * 0.5, 380)
+	for i in 21:
+		_move_mouse(start.lerp(end, i / 20.0))
+		await get_tree().create_timer(0.1).timeout
 
 
 ## イベントの選択肢を順に押し、各段階のプレイヤー状態を出力 (イベント確認用)
