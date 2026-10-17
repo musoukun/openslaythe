@@ -1813,14 +1813,7 @@ func add_run_modifiers() -> void:
 
 	Global.register_rod(run_modifier_custom_easy_mode)
 	
-	var run_modifier_endless_mode: RunModifierData = RunModifierData.new("run_modifier_endless_mode")
-	run_modifier_endless_mode.run_modifier_name = "Endless Mode"
-	run_modifier_endless_mode.run_modifier_description = "Run will only end when the player dies"
-	run_modifier_endless_mode.run_modifier_is_custom =  true
-	run_modifier_endless_mode.run_modifier_exclusive_to_modifier_ids = []
-	run_modifier_endless_mode.run_modifier_modifier_script_path = Scripts.RUN_MODIFIER_CUSTOM_ENDLESS_MODE
-
-	Global.register_rod(run_modifier_endless_mode)
+	# エンドレスモードは使わない (3 幕のボスでクリア。難易度はクリアするたびに 1 段ずつ解禁)
 	
 	var run_modifier_custom_1: RunModifierData = RunModifierData.new("run_modifier_custom_1")
 	run_modifier_custom_1.run_modifier_name = "Custom 1"
