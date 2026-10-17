@@ -238,6 +238,9 @@ func start_run(character_object_id: String, run_seed: int, difficulty_level: int
 	
 	# money and health
 	player_data.player_money = character_data.character_starting_money
+	# テスト起動 (--auto=) のときは買い物の確認がしやすいよう多めに持たせる
+	if DevAutoPilot.is_active():
+		player_data.player_money = DevAutoPilot.TEST_STARTING_MONEY
 	player_data.player_health_max = character_data.character_starting_health
 	player_data.player_health = character_data.character_starting_health
 	

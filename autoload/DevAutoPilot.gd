@@ -627,6 +627,12 @@ func _preview_vfx() -> void:
 func _get_mode() -> String:
 	return _get_user_arg("--auto=")
 
+## テスト起動 (--auto=) のときのラン開始時の所持金。普通に遊ぶときは CharacterData.character_starting_money (90)
+const TEST_STARTING_MONEY := 999
+
+func is_active() -> bool:
+	return _get_mode() != ""
+
 func _get_user_arg(prefix: String) -> String:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with(prefix):
