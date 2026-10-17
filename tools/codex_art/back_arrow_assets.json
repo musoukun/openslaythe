@@ -1,0 +1,104 @@
+{
+  "style": "Simplified, chunky stylized fantasy game UI art: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading and one soft highlight, very little texture. No filigree, no tiny rivets, no engraved patterns, no gem encrustations, no pedestals or stands. Saturated but harmonious colors. Do not imitate any existing game, franchise or official artwork. Include no text, letters or numerals. This is a navigation button icon for a SHARED WORLD UI that every playable hero uses, so it must never hint at any hero: no dragon scales, claws, wings or dragon fire, and no people. The world is an original realm of enchanted forest ruins with moss-covered pale stone, tarnished bronze, warm parchment and teal rune light.",
+  "assets": [
+    {
+      "id": "back_arrow_a",
+      "out": "sprites/ui/back_arrow/back_arrow_a.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A thick straight arrow pointing LEFT, made of a tarnished bronze plate with a glowing teal rune line running along its shaft. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_b",
+      "out": "sprites/ui/back_arrow/back_arrow_b.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A thick straight arrow pointing LEFT, shaped like a torn crimson cloth banner with ragged edges and a dark red hem. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_c",
+      "out": "sprites/ui/back_arrow/back_arrow_c.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A thick straight arrow pointing LEFT, carved from moss-covered pale stone, chunky and heavy, a little moss on top. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_d",
+      "out": "sprites/ui/back_arrow/back_arrow_d.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A thick curved U-turn return arrow: the shaft starts at the right, curves over the top and the arrowhead points LEFT and down, like a 'return' symbol, made of tarnished bronze with a teal rune glow. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_e",
+      "out": "sprites/ui/back_arrow/back_arrow_e.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A thick curved return arrow sweeping in a half circle with the arrowhead pointing LEFT, made of glowing teal rune light with a bright white core and a dark outline. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_f",
+      "out": "sprites/ui/back_arrow/back_arrow_f.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A wooden signpost plank cut into an arrow shape pointing LEFT, warm brown wood with two bronze nails, simple and chunky. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_g",
+      "out": "sprites/ui/back_arrow/back_arrow_g.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A curled warm parchment ribbon folded into an arrow shape pointing LEFT, with a teal wax-seal dot at its tail. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_h",
+      "out": "sprites/ui/back_arrow/back_arrow_h.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A thick curved return arrow (like an undo symbol): arrowhead pointing LEFT at the top-left, shaft curving down and around to the right, made of warm parchment-colored metal with a thick dark-brown outline and a gold rim. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "back_arrow_i",
+      "out": "sprites/ui/back_arrow/back_arrow_i.png",
+      "size": [
+        192,
+        128
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "Two stacked chunky chevrons pointing LEFT (a double chevron), tarnished bronze with teal rune light inside each chevron. It means 'go back / return'. One single object, centered, filling about 85 percent of its cell width, readable at 40px by its silhouette alone. Transparent background, no ground shadow, no stand."
+    }
+  ]
+}
