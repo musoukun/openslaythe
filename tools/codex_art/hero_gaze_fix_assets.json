@@ -1,0 +1,151 @@
+{
+  "style": "This is an EDIT of attached image 1, not a new drawing. Reproduce attached image 1 as faithfully as possible: the same canvas size and aspect, the same number of figures/frames in the same order and positions, the same character design, body poses, limbs, hands, clothing, weapons, wings, tail, effects, colors, line weight, brush texture and rendering style. Do not redesign, restyle, re-pose, mirror, crop, add or remove anything.\nThe ONLY change: the character is fighting an enemy who stands off-canvas to the RIGHT. In every figure whose face is visible, turn the head slightly toward the RIGHT (a three-quarter view facing right) and move the eyes and irises so the character looks at the RIGHT edge, toward the enemy, never at the viewer or camera. Keep the same facial expression (smile, grit, wince), the same face design and hair. Leave figures whose eyes are closed or whose face is hidden or already looking right exactly as they are.",
+  "_note": "戦闘中の主人公がカメラ目線になっていたコマを、目線と顔の向きだけ右 (敵側) に直す。refs の gaze_src/*.png は元の raw (tools/codex_art/raw/ は git 管理外) のコピー",
+  "assets": [
+    {
+      "id": "gaze_green_idle",
+      "out": "external/sprites/characters/character_green/hero_idle.png",
+      "size": [
+        300,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 4,
+      "keep_frames": 1,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero3_idle.png"
+      ],
+      "brief": "Vera 待機: 目線と顔だけ右の敵へ (元 hero3_idle)",
+      "prompt": "The attached sheet shows the same warrior in 4 idle frames; fix the gaze in every frame.",
+      "ref_rule": ""
+    },
+    {
+      "id": "gaze_green_attack",
+      "out": "external/sprites/characters/character_green/hero_attack.png",
+      "size": [
+        450,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 4,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero3_attack.png"
+      ],
+      "brief": "Vera 攻撃: 1・4コマ目の目線を右の敵へ (元 hero3_attack)",
+      "prompt": "The attached sheet shows 4 attack frames; frames 1 and 4 currently look at the viewer and must look right; frames 2 and 3 already face right, keep them.",
+      "ref_rule": ""
+    },
+    {
+      "id": "gaze_green_hurt",
+      "out": "external/sprites/characters/character_green/hero_hurt.png",
+      "size": [
+        300,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 3,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero3_hurt.png"
+      ],
+      "brief": "Vera 被弾: 目線を右の敵へ (元 hero3_hurt)",
+      "prompt": "The attached sheet shows 3 hurt frames; frames 1 and 3 currently look at the viewer and must look right; frame 2 has closed eyes, keep it.",
+      "ref_rule": ""
+    },
+    {
+      "id": "gaze_green_block",
+      "out": "external/sprites/characters/character_green/hero_block.png",
+      "size": [
+        300,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 3,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero3_block.png"
+      ],
+      "brief": "Vera 防御: 3コマ目の目線を右の敵へ (元 hero3_block)",
+      "prompt": "The attached sheet shows 3 block frames; frame 3 currently looks at the viewer and must look right; in frames 1 and 2 the face is behind the arms and fire wings, keep them.",
+      "ref_rule": ""
+    },
+    {
+      "id": "gaze_blue_idle",
+      "out": "external/sprites/characters/character_blue/hero_idle.png",
+      "size": [
+        300,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 1,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero_blue_master.png"
+      ],
+      "brief": "Luca 待機: 目線と顔だけ右の敵へ (元 hero_blue_master。立ち絵は正面のまま)",
+      "prompt": "The attached image is a single full-body figure of the boy mage-swordsman; fix his gaze.",
+      "ref_rule": ""
+    },
+    {
+      "id": "gaze_blue_attack",
+      "out": "external/sprites/characters/character_blue/hero_attack.png",
+      "size": [
+        450,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 4,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero_blue_attack.png"
+      ],
+      "brief": "Luca 攻撃: 1・4コマ目の目線を右の敵へ (元 hero_blue_attack)",
+      "prompt": "The attached sheet shows 4 attack frames; frames 1 and 4 currently look at the viewer and must look right; frames 2 and 3 already face right, keep them.",
+      "ref_rule": ""
+    },
+    {
+      "id": "gaze_blue_hurt",
+      "out": "external/sprites/characters/character_blue/hero_hurt.png",
+      "size": [
+        300,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 3,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero_blue_hurt.png"
+      ],
+      "brief": "Luca 被弾: 目線を右の敵へ (元 hero_blue_hurt)",
+      "prompt": "The attached sheet shows 3 hurt frames; frames 1 and 3 currently look at the viewer and must look right; frame 2 has closed eyes, keep it.",
+      "ref_rule": ""
+    },
+    {
+      "id": "gaze_blue_block",
+      "out": "external/sprites/characters/character_blue/hero_block.png",
+      "size": [
+        300,
+        300
+      ],
+      "transparent": true,
+      "anchor": "bottom",
+      "sheet": 3,
+      "category": "combatant",
+      "refs": [
+        "tools/codex_art/raw/gaze_src/hero_blue_block.png"
+      ],
+      "brief": "Luca 防御: 目線を右の敵へ (元 hero_blue_block)",
+      "prompt": "The attached sheet shows 3 block frames; all three currently look at the viewer and must look right.",
+      "ref_rule": ""
+    }
+  ]
+}
