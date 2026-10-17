@@ -4,10 +4,15 @@
 カードは名前と絵柄で情景が浮かぶ場面の絵 (主人公が技を出している姿ごと描く)。
 敵・背景は今の形と配置の条件を残して、画風だけ描き込みを減らす。
 
-  python tools/codex_art/build_redesign.py      # 下の 3 つの manifest を書き出す
+  python tools/codex_art/build_redesign.py      # 下の 6 つの manifest を書き出す
   python tools/codex_art/generate.py --grid --force --manifest tools/codex_art/redesign_world_assets.json
   python tools/codex_art/generate.py --grid --force --manifest tools/codex_art/redesign_hero_green_icons.json
   python tools/codex_art/generate.py --grid --force --manifest tools/codex_art/redesign_hero_green_cards.json
+  python tools/codex_art/generate.py --grid --force --manifest tools/codex_art/redesign_world_ui.json
+  python tools/codex_art/generate.py --grid --force --manifest tools/codex_art/redesign_hero_green_status.json
+  python tools/codex_art/generate.py --grid --force --manifest tools/codex_art/redesign_events.json
+
+休憩所の行動・状態異常・イベントは、実際に登録されて使われているものだけ描く (Luca 専用の状態異常は除く)。
 """
 import json
 from pathlib import Path
@@ -23,11 +28,12 @@ SIMPLE = (
     "character, franchise or official artwork. Include no text, letters, numerals, logos or symbols."
 )
 
-WORLD_STYLE = SIMPLE + (
+WORLD = (
     " This art belongs to the SHARED WORLD that every playable hero visits, so it must never show or hint at any "
     "hero: no dragon scales, claws, tails, wings, horns or dragon fire, and no people. The world is an original realm "
     "of enchanted forest ruins with moss-covered pale stone, tarnished bronze, clockwork stone golems and teal rune light."
 )
+WORLD_STYLE = SIMPLE + WORLD
 
 ICON = ("One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its "
         "silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand.")
@@ -131,6 +137,69 @@ HERO_CARDS = {
     "card_green_cauterize": ("Cauterize", "she presses a flaming claw to a cut on her arm, wincing, steam hissing.", "dim amber"),
 }
 
+# 休憩所の行動: 共通の世界。それぞれ違う形の道具ひとつ
+REST_ACTIONS = {
+    "rest_action_rest": "A rolled-out leather bedroll with one plump ivory pillow and a small sleepy crescent moon above it.",
+    "rest_action_upgrade_card": "A heavy bronze smithing hammer striking a small black anvil, a big burst of amber sparks.",
+    "rest_action_remove_cards": "A blank ivory parchment card torn into two halves drifting apart, a few grey ash flakes.",
+    "rest_action_enchant_cards": "A blank ivory card standing upright, tapped by a short teal magic wand that bursts into a star-shaped sparkle.",
+    "rest_action_add_random_consumable": "A small round copper cauldron bubbling over with bright pink potion, big round bubbles popping on top.",
+    "rest_action_increase_attack_on_rest": "A short steel blade pressed against a round grey grindstone wheel on a wooden frame, a fan of orange sparks.",
+}
+
+STATUS_ICON = ("One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its "
+               "silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow.")
+
+# 状態異常 (共通): 敵にも主人公にも付くので主人公を匂わせない。守り系が多いので形を全部変える
+WORLD_STATUS = {
+    "status_effect_overshield": "A big glossy teal soap-bubble dome with a bright curved highlight on its top.",
+    "status_effect_preserve_overshield": "A glossy teal glass orb clamped inside a bronze ring, a small padlock hanging from the ring.",
+    "status_effect_preserve_energy": "A tiny bronze treasure chest with its lid slightly open and a bright yellow spark peeking out.",
+    "status_effect_temp_preserve_block": "A short wall of three grey stone bricks with a small sand hourglass leaning against it.",
+    "status_effect_cap_damage": "A jagged red spike burst pushing upward and flattened against a thick horizontal iron bar above it.",
+    "status_effect_negate_damage": "A plump white feather pillow with a small grey dagger bouncing off it.",
+    "status_effect_negate_debuff": "A small open teal umbrella with purple poison drops bouncing off its top.",
+    "status_effect_pointy": "A round spiky ball like a chestnut burr, covered in long pale ivory spikes.",
+    "status_effect_corrosion": "A square bronze plate half eaten away by bubbling green acid dripping off its lower edge.",
+    "status_effect_damage_increase": "A chunky raised grey stone fist with orange power sparks bursting around its knuckles.",
+    "status_effect_vulnerable": "A round wooden target board split by a red crack, a dart stuck in its center.",
+    "status_effect_energy_next_turn": "A half yellow sun with short thick rays rising over a small green hill.",
+}
+
+# 状態異常 (Vera 専用の仕組み): 竜の血と残り火を使ってよい
+HERO_STATUS = {
+    "status_effect_overheat": "A single crimson blood drop with a small ember flame burning on its top.",
+    "status_effect_critical": "A small black iron pot of crimson blood boiling over, big bubbles and a puff of steam.",
+    "status_effect_feedback_loop": "Two ember-orange flames curling into a ring, the head of each chasing the tail of the other.",
+    "status_effect_pollen": "A dizzy spiral of purple and ember-orange smoke with a few sparks flying off it.",
+}
+
+# 「?」イベント: 共通の世界の場面。今の構図のまま、描き込みを減らした絵本の一場面
+# (SIMPLE はアイコン向けに台座を禁じているので、場面用に書き分ける)
+SCENE_STYLE = (
+    "Simplified, chunky stylized fantasy game art with about 30 percent less detail than a typical painted fantasy "
+    "illustration: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading "
+    "and soft gradients, very little texture. No small leaves, pebbles, tiny props, filigree or engraved patterns; "
+    "quiet low-detail background. Light deformation is welcome (exaggerate the one key part, simplify the rest); "
+    "cute but not childish. Saturated but harmonious colors. Do not imitate any existing game, character, franchise "
+    "or official artwork. Include no text, letters, numerals, logos or symbols."
+) + WORLD + (
+    " Square storybook vignette of one event: one clear focal subject in the middle, a simple stage-like setting, "
+    "soft dark vignette at the edges."
+)
+EVENTS = {
+    "event_sprinkler": "A cracked round stone fountain sputtering glowing teal water and small sparks, a gold coin glinting at the bottom of its basin.",
+    "event_bloom": "A pile of gold coins and goblets in a dark forest hollow still glowing ember-orange from an old forgotten fire, a few drifting embers.",
+    "event_vending": "A friendly round old merchant golem of sandstone and bronze with a coin slot in its chest and little shelves of potions built into its belly, one teal rune eye.",
+    "event_compost": "A big heap of warm grey ash inside ruined stone walls, gold coins glittering in it and an amber glow deep inside, thin wisps of smoke.",
+    "event_scarecrow": "A patched-up practice golem of oak and bronze raising two wooden-sword arms in a ready stance, a straw target beside it in a mossy clearing.",
+    "event_spa": "A steaming hot spring pool between big mossy stones under one ancient tree, a flat stone bench beside it, golden light from above.",
+    "event_barber": "A slender dapper bronze golem barber with scissor-blade hands and a curled mustache plate, standing beside a carved stone barber chair.",
+    "event_pod": "A fat bronze cauldron on a rune-carved stone block, teal brew swirling up out of it on its own, two glass vials beside it.",
+    "event_fortune": "A round stout golem whose belly is a big colorful prize wheel painted with a coin, a heart and a gem, a bronze crank handle on its side, beckoning.",
+    "event_graft": "A mossy stone altar holding a humming rune stone glowing crimson and teal, a small offering bowl of coins on the altar.",
+}
+
 WHITE_CARD = {
     "card_energy_next_turn": "A tall hourglass filled with glowing yellow light-sand standing on a mossy stone, sunrise behind the forest ruins. No people.",
 }
@@ -196,6 +265,25 @@ def main() -> None:
                       "refs": ["tools/codex_art/refs/hero_master.png"],
                       "prompt": f"Card '{name}': " + CARD.format(scene=scene, bg=bg)})
     write("redesign_hero_green_cards.json", HERO_CARD_STYLE, cards)
+
+    ui = [{"id": asset_id, "out": f"external/sprites/rest_actions/{asset_id}.png", "size": [192, 192],
+           "transparent": True, "category": "icon", "prompt": f"{prompt} {ICON}"}
+          for asset_id, prompt in REST_ACTIONS.items()]
+    ui += [{"id": asset_id, "out": f"external/sprites/status_effects/{asset_id}.png", "size": [96, 96],
+            "transparent": True, "category": "icon", "prompt": f"{prompt} {STATUS_ICON}"}
+           for asset_id, prompt in WORLD_STATUS.items()]
+    write("redesign_world_ui.json", WORLD_STYLE, ui)
+
+    hero_status = [{"id": asset_id, "out": f"external/sprites/status_effects/{asset_id}.png", "size": [96, 96],
+                    "transparent": True, "category": "icon", "prompt": f"{prompt} {STATUS_ICON}"}
+                   for asset_id, prompt in HERO_STATUS.items()]
+    write("redesign_hero_green_status.json", HERO_ICON_STYLE, hero_status)
+
+    # 2x2 でまとめて描けるよう、カード絵と同じ扱い (正方形・不透明) にする
+    events = [{"id": asset_id, "out": f"external/sprites/events/{asset_id}.png", "size": [512, 512],
+               "transparent": False, "category": "card_art", "prompt": prompt}
+              for asset_id, prompt in EVENTS.items()]
+    write("redesign_events.json", SCENE_STYLE, events)
 
 
 if __name__ == "__main__":

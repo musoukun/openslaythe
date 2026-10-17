@@ -1,0 +1,203 @@
+{
+  "style": "Simplified, chunky stylized fantasy game art with about 30 percent less detail than a typical painted fantasy asset: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading and one soft highlight, very little texture. No filigree, no tiny rivets, no engraved patterns, no gem encrustations, no pedestals, stands or display bases, no ornate frames. Light deformation is welcome (exaggerate the one key part, simplify the rest); cute but not childish. Saturated but harmonious colors. Do not imitate any existing game, character, franchise or official artwork. Include no text, letters, numerals, logos or symbols. This art belongs to the SHARED WORLD that every playable hero visits, so it must never show or hint at any hero: no dragon scales, claws, tails, wings, horns or dragon fire, and no people. The world is an original realm of enchanted forest ruins with moss-covered pale stone, tarnished bronze, clockwork stone golems and teal rune light.",
+  "assets": [
+    {
+      "id": "rest_action_rest",
+      "out": "external/sprites/rest_actions/rest_action_rest.png",
+      "size": [
+        192,
+        192
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A rolled-out leather bedroll with one plump ivory pillow and a small sleepy crescent moon above it. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "rest_action_upgrade_card",
+      "out": "external/sprites/rest_actions/rest_action_upgrade_card.png",
+      "size": [
+        192,
+        192
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A heavy bronze smithing hammer striking a small black anvil, a big burst of amber sparks. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "rest_action_remove_cards",
+      "out": "external/sprites/rest_actions/rest_action_remove_cards.png",
+      "size": [
+        192,
+        192
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A blank ivory parchment card torn into two halves drifting apart, a few grey ash flakes. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "rest_action_enchant_cards",
+      "out": "external/sprites/rest_actions/rest_action_enchant_cards.png",
+      "size": [
+        192,
+        192
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A blank ivory card standing upright, tapped by a short teal magic wand that bursts into a star-shaped sparkle. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "rest_action_add_random_consumable",
+      "out": "external/sprites/rest_actions/rest_action_add_random_consumable.png",
+      "size": [
+        192,
+        192
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A small round copper cauldron bubbling over with bright pink potion, big round bubbles popping on top. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "rest_action_increase_attack_on_rest",
+      "out": "external/sprites/rest_actions/rest_action_increase_attack_on_rest.png",
+      "size": [
+        192,
+        192
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A short steel blade pressed against a round grey grindstone wheel on a wooden frame, a fan of orange sparks. One single object, three-quarter view, centered, filling about 80 percent of its cell, readable at 48px by its silhouette alone; one dominant hue. Transparent background, no ground shadow, no stand."
+    },
+    {
+      "id": "status_effect_overshield",
+      "out": "external/sprites/status_effects/status_effect_overshield.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A big glossy teal soap-bubble dome with a bright curved highlight on its top. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_preserve_overshield",
+      "out": "external/sprites/status_effects/status_effect_preserve_overshield.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A glossy teal glass orb clamped inside a bronze ring, a small padlock hanging from the ring. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_preserve_energy",
+      "out": "external/sprites/status_effects/status_effect_preserve_energy.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A tiny bronze treasure chest with its lid slightly open and a bright yellow spark peeking out. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_temp_preserve_block",
+      "out": "external/sprites/status_effects/status_effect_temp_preserve_block.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A short wall of three grey stone bricks with a small sand hourglass leaning against it. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_cap_damage",
+      "out": "external/sprites/status_effects/status_effect_cap_damage.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A jagged red spike burst pushing upward and flattened against a thick horizontal iron bar above it. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_negate_damage",
+      "out": "external/sprites/status_effects/status_effect_negate_damage.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A plump white feather pillow with a small grey dagger bouncing off it. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_negate_debuff",
+      "out": "external/sprites/status_effects/status_effect_negate_debuff.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A small open teal umbrella with purple poison drops bouncing off its top. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_pointy",
+      "out": "external/sprites/status_effects/status_effect_pointy.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A round spiky ball like a chestnut burr, covered in long pale ivory spikes. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_corrosion",
+      "out": "external/sprites/status_effects/status_effect_corrosion.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A square bronze plate half eaten away by bubbling green acid dripping off its lower edge. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_damage_increase",
+      "out": "external/sprites/status_effects/status_effect_damage_increase.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A chunky raised grey stone fist with orange power sparks bursting around its knuckles. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_vulnerable",
+      "out": "external/sprites/status_effects/status_effect_vulnerable.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A round wooden target board split by a red crack, a dart stuck in its center. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_energy_next_turn",
+      "out": "external/sprites/status_effects/status_effect_energy_next_turn.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A half yellow sun with short thick rays rising over a small green hill. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    }
+  ]
+}

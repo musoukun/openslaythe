@@ -1,0 +1,49 @@
+{
+  "style": "Simplified, chunky stylized fantasy game art with about 30 percent less detail than a typical painted fantasy asset: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading and one soft highlight, very little texture. No filigree, no tiny rivets, no engraved patterns, no gem encrustations, no pedestals, stands or display bases, no ornate frames. Light deformation is welcome (exaggerate the one key part, simplify the rest); cute but not childish. Saturated but harmonious colors. Do not imitate any existing game, character, franchise or official artwork. Include no text, letters, numerals, logos or symbols. These icons belong to the half-dragon warrior heroine and may use her motifs: copper-red dragon scales, black-iron dragon claws with ember-orange cracks, crimson dragon blood and ember fire. Palette: blackened iron #2A2426, copper-red #B5532E, crimson #8E1B23, ivory #EFE2C4, ember #FF8A2A.",
+  "assets": [
+    {
+      "id": "status_effect_overheat",
+      "out": "external/sprites/status_effects/status_effect_overheat.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A single crimson blood drop with a small ember flame burning on its top. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_critical",
+      "out": "external/sprites/status_effects/status_effect_critical.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A small black iron pot of crimson blood boiling over, big bubbles and a puff of steam. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_feedback_loop",
+      "out": "external/sprites/status_effects/status_effect_feedback_loop.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "Two ember-orange flames curling into a ring, the head of each chasing the tail of the other. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    },
+    {
+      "id": "status_effect_pollen",
+      "out": "external/sprites/status_effects/status_effect_pollen.png",
+      "size": [
+        96,
+        96
+      ],
+      "transparent": true,
+      "category": "icon",
+      "prompt": "A dizzy spiral of purple and ember-orange smoke with a few sparks flying off it. One single bold object, front view, centered, filling about 85 percent of its cell, readable at 32px by its silhouette alone; one dominant hue and very few interior lines. Transparent background, no ground shadow."
+    }
+  ]
+}

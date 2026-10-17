@@ -1,0 +1,115 @@
+{
+  "style": "Simplified, chunky stylized fantasy game art with about 30 percent less detail than a typical painted fantasy illustration: a few big readable shapes, thick dark-brown outlines, flat color masses with two-step cel shading and soft gradients, very little texture. No small leaves, pebbles, tiny props, filigree or engraved patterns; quiet low-detail background. Light deformation is welcome (exaggerate the one key part, simplify the rest); cute but not childish. Saturated but harmonious colors. Do not imitate any existing game, character, franchise or official artwork. Include no text, letters, numerals, logos or symbols. This art belongs to the SHARED WORLD that every playable hero visits, so it must never show or hint at any hero: no dragon scales, claws, tails, wings, horns or dragon fire, and no people. The world is an original realm of enchanted forest ruins with moss-covered pale stone, tarnished bronze, clockwork stone golems and teal rune light. Square storybook vignette of one event: one clear focal subject in the middle, a simple stage-like setting, soft dark vignette at the edges.",
+  "assets": [
+    {
+      "id": "event_sprinkler",
+      "out": "external/sprites/events/event_sprinkler.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A cracked round stone fountain sputtering glowing teal water and small sparks, a gold coin glinting at the bottom of its basin."
+    },
+    {
+      "id": "event_bloom",
+      "out": "external/sprites/events/event_bloom.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A pile of gold coins and goblets in a dark forest hollow still glowing ember-orange from an old forgotten fire, a few drifting embers."
+    },
+    {
+      "id": "event_vending",
+      "out": "external/sprites/events/event_vending.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A friendly round old merchant golem of sandstone and bronze with a coin slot in its chest and little shelves of potions built into its belly, one teal rune eye."
+    },
+    {
+      "id": "event_compost",
+      "out": "external/sprites/events/event_compost.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A big heap of warm grey ash inside ruined stone walls, gold coins glittering in it and an amber glow deep inside, thin wisps of smoke."
+    },
+    {
+      "id": "event_scarecrow",
+      "out": "external/sprites/events/event_scarecrow.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A patched-up practice golem of oak and bronze raising two wooden-sword arms in a ready stance, a straw target beside it in a mossy clearing."
+    },
+    {
+      "id": "event_spa",
+      "out": "external/sprites/events/event_spa.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A steaming hot spring pool between big mossy stones under one ancient tree, a flat stone bench beside it, golden light from above."
+    },
+    {
+      "id": "event_barber",
+      "out": "external/sprites/events/event_barber.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A slender dapper bronze golem barber with scissor-blade hands and a curled mustache plate, standing beside a carved stone barber chair."
+    },
+    {
+      "id": "event_pod",
+      "out": "external/sprites/events/event_pod.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A fat bronze cauldron on a rune-carved stone block, teal brew swirling up out of it on its own, two glass vials beside it."
+    },
+    {
+      "id": "event_fortune",
+      "out": "external/sprites/events/event_fortune.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A round stout golem whose belly is a big colorful prize wheel painted with a coin, a heart and a gem, a bronze crank handle on its side, beckoning."
+    },
+    {
+      "id": "event_graft",
+      "out": "external/sprites/events/event_graft.png",
+      "size": [
+        512,
+        512
+      ],
+      "transparent": false,
+      "category": "card_art",
+      "prompt": "A mossy stone altar holding a humming rune stone glowing crimson and teal, a small offering bowl of coins on the altar."
+    }
+  ]
+}
