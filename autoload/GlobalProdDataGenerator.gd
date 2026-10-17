@@ -1135,7 +1135,7 @@ func add_acts() -> void:
 	var act_1: ActData = ActData.new("act_1")
 	act_1.act_name = "Act 1"
 	act_1.act_next_act_ids = ["act_2"]
-	act_1.act_easy_combat_event_pool_object_id = "event_pool_act_1_easy"
+	act_1.act_easy_combat_event_pool_object_id = "event_pool_opening" # 各幕の 1〜3 階は敵 2 体まで
 	act_1.act_hard_combat_event_pool_object_id = "event_pool_act_1_hard"
 	act_1.act_miniboss_event_pool_object_id = "event_pool_act_1_miniboss"
 	act_1.act_non_combat_event_pool_object_id = "event_pool_act_1_dialogue"
@@ -1146,7 +1146,7 @@ func add_acts() -> void:
 	var act_2: ActData = ActData.new("act_2")
 	act_2.act_name = "Act 2"
 	act_2.act_next_act_ids = ["act_3"]
-	act_2.act_easy_combat_event_pool_object_id = "event_pool_act_1_easy"
+	act_2.act_easy_combat_event_pool_object_id = "event_pool_opening"
 	act_2.act_hard_combat_event_pool_object_id = "event_pool_act_1_easy"
 	act_2.act_miniboss_event_pool_object_id = "event_pool_act_1_miniboss"
 	act_2.act_non_combat_event_pool_object_id = "event_pool_act_1_dialogue"
@@ -1156,7 +1156,7 @@ func add_acts() -> void:
 	var act_3: ActData = ActData.new("act_3")
 	act_3.act_name = "Act 3"
 	act_3.act_next_act_ids = ["act_1"] # only works in endless
-	act_3.act_easy_combat_event_pool_object_id = "event_pool_act_1_easy"
+	act_3.act_easy_combat_event_pool_object_id = "event_pool_opening"
 	act_3.act_hard_combat_event_pool_object_id = "event_pool_act_1_easy"
 	act_3.act_miniboss_event_pool_object_id = "event_pool_act_1_miniboss"
 	act_3.act_non_combat_event_pool_object_id = "event_pool_act_1_dialogue"
@@ -1178,6 +1178,15 @@ func add_events() -> void:
 		]
 	
 	Global.register_rod(event_act_1_easy_combat_1)
+	
+	# 各幕の 1〜3 階用: easy_combat_1 と同じ抽選で、敵は 2 体まで
+	var event_opening_pair: EventData = EventData.new("event_opening_pair")
+	event_opening_pair.event_weighted_enemy_object_ids = [
+		{"enemy_1": 1, "enemy_2": 1, "enemy_3": 1},
+		{"enemy_1": 1, "enemy_2": 1, "enemy_3": 1},
+		]
+	
+	Global.register_rod(event_opening_pair)
 	
 	var event_act_1_easy_combat_2: EventData = EventData.new("event_act_1_easy_combat_2")
 	event_act_1_easy_combat_2.event_weighted_enemy_object_ids = [
@@ -1255,6 +1264,17 @@ func add_events() -> void:
 		])
 	
 	Global.register_rod(event_pool_act_1_easy)
+	# 各幕の 1〜3 階のプール: 敵は 2 体まで (3 体の easy_combat_1 の代わりに event_opening_pair)
+	var event_pool_opening: EventPoolData = EventPoolData.new("event_pool_opening")
+	event_pool_opening.add_events_to_pool(
+		event_opening_pair,
+		[
+		event_opening_pair,
+		event_act_1_easy_combat_2,
+		event_act_1_easy_combat_3,
+		event_act_1_easy_combat_4,
+		])
+	Global.register_rod(event_pool_opening)
 	
 	# act 1 hard pool
 	var event_pool_act_1_hard: EventPoolData = EventPoolData.new("event_pool_act_1_hard")

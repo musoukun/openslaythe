@@ -16,7 +16,7 @@ const PATHS := 6
 const FLOORS_BY_ACT := {1: 15, 2: 14, 3: 13}
 const MIN_ELITE_REST_FLOOR := 6	# 1始まり
 const TREASURE_FROM_TOP := 7	# 最後から何行目が宝箱か
-const EASY_COMBATS_BY_ACT := {1: 3, 2: 2, 3: 2}	# 最初の何戦が弱いプールか (階で近似)
+const EASY_COMBATS_BY_ACT := {1: 3, 2: 3, 3: 3}	# 最初の何戦が弱いプール (敵 2 体まで) か (階で近似)
 
 ## 1幕あたりの部屋数 [最小, 最大] (StS2)
 const ELITE_COUNT := 5
