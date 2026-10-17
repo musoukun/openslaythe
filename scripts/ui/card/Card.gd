@@ -41,6 +41,7 @@ var tooltip_left_side: bool = false # if tooltip should display to the left of t
 @onready var card_glow: ColorRect = %CardGlow
 
 @onready var keyword_timer = $KeywordTimer
+var _shine: ColorRect = null	# レア加工の輝き (手札のカードだけ)
 
 const KEYWORD_HOVER_DELAY: float = 0.5
 
@@ -66,6 +67,11 @@ func init(_card_data: CardData, angular_offset: float, connect_combat_signals: b
 		Signals.card_upgraded.connect(_on_card_upgraded)
 		Signals.card_transformed.connect(_on_card_transformed)
 		Signals.card_decorators_changed.connect(_on_card_decorators_changed)
+		# 手札のカードはコンボや成長に応じてレア加工のように輝く (CardShine)
+		_shine = CardShine.create_overlay(card_frame.size)
+		card_visual.add_child(_shine)
+		Vfx.shine_changed.connect(refresh_shine)
+		refresh_shine()
 	# flag to disable cards so they're not interactable by player
 	if connect_ui_signals:
 		card_button.gui_input.connect(_on_button_gui_input)
@@ -80,6 +86,11 @@ func init(_card_data: CardData, angular_offset: float, connect_combat_signals: b
 	# only modify card visuals.
 	card_decorator_id_to_card_decorator = _generate_card_decorators(card_data.card_decorators)
 	
+
+func refresh_shine() -> void:
+	if _shine and card_data:
+		CardShine.apply(_shine, CardShine.tier_for(card_data))
+
 
 func update_card_display(selected_enemy: Enemy = null) -> void:
 	if card_data == null:
