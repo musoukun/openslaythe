@@ -29,6 +29,12 @@ const ENERGY_ICON_KEYWORD: String = "[energy_icon]"	# tells description to displ
 
 var tooltip_left_side: bool = false # if tooltip should display to the left of the card when hovered
 
+## どの画面でもカードをこの倍率で表示する。Pivot ごと拡大するので絵・文字・押せる範囲がそろって大きくなる
+const CARD_SCALE: float = 1.15
+## Card.tscn での大きさと Pivot の位置 (拡大前)
+const BASE_SIZE := Vector2(144, 184)
+const BASE_PIVOT_POSITION := Vector2(72, 90)
+
 @onready var card_button: Button = %CardButton
 
 @onready var pivot: Node2D = $Pivot # used to rotate/offset the card
@@ -49,6 +55,7 @@ var tooltip_left_side: bool = false # if tooltip should display to the left of t
 @onready var card_glow: ColorRect = %CardGlow
 
 @onready var keyword_timer = $KeywordTimer
+var _is_leaving: bool = false	# 出したカードが中央に見えてから山へ飛ぶまでの間 (同じカードの再生で二重に飛ばさない)
 
 const KEYWORD_HOVER_DELAY: float = 0.5
 
@@ -60,6 +67,10 @@ signal card_unhovered(Card)
 func _ready() -> void:
 	# ホバー拡大しても文字がにじまないよう、カードの文字はすべて MSDF フォントで描く
 	card_visual.theme = CardFont.get_theme()
+	# コンテナは scale を見ずに並べるので、最小サイズも同じ倍率にして間隔を空ける
+	custom_minimum_size = BASE_SIZE * CARD_SCALE
+	pivot.position = BASE_PIVOT_POSITION * CARD_SCALE
+	pivot.scale = Vector2.ONE * CARD_SCALE
 
 func init(_card_data: CardData, angular_offset: float, connect_combat_signals: bool = false, connect_ui_signals: bool = true):
 	card_data = _card_data
@@ -359,8 +370,9 @@ func _on_card_added_to_draw(_card_data: CardData):
 
 func _on_card_play_started(card_play_request: CardPlayRequest):
 	if card_data == card_play_request.card_data:
-		HandManager.hand.create_card_trail_from_card(self, card_play_request.card_destination_pile, true)
-		queue_free()
+		if not _is_leaving:
+			_is_leaving = true
+			HandManager.hand.show_played_card(self, card_play_request.card_destination_pile)
 	else:
 		_attempt_hand_glow()
 

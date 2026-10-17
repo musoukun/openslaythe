@@ -34,6 +34,7 @@ func generate_production_data() -> void:
 	add_artifacts()
 	add_card_decorators()
 	add_cards()
+	HeroGreenContent.register_cards() # Vera の報酬カードを 3 つの軸に絞る (scripts/content/HeroGreenContent.gd)。BuildContent より前
 	BuildContent.register() # ビルド軸のタグ付けと武器 (scripts/content/BuildContent.gd)。カード登録の後に呼ぶ
 	ComboContent.register() # 祝福「昇り竜の型」(コストの小さい順に出すコンボ。scripts/content/ComboContent.gd)
 	HeroBlueContent.register_cards() # 2人目の主人公のカード (scripts/content/HeroBlueContent.gd)
@@ -824,12 +825,20 @@ func add_status_effects() -> void:
 				"custom_signal_value": 1,
 			}
 		},
+		# 敵全体に 10、自分には 5 (自分の分を半分にして、熱のビルドで自滅しにくくする)
 		{
 			Scripts.ACTION_DIRECT_DAMAGE: {
 				"damage": 10,
 				"bypass_block": false,
 				"time_delay": 0.5,
-				"target_override": BaseAction.TARGET_OVERRIDES.ALL_COMBATANTS,
+				"target_override": BaseAction.TARGET_OVERRIDES.ALL_ENEMIES,
+			}
+		},
+		{
+			Scripts.ACTION_DIRECT_DAMAGE: {
+				"damage": 5,
+				"bypass_block": false,
+				"target_override": BaseAction.TARGET_OVERRIDES.PLAYER,
 			}
 		}
 	]
@@ -1134,7 +1143,7 @@ func add_acts() -> void:
 	var act_1: ActData = ActData.new("act_1")
 	act_1.act_name = "Act 1"
 	act_1.act_next_act_ids = ["act_2"]
-	act_1.act_easy_combat_event_pool_object_id = "event_pool_act_1_easy"
+	act_1.act_easy_combat_event_pool_object_id = "event_pool_opening" # 各幕の 1〜3 階は敵 2 体まで
 	act_1.act_hard_combat_event_pool_object_id = "event_pool_act_1_hard"
 	act_1.act_miniboss_event_pool_object_id = "event_pool_act_1_miniboss"
 	act_1.act_non_combat_event_pool_object_id = "event_pool_act_1_dialogue"
@@ -1145,7 +1154,7 @@ func add_acts() -> void:
 	var act_2: ActData = ActData.new("act_2")
 	act_2.act_name = "Act 2"
 	act_2.act_next_act_ids = ["act_3"]
-	act_2.act_easy_combat_event_pool_object_id = "event_pool_act_1_easy"
+	act_2.act_easy_combat_event_pool_object_id = "event_pool_opening"
 	act_2.act_hard_combat_event_pool_object_id = "event_pool_act_1_easy"
 	act_2.act_miniboss_event_pool_object_id = "event_pool_act_1_miniboss"
 	act_2.act_non_combat_event_pool_object_id = "event_pool_act_1_dialogue"
@@ -1155,7 +1164,7 @@ func add_acts() -> void:
 	var act_3: ActData = ActData.new("act_3")
 	act_3.act_name = "Act 3"
 	act_3.act_next_act_ids = ["act_1"] # only works in endless
-	act_3.act_easy_combat_event_pool_object_id = "event_pool_act_1_easy"
+	act_3.act_easy_combat_event_pool_object_id = "event_pool_opening"
 	act_3.act_hard_combat_event_pool_object_id = "event_pool_act_1_easy"
 	act_3.act_miniboss_event_pool_object_id = "event_pool_act_1_miniboss"
 	act_3.act_non_combat_event_pool_object_id = "event_pool_act_1_dialogue"
@@ -1177,6 +1186,15 @@ func add_events() -> void:
 		]
 	
 	Global.register_rod(event_act_1_easy_combat_1)
+	
+	# 各幕の 1〜3 階用: easy_combat_1 と同じ抽選で、敵は 2 体まで
+	var event_opening_pair: EventData = EventData.new("event_opening_pair")
+	event_opening_pair.event_weighted_enemy_object_ids = [
+		{"enemy_1": 1, "enemy_2": 1, "enemy_3": 1},
+		{"enemy_1": 1, "enemy_2": 1, "enemy_3": 1},
+		]
+	
+	Global.register_rod(event_opening_pair)
 	
 	var event_act_1_easy_combat_2: EventData = EventData.new("event_act_1_easy_combat_2")
 	event_act_1_easy_combat_2.event_weighted_enemy_object_ids = [
@@ -1254,6 +1272,17 @@ func add_events() -> void:
 		])
 	
 	Global.register_rod(event_pool_act_1_easy)
+	# 各幕の 1〜3 階のプール: 敵は 2 体まで (3 体の easy_combat_1 の代わりに event_opening_pair)
+	var event_pool_opening: EventPoolData = EventPoolData.new("event_pool_opening")
+	event_pool_opening.add_events_to_pool(
+		event_opening_pair,
+		[
+		event_opening_pair,
+		event_act_1_easy_combat_2,
+		event_act_1_easy_combat_3,
+		event_act_1_easy_combat_4,
+		])
+	Global.register_rod(event_pool_opening)
 	
 	# act 1 hard pool
 	var event_pool_act_1_hard: EventPoolData = EventPoolData.new("event_pool_act_1_hard")
@@ -1686,7 +1715,7 @@ func add_characters() -> void:
 	character_green.character_name = "Vera Emberscale"
 	character_green.character_description = "A half-dragon warrior born in the cliffside kingdom. With dragon-scale claws and wings of ember fire, she tears through the rampaging clockwork golems that overran the ancient forest."
 	character_green.character_color_id = "color_{0}".format([character_color])
-	character_green.character_starting_health = 75
+	character_green.character_starting_health = 80
 	character_green.character_starting_card_draft_card_pack_ids = ["card_pack_{0}".format([character_color])]
 	character_green.character_starting_artifact_ids = ["artifact_draw_on_combat_start"]
 	character_green.character_starting_artifact_pack_ids = ["artifact_pack_white", "artifact_pack_{0}".format([character_color])]
@@ -1792,14 +1821,7 @@ func add_run_modifiers() -> void:
 
 	Global.register_rod(run_modifier_custom_easy_mode)
 	
-	var run_modifier_endless_mode: RunModifierData = RunModifierData.new("run_modifier_endless_mode")
-	run_modifier_endless_mode.run_modifier_name = "Endless Mode"
-	run_modifier_endless_mode.run_modifier_description = "Run will only end when the player dies"
-	run_modifier_endless_mode.run_modifier_is_custom =  true
-	run_modifier_endless_mode.run_modifier_exclusive_to_modifier_ids = []
-	run_modifier_endless_mode.run_modifier_modifier_script_path = Scripts.RUN_MODIFIER_CUSTOM_ENDLESS_MODE
-
-	Global.register_rod(run_modifier_endless_mode)
+	# エンドレスモードは使わない (3 幕のボスでクリア。難易度はクリアするたびに 1 段ずつ解禁)
 	
 	var run_modifier_custom_1: RunModifierData = RunModifierData.new("run_modifier_custom_1")
 	run_modifier_custom_1.run_modifier_name = "Custom 1"
@@ -1831,7 +1853,7 @@ func add_run_modifiers() -> void:
 	### Automatic Modifiers
 	
 	# this allows for auto revive consumables to work each run
-	var run_modifier_consumable_auto_revive: RunModifierData = RunModifierData.new("run_modifier_draft_all_colors")
+	var run_modifier_consumable_auto_revive: RunModifierData = RunModifierData.new("run_modifier_consumable_auto_revive")
 	run_modifier_consumable_auto_revive.run_modifier_name = "Auto Revive"
 	run_modifier_consumable_auto_revive.run_modifier_description = "Uses auto revive consumables"
 	run_modifier_consumable_auto_revive.run_modifier_is_automatic = true # registered regardless of difficulty
@@ -2036,8 +2058,8 @@ func add_enemies() -> void:
 		])
 	# an attack that hits harder on higher difficulties
 	enemy_1.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_1.add_intent_state([
 		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 3, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
@@ -2061,8 +2083,8 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1})
 		])
 	enemy_2.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_2.add_intent_state([
 		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 3, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
@@ -2090,8 +2112,8 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_3.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 7, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_3.add_intent_state([
 		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 3, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
@@ -2123,12 +2145,12 @@ func add_enemies() -> void:
 	var enemy_4_status_charge_2: int = 4
 	var enemy_4_status_actions_2: Array[Dictionary] = [{Scripts.ACTION_APPLY_STATUS: {"status_effect_object_id": "status_effect_vulnerable", "status_charge_amount": enemy_4_status_charge_2, "target_override": BaseAction.TARGET_OVERRIDES.PLAYER}}]
 	enemy_4.add_intent_state([
-		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STARTING, 10, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_1),
-		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STANDARD_ENEMIES_HARDER, 12, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_2),
+		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STARTING, 8, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_1),
+		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STANDARD_ENEMIES_HARDER, 10, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_2),
 	])
 	enemy_4.add_intent_state([
-		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STARTING, 5, 2, "", 0, "", {"intent_block": 1}),
-		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 2, "", 0, "", {"intent_block": 1}),
+		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STARTING, 4, 2, "", 0, "", {"intent_block": 1}),
+		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STANDARD_ENEMIES_HARDER, 5, 2, "", 0, "", {"intent_block": 1}),
 		])
 	enemy_4.add_intent_state([
 		EnemyIntentData.new("intent_block", DIFFICULTY_STARTING, 0, 0, "", 10, "", {"intent_attack_vulnerable": 1}),
@@ -2191,7 +2213,7 @@ func add_enemies() -> void:
 	
 	# boss that summons minions
 	var enemy_act_1_boss_1: EnemyData = EnemyData.new("enemy_act_1_boss_1")
-	enemy_act_1_boss_1.add_health_bounds(200, 200)
+	enemy_act_1_boss_1.add_health_bounds(160, 160)
 	enemy_act_1_boss_1.add_health_bounds(250, 250, DIFFICULTY_BOSS_ENEMIES_HARDER)
 	enemy_act_1_boss_1.enemy_type = EnemyData.ENEMY_TYPES.BOSS
 	enemy_act_1_boss_1.enemy_name = "Act 1 Boss"
@@ -2208,7 +2230,7 @@ func add_enemies() -> void:
 		EnemyIntentData.new("intent_summon", DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack": 1}, enemy_act_1_boss_1_summon_actions)
 		])
 	enemy_act_1_boss_1.add_intent_state([
-		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 3, 2, "", 7, "", {"intent_attack": 1}),
+		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 3, 2, "", 4, "", {"intent_attack": 1}),
 		EnemyIntentData.new("intent_attack", DIFFICULTY_BOSS_ENEMIES_HARDER, 5, 2, "", 7, "", {"intent_attack": 1}),
 	])
 	
@@ -2229,7 +2251,7 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack": 1})
 	])
 	enemy_minion_1.add_intent_state([
-		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack": 1}),
+		EnemyIntentData.new("intent_attack", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack": 1}),
 		EnemyIntentData.new("intent_attack", DIFFICULTY_BOSS_ENEMIES_HARDER, 8, 1, "", 5, "", {"intent_attack": 1}),
 		])
 	
@@ -2406,7 +2428,7 @@ func add_card_basics() -> void:
 		card_basic_attack.card_rarity = CardData.CARD_RARITIES.BASIC
 		card_basic_attack.card_keyword_object_ids = []
 		card_basic_attack.card_values = {"damage": 7, "number_of_attacks": 1}
-		card_basic_attack.card_upgrade_value_improvements = {"damage": 3, "number_of_attacks": 1}
+		card_basic_attack.card_upgrade_value_improvements = {"damage": 3}
 		card_basic_attack.card_play_actions = [{
 		Scripts.ACTION_ATTACK_GENERATOR: {"time_delay": 0.0, "actions_on_lethal": []},
 		Scripts.ACTION_PLAY_SOUND: {"audio_path": "external/audio/sounds/slash.wav"},
@@ -2488,7 +2510,7 @@ func add_cards_green() -> void:
 	card_bud.card_name = "Bristling Scales"
 	card_bud.card_color_id = "color_{0}".format([color])
 	card_bud.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_bud.card_description = "Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy. Exhaust."
+	card_bud.card_description = "Gain [parent_status_charge_amount] Pointy and apply [target_status_charge_amount] Pointy."
 	card_bud.card_type = CardData.CARD_TYPES.SKILL
 	card_bud.card_rarity = CardData.CARD_RARITIES.UNCOMMON
 	card_bud.card_requires_target = true
@@ -2525,7 +2547,6 @@ func add_cards_green() -> void:
 	card_cell_wall.card_rarity = CardData.CARD_RARITIES.BASIC
 	card_cell_wall.card_requires_target = false
 	card_cell_wall.card_values = {}
-	card_cell_wall.card_first_upgrade_property_changes = {"card_energy_cost": 0}
 	card_cell_wall.card_play_actions = [
 		{
 			Scripts.ACTION_BLOCK_TO_STATUS: 
@@ -2634,13 +2655,12 @@ func add_cards_green() -> void:
 	card_fertilize.card_name = "Blood Kindling"
 	card_fertilize.card_color_id = "color_{0}".format([color])
 	card_fertilize.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_fertilize.card_description = "Gain {0}{0}. Lose [self_damage] HP.".format([Card.ENERGY_ICON_KEYWORD])
+	card_fertilize.card_description = "Gain [energy_amount] Energy. Lose [self_damage] HP."
 	card_fertilize.card_type = CardData.CARD_TYPES.SKILL
 	card_fertilize.card_rarity = CardData.CARD_RARITIES.RARE
 	card_fertilize.card_requires_target = false
 	card_fertilize.card_values = {"self_damage": 6, "energy_amount": 2}
-	card_fertilize.card_upgrade_value_improvements = {"self_damage": 3, "energy_amount": 1}
-	card_fertilize.card_first_upgrade_property_changes = {"card_description": "Gain {0}{0}. Lose [self_damage] HP.".format([Card.ENERGY_ICON_KEYWORD])}
+	card_fertilize.card_upgrade_value_improvements = {"energy_amount": 1}
 	card_fertilize.card_play_actions = [
 		{
 			Scripts.ACTION_DIRECT_DAMAGE: {
@@ -2666,6 +2686,8 @@ func add_cards_green() -> void:
 	card_fruit.card_play_destination = HandManager.EXHAUST_PILE
 	card_fruit.card_values = {"small_max_health_amount": 1, "big_max_health_amount": 3}
 	card_fruit.card_upgrade_value_improvements = {"small_max_health_amount": 1, "big_max_health_amount": 1}
+	# 最大HPを増やすカードなので、廃棄を消さず (毎戦闘何度も増えてしまう) 数値を上げる
+	card_fruit.card_upgrade_type = CardData.UPGRADE_TYPES.VALUES
 	card_fruit.card_play_actions = [
 		{
 			Scripts.ACTION_RANDOM_SELECTION: 
@@ -2720,7 +2742,6 @@ func add_cards_green() -> void:
 	card_lotus.card_play_destination = HandManager.EXHAUST_PILE
 	card_lotus.card_values = {"status_effect_multiplier_amount": 2}
 	card_lotus.card_upgrade_value_improvements = {"status_effect_multiplier_amount": 1,}
-	card_lotus.card_first_upgrade_property_changes = {"card_description": "Triple Overshield charges."}
 	card_lotus.card_play_actions = [
 		{
 			Scripts.ACTION_MULTIPLY_STATUS: {
@@ -2789,7 +2810,7 @@ func add_cards_green() -> void:
 	card_petals.card_name = "Wing Shroud"
 	card_petals.card_color_id = "color_{0}".format([color])
 	card_petals.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_petals.card_description = "Gain [block] block. Keep block for [status_charge_amount] turns. Exhaust. On pickup, gain [health_amount] HP."
+	card_petals.card_description = "Gain [block] block. Keep block for [status_charge_amount] turns. On pickup, gain [health_amount] HP."
 	card_petals.card_type = CardData.CARD_TYPES.SKILL
 	card_petals.card_rarity = CardData.CARD_RARITIES.RARE
 	card_petals.card_requires_target = false
@@ -2887,24 +2908,7 @@ func add_cards_green() -> void:
 	card_symbiosis.card_energy_cost = 2
 	card_symbiosis.card_requires_target = false
 	card_symbiosis.card_values = {"status_charge_amount": 0}
-	card_symbiosis.card_upgrade_value_improvements = {"status_charge_amount": 20}
-	card_symbiosis.card_first_upgrade_property_changes = {
-		"card_description": "Overshield no longer decays. Gain [status_charge_amount] Overshield",
-		"card_play_actions": [
-			{
-			Scripts.ACTION_APPLY_STATUS: {
-			"status_effect_object_id": "status_effect_overshield",
-			"status_charge_amount": 20,
-			"target_override": BaseAction.TARGET_OVERRIDES.PLAYER}
-			},
-			{
-			Scripts.ACTION_APPLY_STATUS: {
-			"status_effect_object_id": "status_effect_preserve_overshield",
-			"status_charge_amount": 1,
-			"target_override": BaseAction.TARGET_OVERRIDES.PLAYER}
-			}
-		]
-		}
+	card_symbiosis.card_upgrade_value_improvements = {}
 	card_symbiosis.card_play_actions = [
 		{
 			Scripts.ACTION_APPLY_STATUS: {
@@ -2958,6 +2962,8 @@ func add_cards_green() -> void:
 	card_verdant.card_play_destination = HandManager.EXHAUST_PILE
 	card_verdant.card_values = {"status_charge_amount": 1, "status_secondary_charge_amount": 7}
 	card_verdant.card_upgrade_value_improvements = {"status_secondary_charge_amount": -2,}
+	# 使用不可で引いた時に廃棄されるカードなので、廃棄を消さず受けるダメージの上限を下げる
+	card_verdant.card_upgrade_type = CardData.UPGRADE_TYPES.VALUES
 	card_verdant.card_draw_actions = [
 		{
 			Scripts.ACTION_PICK_CARDS: {
@@ -3007,7 +3013,7 @@ func add_cards_green() -> void:
 	card_conclusion.card_name = "Banked Flame"
 	card_conclusion.card_color_id = "color_{0}".format([color])
 	card_conclusion.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_conclusion.card_description = "Retain. Do [damage]. Gain 4 damage for each unused energy at turn end. Exhaust"
+	card_conclusion.card_description = "Do [damage]. Gain 4 damage for each unused energy at turn end."
 	card_conclusion.card_type = CardData.CARD_TYPES.ATTACK
 	card_conclusion.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_conclusion.card_energy_cost = 3
@@ -3015,10 +3021,6 @@ func add_cards_green() -> void:
 	card_conclusion.card_is_retained = true
 	card_conclusion.card_play_destination = HandManager.EXHAUST_PILE
 	card_conclusion.card_values = {"damage": 18, "number_of_attacks": 1, "card_value_improvements":{"damage": 4}}
-	card_conclusion.card_first_upgrade_property_changes = {
-		"card_description": "Retain. Do [damage]. Gain 6 damage for each unused energy at turn end. Exhaust",
-		"card_value_improvements":{"damage": 6}
-		}
 	card_conclusion.card_play_actions = [
 		{
 			Scripts.ACTION_ATTACK_GENERATOR: {
@@ -3045,7 +3047,7 @@ func add_cards_green() -> void:
 	card_datum.card_name = "Mirror Scale"
 	card_datum.card_color_id = "color_{0}".format([color])
 	card_datum.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_datum.card_description = "Gain [block] Block. Duplicates on draw. Exhaust."
+	card_datum.card_description = "Gain [block] Block. Duplicates on draw."
 	card_datum.card_type = CardData.CARD_TYPES.SKILL
 	card_datum.card_rarity = CardData.CARD_RARITIES.COMMON
 	card_datum.card_energy_cost = 3
@@ -3125,7 +3127,7 @@ func add_cards_green() -> void:
 	card_photoelectric_synthesis.card_name = "Dragon Awakening"
 	card_photoelectric_synthesis.card_color_id = "color_{0}".format([color])
 	card_photoelectric_synthesis.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_photoelectric_synthesis.card_description = "Gain 10 strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed."
+	card_photoelectric_synthesis.card_description = "Gain [status_charge_amount] strength. Cannot be played unless it has Absorbed 5 energy. [card_absorbed_energy] Absorbed."
 	card_photoelectric_synthesis.card_type = CardData.CARD_TYPES.POWER
 	card_photoelectric_synthesis.card_rarity = CardData.CARD_RARITIES.RARE
 	card_photoelectric_synthesis.card_energy_cost = 0
@@ -3137,6 +3139,7 @@ func add_cards_green() -> void:
 		"status_effect_object_id": "status_effect_damage_increase",
 		"status_charge_amount": 10,
 		}
+	card_photoelectric_synthesis.card_upgrade_value_improvements = {"status_charge_amount": 1}
 	card_photoelectric_synthesis.card_play_actions = [
 		{
 			Scripts.ACTION_APPLY_STATUS: {
@@ -3402,7 +3405,7 @@ func add_cards_green() -> void:
 	card_waste.card_name = "Cinder"
 	card_waste.card_color_id = "color_{0}".format([color])
 	card_waste.card_texture_path = "external/sprites/cards/{0}/card_{0}.png".format([color])
-	card_waste.card_description = "At end of turn gain [status_charge_amount] Blood Heat and do [damage] damage to a random enemy. Exhaust"
+	card_waste.card_description = "At end of turn gain [status_charge_amount] Blood Heat and do [damage] damage to a random enemy."
 	card_waste.card_type = CardData.CARD_TYPES.STATUS
 	card_waste.card_rarity = CardData.CARD_RARITIES.GENERATED
 	card_waste.card_requires_target = false

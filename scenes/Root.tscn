@@ -2716,7 +2716,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("25_ll3o0")
 
-[node name="StartingOptionContainer" type="VBoxContainer" parent="RunScreen/RunStartOptions" unique_id=21744175]
+[node name="StartingOptionContainer" type="HBoxContainer" parent="RunScreen/RunStartOptions" unique_id=21744175]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2875,8 +2875,8 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -448.0
-offset_right = 400.0
+offset_left = -460.0
+offset_right = 500.0
 offset_top = -270.0
 offset_bottom = 330.0
 grow_horizontal = 2
@@ -2933,7 +2933,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -400.0
-offset_top = -120.0
+offset_top = -150.0
 offset_right = 400.0
 offset_bottom = 74.0
 grow_horizontal = 2

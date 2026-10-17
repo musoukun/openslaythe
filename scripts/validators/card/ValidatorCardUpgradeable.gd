@@ -6,4 +6,4 @@ func _validation(card_data: CardData, action: BaseAction, values: Dictionary[Str
 		DebugLogger.log_error("ValidatorCardUpgradeable: No card given")
 		return false
 	
-	return card_data.card_upgrade_amount < card_data.card_upgrade_amount_max
+	return card_data.can_upgrade()

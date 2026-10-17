@@ -126,7 +126,7 @@ func _complete_run(is_victory: bool) -> void:
 	
 	if is_victory:
 		# highest character difficulty win
-		var profile_character_highest_difficulty: int = profile_data.profile_character_id_to_highest_difficulty.get(character_id, 0)
+		var profile_character_highest_difficulty: int = profile_data.profile_character_id_to_highest_difficulty.get(character_id, -1) # -1 = まだクリアしていない
 		var current_difficulty_level: int = Global.player_data.player_run_difficulty_level
 		profile_character_highest_difficulty = max(current_difficulty_level, profile_character_highest_difficulty)
 		profile_data.profile_character_id_to_highest_difficulty[character_id] = profile_character_highest_difficulty

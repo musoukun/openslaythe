@@ -10,7 +10,7 @@ const HAND_TEXTURE := preload("res://sprites/ui/shop_hand.png")
 const BACK_TEXTURE := preload("res://sprites/ui/shop_next_arrow.png")
 
 const HUD_HEIGHT := 64.0	# 上部バーは暗くせず、押せるままにする
-const CLOTH_SIZE := Vector2(1040, 470)
+const CLOTH_SIZE := Vector2(1180, 470)	# カード6枚 (Card.CARD_SCALE で拡大) が1段に収まる幅
 const CLOTH_TOP := 136.0
 const CLOTH_COLOR := Color(0.18, 0.36, 0.25)
 const CLOTH_BORDER := Color(0.72, 0.58, 0.3)
@@ -170,7 +170,7 @@ func _build_cloth() -> void:
 	cloth.add_child(rows)
 	_card_row = HBoxContainer.new()
 	_card_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	_card_row.add_theme_constant_override("separation", 26)
+	_card_row.add_theme_constant_override("separation", 12)
 	_card_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rows.add_child(_card_row)
 	_ware_row = HBoxContainer.new()

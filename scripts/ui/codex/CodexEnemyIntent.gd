@@ -39,5 +39,5 @@ func init(_enemy_data: EnemyData, _base_enemy_intent_data: EnemyIntentData) -> v
 		var next_intent_name: String = tr(next_intent_data.enemy_intent_name)
 		next_intent_names.append(next_intent_name)
 	
-	next_intent_text = "Next: " + ", ".join(next_intent_names)
+	next_intent_text = tr("Next: ") + ", ".join(next_intent_names)
 	next_intents_label.text = next_intent_text

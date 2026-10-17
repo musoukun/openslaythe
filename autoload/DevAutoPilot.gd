@@ -3,21 +3,25 @@ extends Node
 ## 例: godot --path . --write-movie shots/x.png --fixed-fps 10 --quit-after 60 -- --auto=combat
 ## --auto=map    : ラン開始してマップを表示
 ## --auto=map_mid : 2階ぶん進んだ状態で移動待ちのマップを表示 (現在地と行き先の目印の確認用)
+## --auto=map_deck : マップを表示してマップ上のデッキボタンを押す (閉じるとマップに戻るかは map_deck:close)
 ## --auto=combat : ラン開始して最初の戦闘に入る
 ## --auto=new_run : タイトルから「新しいラン」画面を開く
 ## --auto=menu:<ボタン名> : タイトルのメニューボタンを押す (例: menu:CodexButton)
 ## --auto=combat_hover : 最初の戦闘で手札の3枚目にカーソルを乗せた状態にする (ホバー拡大の確認用)
 ## --auto=weapon:<artifact_id|none> : 開始時の武器を選んで最初の戦闘に入り、攻撃カードの補正後ダメージを出力する
 ## --auto=blessing[:<選択肢番号>[:<幕>]] : 開始地点の祝福画面を出し、指定があれば選択肢を押して受け取りの演出を見る (番号を空にすると押さない。例 blessing::3)
+## --auto=blessing_hover:<選択肢番号>[:<幕>] : 祝福画面で、番号の柱にカーソルを乗せた状態にする (光り方の確認用)
 ## --auto=shop : 1階の部屋をショップにして訪れ、商人の場面を出す
 ## --auto=shop_buy : 購入画面を開き、商品にカーソルを乗せる (指さしとツールチップの確認用)
 ## --auto=shop_remove : 購入画面からカード削除を押す
 ## --auto=shop_check : カード削除とカードの購入を実際に行い、お金とデッキの変化を出力する
 ## --auto=rest[:many][:<タイル番号>] : 1階の部屋を休憩所にして訪れる。many で登録済みの行動を全部並べ、番号のタイルにホバーする (例 rest:many:6)
+## --auto=rest:smith[:on][:pick] : 鍛冶でアップグレードの選択画面を出す。on で「強化後を見る」を入れ、pick で1枚選んで確定する
 ## --auto=death[:<倒れ方>[:plain]] : 最初の戦闘で主人公を倒して死亡画面を出す。倒れ方 (dissolve / collapse / explode) を上書きでき、plain なら倒れる絵を使わない
 ## --auto=click_test : 最初の戦闘で、手札の各カードのどこを押せば CardButton に届くかを数え、実際にクリックでカードを出す
 ## --auto=playthrough [--seed=<数>] [--god] : タイトルからクリックだけで最終ボスまで遊び、詰まり・押せない場所を出力する (--god はテスト専用で、毎ターン体力を満タンに戻す。--shots=<フォルダ> でウィンドウ実行時に要所を撮る。--draft=first|attack|random|none でカード報酬の取り方。計測は CSVCOMBAT / CSVRUN の行。--combo で祝福「昇り竜の型」を選び、コストの小さい順に出す)
 ## --warp-mouse : 本物のカーソルも動かす (shop_buy の指さしを撮るとき用。使っている人のマウスを奪うので普段は付けない)
+## --hp=<割合>[,<割合>...] : combat モードで、戦闘に入ってから主人公の HP を最大HPのこの割合 (%) にする。複数なら 2 秒ごとに順に変える (例 --hp=10 / --hp=5,100)
 ## --hero=<character_id> : ラン開始系のモードで使う主人公 (省略時は character_green。例 --hero=character_blue)
 ## 引数が無い場合は何もしない。
 
@@ -138,7 +142,7 @@ func _ready() -> void:
 			print("WEAPON deck ", card_data.object_id, " tags=", card_data.card_tags, " damage ", card_data.card_values.get("damage", 0), " -> ", damage)
 		return
 	match mode:
-		"map", "map_top", "map_mid":
+		"map", "map_top", "map_mid", "map_deck", "map_deck:close":
 			_print_map_stats()
 			# ラン開始の選択肢パネルがマップを覆うので閉じてから表示する
 			var run_start_options := get_tree().root.find_child("RunStartOptions", true, false) as Control
@@ -154,6 +158,15 @@ func _ready() -> void:
 				if mode == "map_top":
 					await get_tree().process_frame
 					map.scroll_container.scroll_vertical = 0
+				if mode.begins_with("map_deck"):
+					await get_tree().create_timer(0.5).timeout
+					map.find_child("MapDeckButton", true, false).button_up.emit()
+					var overlay := get_tree().root.find_child("CardSelectionOverlay", true, false) as Control
+					print("MAP_DECK overlay=", overlay.visible, " map=", map.visible, " cards=", overlay.find_children("*", "Card", true, false).size())
+					if mode == "map_deck:close":
+						await get_tree().create_timer(0.5).timeout
+						overlay.get_node("BackButton").button_up.emit()
+						print("MAP_DECK closed overlay=", overlay.visible, " map=", map.visible)
 		"deck":
 			var deck_button := get_tree().root.find_child("DeckButton", true, false) as BaseButton
 			if deck_button:
@@ -163,6 +176,15 @@ func _ready() -> void:
 				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
 					ActionGenerator.generate_visition_location(location.location_id)
 					break
+			# --hp=<割合>[,<割合>...]: 戦闘に入ってから主人公の HP を最大HPのこの割合 (%) にする。複数なら 2 秒ごとに順に変える (Vera の輪郭の炎の段階確認用)
+			if _get_user_arg("--hp=") != "":
+				var player_data: PlayerData = Global.player_data
+				var wait := 1.0
+				for percent in _get_user_arg("--hp=").split(","):
+					await get_tree().create_timer(wait).timeout
+					wait = 2.0
+					player_data.set_health(maxi(1, roundi(player_data.player_health_max * float(percent) / 100.0)))
+					print("HP ", player_data.player_health, "/", player_data.player_health_max)
 			if mode == "combat_hover":
 				await get_tree().create_timer(2.0).timeout
 				var hand_cards: Array[Card] = HandManager.hand.get_player_hand_cards()
@@ -237,6 +259,26 @@ func _ready() -> void:
 				print("COMBO %s cost=%d preview=\"%s\" damage=%d block=+%d chain=%s" % [card_data.object_id, card_data.get_card_energy_cost(true, true), preview.replace("\n", " "),
 					hp_before - enemy.get_combatant_health(), Global.player_data.player_block - block_before, Global.player_data.player_values.get(InterceptorComboChain.CHAIN_VALUE, 0)])
 			get_tree().quit()
+		"card_check":
+			# --auto=card_check [--hero=] : 新しいカードを決めた手順で出し、HP・エナジー・筋力・熱・マナ・手札・山札の変化を出力する
+			for location in Global.get_next_locations():
+				if location.location_type == LocationData.LOCATION_TYPES.COMBAT:
+					ActionGenerator.generate_visition_location(location.location_id)
+					break
+			await get_tree().create_timer(3.0).timeout
+			for each_enemy: Enemy in Global.get_alive_enemies():
+				each_enemy.set_health(999, 999)
+			Global.player_data.player_energy = 99
+			var steps: Array = [["card_particle_accelerator"], ["card_green_blood_pact"], ["card_green_sharpen_claws"], ["card_green_frenzied_claws"],
+				["card_reap"], ["card_green_cauterize"], ["card_green_heat_scales"]]
+			if Global.player_data.player_character_object_id == "character_blue":
+				Global.get_player().add_status_effect_charges(HeroBlueContent.STATUS_MANA, 10)
+				# [出すカード, 先に山札へ入れるカード]
+				steps = [["card_blue_blade_call", "card_blue_extend_blade"], ["card_blue_minds_eye", "card_blue_starfall"],
+					["card_blue_azure_bolt"], ["card_blue_azure_veil"], ["card_blue_mana_drop"], ["card_blue_clear_mind"], ["card_blue_stillness"]]
+			for step: Array in steps:
+				await _card_check_step(step)
+			get_tree().quit()
 		"card_stats":
 			# --auto=card_stats [--hero=] : 主人公の報酬カード (色・標準レア) の種別・レア度・コスト・数値・説明を出力する (バランス確認用)
 			var color_id: String = Global.get_player_character_data().character_color_id
@@ -250,6 +292,18 @@ func _ready() -> void:
 				print("CARDSTAT|%s|%s|%s|%s|%d|%s|%s" % [card_data.object_id, tr(card_data.card_name), CardData.CARD_TYPES.keys()[card_data.card_type],
 					CardData.CARD_RARITIES.keys()[card_data.card_rarity], card_data.card_energy_cost, card_data.card_values,
 					regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
+			get_tree().quit()
+		"upgrade_check":
+			# --auto=upgrade_check : 全カードのアップグレード前後 (コスト・廃棄・数値・説明) を出力する
+			var preview: Card = Scenes.CARD.instantiate()
+			add_child(preview)
+			var regex := RegEx.create_from_string("\\[[^\\]]*\\]")
+			for card_data: CardData in Global._id_to_card_data.values():
+				var upgraded: CardData = card_data.get_upgraded_preview()
+				for c: CardData in [card_data, upgraded]:
+					preview.init(c, 0, false, false)
+					print("UPG|%s|%s|cost=%d|exhaust=%s|%s|%s|%s" % [c.object_id, c.get_card_name(), c.card_energy_cost, c.does_card_exhaust(),
+						CardData.CARD_TYPES.keys()[c.card_type], c.card_values, regex.sub(preview.get_card_description(), "", true).replace("\n", " ")])
 			get_tree().quit()
 		"juice":
 			# 演出の確認: 戦闘に入り、カードを連打してコンボ (揺れ・音) を重ねる
@@ -330,6 +384,32 @@ func _mana_check() -> void:
 	print("MANA blade damage per hit after Extend Blade: ", preview._intercept_action(targets, true)[0].get_shadowed_action_values("damage", 0), " (expected 14)")
 
 
+## card_check の 1 手: 山札を空にして (2 つ目があれば山札に入れて) カードを手札に加えて出し、前後の状態を出力する
+func _card_check_step(step: Array) -> void:
+	var player: Player = Global.get_player()
+	var enemy: Enemy = Global.get_alive_enemies()[0]
+	HandManager.player_draw.clear()
+	if step.size() > 1:
+		HandManager.player_draw.append(Global.get_card_data_from_prototype(step[1]))
+	# 手札は出すカードと、捨てる対象にする斬撃 1 枚だけにする
+	HandManager.discard_hand()
+	await get_tree().create_timer(0.5).timeout
+	var card_data: CardData = Global.get_card_data_from_prototype(step[0])
+	HandManager.add_cards_to_hand([card_data, Global.get_card_data_from_prototype("card_basic_attack_" + Global.get_player_character_data().character_color_id.trim_prefix("color_"))] as Array[CardData], 99)
+	await get_tree().create_timer(0.5).timeout
+	var summary := func() -> String:
+		return "hp=%d energy=%d strength=%d heat=%d mana=%d hand=%s draw=%s exhaust=%d enemy_hp=%d" % [Global.player_data.player_health, Global.player_data.player_energy,
+			player.get_status_charges("status_effect_damage_increase"), player.get_status_charges("status_effect_overheat"), player.get_status_charges("status_effect_mana"),
+			HandManager.player_hand.map(func(c): return c.object_id), HandManager.player_draw.map(func(c): return c.object_id), HandManager.player_exhaust.size(), enemy.get_combatant_health()]
+	var before: String = summary.call()
+	var request: CardPlayRequest = HandManager.create_card_play_request(card_data, enemy if card_data.card_requires_target else null)
+	request.card_destination_pile = card_data.card_play_destination
+	request.card_destination_strategy = card_data.card_play_destination_strategy
+	HandManager.add_card_to_play_queue(request)
+	await get_tree().create_timer(2.0).timeout
+	print("CARDCHECK %s\n   before %s\n   after  %s" % [card_data.object_id, before, summary.call()])
+
+
 ## 性能計測: 何もしない時 / デッキ一覧を開いた直後 のフレーム時間
 func _profile() -> void:
 	for phase in ["idle", "mouse_sweep", "open_deck"]:
@@ -360,6 +440,29 @@ func _rest_site(parts: PackedStringArray) -> void:
 	var location: LocationData = Global.get_next_locations()[0]
 	location.location_type = LocationData.LOCATION_TYPES.REST_SITE
 	ActionGenerator.generate_visition_location(location.location_id)
+	if parts.has("smith"):
+		# --auto=rest:smith[:on][:pick] : 鍛冶を押してアップグレードの選択画面を出す
+		await get_tree().create_timer(1.5).timeout
+		for button: RestActionButton in get_tree().root.find_children("*", "RestActionButton", true, false):
+			if button.rest_action_object_id == "rest_action_upgrade_card":
+				button.button_up.emit()
+		await get_tree().create_timer(0.5).timeout
+		var overlay := get_tree().root.find_child("CardSelectionOverlay", true, false)
+		var toggle := overlay.find_child("UpgradeToggle", true, false) as CheckButton
+		print("SMITH toggle visible=", toggle.visible)
+		if parts.has("on"):
+			toggle.button_pressed = true
+			await get_tree().create_timer(0.3).timeout
+			var shown: Array = overlay.find_children("*", "Card", true, false).map(func(c): return c.card_data.get_card_name())
+			print("SMITH shown=", shown)
+		if parts.has("pick"):
+			var first: Card = overlay.find_children("*", "Card", true, false)[0]
+			first.card_selected.emit(first)
+			await get_tree().create_timer(0.3).timeout
+			overlay.get_node("ConfirmButton").button_up.emit()
+			await get_tree().create_timer(0.5).timeout
+			print("SMITH deck=", Global.player_data.player_deck.map(func(c): return c.get_card_name()))
+		return
 	var hover_index := parts[parts.size() - 1]
 	if not hover_index.is_valid_int():
 		return
@@ -380,6 +483,9 @@ func _blessing(parts: PackedStringArray) -> void:
 	var options := run_start_options.find_children("*", "DialogueOption", true, false)
 	print("BLESSING act=", Global.player_data.player_act, " options=", options.map(func(o): return o.rich_text_label.get_parsed_text()))
 	if parts.size() < 2 or parts[1] == "":
+		return
+	if parts[0] == "blessing_hover":
+		options[int(parts[1])].mouse_entered.emit()
 		return
 	print("BLESSING before: ", _player_summary())
 	var option: DialogueOption = options[int(parts[1])]
@@ -580,6 +686,12 @@ func _preview_vfx() -> void:
 
 func _get_mode() -> String:
 	return _get_user_arg("--auto=")
+
+## テスト起動 (--auto=) のときのラン開始時の所持金。普通に遊ぶときは CharacterData.character_starting_money (90)
+const TEST_STARTING_MONEY := 999
+
+func is_active() -> bool:
+	return _get_mode() != ""
 
 func _get_user_arg(prefix: String) -> String:
 	for arg in OS.get_cmdline_user_args():

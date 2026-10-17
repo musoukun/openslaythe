@@ -11,6 +11,7 @@ const INTERCEPTOR_ID := "interceptor_tag_scaling"
 ## 爪・尾の攻撃。手数で伸びる
 const PHYSICAL_CARD_IDS: Array[String] = [
 	"card_basic_attack_green", "card_clippers", "card_reap", "card_wildflower", "card_vines",
+	"card_green_searing_claw", "card_green_frenzied_claws", "card_green_claw_flurry",
 ]
 ## 竜炎の攻撃 (タグ ID は reactor のまま)。枚数は少ないが1発の上乗せが大きい
 const REACTOR_CARD_IDS: Array[String] = [

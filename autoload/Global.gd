@@ -238,6 +238,9 @@ func start_run(character_object_id: String, run_seed: int, difficulty_level: int
 	
 	# money and health
 	player_data.player_money = character_data.character_starting_money
+	# テスト起動 (--auto=) のときは買い物の確認がしやすいよう多めに持たせる
+	if DevAutoPilot.is_active():
+		player_data.player_money = DevAutoPilot.TEST_STARTING_MONEY
 	player_data.player_health_max = character_data.character_starting_health
 	player_data.player_health = character_data.character_starting_health
 	
@@ -255,7 +258,8 @@ func start_run(character_object_id: String, run_seed: int, difficulty_level: int
 			player_data.player_run_modifier_object_ids.append(run_modifier_id)
 	# difficulty run modifiers
 	if difficulty_level > 0:
-		var difficulty_amount_max: int = min(difficulty_level, len(STANDARD_DIFFICULTY_RUN_MODIFIER_IDS))
+		# レベル N は 0〜N 番の修飾を全部かける (0 番は何もしない「基本」)
+		var difficulty_amount_max: int = min(difficulty_level + 1, len(STANDARD_DIFFICULTY_RUN_MODIFIER_IDS))
 		player_data.player_run_modifier_object_ids += STANDARD_DIFFICULTY_RUN_MODIFIER_IDS.slice(0, difficulty_amount_max, 1, true)
 	player_data.player_run_modifier_object_ids += custom_run_modifier_object_ids
 	#endregion
