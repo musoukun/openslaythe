@@ -53,7 +53,7 @@ func generate_run_summary_text() -> void:
 	if current_run_stats == null:
 		breakpoint
 		DebugLogger.log_error("RunSummaryOverlay: Current run stats not detected")
-		stats_summary_autosize_label.set_bbcode("[color=red]Current run stats not found[/color]")
+		stats_summary_autosize_label.set_bbcode("[color=red]" + tr("Current run stats not found") + "[/color]")
 		
 	# All the cells concatenated together, since godot rich text tables
 	# don't format as an X by X grid but by a single line of cells
@@ -63,7 +63,7 @@ func generate_run_summary_text() -> void:
 		var run_stat_name: String = SUMMARY_TEMPLATE[summary_stat_text]
 		var stat_value: int = current_run_stats.get_run_total_stat(run_stat_name)
 		# format text into a cell
-		var cell_text: String = "[cell]{0}: {1}[/cell]".format([summary_stat_text, stat_value])
+		var cell_text: String = "[cell]{0}: {1}[/cell]".format([tr(summary_stat_text), stat_value])
 		summary_cell_text += cell_text
 		
 	# create table and fill it with cells

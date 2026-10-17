@@ -134,14 +134,14 @@ func get_intent_codex_bbcode() -> String:
 	# blocking
 	if enemy_intent_block > 0:
 		# add to text
-		returned_bbcode += "Gain {0} Block".format([enemy_intent_block])
+		returned_bbcode += tr("Gain {0} Block").format([enemy_intent_block])
 	
 	# attacking
 	if enemy_intent_attack_damage > 0 or enemy_intent_number_of_attacks > 0:
 		# add to text
 		if returned_bbcode.length() > 0:
 			returned_bbcode += "\n" # newline
-		returned_bbcode += "Do {0} x {1} Damage".format([enemy_intent_attack_damage, enemy_intent_number_of_attacks])
+		returned_bbcode += tr("Do {0} x {1} Damage").format([enemy_intent_attack_damage, enemy_intent_number_of_attacks])
 	
 	# parse each custom action and use it to generate text from their parameters.
 	for action: Dictionary in enemy_intent_custom_actions:
@@ -163,7 +163,7 @@ func get_intent_codex_bbcode() -> String:
 						returned_bbcode += "\n"
 					
 					# generate summoning bbcode then format with join
-					returned_bbcode += "Summon: "
+					returned_bbcode += tr("Summon: ")
 					var summoning_texts: Array[String] = []
 					
 					for enemy_id: String in random_enemy_object_ids:
@@ -205,12 +205,12 @@ func get_intent_codex_bbcode() -> String:
 						if action_target == BaseAction.TARGET_OVERRIDES.PARENT or action_target == BaseAction.TARGET_OVERRIDES.ALL_ENEMIES:
 							if returned_bbcode.length() > 0:
 								returned_bbcode += "\n" # newline
-							returned_bbcode += "Gain {0}[img width={1}]{2}[/img]".format([status_charge_amount, BBCODE_EMBEDDED_IMAGE_WIDTH, status_texture_path])
+							returned_bbcode += tr("Gain {0}[img width={1}]{2}[/img]").format([status_charge_amount, BBCODE_EMBEDDED_IMAGE_WIDTH, status_texture_path])
 					# debuffing player
 					if status_effect_data.status_effect_type == StatusEffectData.STATUS_EFFECT_TYPES.DEBUFF:
 						if action_target == BaseAction.TARGET_OVERRIDES.PLAYER:
 							if returned_bbcode.length() > 0:
 								returned_bbcode += "\n" # newline
-							returned_bbcode += "Inflict {0}[img width={1}]{2}[/img]".format([status_charge_amount, BBCODE_EMBEDDED_IMAGE_WIDTH, status_texture_path])
+							returned_bbcode += tr("Inflict {0}[img width={1}]{2}[/img]").format([status_charge_amount, BBCODE_EMBEDDED_IMAGE_WIDTH, status_texture_path])
 	
 	return returned_bbcode

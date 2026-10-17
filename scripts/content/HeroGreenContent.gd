@@ -42,14 +42,15 @@ static func _rework_starting_deck() -> void:
 static func _rework_cards() -> void:
 	# 竜心をくべる (初期デッキ): 燃えさしを捨て札に入れる代わりに HP を払う (わざと傷つく軸)。1 戦闘に 1 回ずつ (廃棄)
 	var stoke: CardData = Global.get_card_data("card_particle_accelerator")
-	stoke.card_description = "Gain [energy_amount] Energy. Lose [self_damage] HP. Exhaust."
+	stoke.card_description = "Gain [energy_amount] Energy. Lose [self_damage] HP."
 	stoke.card_values = {"energy_amount": 3, "self_damage": 3, "time_delay": 0.0}
 	stoke.card_play_destination = HandManager.EXHAUST_PILE
 	stoke.card_play_actions = [_lose_hp(), {Scripts.ACTION_ADD_ENERGY: {"time_delay": 0.1, "target_override": BaseAction.TARGET_OVERRIDES.PARENT}}]
 
 	# 喰らう: オーバーシールドを得る代わりに、ブロックされなかったダメージ分 HP を回復する (回復の軸)
 	var devour: CardData = Global.get_card_data("card_reap")
-	devour.card_description = "Deal [damage] damage. Heal HP equal to the unblocked damage. Exhaust."
+	devour.card_description = "Deal [damage] damage. Heal HP equal to the unblocked damage."
+	devour.card_play_destination = HandManager.EXHAUST_PILE # 説明どおり 1 戦闘に 1 回
 	devour.card_play_actions = [
 		{Scripts.ACTION_ADD_HEALTH: {"custom_key_names": {"health_amount": "unblocked_damage_capped"}, "target_override": BaseAction.TARGET_OVERRIDES.PLAYER}},
 		{Scripts.ACTION_ATTACK_GENERATOR: {"target_override": BaseAction.TARGET_OVERRIDES.SELECTED_TARGETS, "time_delay": 0.3}},
@@ -75,7 +76,7 @@ static func _add_cards() -> void:
 	Global.register_rod(frenzy)
 
 	var sharpen: CardData = _card("card_green_sharpen_claws", "Sharpen Claws", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.COMMON, 1,
-		"Gain [status_charge_amount] Strength. Exhaust.", {"status_charge_amount": 2}, {"status_charge_amount": 1}, "card_growth")
+		"Gain [status_charge_amount] Strength.", {"status_charge_amount": 2}, {"status_charge_amount": 1}, "card_growth")
 	sharpen.card_play_destination = HandManager.EXHAUST_PILE
 	sharpen.card_play_actions = [_gain_strength()]
 	_register_skill(sharpen)
@@ -92,7 +93,7 @@ static func _add_cards() -> void:
 	_register_skill(blood_pact)
 
 	var cauterize: CardData = _card("card_green_cauterize", "Cauterize", CardData.CARD_TYPES.SKILL, CardData.CARD_RARITIES.UNCOMMON, 1,
-		"Heal [health_amount] HP. Gain [status_charge_amount] Blood Heat. Exhaust.", {"health_amount": 6, "status_charge_amount": 5}, {"health_amount": 3}, "card_symbiosis")
+		"Heal [health_amount] HP. Gain [status_charge_amount] Blood Heat.", {"health_amount": 6, "status_charge_amount": 5}, {"health_amount": 3}, "card_symbiosis")
 	cauterize.card_play_destination = HandManager.EXHAUST_PILE
 	cauterize.card_play_actions = [{Scripts.ACTION_ADD_HEALTH: {"target_override": BaseAction.TARGET_OVERRIDES.PARENT}}, _gain_heat()]
 	_register_skill(cauterize)

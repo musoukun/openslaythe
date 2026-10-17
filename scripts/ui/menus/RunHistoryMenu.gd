@@ -83,7 +83,7 @@ func _populate_run_history(run_index: int = -1) -> void:
 	
 	if run_stats_data.run_victory:
 		# victory
-		run_history_message_label.parse_bbcode(VICTORY_MESSAGE_BBCODE)
+		run_history_message_label.parse_bbcode(tr(VICTORY_MESSAGE_BBCODE))
 	else:
 		# defeat event message
 		var defeat_event_data: EventData = Global.get_event_data(run_stats_data.run_defeat_event_id)

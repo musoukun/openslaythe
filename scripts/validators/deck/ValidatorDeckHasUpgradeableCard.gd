@@ -3,6 +3,6 @@ extends BaseValidator
 
 func _validation(_card_data: CardData, _action: BaseAction, values: Dictionary[String, Variant]) -> bool:
 	for card: CardData in Global.player_data.player_deck:
-		if card.card_upgrade_amount < card.card_upgrade_amount_max:
+		if card.can_upgrade():
 			return true
 	return false

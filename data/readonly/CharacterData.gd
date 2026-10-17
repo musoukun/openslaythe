@@ -42,6 +42,6 @@ class_name CharacterData
 ## Cards added to player on run start
 @export var character_starting_card_object_ids: Array[String] = []
 ## Money added to player on start
-@export var character_starting_money: int = 999
+@export var character_starting_money: int = 90
 @export var character_starting_health: int = 50
 #endregion
