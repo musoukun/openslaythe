@@ -38,6 +38,15 @@ var _m_deck_by_act: Dictionary = {}
 var _m_last_block: int = 0
 var _rng := RandomNumberGenerator.new()
 var _clicked_rewards: Dictionary = {}
+## --combo: 祝福で「昇り竜の型」を選び、戦闘ではコストの小さい順にカードを出す
+var combo_mode: bool = false
+const COMBO_OPTION_TEXT := "昇り竜"
+## 1ターンの計測 (チェーンは祝福の有無にかかわらず同じ規則で数える)
+var _turn_active: bool = false
+var _turn_dmg: int = 0
+var _turn_chain: int = 0
+var _turn_last_cost: int = -1
+var _turn_max_chain: int = 0
 
 ## 撮影先 (--shots=<フォルダ>)。ウィンドウがあるときだけ撮る (headless では絵が描かれない)
 var shots_dir: String = ""
@@ -198,9 +207,13 @@ func _hand_pick() -> void:
 func _click_first_option(overlay: Node, label: String) -> void:
 	var options: Array = overlay.find_children("*", "DialogueOption", true, false).filter(func(o): return o.is_visible_in_tree() and o.option_enabled)
 	if label == "blessing":
+		var combo: Array = options.filter(func(o): return COMBO_OPTION_TEXT in o.rich_text_label.get_parsed_text())
+		options = options.filter(func(o): return not COMBO_OPTION_TEXT in o.rich_text_label.get_parsed_text())
 		var without_cards: Array = options.filter(func(o): return not "カード" in o.rich_text_label.get_parsed_text())
 		if not without_cards.is_empty():
 			options = without_cards
+		if combo_mode and not combo.is_empty():
+			options = combo
 	if options.is_empty():
 		return
 	var option: DialogueOption = options[0]
@@ -326,6 +339,14 @@ func _combat() -> void:
 		await _wait(1.0)
 		return
 	playable.sort_custom(func(a: Card, b: Card): return _card_priority(a.card_data, need_block) > _card_priority(b.card_data, need_block))
+	if combo_mode:
+		# コストの小さい順 (同じコストなら上の優先順)
+		playable.sort_custom(func(a: Card, b: Card):
+			var cost_a: int = a.card_data.get_card_energy_cost(true, true)
+			var cost_b: int = b.card_data.get_card_energy_cost(true, true)
+			if cost_a != cost_b:
+				return cost_a < cost_b
+			return _card_priority(a.card_data, need_block) > _card_priority(b.card_data, need_block))
 	var card: Card = playable[0]
 	var card_data: CardData = card.card_data # 出したカードの Card はすぐ消えるので先に持っておく
 	var before := "%d|%d" % [HandManager.player_hand.size(), Global.player_data.player_energy]
@@ -404,7 +425,23 @@ func _connect_metrics() -> void:
 			_m_combat.dmg_taken += capped
 			_m_last_block = Global.player_data.player_block
 		else:
-			_m_combat.dmg_dealt += capped)
+			_m_combat.dmg_dealt += capped
+			if _turn_active:
+				_turn_dmg += capped)
+	Signals.player_turn_started.connect(func():
+		_turn_active = true
+		_turn_dmg = 0
+		_turn_chain = 0
+		_turn_last_cost = -1
+		_turn_max_chain = 0)
+	Signals.player_turn_ended.connect(_end_metric_turn)
+	Signals.card_play_started.connect(func(card_play_request: CardPlayRequest):
+		if card_play_request.card_data == null or not _turn_active:
+			return
+		var cost: int = card_play_request.card_data.get_card_energy_cost(true, true)
+		_turn_chain = _turn_chain + 1 if _turn_chain > 0 and cost >= _turn_last_cost else 1
+		_turn_last_cost = cost
+		_turn_max_chain = max(_turn_max_chain, _turn_chain))
 	Signals.combatant_block_added.connect(func(combatant):
 		if combatant is Player and not _m_combat.is_empty():
 			_m_combat.block += max(0, Global.player_data.player_block - _m_last_block)
@@ -420,7 +457,9 @@ func _on_metric_combat_started(_event_id: String) -> void:
 	_m_combat = {"act": Global.player_data.player_act, "floor": location.location_floor if location else -1,
 		"type": LocationData.LOCATION_TYPES.keys()[location.location_type] if location else "?",
 		"hp_before": Global.player_data.player_health, "turns": 0, "dmg_taken": 0, "dmg_dealt": 0, "block": 0,
-		"cycle": -1, "deck": Global.player_data.player_deck.size()}
+		"cycle": -1, "deck": Global.player_data.player_deck.size(),
+		"enemies": "+".join(Global.get_alive_enemies().map(func(e): return e.enemy_data.object_id)),
+		"max_turn_dmg": 0, "chains": []}
 	_m_last_block = 0
 	if _m_combat.type == "BOSS":
 		_m_deck_by_act[_m_combat.act] = Global.player_data.player_deck.size()
@@ -431,7 +470,20 @@ func _on_metric_block_spent(combatant) -> void:
 		_m_last_block = Global.player_data.player_block
 
 
+## ターンの終わり: そのターンの与ダメージと最長チェーンを戦闘の記録へ
+func _end_metric_turn() -> void:
+	if not _turn_active:
+		return
+	_turn_active = false
+	if _m_combat.is_empty():
+		return
+	_m_combat.max_turn_dmg = max(_m_combat.max_turn_dmg, _turn_dmg)
+	if _turn_max_chain > 0:
+		_m_combat.chains.append(_turn_max_chain)
+
+
 func _finish_combat(result: String) -> void:
+	_end_metric_turn() # 敵を倒したターンはターン終了が来ないのでここで締める
 	if _m_combat.is_empty():
 		return
 	var c := _m_combat
@@ -441,9 +493,10 @@ func _finish_combat(result: String) -> void:
 	c.hp_max = Global.player_data.player_health_max
 	_m_combats.append(c)
 	var turns: int = max(1, c.turns)
-	print("CSVCOMBAT,%d,%s,%d,%d,%s,%s,%d,%d,%d,%d,%d,%d,%d,%.2f,%.2f,%s,%d" % [run_seed, draft_policy, c.act, c.floor, c.type, result, c.turns,
+	var avg_chain: float = c.chains.reduce(func(a, b): return a + b, 0) / float(max(1, c.chains.size()))
+	print("CSVCOMBAT,%d,%s,%d,%d,%s,%s,%d,%d,%d,%d,%d,%d,%d,%.2f,%.2f,%s,%d,%s,%d,%.2f,%s" % [run_seed, draft_policy, c.act, c.floor, c.type, result, c.turns,
 		c.hp_before, c.dmg_taken, c.hp_after, c.hp_max, c.dmg_dealt, c.block, float(c.dmg_dealt) / turns, float(c.block) / turns,
-		str(c.cycle) if c.cycle >= 0 else "", c.deck])
+		str(c.cycle) if c.cycle >= 0 else "", c.deck, c.enemies, c.max_turn_dmg, avg_chain, "combo" if combo_mode else "plain"])
 
 
 func _print_run_csv(result: String) -> void:
@@ -460,11 +513,21 @@ func _print_run_csv(result: String) -> void:
 	var avg_cycle: String = ""
 	if not cycles.is_empty():
 		avg_cycle = "%.2f" % (cycles.reduce(func(a, b): return a + b, 0) / float(cycles.size()))
+	var max_turn_dmg := 0
+	var chains: Array = []
+	var boss_turns: Array = []
+	for c: Dictionary in _m_combats:
+		max_turn_dmg = max(max_turn_dmg, c.max_turn_dmg)
+		chains.append_array(c.chains)
+		if c.type == "BOSS":
+			boss_turns.append(str(c.turns))
+	var avg_chain: float = chains.reduce(func(a, b): return a + b, 0) / float(max(1, chains.size()))
 	var location := Global.get_player_location_data()
-	print("CSVRUN,%d,%s,%s,%d,%d,%d,%d,%d,%s,%s,%s,%d,%d,%.2f,%.2f,%s,%d" % [run_seed, draft_policy, result, Global.player_data.player_act,
+	print("CSVRUN,%d,%s,%s,%d,%d,%d,%d,%d,%s,%s,%s,%d,%d,%.2f,%.2f,%s,%d,%d,%.2f,%s,%s,%s" % [run_seed, draft_policy, result, Global.player_data.player_act,
 		location.location_floor if location else -1, Global.player_data.player_health, Global.player_data.player_health_max,
 		_m_combats.size(), str(_m_deck_by_act.get(1, "")), str(_m_deck_by_act.get(2, "")), str(_m_deck_by_act.get(3, "")),
-		Global.player_data.player_deck.size(), turns, float(dealt) / max(1, turns), float(block) / max(1, turns), avg_cycle, cycles.size()])
+		Global.player_data.player_deck.size(), turns, float(dealt) / max(1, turns), float(block) / max(1, turns), avg_cycle, cycles.size(),
+		max_turn_dmg, avg_chain, "/".join(boss_turns), "combo" if combo_mode else "plain", Global.player_data.player_character_object_id])
 #endregion
 
 
