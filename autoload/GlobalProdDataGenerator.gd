@@ -2057,8 +2057,8 @@ func add_enemies() -> void:
 		])
 	# an attack that hits harder on higher difficulties
 	enemy_1.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_1.add_intent_state([
 		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 3, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
@@ -2082,8 +2082,8 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1})
 		])
 	enemy_2.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_2.add_intent_state([
 		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 3, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
@@ -2111,8 +2111,8 @@ func add_enemies() -> void:
 		EnemyIntentData.new(EnemyIntentData.INTENT_INITIAL, DIFFICULTY_STARTING, 0, 0, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_3.add_intent_state([
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 5, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
-		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 7, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STARTING, 4, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
+		EnemyIntentData.new("intent_attack_1", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 1, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
 		])
 	enemy_3.add_intent_state([
 		EnemyIntentData.new("intent_attack_2", DIFFICULTY_STARTING, 3, 2, "", 0, "", {"intent_attack_1": 1, "intent_attack_2": 1}),
@@ -2144,12 +2144,12 @@ func add_enemies() -> void:
 	var enemy_4_status_charge_2: int = 4
 	var enemy_4_status_actions_2: Array[Dictionary] = [{Scripts.ACTION_APPLY_STATUS: {"status_effect_object_id": "status_effect_vulnerable", "status_charge_amount": enemy_4_status_charge_2, "target_override": BaseAction.TARGET_OVERRIDES.PLAYER}}]
 	enemy_4.add_intent_state([
-		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STARTING, 10, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_1),
-		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STANDARD_ENEMIES_HARDER, 12, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_2),
+		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STARTING, 8, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_1),
+		EnemyIntentData.new("intent_attack_vulnerable", DIFFICULTY_STANDARD_ENEMIES_HARDER, 10, 1, "", 0, "", {"intent_attack_multi": 1}, enemy_4_status_actions_2),
 	])
 	enemy_4.add_intent_state([
-		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STARTING, 5, 2, "", 0, "", {"intent_block": 1}),
-		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STANDARD_ENEMIES_HARDER, 6, 2, "", 0, "", {"intent_block": 1}),
+		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STARTING, 4, 2, "", 0, "", {"intent_block": 1}),
+		EnemyIntentData.new("intent_attack_multi", DIFFICULTY_STANDARD_ENEMIES_HARDER, 5, 2, "", 0, "", {"intent_block": 1}),
 		])
 	enemy_4.add_intent_state([
 		EnemyIntentData.new("intent_block", DIFFICULTY_STARTING, 0, 0, "", 10, "", {"intent_attack_vulnerable": 1}),
